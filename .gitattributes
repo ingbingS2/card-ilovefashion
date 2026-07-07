@@ -1,0 +1,2 @@
+# 셸 스크립트는 항상 LF 로 유지 (CRLF 로 바뀌면 bash 훅이 깨짐)
+*.sh text eol=lf
