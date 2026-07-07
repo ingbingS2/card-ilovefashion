@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>B안 · 구매처 가이드형 — 먹지 마세요! 만지세요!</title>
+    <link rel="stylesheet" href="pixel.css" />
+  </head>
+  <body>
+    <div class="page-head">
+      <h1>B안 · 구매처 가이드형 (7장)</h1>
+      <p>표지 → 사과·버터·쫀득쿠·크로와상·호빵 슬라임별 업체 3곳 → 마무리 CTA</p>
+      <p class="hint">
+        ※ 업체 슬롯은 <b>플레이스홀더</b>예요. 실제 상호/@인스타/특징으로 바꿔서 쓰세요.
+        (원하면 실제 샵을 찾아 채워드릴 수 있어요)
+      </p>
+    </div>
+    <div class="toolbar">
+      <button id="export-all">⬇ 전체 PNG 내보내기 (7장)</button>
+    </div>
+    <div class="deck" id="deck"></div>
+
+    <script>
+      window.META = { slug: "slime-B-vendors" };
+
+      // 업체 슬롯 헬퍼: 실제 정보로 교체하세요.
+      const shop = (name, handle, note) => ({
+        name: name,
+        meta: handle + "  ·  " + note,
+      });
+
+      window.CARDS = [
+        {
+          kind: "cover",
+          kicker: "슬라임 구매처 총정리 🛒",
+          emoji: "🍮",
+          blob: "var(--milk-pink)",
+          title: "먹지 마세요!\n만지세요!",
+          body: "음식모형 슬라임,\n어디서 사요? 종류별 BEST 3",
+        },
+        {
+          kind: "list",
+          tag: "구매처",
+          emoji: "🍎",
+          blob: "var(--strawberry)",
+          titleShadow: "var(--strawberry)",
+          title: "사과 슬라임 BEST 3",
+          sub: "탱글탱글 사과 촉감 · 추천 3곳",
+          items: [
+            shop("업체명 ①", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ②", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ③", "@instagram", "가격대 · 특징 한 줄"),
+          ],
+        },
+        {
+          kind: "list",
+          tag: "구매처",
+          emoji: "🧈",
+          blob: "var(--cream)",
+          titleShadow: "var(--gold)",
+          title: "버터 슬라임 BEST 3",
+          sub: "부드럽게 뭉개지는 버터 촉감 · 추천 3곳",
+          items: [
+            shop("업체명 ①", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ②", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ③", "@instagram", "가격대 · 특징 한 줄"),
+          ],
+        },
+        {
+          kind: "list",
+          tag: "구매처",
+          emoji: "🍪",
+          blob: "var(--cream)",
+          titleShadow: "var(--milk-pink)",
+          title: "쫀득쿠 슬라임 BEST 3",
+          sub: "쫀득한 쿠키 식감 · 추천 3곳",
+          items: [
+            shop("업체명 ①", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ②", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ③", "@instagram", "가격대 · 특징 한 줄"),
+          ],
+        },
+        {
+          kind: "list",
+          tag: "구매처",
+          emoji: "🥐",
+          blob: "var(--gold)",
+          titleShadow: "var(--gold)",
+          title: "크로와상 슬라임 BEST 3",
+          sub: "바삭한 결이 살아있는 비주얼 · 추천 3곳",
+          items: [
+            shop("업체명 ①", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ②", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ③", "@instagram", "가격대 · 특징 한 줄"),
+          ],
+        },
+        {
+          kind: "list",
+          tag: "구매처",
+          emoji: "🍞",
+          blob: "var(--milk-pink)",
+          titleShadow: "var(--milk-pink)",
+          title: "호빵 슬라임 BEST 3",
+          sub: "말랑 폭신한 호빵 촉감 · 추천 3곳",
+          items: [
+            shop("업체명 ①", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ②", "@instagram", "가격대 · 특징 한 줄"),
+            shop("업체명 ③", "@instagram", "가격대 · 특징 한 줄"),
+          ],
+        },
+        {
+          kind: "cta",
+          tag: "마무리",
+          emoji: "🔖",
+          blob: "var(--gold)",
+          titleShadow: "var(--accent)",
+          title: "찜했으면\n저장 필수!",
+          body: "구매 전 저장해두고 참고하기 📌\n다음 슬라임 편도 팔로우하면 안 놓쳐요!",
+        },
+      ];
+    </script>
+    <script src="cards.js"></script>
+  </body>
+</html>
