@@ -1,0 +1,203 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --card: #ffffff;
+  --ink: #14161a;
+  --muted: #8b93a1;
+  --line: #262b34;
+  --accent: #ff4d6d;
+  --accent-2: #4d7cff;
+  font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #e8ebf0;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.header h1 {
+  font-size: 28px;
+  margin: 0 0 6px;
+}
+
+.header p {
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.panel,
+.result,
+.saved {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.field span {
+  color: var(--muted);
+}
+
+.field-row {
+  display: flex;
+  gap: 14px;
+}
+
+.field-row .field {
+  flex: 1;
+}
+
+input {
+  background: #0f1218;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #e8ebf0;
+  font-size: 15px;
+}
+
+input[type="range"] {
+  padding: 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.btn,
+.btn-ghost,
+.link {
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn {
+  background: #232833;
+  color: #e8ebf0;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  padding: 6px 10px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: var(--accent-2);
+  padding: 4px 0;
+  text-align: left;
+}
+
+.error {
+  color: var(--accent);
+  margin-top: 12px;
+}
+
+.result-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.slide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* 4:5 (1080x1350) 비율 카드 */
+.slide-card {
+  aspect-ratio: 4 / 5;
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.slide-index {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.slide-headline {
+  font-size: 24px;
+  line-height: 1.35;
+  margin: 0;
+  font-weight: 800;
+  word-break: keep-all;
+}
+
+.slide-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #43474e;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.saved-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

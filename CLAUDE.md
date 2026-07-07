@@ -4,8 +4,13 @@
 
 ## 절대 규칙
 - 모든 사용자 노출 UI 텍스트는 **한국어**만 사용한다 (코드 식별자·주석은 영어 허용).
-- 셸 명령은 **Bash 툴**로 실행한다. 이 환경엔 아래 툴 shim이 `~/.local/bin`에 있어 PATH로 잡힌다:
-  - `node` v22.23.1, `npm`, `npx`, `python` 3.12.10, `pip`, `firebase` 15.22.4
+- 셸 명령은 **Bash 툴**로 실행한다. `node/npm/npx/python/pip/firebase` shim이 `~/.local/bin`에 있다.
+- **중요:** `npm install`/`npm run build` 는 내부적으로 cmd.exe 로 `node` 를 호출하므로,
+  npm/vite/python 관련 명령 앞에 반드시 아래를 먼저 실행해 실제 툴 디렉토리를 PATH 에 올린다:
+  ```bash
+  export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/Local/Programs/Python/Python312:/c/Users/yepdo/AppData/Local/Programs/Python/Python312/Scripts:$PATH"
+  ```
+- 백엔드는 venv 사용: `cd backend && ./.venv/Scripts/python.exe -m pytest -q`
 - **실제 외부 호출·비밀키·배포 금지**:
   - Claude API 실제 호출 금지 → 백엔드 테스트는 반드시 API 응답을 **목(mock)** 처리.
   - `firebase deploy`, `firebase login`, 실제 Firestore 접속 금지 → 설정 파일만 작성/검증.
