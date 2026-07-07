@@ -1,0 +1,19 @@
+rules_version = '2';
+
+// 개발용 기본 규칙. 프로덕션에서는 반드시 인증 기반으로 강화할 것.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 카드뉴스 컬렉션: 개발 단계에서는 읽기 허용, 쓰기는 서버(Admin SDK)만 권장.
+    match /cardnews/{docId} {
+      allow read: if true;
+      // TODO(prod): request.auth != null 등으로 제한. 현재는 백엔드 Admin SDK 를 통한 쓰기만 가정.
+      allow write: if false;
+    }
+
+    // 그 외 경로는 기본 차단
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

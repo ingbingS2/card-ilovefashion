@@ -1,0 +1,59 @@
+name: Deploy to Firebase Hosting
+
+# main 브랜치에 push 되면 프론트엔드를 빌드해 Firebase Hosting 으로 자동 배포한다.
+# 필요한 GitHub Secrets:
+#   FIREBASE_SERVICE_ACCOUNT : Firebase 서비스 계정 JSON 전체 (콘솔 > 프로젝트 설정 > 서비스 계정)
+#   FIREBASE_PROJECT_ID      : Firebase 프로젝트 ID
+# 두 시크릿이 없으면 배포 단계는 자동으로 건너뛴다(실패하지 않음).
+on:
+  push:
+    branches: [main]
+
+# 동시 배포 방지 (자동 커밋/푸시와 궁합)
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 배포 조건 판단: 프론트엔드 존재 + 서비스계정 시크릿 존재
+      - name: Gate
+        id: gate
+        run: |
+          proceed=true
+          if [ ! -f frontend/package.json ]; then
+            echo "frontend/package.json 없음 → 배포 건너뜀"
+            proceed=false
+          fi
+          if [ -z "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT 시크릿 없음 → 배포 건너뜀 (Secrets 설정 필요)"
+            proceed=false
+          fi
+          echo "proceed=$proceed" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Node.js
+        if: steps.gate.outputs.proceed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install & build frontend
+        if: steps.gate.outputs.proceed == 'true'
+        working-directory: frontend
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm run build
+
+      - name: Deploy to Firebase Hosting (live)
+        if: steps.gate.outputs.proceed == 'true'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          channelId: live
