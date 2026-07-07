@@ -1,0 +1,60 @@
+name: CI
+
+# main 브랜치에 push 되거나 PR이 열릴 때 실행
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# 같은 브랜치에서 새 커밋이 오면 이전 실행은 취소 (자동 커밋/푸시와 궁합)
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # package.json 유무를 감지해서 이후 단계 실행 여부를 결정
+      - name: Detect Node project
+        id: detect
+        run: |
+          if [ -f package.json ]; then
+            echo "has_node=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_node=false" >> "$GITHUB_OUTPUT"
+            echo "package.json 이 아직 없습니다. 코드가 추가되면 자동으로 build/lint/test 가 실행됩니다."
+          fi
+
+      - name: Setup Node.js
+        if: steps.detect.outputs.has_node == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_node == 'true'
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # 아래 단계들은 해당 npm script 가 정의돼 있을 때만 실행 (없으면 건너뜀)
+      - name: Lint
+        if: steps.detect.outputs.has_node == 'true'
+        run: npm run lint --if-present
+
+      - name: Test
+        if: steps.detect.outputs.has_node == 'true'
+        run: npm test --if-present
+
+      - name: Build
+        if: steps.detect.outputs.has_node == 'true'
+        run: npm run build --if-present
