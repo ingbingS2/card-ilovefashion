@@ -32,3 +32,12 @@ Thumbs.db
 .cache/
 .parcel-cache/
 .eslintcache
+
+# Ralph Loop 상태 파일 (로컬)
+.claude/ralph-loop.local.md
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
