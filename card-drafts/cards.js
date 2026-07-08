@@ -123,58 +123,66 @@ async function embedFont() {
 }
 
 /* ---------- 카드 조립 ---------- */
-function decoHTML(cover) {
-  const tint = cover ? "#ffffff" : "#cbb6ff";
-  return `
-    <div class="deco">
-      <div class="cloud c1"></div>
-      <div class="cloud c2"></div>
-      ${cover ? `<div class="heart-cloud">${heartSVG(58)}</div>` : `<div class="cloud c3"></div>`}
-      <span class="spark" style="top:56px;left:44px">${sparkleSVG(16, tint)}</span>
-      <span class="spark" style="bottom:180px;right:52px">${sparkleSVG(13, tint)}</span>
-    </div>`;
-}
+const nl = (t) => (t || "").replace(/\n/g, "<br>");
 
-function orbHTML(icon, size) {
-  return `<div class="orb"><span class="hi"></span>${pixelSVG(icon, size)}</div>`;
+function starsSVG() {
+  const pts = [[60,92,2],[150,58,1.4],[430,80,2.2],[356,150,1.3],[92,210,1.6],[472,214,1.8],[300,58,1.2],[210,120,1.1]];
+  const dots = pts.map((p) => `<circle cx="${p[0]}" cy="${p[1]}" r="${p[2]}" fill="#fff" opacity="0.85"/>`).join("");
+  return `<svg class="stars" width="540" height="675" viewBox="0 0 540 675" xmlns="http://www.w3.org/2000/svg">${dots}</svg>`;
 }
-
-function footHTML(i, total) {
-  return `<div class="foot"><span class="handle">${HANDLE}</span><span class="pages">${String(i + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}</span></div>`;
+function skyDeco() {
+  return `<div class="sky">${starsSVG()}
+    <span class="spark s1">${sparkleSVG(20, "#ffffff")}</span>
+    <span class="spark s2">${sparkleSVG(13, "#ffd9ec")}</span>
+    <div class="heart-cloud">${heartSVG(64)}</div>
+  </div>`;
+}
+function eyebrow(text) {
+  return text ? `<div class="eyebrow"><span class="eb-tick"></span>${text}</div>` : "";
+}
+function footer(idx, tot) {
+  return `<div class="foot"><span class="handle">${HANDLE}</span><span class="pages">${idx} <span class="sep">/</span> ${tot}</span></div>`;
 }
 
 function cardInner(c, i, total) {
-  const tag = c.tag ? `<div class="tag">${c.tag}</div>` : "";
+  const idx = String(i + 1).padStart(2, "0");
+  const tot = String(total).padStart(2, "0");
 
   if (c.kind === "cover") {
-    return `${decoHTML(true)}
-      <div class="stage">
-        ${c.kicker ? `<div class="kicker">${c.kicker}</div>` : ""}
-        ${orbHTML(c.icon || "cake", 96)}
-        <h1 class="title">${c.title}</h1>
-        ${c.body ? `<p class="body">${c.body}</p>` : ""}
-      </div>${footHTML(i, total)}`;
+    return skyDeco()
+      + eyebrow(c.kicker || "오늘의 유행")
+      + `<div class="stage cover-stage">`
+      +   `<h1 class="title cover-title">${nl(c.title)}</h1>`
+      +   (c.body ? `<p class="lead">${nl(c.body)}</p>` : "")
+      + `</div>`
+      + `<div class="hero-stamp">${pixelSVG(c.icon || "cake", 128)}</div>`
+      + footer(idx, tot);
   }
 
   if (c.kind === "list") {
     const rows = (c.items || []).map(
-      (it, n) => `<div class="row"><div class="no">${n + 1}</div><div class="info"><div class="name">${it.name}</div><div class="meta">${it.meta}</div></div></div>`
+      (it, n) => `<div class="row"><span class="rank">${n + 1}</span><div class="info"><div class="name">${it.name}</div><div class="meta">${it.meta}</div></div></div>`
     ).join("");
-    return `${decoHTML(false)}${tag}
-      <div class="stage">
-        ${orbHTML(c.icon || "cake", 98)}
-        <h2 class="list-title">${c.title}</h2>
-        ${c.sub ? `<p class="sub">${c.sub}</p>` : ""}
-        <div class="rows">${rows}</div>
-      </div>${footHTML(i, total)}`;
+    return `<div class="wash"></div>`
+      + eyebrow(c.tag || "구매처")
+      + `<div class="stage list-stage">`
+      +   `<div class="head-row"><h2 class="title list-title">${nl(c.title)}</h2><div class="stamp">${pixelSVG(c.icon || "cake", 60)}</div></div>`
+      +   (c.sub ? `<p class="sub">${c.sub}</p>` : "")
+      +   `<div class="rows">${rows}</div>`
+      + `</div>`
+      + footer(idx, tot);
   }
 
-  return `${decoHTML(false)}${tag}
-    <div class="stage">
-      ${orbHTML(c.icon || "star", 98)}
-      <h2 class="title">${c.title}</h2>
-      ${c.body ? `<p class="body">${c.body}</p>` : ""}
-    </div>${footHTML(i, total)}`;
+  // content / cta
+  return `<div class="wash"></div>`
+    + `<div class="bignum">${idx}</div>`
+    + eyebrow(c.tag || "")
+    + `<div class="stage">`
+    +   `<h2 class="title">${nl(c.title)}</h2>`
+    +   (c.body ? `<p class="lead">${nl(c.body)}</p>` : "")
+    + `</div>`
+    + `<div class="stamp corner">${pixelSVG(c.icon || "star", 78)}</div>`
+    + footer(idx, tot);
 }
 
 function render() {
