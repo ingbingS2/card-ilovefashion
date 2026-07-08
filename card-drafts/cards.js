@@ -89,6 +89,12 @@ function sparkleSVG(size, color) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0 Z" fill="${c}"/></svg>`;
 }
 
+/* 루디브리엄 하트 구름(표지 데코) */
+function heartSVG(size) {
+  const s = size || 58;
+  return `<svg width="${s}" height="${Math.round(s * 0.94)}" viewBox="0 0 32 30" xmlns="http://www.w3.org/2000/svg"><path d="M16 29C6 22 1 16 1 9.5 1 4.8 4.8 1 9.5 1 12.4 1 15 2.6 16 5 17 2.6 19.6 1 22.5 1 27.2 1 31 4.8 31 9.5 31 16 26 22 16 29Z" fill="#ffd0e2" stroke="#ffffff" stroke-width="2"/></svg>`;
+}
+
 /* html-to-image 로드 */
 function loadScript(src) {
   return new Promise((res, rej) => {
@@ -118,13 +124,14 @@ async function embedFont() {
 
 /* ---------- 카드 조립 ---------- */
 function decoHTML(cover) {
-  const tint = cover ? "#ffe6ff" : "#ffffff";
+  const tint = cover ? "#ffffff" : "#cbb6ff";
   return `
     <div class="deco">
-      <div class="glow g1"></div><div class="glow g2"></div>
-      <span class="spark" style="top:54px;right:44px">${sparkleSVG(26, tint)}</span>
-      <span class="spark" style="top:120px;left:40px">${sparkleSVG(15, tint)}</span>
-      <span class="spark" style="bottom:150px;right:56px">${sparkleSVG(18, tint)}</span>
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      ${cover ? `<div class="heart-cloud">${heartSVG(58)}</div>` : `<div class="cloud c3"></div>`}
+      <span class="spark" style="top:56px;left:44px">${sparkleSVG(16, tint)}</span>
+      <span class="spark" style="bottom:180px;right:52px">${sparkleSVG(13, tint)}</span>
     </div>`;
 }
 
