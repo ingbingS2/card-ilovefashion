@@ -137,7 +137,7 @@
     }
     return '<div class="card ' + c.kind + '" id="card' + idx + '">'
       + '<div class="toprow"><span class="handle">' + HANDLE + '</span>'
-      + '<span class="num">' + (c.num ? c.num + '<span style="color:#c9c6bf">/05</span>' : (idx + 1) + '/' + CARDS.length) + '</span></div>'
+      + '<span class="num">' + (idx + 1) + '<span style="color:#c9c6bf">/' + CARDS.length + '</span></span></div>'
       + photo + body
       + '<div class="foot"><span>' + (idx < CARDS.length - 1 ? '옆으로 넘기기 &rarr;' : '&nbsp;') + '</span></div>'
       + '</div>';
