@@ -40,6 +40,9 @@
   .meta s { color:#b6b3ac; font-weight:500; margin-right:4px; }
   .proof { display:inline-block; background:var(--chip); border-radius:99px; padding:6px 12px; font-size:12px; font-weight:600; color:#55555a; }
   .credit { font-size:8px; color:#bdbab3; margin-top:10px; }
+  .selling { margin-top:9px; font-size:12.5px; font-weight:600; color:#55555a; line-height:1.6; word-break:keep-all;
+             border-top:1px solid #efedea; padding-top:9px; }
+  .sp-label { color:var(--accent); font-weight:800; font-size:10.5px; letter-spacing:.14em; margin-right:8px; }
 
   .foot { flex:none; display:flex; justify-content:space-between; align-items:center; margin-top:10px;
           font-size:11px; font-weight:700; color:var(--mute); }
@@ -77,27 +80,32 @@
       title:"<em>파스텔</em>이 필요한 날",
       meta:"아우어솔티 &middot; 71,000원",
       proof:"리뷰 165개 &#9733; 5.0 만점",
-      cr:"이미지 출처 : 29CM &middot; 아우어솔티" },
+      cr:"이미지 출처 : 29CM &middot; 아우어솔티",
+      sp:"프린트 하나로 밋밋한 티셔츠 코디가 살아나는 치마 — 상의는 무지로 조용히 두는 게 포인트" },
     { kind:"item", img:"comfort", lab:"씨타", pw:330, num:"02", badge:"19%",
       title:"리뷰 <em>885개</em>엔<br>이유가 있다",
       meta:"씨타 &middot; <s>59,000원</s> 47,790원",
       proof:"10컬러 데일리 &#9733; 5.0",
-      cr:"이미지 출처 : 29CM &middot; 씨타" },
+      cr:"이미지 출처 : 29CM &middot; 씨타",
+      sp:"허리 셔링이 라인을 잡아줘서 편한데 늘어져 보이지 않아요 — 컬러만 바꿔 매일 입기 좋은 기본템" },
     { kind:"item", img:"tartan", lab:"센토르", pw:330, num:"03", badge:"30%",
       title:"체크는 <em>핑크</em>가 국룰",
       meta:"센토르 &middot; <s>158,000원</s> 110,600원",
       proof:"미디 기장 &middot; 가을까지 OK",
-      cr:"이미지 출처 : 29CM &middot; 센토르" },
+      cr:"이미지 출처 : 29CM &middot; 센토르",
+      sp:"파스텔 타탄이라 체크인데 무겁지 않고, 플레어 라인이 걸을 때마다 살랑여요 — 레그워머 조합 강추" },
     { kind:"item", img:"stripe", lab:"오버듀플레어", pw:330, num:"04", badge:"5%",
       title:"휘날릴수록<br><em>이기는</em> 치마",
       meta:"오버듀플레어 &middot; <s>99,000원</s> 94,050원",
       proof:"빈티지 스트라이프 맥시",
-      cr:"이미지 출처 : 29CM &middot; 오버듀플레어" },
+      cr:"이미지 출처 : 29CM &middot; 오버듀플레어",
+      sp:"가는 스트라이프가 세로 라인을 만들어 다리가 길어 보이는 효과 — 크롭 상의와 비율 맞추면 끝" },
     { kind:"item", img:"siron", lab:"그리트", pw:330, num:"05", badge:"10%",
       title:"벌써 <em>4차 재입고</em>",
       meta:"그리트 &middot; <s>72,000원</s> 64,800원",
       proof:"망설이면 또 품절 ⏰",
-      cr:"이미지 출처 : 29CM &middot; 그리트" },
+      cr:"이미지 출처 : 29CM &middot; 그리트",
+      sp:"쨍한 레드가 심플한 상의에 얹기만 해도 코디 완성 — 재입고될 때마다 품절되는 이유가 있어요" },
     { kind:"cta", img:"zzal", lab:"CTA", pw:310,
       title:"최애는 몇 번?<br><em>댓글</em>로 알려줘요",
       sub:"📌 저장해두면 쇼핑할 때 안 헤매요<br>팔로우하면 다음 픽도 먼저 봐요" }
@@ -125,6 +133,7 @@
            + '<h2 class="title">' + c.title + '</h2>'
            + '<div class="metarow"><span class="meta">' + c.meta + '</span><span class="proof">' + c.proof + '</span></div>'
            + (c.cr ? '<div class="credit">' + c.cr + '</div>' : '')
+           + (c.sp ? '<div class="selling"><span class="sp-label">POINT</span>' + c.sp + '</div>' : '')
            + '</div>';
     }
     return '<div class="card ' + c.kind + '" id="card' + idx + '">'
