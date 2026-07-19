@@ -1,0 +1,45 @@
+name: 크롤링 프로브 (Phase 0)
+
+# 수동 실행 전용. Actions 러너(데이터센터 IP)에서 무신사/29CM 가 응답하는지 검증한다.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "discover 프리셋 이름(musinsa_ranking, cm29_best) 또는 direct"
+        required: true
+        default: "musinsa_ranking"
+      url:
+        description: "mode=direct 일 때 엔드포인트 URL"
+        required: false
+        default: ""
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        working-directory: crawler
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Run probe
+        working-directory: crawler
+        run: |
+          if [ "${{ github.event.inputs.mode }}" = "direct" ]; then
+            python probe.py direct actions_direct "${{ github.event.inputs.url }}"
+          else
+            python probe.py discover "${{ github.event.inputs.mode }}"
+          fi
+      - name: Upload samples
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-samples-${{ github.event.inputs.mode }}
+          path: crawler/samples/
+          retention-days: 7
