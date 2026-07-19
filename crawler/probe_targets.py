@@ -11,9 +11,9 @@ PAGES: dict[str, dict] = {
         "url": "https://www.musinsa.com/main/musinsa/ranking",
         "keywords": ["rank", "best", "goods", "api", "review"],
     },
-    # 29CM 베스트 (전체)
+    # 29CM 베스트 (전체) — 2026-07-19 확인: /home/best 는 홈으로 리다이렉트되어 /best-products 로 갱신
     "cm29_best": {
-        "url": "https://www.29cm.co.kr/home/best",
+        "url": "https://www.29cm.co.kr/best-products",
         "keywords": ["best", "rank", "product", "api", "review", "item"],
     },
 }
