@@ -94,40 +94,51 @@ def cmd_discover(name: str, url: str | None, keywords: str | None, wait: int) ->
     seq = 0
 
     print(f"discover: {url}\n키워드: {kw or '(전체 XHR)'}")
+    exc_info = None
     with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page(user_agent=UA, locale="ko-KR",
-                                viewport={"width": 1280, "height": 900})
+        browser = None
+        try:
+            browser = p.chromium.launch()
+            page = browser.new_page(user_agent=UA, locale="ko-KR",
+                                    viewport={"width": 1280, "height": 900})
 
-        def on_response(res):
-            nonlocal seq
-            if res.request.resource_type not in ("xhr", "fetch"):
-                return
-            u = res.url.lower()
-            if kw and not any(k in u for k in kw):
-                return
-            try:
-                body = res.text()
-            except Exception:
-                return
-            seq += 1
-            _save(run_dir, seq, res.url, res.status,
-                  res.headers.get("content-type", ""), body, index)
+            def on_response(res):
+                nonlocal seq
+                if res.request.resource_type not in ("xhr", "fetch"):
+                    return
+                u = res.url.lower()
+                if kw and not any(k in u for k in kw):
+                    return
+                try:
+                    body = res.text()
+                except Exception:
+                    return
+                seq += 1
+                _save(run_dir, seq, res.url, res.status,
+                      res.headers.get("content-type", ""), body, index)
 
-        page.on("response", on_response)
-        page.goto(url, wait_until="domcontentloaded", timeout=45_000)
-        page.wait_for_timeout(wait * 1000)
-        # 지연 로딩 유도: 두 번 스크롤
-        for _ in range(2):
-            page.mouse.wheel(0, 2500)
-            page.wait_for_timeout(2000)
-        # 페이지 자체 HTML 도 저장 (__NEXT_DATA__ 분석용)
-        html = page.content()
-        (run_dir / "page.html").write_text(html, encoding="utf-8")
-        browser.close()
+            page.on("response", on_response)
+            page.goto(url, wait_until="domcontentloaded", timeout=45_000)
+            page.wait_for_timeout(wait * 1000)
+            # 지연 로딩 유도: 두 번 스크롤
+            for _ in range(2):
+                page.mouse.wheel(0, 2500)
+                page.wait_for_timeout(2000)
+            # 페이지 자체 HTML 도 저장 (__NEXT_DATA__ 분석용)
+            html = page.content()
+            (run_dir / "page.html").write_text(html, encoding="utf-8")
+        except Exception as e:
+            exc_info = str(e)
+        finally:
+            if browser:
+                browser.close()
 
+    # 수집된 내용이 있으면 항상 index.json 기록
     (run_dir / "index.json").write_text(
         json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if exc_info:
+        print(f"경고: 페이지 로드 중 오류 — 채집분까지만 저장: {exc_info}")
     print(f"\n채집 {len(index)}건 → {run_dir}")
     return 0 if index else 1
 
