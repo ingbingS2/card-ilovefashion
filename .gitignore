@@ -44,3 +44,8 @@ __pycache__/
 *.tsbuildinfo
 frontend/vite.config.js
 frontend/vite.config.d.ts
+
+# crawler
+crawler/.venv/
+crawler/samples/
+crawler/__pycache__/
