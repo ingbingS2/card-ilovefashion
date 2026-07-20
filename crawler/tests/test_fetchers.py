@@ -80,3 +80,16 @@ def test_gives_up_after_retries(monkeypatch):
     monkeypatch.setattr(fetchers.requests, "request", always_500)
     with pytest.raises(fetchers.FetchError):
         fetchers.fetch_musinsa_reviews("5928448")
+
+
+def test_block_status_no_retry(monkeypatch):
+    calls = {"n": 0}
+
+    def blocked(method, url, **kw):
+        calls["n"] += 1
+        return FakeResp(status=403)
+
+    monkeypatch.setattr(fetchers.requests, "request", blocked)
+    with pytest.raises(fetchers.FetchError):
+        fetchers.fetch_musinsa_ranking("001")
+    assert calls["n"] == 1

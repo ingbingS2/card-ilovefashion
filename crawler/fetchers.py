@@ -44,7 +44,8 @@ def _request(method: str, url: str, *, params=None, json_body=None, headers=None
                 break  # 차단 시그널 — 재시도(우회) 금지
         except requests.exceptions.RequestException as e:
             last = repr(e)
-        time.sleep(2 ** attempt)
+        if attempt < RETRIES - 1:
+            time.sleep(2 ** attempt)
     raise FetchError(f"{method} {url} 실패: {last}")
 
 
