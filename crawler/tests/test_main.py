@@ -125,3 +125,32 @@ def test_crawl_once_review_fetch_failure_not_counted(tmp_path, monkeypatch):
     # 상품은 여전히 저장됨 (cm29 x)
     doc = json.load(open(tmp_path / "products" / "cm29_x.json", encoding="utf-8"))
     assert doc["product_id"] == "x"  # 상품 정보는 저장됨
+
+
+class FlakyProductStore(LocalJsonStore):
+    """지정한 product_id 저장 시 예외를 던지는 페이크 저장소."""
+
+    def __init__(self, out_dir, fail_pid):
+        super().__init__(out_dir)
+        self.fail_pid = fail_pid
+
+    def save_product(self, product, reviews, now_iso):
+        if product["product_id"] == self.fail_pid:
+            raise RuntimeError("상품 저장 실패")
+        super().save_product(product, reviews, now_iso)
+
+
+def test_crawl_once_product_save_failure_skips_ranking_snapshot(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의", "002": "아우터"})
+    store = FlakyProductStore(str(tmp_path), fail_pid="a")
+    fetch = FakeFetch()
+    parse = FakeParse(
+        {"001": [_prod("musinsa", "a", 3)], "002": [_prod("musinsa", "b", 1)]}, [])
+
+    stats = crawl_once(store, "t1", fetch=fetch, parse=parse)
+
+    assert any("001" in err for err in stats["errors"])
+    # 상품 저장 실패 카테고리는 랭킹 스냅샷도 저장되면 안 됨(불일치 방지)
+    assert store.load_ranking("musinsa", "001") is None
+    # 다른 카테고리는 정상 저장됨
+    assert store.load_ranking("musinsa", "002") is not None

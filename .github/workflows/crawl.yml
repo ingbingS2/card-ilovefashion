@@ -21,12 +21,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install deps
+      - name: 의존성 설치
         working-directory: crawler
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Gate
+      - name: 시크릿 확인
         id: gate
         env:
           FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
@@ -36,7 +36,15 @@ jobs:
           else
             echo "has_sa=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Crawl (Firestore 모드)
+      - name: 이전 산출물 캐시 복원 (JSON 모드)
+        if: steps.gate.outputs.has_sa == 'false'
+        uses: actions/cache@v4
+        with:
+          path: crawler/out
+          key: crawl-out-${{ github.run_id }}
+          restore-keys: |
+            crawl-out-
+      - name: 크롤링 (Firestore 모드)
         if: ${{ steps.gate.outputs.has_sa == 'true' }}
         working-directory: crawler
         env:
@@ -45,12 +53,12 @@ jobs:
           printf '%s' "$FIREBASE_SA" > /tmp/sa.json
           export GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json
           python main.py --store firestore
-      - name: Crawl (JSON 모드 — 시크릿 없음)
+      - name: 크롤링 (JSON 모드 — 시크릿 없음)
         if: ${{ steps.gate.outputs.has_sa == 'false' }}
         working-directory: crawler
         run: python main.py --store json --out out
-      - name: Upload JSON output
-        if: ${{ steps.gate.outputs.has_sa == 'false' }}
+      - name: JSON 산출물 업로드
+        if: ${{ !cancelled() && steps.gate.outputs.has_sa == 'false' }}
         uses: actions/upload-artifact@v4
         with:
           name: crawl-out

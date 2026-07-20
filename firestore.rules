@@ -11,6 +11,18 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // 랭킹 스냅샷: Phase 2 사이트가 클라이언트에서 읽음. 쓰기는 크롤러(Admin SDK)만.
+    match /rankings/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 상품 상세(후기 포함): 읽기 공개, 쓰기 차단 — Admin SDK 크롤러는 규칙 미적용
+    match /products/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
     // 그 외 경로는 기본 차단
     match /{document=**} {
       allow read, write: if false;

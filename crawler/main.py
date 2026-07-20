@@ -34,8 +34,6 @@ def _run_job(store, mall, cat, products, now_iso, fetch, parse, stats):
     prev = store.load_ranking(mall, cat) or {}
     prev_counts = {p["product_id"]: p.get("review_count")
                    for p in prev.get("items") or []}
-    store.save_ranking(mall, cat, {"updatedAt": now_iso, "items": products})
-    stats["rankings_saved"] += 1
     for product in products:
         try:
             reviews = _collect_reviews(product, prev_counts, fetch, parse, stats)
@@ -44,6 +42,11 @@ def _run_job(store, mall, cat, products, now_iso, fetch, parse, stats):
             reviews = None
         store.save_product(product, reviews, now_iso)
         stats["products_saved"] += 1
+    # 랭킹 스냅샷은 상품 저장이 전부 끝난 뒤에 기록한다.
+    # (먼저 저장하면 상품 저장 실패로 카테고리가 실패 처리돼도 새 스냅샷이
+    #  이미 남아, 다음 실행의 prev_counts 가 저장되지 않은 후기를 건너뛴다)
+    store.save_ranking(mall, cat, {"updatedAt": now_iso, "items": products})
+    stats["rankings_saved"] += 1
 
 
 def crawl_once(store, now_iso: str, fetch=_fetchers, parse=_parsers) -> dict:
