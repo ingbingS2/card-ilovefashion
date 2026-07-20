@@ -49,3 +49,4 @@ frontend/vite.config.d.ts
 crawler/.venv/
 crawler/samples/
 crawler/__pycache__/
+crawler/out/
