@@ -104,3 +104,24 @@ def test_crawl_once_category_failure_isolated(tmp_path, monkeypatch):
     assert len(stats["errors"]) == 1 and "001" in stats["errors"][0]
     assert store.load_ranking("musinsa", "001") is None   # 실패 카테고리는 미저장
     assert store.load_ranking("musinsa", "002") is not None
+
+
+def test_crawl_once_review_fetch_failure_not_counted(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의"})
+    store = LocalJsonStore(str(tmp_path))
+    fetch = FakeFetch()
+
+    def boom_cm29_reviews(item_id, size=10):
+        raise RuntimeError("후기 서버 오류")
+
+    fetch.fetch_cm29_reviews = boom_cm29_reviews
+    parse = FakeParse({"001": [_prod("musinsa", "a", 3)]}, [_prod("cm29", "x", 7)])
+
+    stats = crawl_once(store, "t1", fetch=fetch, parse=parse)
+    # musinsa a 수집 성공(1) + cm29 x 후기 실패(0) = 1건만 집계
+    assert stats["reviews_fetched"] == 1
+    # cm29 x 후기 실패가 오류 목록에 기록됨
+    assert any("후기 수집 실패" in err and "cm29" in err for err in stats["errors"])
+    # 상품은 여전히 저장됨 (cm29 x)
+    doc = json.load(open(tmp_path / "products" / "cm29_x.json", encoding="utf-8"))
+    assert doc["product_id"] == "x"  # 상품 정보는 저장됨

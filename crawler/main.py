@@ -20,12 +20,14 @@ def _collect_reviews(product, prev_counts, fetch, parse, stats):
     pid = product["product_id"]
     if pid in prev_counts and prev_counts[pid] == product["review_count"]:
         return None  # 변동 없음 → 기존 후기 유지
-    stats["reviews_fetched"] += 1
     if product["mall"] == "musinsa":
-        return parse.parse_musinsa_reviews(
+        reviews = parse.parse_musinsa_reviews(
             fetch.fetch_musinsa_reviews(pid, size=config.REVIEW_SIZE))
-    return parse.parse_cm29_reviews(
-        fetch.fetch_cm29_reviews(pid, size=config.REVIEW_SIZE))
+    else:
+        reviews = parse.parse_cm29_reviews(
+            fetch.fetch_cm29_reviews(pid, size=config.REVIEW_SIZE))
+    stats["reviews_fetched"] += 1
+    return reviews
 
 
 def _run_job(store, mall, cat, products, now_iso, fetch, parse, stats):
