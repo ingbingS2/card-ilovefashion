@@ -7,7 +7,7 @@ from __future__ import annotations
 
 def _to_int(v):
     try:
-        return int(str(v).replace(",", ""))
+        return int(float(str(v).replace(",", "")))
     except (TypeError, ValueError):
         return None
 
@@ -23,7 +23,7 @@ def parse_musinsa_ranking(data: dict) -> list[dict]:
     for module in (data.get("data") or {}).get("modules") or []:
         if module.get("type") != "MULTICOLUMN":
             continue
-        for i, item in enumerate(module.get("items") or []):
+        for item in module.get("items") or []:
             info = item.get("info") or {}
             image = item.get("image") or {}
             payload = (

@@ -56,6 +56,10 @@ def test_parse_cm29_best_normalizes():
     assert p["product_url"].startswith("https://")
     assert p["review_score"] is None or 0 <= p["review_score"] <= 5
     assert p["category_code"] is None or isinstance(p["category_code"], str)
+    # 가격·할인율: saleRate 는 float 이므로 _to_int() 가 float 파싱해야 함
+    assert p["discount_rate"] == 66
+    assert isinstance(p["price"], int) and p["price"] == 27500
+    assert isinstance(p["original_price"], int) and p["original_price"] == 60000
 
 
 def test_parse_cm29_best_empty():
