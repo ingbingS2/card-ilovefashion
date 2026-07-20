@@ -23,6 +23,8 @@ Firebase 콘솔 → **프로젝트 설정 → 서비스 계정 → 새 비공개
 | `FIREBASE_SERVICE_ACCOUNT` | 2단계에서 받은 **서비스 계정 JSON 전체** 붙여넣기 |
 | `FIREBASE_PROJECT_ID` | Firebase 프로젝트 ID |
 
+> 이 시크릿은 `.github/workflows/crawl.yml`(랭킹 크롤러)의 Firestore 적재에도 그대로 사용된다.
+
 > 두 시크릿이 없으면 배포 워크플로우는 **자동으로 건너뛰며**(실패 아님), CI(빌드/테스트)만 동작한다.
 
 ## 4. 배포 확인

@@ -1,0 +1,58 @@
+name: 랭킹 크롤러 (매시간)
+
+# 매시간 7분에 무신사/29CM 랭킹·후기를 수집한다.
+# FIREBASE_SERVICE_ACCOUNT 시크릿이 있으면 Firestore 에 적재하고,
+# 없으면 로컬 JSON 으로 돌려 아티팩트로만 업로드한다(실패 아님).
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        working-directory: crawler
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Gate
+        id: gate
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -n "$FIREBASE_SA" ]; then
+            echo "has_sa=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_sa=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Crawl (Firestore 모드)
+        if: ${{ steps.gate.outputs.has_sa == 'true' }}
+        working-directory: crawler
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          printf '%s' "$FIREBASE_SA" > /tmp/sa.json
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json
+          python main.py --store firestore
+      - name: Crawl (JSON 모드 — 시크릿 없음)
+        if: ${{ steps.gate.outputs.has_sa == 'false' }}
+        working-directory: crawler
+        run: python main.py --store json --out out
+      - name: Upload JSON output
+        if: ${{ steps.gate.outputs.has_sa == 'false' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: crawl-out
+          path: crawler/out/
+          retention-days: 3

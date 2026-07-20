@@ -51,6 +51,19 @@ npm run build                      # 프로덕션 빌드 → dist/
   (Secrets `FIREBASE_SERVICE_ACCOUNT`, `FIREBASE_PROJECT_ID` 필요 — 없으면 자동 스킵)
 - 배포 1회 설정: **[DEPLOY.md](DEPLOY.md)** 참고
 
+## 랭킹 크롤러 (crawler/)
+무신사 카테고리별 TOP 50 + 29CM 베스트 TOP 50 의 순위·가격·평점·후기(상품당 10개)를
+매시간 수집한다 (`.github/workflows/crawl.yml`, 매시간 7분).
+
+```bash
+cd crawler && ./.venv/Scripts/python.exe -m pytest -q   # 테스트 (네트워크 없음)
+./.venv/Scripts/python.exe main.py --store json         # 로컬 실크롤 → out/
+./.venv/Scripts/python.exe main.py --store firestore    # Firestore 적재 (ADC 필요)
+```
+
+- Firestore 모드는 GitHub Secret `FIREBASE_SERVICE_ACCOUNT` 등록 시 자동 활성화 (없으면 JSON 아티팩트 모드).
+- 엔드포인트 실측 문서: [crawler/FINDINGS.md](crawler/FINDINGS.md)
+
 ## 개발 자동화
 - Claude Code 코드 수정 시 턴 종료마다 자동 커밋·푸시 (`.claude/hooks/auto-commit-push.sh`)
 - 개발 규칙: **[CLAUDE.md](CLAUDE.md)**, 스펙: **[SPEC.md](SPEC.md)**
