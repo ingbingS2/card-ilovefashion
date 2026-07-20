@@ -79,3 +79,33 @@ def parse_cm29_best(data: dict) -> list[dict]:
             "category_name": props.get("middleCategoryName"),
         })
     return out
+
+
+def parse_musinsa_reviews(data: dict) -> list[dict]:
+    out = []
+    for item in (data.get("data") or {}).get("list") or []:
+        text = (item.get("content") or "").strip()
+        if not text:
+            continue
+        out.append({
+            "score": _to_int(item.get("grade")),
+            "text": text,
+            "date": item.get("createDate"),
+            "likes": _to_int(item.get("likeCount")),
+        })
+    return out
+
+
+def parse_cm29_reviews(data: dict) -> list[dict]:
+    out = []
+    for item in (data.get("data") or {}).get("results") or []:
+        text = (item.get("contents") or "").strip()
+        if not text:
+            continue
+        out.append({
+            "score": _to_int(item.get("point")),
+            "text": text,
+            "date": str(item.get("insertTimestamp")) if item.get("insertTimestamp") is not None else None,
+            "likes": _to_int(item.get("helpfulCount")),
+        })
+    return out

@@ -65,3 +65,32 @@ def test_parse_cm29_best_normalizes():
 def test_parse_cm29_best_empty():
     from parsers import parse_cm29_best
     assert parse_cm29_best({"data": {"list": []}}) == []
+
+
+def test_parse_musinsa_reviews():
+    from parsers import parse_musinsa_reviews
+    reviews = parse_musinsa_reviews(fx("musinsa_reviews.json"))
+    assert len(reviews) == 2
+    r = reviews[0]
+    assert set(r) == {"score", "text", "date", "likes"}
+    assert r["text"]
+    assert r["score"] is None or 1 <= r["score"] <= 5
+
+
+def test_parse_musinsa_reviews_empty():
+    from parsers import parse_musinsa_reviews
+    assert parse_musinsa_reviews({"data": {"list": []}}) == []
+
+
+def test_parse_cm29_reviews():
+    from parsers import parse_cm29_reviews
+    reviews = parse_cm29_reviews(fx("cm29_reviews.json"))
+    assert len(reviews) == 2
+    r = reviews[0]
+    assert set(r) == {"score", "text", "date", "likes"}
+    assert r["text"]
+
+
+def test_parse_cm29_reviews_empty():
+    from parsers import parse_cm29_reviews
+    assert parse_cm29_reviews({"data": {"results": []}}) == []
