@@ -150,7 +150,8 @@
 
 ## 결론
 - **브라우저 없이 requests 만으로 수집 가능 여부: 예.** 무신사 랭킹(GET)·무신사 후기(GET)·29CM 후기(GET) 는 물론, 29CM 랭킹(POST + JSON 바디)까지 포함해 4개 핵심 엔드포인트 전부 `requests` 로 200 OK 및 정상 JSON 응답을 실측 확인했다(직접 GET/POST 재현, Playwright 불필요). 필요 헤더는 29CM 랭킹의 `Content-Type: application/json` 정도이며, Referer·쿠키·인증 토큰은 4개 엔드포인트 어디에도 필요하지 않았다. 단, 29CM 랭킹은 GET 이 아니라 POST + JSON 바디라는 점을 크롤러 구현 시 반드시 반영해야 한다(GET 시도 시 405 확인).
-- **GitHub Actions 실행 가능 여부: 아니오(이번 검증 세션 기준, 원인 = 러너 큐 정체·미확정) — 당분간 크롤러는 내 PC 작업 스케줄러로 실행, `probe.yml` 은 수동 트리거용으로 유지, main 반영 이후 재검증 필요.**
+- **GitHub Actions 실행 가능 여부: 예 (확정, 2026-07-20 3차 확인) — 크롤러는 GitHub Actions 매시간 스케줄로 실행한다.**
+  - **3차 확인(최종)**: 2차 시도에서 큐에 걸려 있던 두 run 이 이후 자연 해소되어 **둘 다 `completed / success`** 로 종료됨(musinsa_ranking `29714495056` started 03:21:52Z, cm29_best `29714513646` started 03:22:24Z). 아티팩트를 내려받아 본문 대조 완료 — 무신사 `sections/200` 응답에 실상품 102개(브랜드·finalPrice 정상), 29CM `plp/best/items` 응답에 실상품 100개(itemId·sellPrice·reviewCount 정상). **봇 차단·캡차 페이지 아님, 데이터센터 IP 차단 없음.** 2차 시도의 큐 정체는 일시적 러너 배정 지연이었음이 확인됨.
   - **1차 시도(브랜치 미병합 시점)**: `probe.yml` 이 `feature/phase0-crawl-probe` 에만 존재하고 `main`(기본 브랜치)에는 없어 Actions 워크플로 목록에 미등록 상태였음 → dispatch 2건(musinsa_ranking, cm29_best) 모두 HTTP 404(run 자체가 생성 안 됨). 이후 `feature/phase0-crawl-probe` 가 `main` 에 병합됨(main HEAD `fa99642`).
   - **2차 시도(main 병합 후 재검증)**: `GET /repos/ingbingS2/card-ilovefashion/actions/workflows` → `probe.yml`(id `316439675`) 정상 등록 확인(`total_count: 3`). `POST .../workflows/probe.yml/dispatches` body `{"ref":"main","inputs":{"mode":"musinsa_ranking"}}` → **HTTP 204**(성공), 이어서 `mode=cm29_best` → **HTTP 204**. → 1차 시도의 404 원인(파일이 default 브랜치에 없어 미등록)이 정확했고, main 병합으로 실제 해소됨을 확인.
   - 생성된 run: musinsa_ranking → run id `29714495056`(created `2026-07-20T03:21:52Z`), cm29_best → run id `29714513646`(created `2026-07-20T03:22:24Z`). 두 run 모두 즉시 `status=queued` 로 생성됨(정상).
