@@ -150,4 +150,10 @@
 
 ## 결론
 - **브라우저 없이 requests 만으로 수집 가능 여부: 예.** 무신사 랭킹(GET)·무신사 후기(GET)·29CM 후기(GET) 는 물론, 29CM 랭킹(POST + JSON 바디)까지 포함해 4개 핵심 엔드포인트 전부 `requests` 로 200 OK 및 정상 JSON 응답을 실측 확인했다(직접 GET/POST 재현, Playwright 불필요). 필요 헤더는 29CM 랭킹의 `Content-Type: application/json` 정도이며, Referer·쿠키·인증 토큰은 4개 엔드포인트 어디에도 필요하지 않았다. 단, 29CM 랭킹은 GET 이 아니라 POST + JSON 바디라는 점을 크롤러 구현 시 반드시 반영해야 한다(GET 시도 시 405 확인).
-- GitHub Actions 실행 가능 여부: Task 5 에서 기입
+- **GitHub Actions 실행 가능 여부: 아니오(이번 브랜치 상태 기준) — 크롤러는 내 PC 작업 스케줄러로 실행, 워크플로 파일은 수동 트리거용으로만 유지.**
+  - 근거: `.github/workflows/probe.yml` 은 `feature/phase0-crawl-probe` 브랜치에는 존재(Contents API `GET /repos/ingbingS2/card-ilovefashion/contents/.github/workflows/probe.yml?ref=feature/phase0-crawl-probe` → 200)하지만, 저장소의 Actions 워크플로 목록에는 등록되어 있지 않음: `GET /repos/ingbingS2/card-ilovefashion/actions/workflows` 응답이 `ci.yml`, `deploy.yml` 두 개뿐(`total_count: 2`)이고 `probe.yml` 이 없음.
+  - 이 상태에서 `POST /repos/ingbingS2/card-ilovefashion/actions/workflows/probe.yml/dispatches` (body `{"ref":"feature/phase0-crawl-probe","inputs":{"mode":"musinsa_ranking"}}`, 이어서 `mode=cm29_best`)를 각각 1회 호출한 결과 **둘 다 HTTP 404** `{"message":"Not Found","documentation_url":".../workflow-dispatch-event"}` — 워크플로 실행(run)이 아예 생성되지 않음. 두 시도 모두 동일하게 실패하여 run ID 자체가 존재하지 않음(재시도해도 구조적 원인이 동일하므로 반복 호출은 의미 없다고 판단, 몰당 1회로 종료).
+  - 원인: GitHub REST API 의 workflow_dispatch 는 워크플로 파일이 **저장소의 기본 브랜치(default branch, 이 저장소는 `main`)** 에 존재해야 해당 워크플로가 "등록"되어 dispatch 대상이 되는 GitHub 사양 때문. 이 저장소의 `main` 에는 `probe.yml` 이 없고(Phase 0 전용 브랜치에만 존재), 따라서 `ref` 파라미터로 feature 브랜치를 지정해도 dispatch 자체가 404 로 거부됨. 사이트 차단(403/429/캡차)이 아니라 GitHub 플랫폼의 사전 조건 미충족.
+  - 인증/자격증명: 문제 없음 — Git Credential Manager 에 저장된 토큰(`git credential fill`)으로 REST API 호출 자체는 정상 동작(`GET .../actions/workflows` 200, `GET .../contents/...` 200), dispatch 만 404.
+  - 데이터 검증(로컬 vs Actions): Actions 상에서 실제 실행/아티팩트 자체가 생성되지 않았으므로 이번 라운드에서 "봇 차단 페이지 vs 실제 상품 데이터" 대조는 수행 불가. 크롤링 성공 여부 자체는 Task 3 로컬 결과(무신사 랭킹/후기, 29CM 랭킹(POST)/후기 4개 엔드포인트 모두 200 + 실제 상품ID/가격/후기수 확인)만이 근거임.
+  - 결론적 실행 위치: 위 조건(워크플로가 default 브랜치에 없어 미등록) 은 이 워크플로 파일을 `main` 에 병합하면 해소 가능한 조건이지만, 이번 태스크 범위(브랜치 병합/워크플로 수정 금지)를 벗어나므로 시도하지 않음. 현재 시점 결론은 **"크롤러는 내 PC 작업 스케줄러로 실행, `probe.yml` 워크플로 파일은 (향후 `main` 병합 후) 수동 트리거용으로만 유지"**.
