@@ -140,6 +140,11 @@ def cmd_discover(name: str, url: str | None, keywords: str | None, wait: int) ->
     if exc_info:
         print(f"경고: 페이지 로드 중 오류 — 채집분까지만 저장: {exc_info}")
     print(f"\n채집 {len(index)}건 → {run_dir}")
+    # exc_info 가 있으면 중간에 실패한 '부분 실행'이므로 index 가 비어있지 않아도
+    # 절대 0(성공)으로 보고하지 않는다 — Actions 워크플로가 초록불로 오인하지 않도록
+    # 전용 종료코드 3 을 반환한다.
+    if exc_info:
+        return 3
     return 0 if index else 1
 
 

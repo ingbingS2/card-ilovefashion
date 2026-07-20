@@ -54,13 +54,35 @@ def load_token(path: str = TOKEN_FILE) -> str:
 
 
 def collect_images(folder: str) -> list[str]:
-    """1.jpg ~ N.jpg 를 번호 순으로 수집."""
+    """1.jpg ~ N.jpg 를 번호 순으로 수집.
+
+    게시는 되돌릴 수 없으므로 번호가 1..N 연속이고 중복이 없는지 검증한다
+    (2.jpg 누락, 1.jpg+1.jpeg 중복 등이 그대로 게시되지 않도록).
+    """
     files = []
+    numbers = []
     for name in os.listdir(folder):
         m = re.fullmatch(r"(\d+)\.jpe?g", name, re.IGNORECASE)
         if m:
-            files.append((int(m.group(1)), os.path.join(folder, name)))
+            n = int(m.group(1))
+            files.append((n, os.path.join(folder, name)))
+            numbers.append(n)
     files.sort()
+
+    seen = set()
+    dups = sorted({n for n in numbers if n in seen or seen.add(n)})
+    if dups:
+        sys.exit("중복 번호: " + ", ".join(str(n) for n in dups))
+
+    if numbers:
+        expected = set(range(1, len(numbers) + 1))
+        missing = sorted(expected - set(numbers))
+        if missing:
+            sys.exit(
+                "이미지 번호가 연속이 아닙니다: "
+                + ", ".join(f"{n}번 누락" for n in missing)
+            )
+
     return [p for _, p in files]
 
 
@@ -79,9 +101,13 @@ def captions_match(sent: str, fetched: str) -> bool:
 
 
 def api(method: str, endpoint: str, token: str, **data):
-    """Graph API 호출. 한글 파라미터는 반드시 data 로 전달 (셸 인자 금지)."""
+    """Graph API 호출. GET 은 쿼리 파라미터로, 그 외(POST 등)는 본문(data)으로 전달.
+
+    한글 캡션 등은 반드시 POST 본문(data)으로 전달된다 (셸 인자·URL 금지, CP949 깨짐 방지).
+    """
     data["access_token"] = token
-    r = requests.request(method, f"{GRAPH}/{endpoint}", data=data, timeout=60)
+    kwargs = {"params": data} if method == "GET" else {"data": data}
+    r = requests.request(method, f"{GRAPH}/{endpoint}", timeout=60, **kwargs)
     if not r.ok:
         raise RuntimeError(f"Graph API 오류 {r.status_code}: {r.text}")
     return r.json()
@@ -178,13 +204,22 @@ def main() -> None:
     post_id = api("POST", "me/media_publish", token, creation_id=carousel)["id"]
 
     print("[6/6] 게시 확인 + 캡션 검증…")
-    info = api("GET", post_id, token, fields="permalink,caption")
-    permalink = info.get("permalink", "(permalink 조회 실패)")
-    if not captions_match(caption, info.get("caption", "")):
+    try:
+        info = api("GET", post_id, token, fields="permalink,caption")
+        permalink = info.get("permalink", "(permalink 조회 실패)")
+        if not captions_match(caption, info.get("caption", "")):
+            sys.exit(
+                "실패: 게시된 캡션이 원본과 다릅니다 (한글 깨짐 의심).\n"
+                f"게시물: {permalink}\n"
+                "API 로는 수정/삭제가 불가하니 인스타그램 앱에서 확인 후 수동 삭제하세요."
+            )
+    except Exception as e:
+        # SystemExit(캡션 불일치)은 Exception 이 아니라 여기서 잡히지 않는다 — 위 메시지 그대로 유지됨.
         sys.exit(
-            "실패: 게시된 캡션이 원본과 다릅니다 (한글 깨짐 의심).\n"
-            f"게시물: {permalink}\n"
-            "API 로는 수정/삭제가 불가하니 인스타그램 앱에서 확인 후 수동 삭제하세요."
+            "경고: 게시는 완료되었으나 확인 단계에서 오류가 발생했습니다.\n"
+            f"post_id: {post_id}\n"
+            f"오류: {e}\n"
+            "API 로는 수정/삭제가 불가하니 재실행 전에 인스타그램 앱에서 직접 확인하세요."
         )
     print(f"\n완료! {permalink}")
     print("캡션 검증: 일치")
