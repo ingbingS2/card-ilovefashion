@@ -69,6 +69,10 @@ def build_html(copy: dict, products: list[dict]) -> str:
     }]
 
     for i, (item, key, p) in enumerate(zip(copy["items"], keys, products)):
+        # 이미지 출처 표기는 카피 엔진(Claude/폴백)이 뭐라 쓰든 상관없이 항상 상품의
+        # 실제 판매처(mall)에서 직접 파생한다 — 두 경로 모두 항상 정확한 출처를 보장.
+        mall = p.get("mall")
+        cr = "이미지 출처 : 무신사" if mall == "musinsa" else "이미지 출처 : 29CM"
         card = {
             "kind": "item",
             "img": key,
@@ -79,7 +83,7 @@ def build_html(copy: dict, products: list[dict]) -> str:
             "title": item.get("title"),
             "meta_": item.get("meta"),
             "proof": item.get("proof"),
-            "cr": item.get("cr"),
+            "cr": cr,
             "sp": item.get("sp"),
         }
         if item.get("badge"):
@@ -100,18 +104,26 @@ def build_html(copy: dict, products: list[dict]) -> str:
     # 람다 치환은 백슬래시를 그대로 두므로 json 출력이 안전하게 삽입된다.
     def _js(var: str, value) -> str:
         payload = json.dumps(value, ensure_ascii=False)
-        # U+2028/U+2029 는 JSON 은 허용하나 JS 문자열 리터럴에선 불법 (이스케이프)
-        payload = payload.replace(chr(0x2028), "\u2028").replace(chr(0x2029), "\u2029")
-        # script 종료 태그만 조기 종료를 유발 → 그것만 무력화 (다른 태그는 보존)
-        payload = payload.replace("</script", r"<\/script").replace("</SCRIPT", r"<\/SCRIPT")
+        # U+2028/U+2029 는 JSON 은 허용하나 JS 문자열 리터럴에선 불법이므로,
+        # 리터럴 6글자 유니코드 이스케이프 시퀀스로 치환한다 (raw string 필수 --
+        # 일반 문자열이면 파이썬이 실제 U+2028 문자로 해석해 사실상 no-op이 됨).
+        payload = payload.replace(chr(0x2028), r"\u2028").replace(chr(0x2029), r"\u2029")
+        # 닫는 태그(스킴 무관 </xxx>)는 전부 이스케이프한다 (대소문자 혼합
+        # </ScRiPt> 등 HTML 파서의 조기 스크립트 종료를 모두 막기 위함). JS
+        # 문자열 리터럴 안에서 이스케이프된 슬래시는 그냥 슬래시로 해석되므로,
+        # 실행 시점엔 원래 문자(예: 닫는 em 태그)가 그대로 화면에 나타난다.
+        payload = payload.replace("</", r"<\/")
         return f"{var} {payload};"
 
-    template = re.sub(r"var IMAGES = \{.*?\};",
-                      lambda m: _js("var IMAGES =", images), template, count=1, flags=re.S)
-    template = re.sub(r"var META   = \{.*?\};",
-                      lambda m: _js("var META   =", meta), template, count=1, flags=re.S)
-    template = re.sub(r"var CARDS  = \[.*?\];",
-                      lambda m: _js("var CARDS  =", cards), template, count=1, flags=re.S)
+    template, n_images = re.subn(r"var IMAGES = \{.*?\};",
+                                  lambda m: _js("var IMAGES =", images), template, count=1, flags=re.S)
+    template, n_meta = re.subn(r"var META   = \{.*?\};",
+                                lambda m: _js("var META   =", meta), template, count=1, flags=re.S)
+    template, n_cards = re.subn(r"var CARDS  = \[.*?\];",
+                                 lambda m: _js("var CARDS  =", cards), template, count=1, flags=re.S)
+
+    if n_images != 1 or n_meta != 1 or n_cards != 1:
+        raise RuntimeError("템플릿 앵커(IMAGES/META/CARDS)를 찾지 못했습니다")
 
     return template
 
