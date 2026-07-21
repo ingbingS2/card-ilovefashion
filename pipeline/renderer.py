@@ -152,6 +152,12 @@ def render(copy: dict, products: list[dict], out_dir: str) -> list[str]:
     for shot in shots:
         _crop_to_1080x1350(shot)
         out.append(os.path.abspath(shot))
+
+    # 렌더용 임시 HTML 은 결과 폴더에 남기지 않는다 (사용자가 여는 폴더이므로).
+    try:
+        os.remove(html_path)
+    except OSError:
+        pass
     return out
 
 
