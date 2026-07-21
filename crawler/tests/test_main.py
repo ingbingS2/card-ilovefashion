@@ -26,7 +26,7 @@ class FakeFetch:
     def fetch_musinsa_ranking(self, category_code, page=1):
         return {"cat": category_code}
 
-    def fetch_cm29_best(self, page=1, size=100):
+    def fetch_cm29_best(self, page=1, size=100, category_large_id=None):
         return {"best": True}
 
     def fetch_musinsa_reviews(self, goods_no, size=10):
@@ -56,6 +56,7 @@ class FakeParse:
 
 
 def test_crawl_once_full_flow(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {})
     monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의"})
     store = LocalJsonStore(str(tmp_path))
     fetch = FakeFetch()
@@ -71,6 +72,7 @@ def test_crawl_once_full_flow(tmp_path, monkeypatch):
 
 
 def test_crawl_once_incremental_reviews(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {})
     monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의"})
     store = LocalJsonStore(str(tmp_path))
     fetch = FakeFetch()
@@ -89,6 +91,7 @@ def test_crawl_once_incremental_reviews(tmp_path, monkeypatch):
 
 
 def test_crawl_once_category_failure_isolated(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {})
     monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의", "002": "아우터"})
     store = LocalJsonStore(str(tmp_path))
     fetch = FakeFetch()
@@ -107,6 +110,7 @@ def test_crawl_once_category_failure_isolated(tmp_path, monkeypatch):
 
 
 def test_crawl_once_review_fetch_failure_not_counted(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {})
     monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의"})
     store = LocalJsonStore(str(tmp_path))
     fetch = FakeFetch()
@@ -141,6 +145,7 @@ class FlakyProductStore(LocalJsonStore):
 
 
 def test_crawl_once_product_save_failure_skips_ranking_snapshot(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {})
     monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {"001": "상의", "002": "아우터"})
     store = FlakyProductStore(str(tmp_path), fail_pid="a")
     fetch = FakeFetch()
@@ -154,3 +159,24 @@ def test_crawl_once_product_save_failure_skips_ranking_snapshot(tmp_path, monkey
     assert store.load_ranking("musinsa", "001") is None
     # 다른 카테고리는 정상 저장됨
     assert store.load_ranking("musinsa", "002") is not None
+
+
+def test_crawl_once_cm29_categories(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {})
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {"269100100": "여성가방"})
+    store = LocalJsonStore(str(tmp_path))
+    fetch = FakeFetch()
+    calls = []
+    orig = fetch.fetch_cm29_best
+
+    def spy(page=1, size=100, category_large_id=None):
+        calls.append(category_large_id)
+        return orig(page=page, size=size, category_large_id=category_large_id)
+
+    fetch.fetch_cm29_best = spy
+    parse = FakeParse({}, [_prod("cm29", "x", 7)])
+    stats = crawl_once(store, "t1", fetch=fetch, parse=parse)
+    assert calls == [None, "269100100"]          # 전체 베스트 + 카테고리 1개
+    assert stats["rankings_saved"] == 2
+    snap = store.load_ranking("cm29", "269100100")
+    assert snap["items"][0]["category_name"] == "여성가방"

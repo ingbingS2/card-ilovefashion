@@ -259,3 +259,8 @@ input[type="range"] {
 .review-score { font-size:11px; }
 .review-text { font-size:13px; line-height:1.6; margin:4px 0; word-break:keep-all; }
 .review-likes { font-size:11px; color:#8b8b90; }
+
+/* 몰 라벨 + 29CM 칩 */
+.tabs-label { font-size:12px; font-weight:800; color:#8b8b90; align-self:center; margin-right:2px; min-width:44px; }
+.cm-chip { border-style:dashed; }
+.dash-tabs + .dash-tabs { margin-top:-6px; }

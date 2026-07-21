@@ -14,6 +14,16 @@ export const MUSINSA_TABS = [
   { code: "103", label: "신발" },
 ];
 
+export const CM29_TABS = [
+  { code: "best", label: "전체" },
+  { code: "268100100", label: "여성의류" },
+  { code: "269100100", label: "여성가방" },
+  { code: "270100100", label: "여성슈즈" },
+  { code: "271100100", label: "여성액세서리" },
+  { code: "305100100", label: "여성주얼리" },
+  { code: "310100100", label: "여성모자" },
+];
+
 type RestValue = Record<string, unknown>;
 
 export function fv(v: unknown): unknown {

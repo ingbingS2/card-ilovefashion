@@ -93,3 +93,18 @@ def test_block_status_no_retry(monkeypatch):
     with pytest.raises(fetchers.FetchError):
         fetchers.fetch_musinsa_ranking("001")
     assert calls["n"] == 1
+
+
+def test_cm29_best_category_filter_body(monkeypatch):
+    captured = {}
+
+    def fake_request(method, url, **kw):
+        captured.update(method=method, url=url, **kw)
+        return FakeResp()
+
+    monkeypatch.setattr(fetchers.requests, "request", fake_request)
+    fetchers.fetch_cm29_best(category_large_id="269100100")
+    assert captured["json"]["facets"]["categoryFacetInputs"] == [{"largeId": 269100100}]
+    # 카테고리 없으면 필드 자체가 없어야 함
+    fetchers.fetch_cm29_best()
+    assert "categoryFacetInputs" not in captured["json"]["facets"]

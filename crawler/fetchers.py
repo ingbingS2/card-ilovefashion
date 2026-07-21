@@ -67,12 +67,17 @@ def fetch_musinsa_reviews(goods_no: str, size: int = 10) -> dict:
     })
 
 
-def fetch_cm29_best(page: int = 1, size: int = 100) -> dict:
+def fetch_cm29_best(page: int = 1, size: int = 100,
+                    category_large_id: str | None = None) -> dict:
+    facets: dict = {"periodFacetInput": {"type": "HOURLY", "order": "DESC"},
+                    "rankingFacetInput": {"type": "POPULARITY"}}
+    if category_large_id:
+        # 실측 (2026-07-21): 카테고리 필터는 대분류 largeId 배열로 전달
+        facets["categoryFacetInputs"] = [{"largeId": int(category_large_id)}]
     return _request("POST", CM29_BEST_URL, json_body={
         "pageRequest": {"page": page, "size": size},
         "userSegment": {"gender": "F", "age": "THIRTIES"},
-        "facets": {"periodFacetInput": {"type": "HOURLY", "order": "DESC"},
-                   "rankingFacetInput": {"type": "POPULARITY"}},
+        "facets": facets,
     }, headers={"Content-Type": "application/json"})
 
 

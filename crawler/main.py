@@ -66,6 +66,15 @@ def crawl_once(store, now_iso: str, fetch=_fetchers, parse=_parsers) -> dict:
         _run_job(store, "cm29", "best", products, now_iso, fetch, parse, stats)
     except Exception as e:
         stats["errors"].append(f"29CM best 실패: {e}")
+    for cat, cat_name in config.CM29_CATEGORIES.items():
+        try:
+            products = parse.parse_cm29_best(
+                fetch.fetch_cm29_best(category_large_id=cat))[:config.TOP_N]
+            for p in products:
+                p["category_code"], p["category_name"] = cat, cat_name
+            _run_job(store, "cm29", cat, products, now_iso, fetch, parse, stats)
+        except Exception as e:
+            stats["errors"].append(f"29CM {cat}({cat_name}) 실패: {e}")
     return stats
 
 

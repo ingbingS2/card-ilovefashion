@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MUSINSA_TABS } from "../firestore";
+import { CM29_TABS, MUSINSA_TABS } from "../firestore";
 import type { RankItem } from "../rankTypes";
 import { buildSelectionPayload, sendSelection, toggleSelection } from "../selection";
 import ProductPanel from "./ProductPanel";
@@ -7,6 +7,7 @@ import RankList from "./RankList";
 
 export default function Dashboard() {
   const [cat, setCat] = useState("001");
+  const [cmCat, setCmCat] = useState("best");
   const [selected, setSelected] = useState<Record<string, RankItem>>({});
   const [open, setOpen] = useState<{ mall: string; productId: string } | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -14,6 +15,7 @@ export default function Dashboard() {
 
   const count = Object.keys(selected).length;
   const label = MUSINSA_TABS.find((t) => t.code === cat)?.label ?? "";
+  const cmLabel = CM29_TABS.find((t) => t.code === cmCat)?.label ?? "";
 
   const onToggle = (item: RankItem) => setSelected((m) => toggleSelection(m, item));
   const onOpen = (item: RankItem) => setOpen({ mall: item.mall, productId: item.product_id });
@@ -34,15 +36,23 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <div className="dash-tabs">
+        <span className="tabs-label">무신사</span>
         {MUSINSA_TABS.map((t) => (
           <button key={t.code} className={"chip" + (t.code === cat ? " chip-on" : "")}
             onClick={() => setCat(t.code)}>{t.label}</button>
         ))}
       </div>
+      <div className="dash-tabs">
+        <span className="tabs-label">29CM</span>
+        {CM29_TABS.map((t) => (
+          <button key={t.code} className={"chip cm-chip" + (t.code === cmCat ? " chip-on" : "")}
+            onClick={() => setCmCat(t.code)}>{t.label}</button>
+        ))}
+      </div>
       <div className="dash-grid">
         <RankList title={`무신사 ${label}`} docId={`musinsa_${cat}`}
           selected={selected} onToggle={onToggle} onOpen={onOpen} />
-        <RankList title="29CM 베스트" docId="cm29_best"
+        <RankList title={`29CM ${cmLabel}`} docId={cmCat === "best" ? "cm29_best" : `cm29_${cmCat}`}
           selected={selected} onToggle={onToggle} onOpen={onOpen} />
       </div>
       {open && <ProductPanel mall={open.mall} productId={open.productId} onClose={() => setOpen(null)} />}
