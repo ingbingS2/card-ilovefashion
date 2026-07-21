@@ -189,7 +189,19 @@ def main() -> None:
     print(f"[3/6] 캐러셀 아이템 컨테이너 생성 x {len(urls)}…")
     children = []
     for url in urls:
-        res = api("POST", "me/media", token, image_url=url, is_carousel_item="true")
+        # 인수인계 문서: 이미지 URL 정상인데도 code 9004(2207052)가 간헐 발생 —
+        # 실제로는 일시적 오류라 몇 초 간격 재시도로 해결됨 (2026-07-20 실측)
+        last_err = None
+        for attempt in range(3):
+            try:
+                res = api("POST", "me/media", token, image_url=url, is_carousel_item="true")
+                break
+            except RuntimeError as e:
+                last_err = e
+                print(f"       재시도 {attempt + 1}/3 (컨테이너 생성 실패: {str(e)[:80]})")
+                time.sleep(4)
+        else:
+            raise RuntimeError(f"아이템 컨테이너 생성 3회 실패: {last_err}")
         children.append(res["id"])
         print(f"       {res['id']}")
 
