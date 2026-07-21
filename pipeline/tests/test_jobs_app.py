@@ -13,7 +13,12 @@ from fastapi.testclient import TestClient
 import app as app_module
 import jobs
 
-client = TestClient(app_module.app)
+DEFAULT_ORIGIN = "https://fashion-cardnews.web.app"
+
+# TrustedHostMiddleware 는 Host 헤더가 allowed_hosts(localhost/127.0.0.1)에 없으면
+# 거부한다. httpx 기본 base_url("http://testserver")은 여기 걸리므로, 실제 배포
+# 환경과 같은 호스트로 맞춰준다.
+client = TestClient(app_module.app, base_url="http://localhost")
 
 
 @pytest.fixture(autouse=True)
@@ -205,7 +210,9 @@ def test_publish_system_exit_from_post_ig_marks_job_failed(monkeypatch, tmp_path
     assert "토큰" in updated["error"]
 
 
-def test_publish_double_click_does_not_start_second_thread(monkeypatch, tmp_path):
+def test_publish_rejected_when_already_publishing(monkeypatch, tmp_path):
+    """게시는 되돌릴 수 없다 — "미리보기 대기"가 아닌 잡(이미 게시 중)에 대한
+    재요청은 새 스레드를 띄우지 않고 거부돼야 한다(이중 클릭/경쟁 방지)."""
     job = _make_ready_job(tmp_path)
     jobs.set_status(job, "게시 중")  # 이미 게시가 진행 중인 상태를 흉내낸다
 
@@ -218,10 +225,41 @@ def test_publish_double_click_does_not_start_second_thread(monkeypatch, tmp_path
     monkeypatch.setattr(app_module.publisher, "publish", slow_publish)
 
     resp = client.post(f"/api/jobs/{job['id']}/publish")
-    assert resp.status_code == 200
-    assert resp.json() == {"ok": True}
+    assert resp.status_code == 409
     assert job["id"] not in app_module._THREADS  # 새 스레드를 띄우지 않았어야 함
     assert called["n"] == 0
+
+
+def test_publish_rejected_when_already_completed(monkeypatch, tmp_path):
+    """이미 게시가 끝난("완료") 잡을 다시 게시 요청해도 publisher.publish 가 또
+    호출돼선 안 된다 — 게시는 되돌릴 수 없으므로 중복 게시를 막는 게 핵심이다."""
+    job = _make_ready_job(tmp_path)
+    jobs.set_status(job, "완료", permalink="https://instagram.com/p/already")
+
+    called = {"n": 0}
+
+    def slow_publish(folder):
+        called["n"] += 1
+        return "https://instagram.com/p/xyz"
+
+    monkeypatch.setattr(app_module.publisher, "publish", slow_publish)
+
+    resp = client.post(f"/api/jobs/{job['id']}/publish")
+    assert resp.status_code == 409
+    assert job["id"] not in app_module._THREADS
+    assert called["n"] == 0
+    assert jobs.JOBS[job["id"]]["permalink"] == "https://instagram.com/p/already"
+
+
+def test_publish_rejected_when_failed(monkeypatch, tmp_path):
+    job = _make_ready_job(tmp_path)
+    jobs.set_status(job, "실패", error="이전 시도 실패")
+
+    monkeypatch.setattr(app_module.publisher, "publish", lambda folder: "https://instagram.com/p/xyz")
+
+    resp = client.post(f"/api/jobs/{job['id']}/publish")
+    assert resp.status_code == 409
+    assert job["id"] not in app_module._THREADS
 
 
 def test_get_job_not_found_returns_404():
@@ -234,3 +272,56 @@ def test_get_job_returns_job_dict(tmp_path):
     resp = client.get(f"/api/jobs/{job['id']}")
     assert resp.status_code == 200
     assert resp.json()["status"] == "미리보기 대기"
+
+
+def test_preview_publish_button_disables_itself_before_fetch(tmp_path):
+    """더블클릭으로 fetch 가 두 번 발사되지 않도록, 버튼 클릭 즉시(fetch 이전에)
+    스스로를 비활성화하는 스크립트가 미리보기 HTML 에 포함돼야 한다."""
+    job = _make_ready_job(tmp_path)
+    resp = client.get(f"/preview/{job['id']}")
+    assert resp.status_code == 200
+    onclick_pos = resp.text.find("onclick=")
+    fetch_pos = resp.text.find("fetch(", onclick_pos)
+    disable_pos = resp.text.find("disabled = true", onclick_pos)
+    assert onclick_pos != -1 and fetch_pos != -1 and disable_pos != -1
+    assert disable_pos < fetch_pos  # disabled 처리가 fetch 호출보다 먼저 나와야 함
+
+
+def test_selections_rejects_untrusted_origin(tmp_path):
+    resp = client.post(
+        "/api/selections",
+        json={"items": [{"mall": "musinsa", "product_id": "1"}]},
+        headers={"Origin": "https://evil.example"},
+    )
+    assert resp.status_code == 403
+
+
+def test_selections_allows_missing_origin(monkeypatch, tmp_path):
+    """Origin 헤더가 아예 없는 요청(같은 프로세스/curl 등)은 통과해야 한다."""
+    monkeypatch.setattr(app_module, "CARDNEWS_BASE_DIR", str(tmp_path))
+    monkeypatch.setattr(app_module.reader, "load_products", lambda items, assets_dir: [])
+
+    def boom(*a, **k):
+        raise RuntimeError("copy 단계는 이 테스트의 관심사가 아님 — 여기까지 도달했는지만 확인")
+
+    monkeypatch.setattr(app_module.copywriter, "write_copy", boom)
+
+    resp = client.post("/api/selections", json={"items": [{"mall": "musinsa", "product_id": "1"}]})
+    assert resp.status_code == 200  # 403 이 아니라 정상적으로 잡이 생성돼야 함
+
+
+def test_publish_rejects_untrusted_origin(tmp_path):
+    job = _make_ready_job(tmp_path)
+    resp = client.post(
+        f"/api/jobs/{job['id']}/publish",
+        headers={"Origin": "https://evil.example"},
+    )
+    assert resp.status_code == 403
+    assert job["id"] not in app_module._THREADS
+
+
+def test_trusted_host_middleware_rejects_unknown_host():
+    """127.0.0.1 로만 떠 있어야 할 로컬 서버이므로, 위장된 Host 헤더 요청은
+    TrustedHostMiddleware 가 라우팅 이전에 거부해야 한다."""
+    resp = client.get("/api/jobs/nonexistent", headers={"Host": "evil.example"})
+    assert resp.status_code == 400

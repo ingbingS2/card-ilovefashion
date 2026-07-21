@@ -16,8 +16,9 @@ import webbrowser
 from datetime import datetime
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel
 
@@ -31,24 +32,43 @@ import renderer
 
 app = FastAPI(title="패션 카드뉴스 자동 생성")
 
+ALLOWED_ORIGINS = [
+    "https://fashion-cardnews.web.app",
+    "http://localhost:5173",
+    "http://localhost:4173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://fashion-cardnews.web.app",
-        "http://localhost:5173",
-        "http://localhost:4173",
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# 이 앱은 로컬(127.0.0.1:8787)에서만 떠 있는 개인용 원클릭 서버다 — 다른 호스트로
+# 위장한 Host 헤더 요청(DNS 리바인딩 등)을 미리 걸러낸다.
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1"])
+
 # 완성본 저장 위치: 바탕화면\카드뉴스\YYYYMMDD 주제\ (사용자 확정 규칙)
 CARDNEWS_BASE_DIR = os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
 
-_FILE_NAME_RE = re.compile(r"^([0-9]+\.jpg|caption\.txt)$")
+_FILE_NAME_RE = re.compile(r"^([0-9]+\.jpg|caption\.txt)\Z")
 
 # job_id -> Thread. 백그라운드 스레드 참조를 보관해 테스트에서 join 할 수 있게 한다.
 _THREADS: dict[str, threading.Thread] = {}
+
+# 게시 상태 확인+전환을 원자적으로 만들어, 거의 동시에 들어온 두 POST 가 모두
+# "미리보기 대기"를 통과해 게시 스레드를 이중으로 띄우는 경쟁을 막는다.
+_publish_lock = threading.Lock()
+
+
+def _reject_untrusted_origin(request: Request) -> None:
+    """상태를 바꾸는 엔드포인트(선택 제출/게시)에서, Origin 헤더가 있는데 허용
+    목록에 없으면 거부한다. Origin 헤더가 아예 없는 요청(같은 프로세스, curl 등)은
+    통과시킨다 — 이 앱은 브라우저 프런트에서만 호출되는 걸 전제하지 않기 때문."""
+    origin = request.headers.get("origin")
+    if origin and origin not in ALLOWED_ORIGINS:
+        raise HTTPException(status_code=403, detail="허용되지 않은 출처(Origin)입니다")
 
 
 class SelectionsBody(BaseModel):
@@ -92,12 +112,19 @@ def run_pipeline(job: dict, items: list[dict], topic: str = "랭킹 픽") -> Non
             f.write(copy["caption"])
 
         jobs.set_status(job, "미리보기 대기", folder=folder, images=images)
-        webbrowser.open(f"http://localhost:8787/preview/{job['id']}")
     except (Exception, SystemExit) as e:
         # post_ig.py 재사용 함수(load_token/collect_images 등)는 실패 시 sys.exit() 를
         # 호출해 SystemExit(BaseException)을 던진다. 이를 놓치면 스레드가 조용히 죽고
         # 잡이 진행 중 상태에 영구히 멈추므로(미리보기 자동새로고침만 무한 반복) 함께 잡는다.
         jobs.set_status(job, "실패", error=str(e) or "처리 실패")
+        return
+
+    # 브라우저 자동 열기는 부가 기능일 뿐이라, try 밖에서 별도로 감싼다 — 이게
+    # 실패해도(예: 브라우저 없음) 이미 정상 완료된 잡을 "실패"로 되돌리면 안 된다.
+    try:
+        webbrowser.open(f"http://localhost:8787/preview/{job['id']}")
+    except Exception:
+        pass
 
 
 def run_publish(job: dict, folder: str) -> None:
@@ -111,7 +138,8 @@ def run_publish(job: dict, folder: str) -> None:
 
 
 @app.post("/api/selections")
-def post_selections(body: SelectionsBody):
+def post_selections(body: SelectionsBody, request: Request):
+    _reject_untrusted_origin(request)
     job = jobs.create_job()
     t = threading.Thread(target=run_pipeline, args=(job, body.items), daemon=True)
     _THREADS[job["id"]] = t
@@ -172,8 +200,11 @@ def get_preview(job_id: str):
 <h2>캡션</h2>
 <pre>{html.escape(caption_text)}</pre>
 <button id='publish-btn' onclick="
+  this.disabled = true;
+  this.textContent = '게시 중…';
   fetch('/api/jobs/{job_id}/publish', {{method: 'POST'}})
-    .then(function() {{ alert('게시를 시작했습니다. 잠시 후 새로고침해 확인하세요.'); }});
+    .then(function() {{ alert('게시를 시작했습니다. 잠시 후 새로고침해 확인하세요.'); }})
+    .catch(function() {{ alert('게시 요청에 실패했습니다. 새로고침 후 다시 시도하세요.'); }});
 ">인스타에 게시</button>
 <p>완성된 이미지는 다음 폴더에서도 확인할 수 있습니다: {html.escape(folder or '')}</p>
 </body></html>
@@ -207,7 +238,9 @@ def get_file(job_id: str, name: str):
 
 
 @app.post("/api/jobs/{job_id}/publish")
-def post_publish(job_id: str):
+def post_publish(job_id: str, request: Request):
+    _reject_untrusted_origin(request)
+
     job = jobs.JOBS.get(job_id)
     if job is None:
         raise HTTPException(status_code=404, detail="잡을 찾을 수 없습니다")
@@ -216,11 +249,17 @@ def post_publish(job_id: str):
     if not folder:
         raise HTTPException(status_code=400, detail="아직 렌더링이 끝나지 않았습니다")
 
-    if job["status"] == "게시 중":
-        # 이중 클릭 방지: 이미 게시가 진행 중이면 새 스레드를 또 띄우지 않는다.
-        return {"ok": True}
+    # 게시는 되돌릴 수 없다 — "미리보기 대기" 상태에서만 시작할 수 있고, 상태
+    # 확인+전환을 락으로 묶어 거의 동시에 들어온 두 요청이 둘 다 통과하는 경쟁을
+    # 막는다. 이미 게시 중/완료/실패인 잡은 재게시(중복 게시) 대신 거부한다.
+    with _publish_lock:
+        if job["status"] != "미리보기 대기":
+            raise HTTPException(
+                status_code=409,
+                detail=f"이미 게시가 진행 중이거나 끝난 잡입니다 (현재 상태: {job['status']})",
+            )
+        jobs.set_status(job, "게시 중")
 
-    jobs.set_status(job, "게시 중")
     t = threading.Thread(target=run_publish, args=(job, folder), daemon=True)
     _THREADS[job_id] = t
     t.start()

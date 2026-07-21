@@ -67,7 +67,19 @@ def publish(folder: str) -> str:
     post_id = post_ig.api("POST", "me/media_publish", token, creation_id=carousel)["id"]
 
     # [6/6] permalink + 캡션 재조회 검증 (한글 깨짐 확인)
-    info = post_ig.api("GET", post_id, token, fields="permalink,caption")
+    # 이 시점에서 media_publish 는 이미 성공했다 — 아래 확인 단계에서 예외가 나도
+    # "게시 실패"로 보고하면 사용자가 재시도해 중복 게시(캐러셀 두 번 업로드)로
+    # 이어질 수 있으므로, 확인 단계 자체의 오류는 별도 메시지로 구분한다.
+    try:
+        info = post_ig.api("GET", post_id, token, fields="permalink,caption")
+    except Exception as e:
+        raise RuntimeError(
+            "게시는 완료되었으나 확인 단계에서 오류가 발생했습니다.\n"
+            f"post_id: {post_id}\n"
+            f"오류: {e}\n"
+            "다시 게시하지 말고 인스타그램 앱에서 직접 확인하세요."
+        ) from e
+
     permalink = info.get("permalink", "(permalink 조회 실패)")
     if not post_ig.captions_match(caption, info.get("caption", "")):
         raise RuntimeError(

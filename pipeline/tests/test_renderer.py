@@ -25,7 +25,7 @@ def prods():
 def test_build_html_replaces_blocks(tmp_path):
     html = renderer.build_html(copy2(), prods())
     assert "var IMAGES = {" in html and "var META   = {" in html and "var CARDS  = [" in html
-    assert "커버<em>강조</em>" in html
+    assert r"커버<em>강조<\/em>" in html  # </ 는 전부 이스케이프되어 나온다
     assert "data:image/png;base64," in html  # image_path None → 폴백 1px
 
 
@@ -72,3 +72,43 @@ def test_build_html_escapes_special_chars_for_js():
     import json as _json
     # 블록이 유효한 JSON 으로 다시 파싱되어야 함 (JS 로도 유효)
     _json.loads(block.replace("<\/", "</"))
+
+
+def test_build_html_raises_when_template_anchor_missing(monkeypatch, tmp_path):
+    """템플릿에서 IMAGES/META/CARDS 앵커 중 하나라도 찾지 못하면 조용히 데모 데이터로
+    렌더링하지 말고 즉시 실패해야 한다 (템플릿 리팩터 등으로 앵커 문자열이 바뀌는
+    드리프트를 렌더 단계에서 바로 잡아내기 위함)."""
+    import pytest
+
+    broken_template = (
+        "<html><body><script>\n"
+        "var IMAGES = {};\n"
+        "var META   = {};\n"
+        "</script></body></html>\n"
+    )
+    fake_path = tmp_path / "broken.html"
+    fake_path.write_text(broken_template, encoding="utf-8")
+    monkeypatch.setattr(renderer, "TEMPLATE_PATH", fake_path)
+
+    with pytest.raises(RuntimeError, match="템플릿 앵커"):
+        renderer.build_html(copy2(), prods())
+
+
+def test_build_html_cr_derived_from_product_mall_not_copy_engine():
+    """이미지 출처(cr)는 카피 엔진(Claude/폴백)이 뭐라고 주든 무시하고 항상
+    상품의 실제 mall 에서 파생돼야 한다 (폴백/Claude 경로 모두 정확한 출처 보장)."""
+    c = copy2()
+    c["items"][0]["cr"] = "이 값은 무시되어야 함"
+    p = prods()
+    p[0]["mall"] = "cm29"
+
+    html = renderer.build_html(c, p)
+    import json, re
+    cards = json.loads(re.search(r"var CARDS  = (\[.*?\]);", html, re.S).group(1))
+    assert cards[1]["cr"] == "이미지 출처 : 29CM"
+
+    p2 = prods()
+    p2[0]["mall"] = "musinsa"
+    html2 = renderer.build_html(copy2(), p2)
+    cards2 = json.loads(re.search(r"var CARDS  = (\[.*?\]);", html2, re.S).group(1))
+    assert cards2[1]["cr"] == "이미지 출처 : 무신사"

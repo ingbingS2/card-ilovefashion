@@ -16,7 +16,7 @@
 - 비밀키: `pipeline/.env`(미커밋)에 `ANTHROPIC_API_KEY`(선택). 없으면 폴백 문구 모드로 동작해야 한다(전 구간 키 없이 실행 가능). IG 토큰은 기존 `카드뉴스\ig_api_token.txt` 재사용(post_ig 경유). `.env.example` 만 커밋.
 - CORS: `https://fashion-cardnews.web.app` + `http://localhost:5173` + `http://localhost:4173` 허용 (최종 리뷰 이관 사항).
 - 산출물 저장 규칙: `C:\Users\yepdo\OneDrive\Desktop\카드뉴스\YYYYMMDD 랭킹픽\1.jpg~N.jpg` + `caption.txt` (기존 규칙).
-- 카드 구성 = C안 고정: 표지 + 상품 N장(상품명 라인 포함) + CTA. 캡션 = 절제 톤(제목형 1줄, 담백한 2~3문장, 경험 소환형 질문, 이모지 0~1, 해시태그 10~11, 나열체·말줄임표 금지).
+- 카드 구성 = C안 고정: 표지 + 상품 N장(상품명 라인 포함) + CTA. 캡션 = 절제 톤(제목형 1줄, 담백한 2~3문장, 경험 소환형 질문, 이모지 0~1, 해시태그 0개(금지), 나열체·말줄임표 금지).
 - 커밋 트레일러 2줄: `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>` / `Claude-Session: https://claude.ai/code/session_01PgitEtAu5cwDBPf5BsKcLr`
 
 ## File Structure
