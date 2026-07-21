@@ -38,6 +38,16 @@ def test_fallback_structure_and_rules():
     assert "…" not in cap and "..." not in cap
 
 
+def test_fallback_cm29_mall_name():
+    p = prod()
+    p["mall"] = "cm29"
+    c = copywriter.fallback_copy([p], "랭킹 픽")
+    it = c["items"][0]
+    assert "29CM" in it["meta"]
+    assert "cm29" not in it["meta"]
+    assert it["cr"] == "이미지 출처 : 29CM"
+
+
 def test_write_copy_without_key_uses_fallback():
     c = copywriter.write_copy([prod()], api_key=None)
     assert c["cover"]["kicker"].startswith("TODAY PICK")

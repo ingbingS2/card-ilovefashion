@@ -84,7 +84,7 @@ def fallback_copy(products: list[dict], topic: str) -> dict:
         name = _truncate(p.get("name") or "", 30)
         rank = p.get("rank")
         mall = p.get("mall")
-        mall_name = "무신사" if mall == "musinsa" else "29CM" if mall == "29cm" else (mall or "")
+        mall_name = "무신사" if mall == "musinsa" else "29CM" if mall == "cm29" else (mall or "")
         price = p.get("price") or 0
         original_price = p.get("original_price")
         review_count = p.get("review_count") or 0
