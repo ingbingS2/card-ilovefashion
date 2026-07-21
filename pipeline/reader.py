@@ -28,12 +28,15 @@ def fv(v):
 
 def _fetch_reviews(mall: str, pid: str) -> list[dict]:
     url = f"{BASE}/products/{mall}_{pid}?key={KEY}&mask.fieldPaths=reviews"
-    r = requests.get(url, timeout=30, headers=UA)
-    if not r.ok:
+    try:
+        r = requests.get(url, timeout=30, headers=UA)
+        if not r.ok:
+            return []
+        fields = r.json().get("fields") or {}
+        reviews = fv(fields.get("reviews", {"arrayValue": {}})) or []
+        return [rv for rv in reviews if isinstance(rv, dict) and rv.get("text")]
+    except (requests.exceptions.RequestException, ValueError):
         return []
-    fields = r.json().get("fields") or {}
-    reviews = fv(fields.get("reviews", {"arrayValue": {}})) or []
-    return [rv for rv in reviews if isinstance(rv, dict) and rv.get("text")]
 
 
 def _download_image(url: str | None, dest: str) -> str | None:
@@ -41,9 +44,10 @@ def _download_image(url: str | None, dest: str) -> str | None:
         return None
     try:
         r = requests.get(url, timeout=60, headers=UA)
-        if not r.ok or len(r.content) < 1000 and not r.content:
+        if not r.ok or len(r.content) < 1000:
             return None
-        open(dest, "wb").write(r.content)
+        with open(dest, "wb") as f:
+            f.write(r.content)
         return os.path.abspath(dest)
     except requests.exceptions.RequestException:
         return None
