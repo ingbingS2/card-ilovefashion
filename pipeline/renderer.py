@@ -35,8 +35,9 @@ def _image_meta(image_path: str | None) -> dict:
         return {"w": 1, "h": 1, "bg": "#f4f3f1"}
     with Image.open(image_path) as img:
         w, h = img.size
-        sample = img.convert("RGB").resize((3, 3))
-        r, g, b = sample.getpixel((1, 1))
+        rgb = img.convert("RGB")
+        px = (3, 3) if w >= 4 and h >= 4 else (0, 0)
+        r, g, b = rgb.getpixel(px)
         return {"w": w, "h": h, "bg": "#%02x%02x%02x" % (r, g, b)}
 
 
@@ -127,8 +128,8 @@ def _crop_to_1080x1350(path: str) -> None:
             top = (new_h - target_h) // 2
             img = img.crop((left, top, left + target_w, top + target_h))
             img.save(path, "JPEG", quality=92)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"경고: 크롭 보정 실패({path}): {e} — 원본 크기 유지")
 
 
 def render(copy: dict, products: list[dict], out_dir: str) -> list[str]:
@@ -143,6 +144,7 @@ def render(copy: dict, products: list[dict], out_dir: str) -> list[str]:
 
     n_cards = len(products) + 2  # cover + items + cta
     shots = _screenshot_cards(html_path, n_cards, out_dir)
+    assert len(shots) == n_cards, f"렌더 카드 수 불일치: {len(shots)}/{n_cards}"
 
     out = []
     for shot in shots:
