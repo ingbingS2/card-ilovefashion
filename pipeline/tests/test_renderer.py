@@ -56,3 +56,19 @@ def test_render_requires_cover_and_cta(tmp_path):
     bad = copy2(); bad.pop("cover")
     with pytest.raises(KeyError):
         renderer.render(bad, prods(), str(tmp_path))
+
+
+def test_build_html_escapes_special_chars_for_js():
+    """후기 텍스트에 개행·따옴표·백슬래시가 있어도 JS 가 깨지지 않아야 한다.
+    (re.sub 치환 문자열이 백슬래시를 해석하던 버그 회귀 방지)"""
+    c = copy2()
+    c["items"][0]["sp"] = '"인용"\n둘째 줄\t탭\백슬래시 </script>'
+    html = renderer.build_html(c, prods())
+    import re
+    block = re.search(r"var CARDS  = (\[.*?\]);", html, re.S).group(1)
+    # 삽입된 CARDS 블록에 날것 개행/조기 스크립트 종료가 없어야 함
+    assert "\n둘째 줄" not in block  # 개행이 이스케이프됨
+    assert "</script>" not in block   # <\/script> 로 이스케이프됨
+    import json as _json
+    # 블록이 유효한 JSON 으로 다시 파싱되어야 함 (JS 로도 유효)
+    _json.loads(block.replace("<\/", "</"))

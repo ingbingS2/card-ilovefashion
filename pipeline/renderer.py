@@ -95,21 +95,23 @@ def build_html(copy: dict, products: list[dict]) -> str:
         "sub": cta["sub"],
     })
 
-    template = re.sub(
-        r"var IMAGES = \{.*?\};",
-        "var IMAGES = " + json.dumps(images, ensure_ascii=False) + ";",
-        template, count=1, flags=re.S,
-    )
-    template = re.sub(
-        r"var META   = \{.*?\};",
-        "var META   = " + json.dumps(meta, ensure_ascii=False) + ";",
-        template, count=1, flags=re.S,
-    )
-    template = re.sub(
-        r"var CARDS  = \[.*?\];",
-        "var CARDS  = " + json.dumps(cards, ensure_ascii=False) + ";",
-        template, count=1, flags=re.S,
-    )
+    # 치환은 반드시 함수형으로 한다. re.sub 의 치환 "문자열" 은 백슬래시를
+    # 해석하므로(예: json 의 \n → 실제 개행, \" → ", \u → 오류) 데이터가 깨진다.
+    # 람다 치환은 백슬래시를 그대로 두므로 json 출력이 안전하게 삽입된다.
+    def _js(var: str, value) -> str:
+        payload = json.dumps(value, ensure_ascii=False)
+        # U+2028/U+2029 는 JSON 은 허용하나 JS 문자열 리터럴에선 불법 (이스케이프)
+        payload = payload.replace(chr(0x2028), "\u2028").replace(chr(0x2029), "\u2029")
+        # script 종료 태그만 조기 종료를 유발 → 그것만 무력화 (다른 태그는 보존)
+        payload = payload.replace("</script", r"<\/script").replace("</SCRIPT", r"<\/SCRIPT")
+        return f"{var} {payload};"
+
+    template = re.sub(r"var IMAGES = \{.*?\};",
+                      lambda m: _js("var IMAGES =", images), template, count=1, flags=re.S)
+    template = re.sub(r"var META   = \{.*?\};",
+                      lambda m: _js("var META   =", meta), template, count=1, flags=re.S)
+    template = re.sub(r"var CARDS  = \[.*?\];",
+                      lambda m: _js("var CARDS  =", cards), template, count=1, flags=re.S)
 
     return template
 
