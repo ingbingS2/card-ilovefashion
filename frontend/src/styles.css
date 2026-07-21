@@ -202,6 +202,9 @@ input[type="range"] {
   gap: 6px;
 }
 
+/* ── 앱 탭 셸 ── */
+.app-tabs { display:flex; gap:6px; justify-content:center; margin-top:10px; }
+
 /* ── 랭킹 대시보드 ── */
 .dash-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
 .chip { font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
