@@ -14,7 +14,8 @@ export default function App() {
           <button className={"chip" + (view === "gen" ? " chip-on" : "")} onClick={() => setView("gen")}>카드뉴스 생성기</button>
         </nav>
       </header>
-      {view === "dash" ? <Dashboard /> : <Generator />}
+      <div hidden={view !== "dash"}><Dashboard /></div>
+      <div hidden={view !== "gen"}><Generator /></div>
     </div>
   );
 }

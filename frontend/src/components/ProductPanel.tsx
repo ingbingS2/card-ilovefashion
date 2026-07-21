@@ -45,7 +45,9 @@ export default function ProductPanel({ mall, productId, onClose }: Props) {
                   ) : null}
                 </div>
                 <div className="panel-delta">순위 {doc.rank}위 · {rankDelta(doc)}</div>
-                <a href={doc.product_url} target="_blank" rel="noopener noreferrer">상품 페이지 열기 ↗</a>
+                {/^https?:\/\//.test(doc.product_url) && (
+                  <a href={doc.product_url} target="_blank" rel="noopener noreferrer">상품 페이지 열기 ↗</a>
+                )}
               </div>
             </div>
             <h4>후기</h4>

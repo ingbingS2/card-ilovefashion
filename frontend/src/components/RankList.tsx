@@ -36,7 +36,7 @@ export default function RankList({ title, docId, selected, onToggle, onOpen }: P
       )}
       {error && <p className="rl-error">⚠️ {error}</p>}
       {!doc && !error && <p className="rl-loading">불러오는 중…</p>}
-      {doc?.items.map((item) => (
+      {doc?.items?.map((item) => (
         <RankCard key={selKey(item)} item={item} checked={!!selected[selKey(item)]}
           onToggle={onToggle} onOpen={onOpen} />
       ))}
