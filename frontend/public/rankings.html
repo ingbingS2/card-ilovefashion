@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>패션 랭킹 — 무신사 · 29CM</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root { --ink:#101012; --mute:#8b8b90; --accent:#ff3366; --line:#ececef; --chip:#f4f3f1;
+          --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:var(--sans); color:var(--ink); background:#fafafa; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 80px; }
+  h1 { font-size:22px; font-weight:800; margin:14px 2px 4px; letter-spacing:-.5px; }
+  .updated { font-size:12px; color:var(--mute); margin:0 2px 16px; }
+  .tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; position:sticky; top:0;
+          background:#fafafa; padding:10px 0; z-index:5; }
+  .tab { font-family:var(--sans); font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
+         border:1px solid var(--line); background:#fff; color:var(--ink); cursor:pointer; }
+  .tab.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .tab.cm { border-style:dashed; }
+  .list { display:flex; flex-direction:column; gap:8px; }
+  .item { display:flex; gap:12px; align-items:center; background:#fff; border:1px solid var(--line);
+          border-radius:12px; padding:10px 12px; text-decoration:none; color:inherit; }
+  .item:hover { border-color:#d5d5da; }
+  .rank { width:28px; text-align:center; font-weight:800; font-size:15px; color:var(--ink); flex:none;
+          font-variant-numeric:tabular-nums; }
+  .rank.top { color:var(--accent); }
+  .thumb { width:56px; height:67px; border-radius:8px; object-fit:cover; background:var(--chip); flex:none; }
+  .info { min-width:0; flex:1; }
+  .brand { font-size:11px; font-weight:700; color:var(--mute); margin-bottom:2px; }
+  .name { font-size:13.5px; font-weight:600; line-height:1.35; overflow:hidden; display:-webkit-box;
+          -webkit-line-clamp:2; -webkit-box-orient:vertical; word-break:keep-all; }
+  .meta { display:flex; gap:8px; align-items:center; margin-top:4px; font-size:12.5px; flex-wrap:wrap; }
+  .price { font-weight:800; }
+  .sale { color:var(--accent); font-weight:800; }
+  .review { color:var(--mute); }
+  .loading, .error { text-align:center; color:var(--mute); padding:60px 0 40px; font-size:14px; }
+  .foot { margin-top:28px; font-size:11px; color:#b6b3ac; text-align:center; line-height:1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>패션 랭킹</h1>
+  <p class="updated" id="updated">불러오는 중…</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="list" id="list"><div class="loading">랭킹을 불러오는 중…</div></div>
+  <p class="foot">데이터 출처 : 무신사 · 29CM (매시간 자동 수집)<br>가격·순위는 수집 시점 기준이며 실제와 다를 수 있습니다.</p>
+</div>
+
+<script>
+const PROJECT = "fashion-cardnews";
+const KEY = "AIzaSyBZIp-NLD8rw6asKSAwIOH-4I4hg9ecALo";
+const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT}/databases/(default)/documents`;
+
+const TABS = [
+  { id: "musinsa_001", label: "무신사 상의" },
+  { id: "musinsa_002", label: "무신사 아우터" },
+  { id: "musinsa_003", label: "무신사 바지" },
+  { id: "musinsa_100", label: "무신사 원피스/스커트" },
+  { id: "musinsa_004", label: "무신사 가방" },
+  { id: "musinsa_103", label: "무신사 신발" },
+  { id: "cm29_best", label: "29CM 베스트", cm: true },
+];
+
+// Firestore REST 타입 래핑 해제
+function fv(v) {
+  if (v == null) return null;
+  if ("stringValue" in v) return v.stringValue;
+  if ("integerValue" in v) return Number(v.integerValue);
+  if ("doubleValue" in v) return v.doubleValue;
+  if ("booleanValue" in v) return v.booleanValue;
+  if ("nullValue" in v) return null;
+  if ("mapValue" in v) return Object.fromEntries(
+    Object.entries(v.mapValue.fields || {}).map(([k, x]) => [k, fv(x)]));
+  if ("arrayValue" in v) return (v.arrayValue.values || []).map(fv);
+  return null;
+}
+
+const cache = {};
+async function load(docId) {
+  if (cache[docId]) return cache[docId];
+  const r = await fetch(`${BASE}/rankings/${docId}?key=${KEY}`);
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const doc = await r.json();
+  const data = Object.fromEntries(
+    Object.entries(doc.fields || {}).map(([k, x]) => [k, fv(x)]));
+  cache[docId] = data;
+  return data;
+}
+
+function won(n) { return n == null ? "" : n.toLocaleString("ko-KR") + "원"; }
+
+function render(data) {
+  const list = document.getElementById("list");
+  const t = data.updatedAt ? new Date(data.updatedAt) : null;
+  document.getElementById("updated").textContent =
+    t ? `업데이트 : ${t.toLocaleString("ko-KR", { month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" })}` : "";
+  list.innerHTML = "";
+  (data.items || []).forEach((p) => {
+    const a = document.createElement("a");
+    a.className = "item"; a.href = p.product_url; a.target = "_blank"; a.rel = "noopener";
+    const sale = p.discount_rate ? `<span class="sale">${p.discount_rate}%</span>` : "";
+    const review = p.review_count ? `<span class="review">⭐ ${p.review_score ?? "-"} · 후기 ${p.review_count.toLocaleString()}</span>` : "";
+    a.innerHTML =
+      `<div class="rank${p.rank <= 3 ? " top" : ""}">${p.rank}</div>` +
+      (p.thumbnail ? `<img class="thumb" loading="lazy" src="${p.thumbnail}" alt="">` : `<div class="thumb"></div>`) +
+      `<div class="info"><div class="brand">${p.brand || ""}</div>` +
+      `<div class="name">${p.name || ""}</div>` +
+      `<div class="meta"><span class="price">${won(p.price)}</span>${sale}${review}</div></div>`;
+    list.appendChild(a);
+  });
+}
+
+async function show(docId) {
+  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("on", b.dataset.id === docId));
+  document.getElementById("list").innerHTML = '<div class="loading">불러오는 중…</div>';
+  try {
+    render(await load(docId));
+  } catch (e) {
+    document.getElementById("list").innerHTML =
+      '<div class="error">불러오지 못했습니다. 잠시 후 새로고침 해주세요.</div>';
+  }
+}
+
+const tabsEl = document.getElementById("tabs");
+TABS.forEach((tb) => {
+  const b = document.createElement("button");
+  b.className = "tab" + (tb.cm ? " cm" : "");
+  b.dataset.id = tb.id;
+  b.textContent = tb.label;
+  b.onclick = () => show(tb.id);
+  tabsEl.appendChild(b);
+});
+show("musinsa_001");
+</script>
+</body>
+</html>
