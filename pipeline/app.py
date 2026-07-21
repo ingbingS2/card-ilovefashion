@@ -93,8 +93,11 @@ def run_pipeline(job: dict, items: list[dict], topic: str = "랭킹 픽") -> Non
 
         jobs.set_status(job, "미리보기 대기", folder=folder, images=images)
         webbrowser.open(f"http://localhost:8787/preview/{job['id']}")
-    except Exception as e:
-        jobs.set_status(job, "실패", error=str(e))
+    except (Exception, SystemExit) as e:
+        # post_ig.py 재사용 함수(load_token/collect_images 등)는 실패 시 sys.exit() 를
+        # 호출해 SystemExit(BaseException)을 던진다. 이를 놓치면 스레드가 조용히 죽고
+        # 잡이 진행 중 상태에 영구히 멈추므로(미리보기 자동새로고침만 무한 반복) 함께 잡는다.
+        jobs.set_status(job, "실패", error=str(e) or "처리 실패")
 
 
 def run_publish(job: dict, folder: str) -> None:
@@ -102,8 +105,9 @@ def run_publish(job: dict, folder: str) -> None:
     try:
         permalink = publisher.publish(folder)
         jobs.set_status(job, "완료", permalink=permalink)
-    except Exception as e:
-        jobs.set_status(job, "실패", error=str(e))
+    except (Exception, SystemExit) as e:
+        # 위 run_pipeline 과 동일한 이유로 SystemExit 도 함께 포착한다.
+        jobs.set_status(job, "실패", error=str(e) or "게시 실패")
 
 
 @app.post("/api/selections")
@@ -211,6 +215,10 @@ def post_publish(job_id: str):
     folder = job.get("folder")
     if not folder:
         raise HTTPException(status_code=400, detail="아직 렌더링이 끝나지 않았습니다")
+
+    if job["status"] == "게시 중":
+        # 이중 클릭 방지: 이미 게시가 진행 중이면 새 스레드를 또 띄우지 않는다.
+        return {"ok": True}
 
     jobs.set_status(job, "게시 중")
     t = threading.Thread(target=run_publish, args=(job, folder), daemon=True)

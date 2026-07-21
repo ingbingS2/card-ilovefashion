@@ -185,6 +185,45 @@ def test_publish_failure_marks_job_failed(monkeypatch, tmp_path):
     assert "캡션 불일치" in updated["error"]
 
 
+def test_publish_system_exit_from_post_ig_marks_job_failed(monkeypatch, tmp_path):
+    """post_ig.py 의 load_token/collect_images 등은 실패 시 sys.exit() -> SystemExit 을
+    던진다(Exception 이 아닌 BaseException). run_publish 가 이를 놓치면 스레드가 조용히
+    죽어 잡이 "게시 중"에 영구히 멈추므로, SystemExit 도 "실패"로 반드시 귀결돼야 한다."""
+    job = _make_ready_job(tmp_path)
+
+    def boom(folder):
+        raise SystemExit("토큰 파일이 없습니다")
+
+    monkeypatch.setattr(app_module.publisher, "publish", boom)
+
+    resp = client.post(f"/api/jobs/{job['id']}/publish")
+    assert resp.status_code == 200
+    app_module._THREADS[job["id"]].join(timeout=5)
+
+    updated = jobs.JOBS[job["id"]]
+    assert updated["status"] == "실패"
+    assert "토큰" in updated["error"]
+
+
+def test_publish_double_click_does_not_start_second_thread(monkeypatch, tmp_path):
+    job = _make_ready_job(tmp_path)
+    jobs.set_status(job, "게시 중")  # 이미 게시가 진행 중인 상태를 흉내낸다
+
+    called = {"n": 0}
+
+    def slow_publish(folder):
+        called["n"] += 1
+        return "https://instagram.com/p/xyz"
+
+    monkeypatch.setattr(app_module.publisher, "publish", slow_publish)
+
+    resp = client.post(f"/api/jobs/{job['id']}/publish")
+    assert resp.status_code == 200
+    assert resp.json() == {"ok": True}
+    assert job["id"] not in app_module._THREADS  # 새 스레드를 띄우지 않았어야 함
+    assert called["n"] == 0
+
+
 def test_get_job_not_found_returns_404():
     resp = client.get("/api/jobs/nonexistent-id")
     assert resp.status_code == 404
