@@ -69,3 +69,32 @@ def test_write_copy_claude_failure_falls_back(monkeypatch):
     monkeypatch.setattr(copywriter, "_call_claude", boom)
     c = copywriter.write_copy([prod()], api_key="sk-test")
     assert c["cover"]["kicker"].startswith("TODAY PICK")  # 폴백 전환, 예외 없음
+
+
+def test_fallback_sp_skips_negative_reviews():
+    """부정 후기(cs·배송 불만 등)는 셀링포인트로 쓰지 않는다 (2026-07-22 실사고 회귀)."""
+    p = prod(reviews=[
+        {"score": 2, "text": "상품은 괜찮은데 cs랑 배송이 너무 불편해요 환불도 안 되고", "date": None, "likes": 50},
+        {"score": 5, "text": "핏이 예쁘고 재질도 좋아서 매일 입어요", "date": None, "likes": 3},
+    ])
+    c = copywriter.fallback_copy([p], "랭킹 픽")
+    sp = c["items"][0]["sp"]
+    assert "cs" not in sp.lower() and "불편" not in sp and "환불" not in sp
+    assert "핏이 예쁘고" in sp  # 긍정 후기가 선택됨
+
+
+def test_fallback_sp_no_positive_review_uses_feature_line():
+    """긍정 후기가 하나도 없으면 후기 인용을 포기하고 상품 특징으로 폴백."""
+    p = prod(reviews=[{"score": 1, "text": "배송 지연에 불량까지 최악이에요", "date": None, "likes": 9}])
+    c = copywriter.fallback_copy([p], "랭킹 픽")
+    sp = c["items"][0]["sp"]
+    assert "최악" not in sp and "불량" not in sp and "지연" not in sp
+    assert "실제 후기" not in sp  # 후기 인용 안 함
+
+
+def test_clip_sentence_ends_on_boundary():
+    """문장 중간에서 뚝 끊기지 않는다."""
+    long = "정말 가볍고 튼튼해서 매일 들고 다녀요. 수납도 넉넉하고 디자인도 예뻐서 만족합니다"
+    out = copywriter._clip_sentence(long, 20)
+    assert out.endswith("다녀요.") or out.endswith("요.") or out.endswith("요") or out.endswith("…") is False
+    assert "\n" not in out
