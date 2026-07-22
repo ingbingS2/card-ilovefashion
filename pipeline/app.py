@@ -92,7 +92,11 @@ def _unique_folder(base_dir: str, name: str) -> str:
         i += 1
 
 
-def run_pipeline(job: dict, items: list[dict], topic: str = "랭킹 픽") -> None:
+_SEASON_BY_MONTH = {12: "겨울", 1: "겨울", 2: "겨울", 3: "봄", 4: "봄", 5: "봄",
+                    6: "여름", 7: "여름", 8: "여름", 9: "가을", 10: "가을", 11: "가을"}
+
+
+def run_pipeline(job: dict, items: list[dict], topic: str | None = None) -> None:
     """선택 상품으로 카드뉴스를 생성한다.
 
     운영에서는 POST /api/selections 가 이 함수를 스레드로 띄우고,
@@ -101,13 +105,16 @@ def run_pipeline(job: dict, items: list[dict], topic: str = "랭킹 픽") -> Non
     """
     try:
         jobs.set_status(job, "문구 생성 중")
+        season = _SEASON_BY_MONTH.get(datetime.now().month, "여름")
+        if topic is None:
+            topic = f"{season} 무드"  # 랭킹 키워드 대신 계절·무드 주제
         assets_dir = os.path.join(CARDNEWS_BASE_DIR, "_assets", job["id"])
         products = reader.load_products(items, assets_dir)
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         copy = copywriter.write_copy(products, topic, api_key=api_key)
 
         jobs.set_status(job, "렌더 중")
-        folder_name = datetime.now().strftime("%Y%m%d") + " 랭킹픽"
+        folder_name = f"{datetime.now().strftime('%Y%m%d')} {season}무드"
         folder = _unique_folder(CARDNEWS_BASE_DIR, folder_name)
         images = renderer.render(copy, products, folder)
 

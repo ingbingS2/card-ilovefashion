@@ -50,7 +50,7 @@ def test_fallback_cm29_mall_name():
 
 def test_write_copy_without_key_uses_fallback():
     c = copywriter.write_copy([prod()], api_key=None)
-    assert c["cover"]["kicker"].startswith("TODAY PICK")
+    assert c["cover"]["kicker"].endswith("MOOD")  # 계절 무드 kicker
 
 
 def test_write_copy_claude_success(monkeypatch):
@@ -68,7 +68,7 @@ def test_write_copy_claude_failure_falls_back(monkeypatch):
         raise RuntimeError("api down")
     monkeypatch.setattr(copywriter, "_call_claude", boom)
     c = copywriter.write_copy([prod()], api_key="sk-test")
-    assert c["cover"]["kicker"].startswith("TODAY PICK")  # 폴백 전환, 예외 없음
+    assert c["cover"]["kicker"].endswith("MOOD")  # 계절 무드 kicker  # 폴백 전환, 예외 없음
 
 
 def test_fallback_sp_skips_negative_reviews():

@@ -7,6 +7,9 @@ import re
 SYSTEM_PROMPT = """당신은 패션 카드뉴스(인스타그램) 전문 카피라이터입니다.
 
 # 카드뉴스 본문 톤 (C안 · 후킹형)
+- "랭킹 N위", "오늘의 픽", "베스트" 같은 순위·랭킹 키워드를 헤드라인에 쓰지 않습니다.
+  대신 **계절감·상황·무드**(예: 장마, 환절기, 데일리, 출근룩, 무더위)를 살린 문구를 씁니다.
+  순위 정보가 필요하면 proof 같은 작은 자리에만 담고, 큰 제목은 분위기로 채웁니다.
 - 큰 타이포 제목은 강렬하게 후킹하되, 핵심 키워드 1곳에만 <em>강조</em>를 사용합니다.
 - 줄바꿈이 필요하면 <br> 태그를 사용합니다 (실제 개행 문자 사용 금지).
 - 반드시 전달받은 상품 데이터의 사실(가격, 순위, 브랜드, 후기 등)만 사용하고 과장·허위 표현을 금지합니다.
@@ -151,10 +154,73 @@ def _pick_positive_review(reviews: list[dict]) -> str | None:
     return _clip_sentence(candidates[0].get("text") or "")
 
 
-def fallback_copy(products: list[dict], topic: str) -> dict:
+# 계절·상황·무드 문구 테이블 (랭킹 키워드 대신 계절감/상황/무드를 살린다).
+_SEASON_BY_MONTH = {
+    12: "겨울", 1: "겨울", 2: "겨울",
+    3: "봄", 4: "봄", 5: "봄",
+    6: "여름", 7: "여름", 8: "여름",
+    9: "가을", 10: "가을", 11: "가을",
+}
+_MOOD = {
+    "봄": {"kicker": "SPRING MOOD", "cover_title": "살랑이는 계절엔<br><em>가볍게</em>",
+           "cover_sub": "환절기 데일리로 손이 가는 것들",
+           "cta_title": "봄, 뭐부터<br><em>꺼낼까</em>", "cta_sub": "마음에 담은 건 댓글로 남겨 주세요",
+           "cap_lead": "완연한 봄, 가볍게 걸치기 좋은 것들로 골랐습니다."},
+    "여름": {"kicker": "SUMMER MOOD", "cover_title": "무더위에도<br><em>산뜻하게</em>",
+             "cover_sub": "장마와 한여름을 나는 아이템",
+             "cta_title": "이번 여름은<br><em>어떻게</em>", "cta_sub": "요즘 찾는 아이템이 있다면 댓글로",
+             "cap_lead": "장마와 무더위를 산뜻하게 나는 것들로 골랐습니다."},
+    "가을": {"kicker": "AUTUMN MOOD", "cover_title": "선선한 바람엔<br><em>레이어드</em>",
+             "cover_sub": "환절기에 걸치기 좋은 것들",
+             "cta_title": "가을, 뭐부터<br><em>걸칠까</em>", "cta_sub": "눈길 간 건 댓글로 알려 주세요",
+             "cap_lead": "선선해진 요즘, 하나씩 걸치기 좋은 것들로 골랐습니다."},
+    "겨울": {"kicker": "WINTER MOOD", "cover_title": "추운 날일수록<br><em>포근하게</em>",
+             "cover_sub": "한파에도 든든한 아이템",
+             "cta_title": "이번 겨울은<br><em>뭘로</em>", "cta_sub": "찜한 아이템은 댓글로 남겨 주세요",
+             "cap_lead": "추위가 깊어진 요즘, 든든하게 챙기기 좋은 것들로 골랐습니다."},
+}
+# 카테고리별 상황형 헤드라인 변주 (랭킹 대신 '언제/어떻게 쓰는지'를 살린다).
+# 계절 특정 표현(쌀쌀할 때 등)은 넣지 않는다 — 현재 계절과 모순될 수 있으므로.
+# 같은 카테고리가 여러 장이면 index 로 변주를 돌려 문구가 겹치지 않게 한다.
+_CATEGORY_HOOK = {
+    "가방": ["손이 자주 가는<br><em>데일리 백</em>", "어디에나<br><em>잘 어울리는</em>",
+            "가볍게 드는<br><em>한 손 백</em>"],
+    "신발": ["매일 신게 되는<br><em>한 켤레</em>", "어떤 룩에도<br><em>무난한</em>",
+            "발 편한<br><em>데일리 슈즈</em>"],
+    "슈즈": ["매일 신게 되는<br><em>한 켤레</em>", "어떤 룩에도<br><em>무난한</em>",
+            "발 편한<br><em>데일리 슈즈</em>"],
+    "상의": ["하나만 걸쳐도<br><em>완성되는</em>", "데일리로<br><em>손이 가는</em>",
+            "무심하게<br><em>툭 걸치는</em>"],
+    "니트": ["포인트 주기<br><em>좋은</em>", "레이어드로<br><em>제격인</em>"],
+    "아우터": ["걸치면<br><em>완성되는</em>", "무드 살리는<br><em>겉옷</em>"],
+    "바지": ["매일 입기 좋은<br><em>한 벌</em>", "핏이 사는<br><em>데일리 팬츠</em>"],
+    "하의": ["매일 입기 좋은<br><em>한 벌</em>", "핏이 사는<br><em>데일리 팬츠</em>"],
+    "스커트": ["그냥 입어도<br><em>분위기</em>", "실루엣이 사는<br><em>한 벌</em>"],
+    "원피스": ["하나로 끝내는<br><em>한 벌</em>", "입기만 해도<br><em>완성</em>"],
+}
+
+
+def _season(month: int) -> str:
+    return _SEASON_BY_MONTH.get(month, "여름")
+
+
+def _category_hook(category_name: str | None, brand: str, idx: int = 0) -> str:
+    for key, variants in _CATEGORY_HOOK.items():
+        if category_name and key in category_name:
+            return variants[idx % len(variants)]
+    # 카테고리를 못 맞추면 브랜드를 살린 담백한 헤드라인
+    return f"요즘 담는<br><em>{brand or '이 아이템'}</em>"
+
+
+def fallback_copy(products: list[dict], topic: str, month: int | None = None) -> dict:
     n = len(products)
+    if month is None:
+        from datetime import datetime
+        month = datetime.now().month
+    mood = _MOOD[_season(month)]
 
     items = []
+    hook_seen: dict[str, int] = {}  # 카테고리별 변주 인덱스
     for p in products:
         brand = p.get("brand") or ""
         name = _truncate(p.get("name") or "", 30)
@@ -170,7 +236,12 @@ def fallback_copy(products: list[dict], topic: str) -> dict:
         category_name = p.get("category_name")
 
         prod = f"{brand} · <b>{name}</b>"
-        title = f"랭킹 {rank}위<br><em>{brand}</em>"
+        # 큰 헤드라인은 '랭킹 N위' 대신 계절·상황·무드를 살린다 (순위는 아래 proof 로만).
+        # 같은 카테고리가 여러 장이면 변주 인덱스를 올려 문구가 겹치지 않게 한다.
+        _hk = category_name or "_"
+        _idx = hook_seen.get(_hk, 0)
+        hook_seen[_hk] = _idx + 1
+        title = _category_hook(category_name, brand, _idx)
 
         meta = f"{mall_name} {price:,}원"
         if original_price:
@@ -205,18 +276,18 @@ def fallback_copy(products: list[dict], topic: str) -> dict:
         })
 
     cover = {
-        "kicker": f"TODAY PICK {n}",
-        "title": f"오늘의 픽,<br><em>{topic}</em>",
-        "sub": f"무신사·29CM 랭킹에서 고른 {n}개",
+        "kicker": mood["kicker"],
+        "title": mood["cover_title"],
+        "sub": mood["cover_sub"],
     }
     cta = {
-        "title": "오늘 픽,<br><em>저장</em>으로 끝",
-        "sub": "📌 최애는 댓글로<br>다음 픽은 팔로우하면 먼저 봐요",
+        "title": mood["cta_title"],
+        "sub": mood["cta_sub"],
     }
     caption = (
-        f"{topic} {n}\n\n"
-        f"무신사와 29CM 랭킹에서 후기로 검증된 {n}개를 골랐습니다.\n"
-        "가격과 순위는 오늘 기준입니다.\n\n"
+        f"{mood['cover_sub']}\n\n"
+        f"{mood['cap_lead']}\n"
+        "후기와 평점을 함께 살펴봤습니다.\n\n"
         "요즘 눈여겨보는 아이템이 있다면 댓글로 알려주세요."
     )
 
