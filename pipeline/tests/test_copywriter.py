@@ -157,6 +157,16 @@ def test_sp_prefers_enthusiastic_sentence():
     assert "너무 만족하는 스타일이에요" in c["items"][0]["sp"]
 
 
+def test_sp_deprioritizes_concessive_opener():
+    """'그래도 마음에 듭니다'(양보)보다 깔끔한 추천 문장을 고른다."""
+    p = prod(reviews=[{"score": 5, "date": None, "likes": 0,
+                       "text": "그래도 마음에 듭니다. 가볍고 귀여운 슬리퍼 찾으시면 추천 드려요"}])
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    sp = c["items"][0]["sp"]
+    assert "그래도" not in sp
+    assert "추천 드려요" in sp
+
+
 def test_sp_reserved_used_as_fallback_when_only_option():
     """유보 문장뿐이면 그거라도 인용한다(깔끔한 긍정이 없을 때)."""
     p = prod(reviews=[{"score": 5, "date": None, "likes": 1,
