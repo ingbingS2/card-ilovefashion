@@ -94,8 +94,10 @@ _NEGATIVE_MARKERS = (
 def _split_sentences(text: str) -> list[str]:
     """후기 텍스트를 문장 단위로 나눈다 (종결부호 뒤에서 분리)."""
     text = " ".join((text or "").split())
-    # 종결부호(. ! ? ~) 뒤에 공백/끝이 오면 문장 경계로 본다.
-    parts = re.split(r"(?<=[.!?~])\s+", text)
+    # 종결부호(. ! ?) 뒤에서 분리한다. 한국어 후기는 "좋아요!!!다음문장" 처럼 부호 뒤에
+    # 공백이 없는 경우가 많으므로 부호 run 의 끝에서 분리한다.
+    # '~' 는 문장 끝이 아니라 강조(너~무, 좋아용~)로 쓰여 종결부호에서 제외한다.
+    parts = re.split(r"(?<=[.!?])(?![.!?])\s*", text)
     return [s.strip() for s in parts if s.strip()]
 
 
@@ -129,14 +131,24 @@ def _clip_sentence(text: str, limit: int = 70) -> str:
     return (cut[:sp] if sp >= 20 else cut).strip()
 
 
-def _pick_positive_review(reviews: list[dict]) -> str | None:
-    """긍정·대표 후기 하나를 골라 문장 단위로 다듬어 반환. 없으면 None.
+# 긍정 신호 단어 — 셀링포인트로 쓸 후기에는 이 중 하나가 있어야 한다.
+_POSITIVE_WORDS = (
+    "예쁘", "이쁘", "좋아", "좋고", "좋습니다", "좋네", "만족", "편하", "편해", "가볍",
+    "부드럽", "마음에", "추천", "잘 맞", "핏이", "고급", "예뻐", "이뻐", "재구매",
+    "잘 어울", "매일", "튼튼", "퀄리티",
+)
+# 개인정보/신체치수가 드러나는 후기는 홍보 문구로 부적합 (예: "163cm 52kg", "임신 30주차")
+_PERSONAL_RE = re.compile(r"\d\s*(kg|cm|키로|주차|호|사이즈)", re.IGNORECASE)
 
-    규칙: (1) 별점 4점 이상, (2) 불만 키워드 없음, (3) 너무 짧지 않음(8자+).
-    도움돼요(likes) 많은 순 → 별점 높은 순으로 우선. 조건 통과가 없으면 None
-    (부정 후기를 홍보 문구로 쓰느니 상품 특징 문구로 폴백하는 게 낫다).
+
+def _pick_positive_review(reviews: list[dict]) -> str | None:
+    """긍정·대표 후기 하나를 골라 첫 문장으로 다듬어 반환. 없으면 None.
+
+    규칙: 별점 4+ · 불만 키워드 없음 · 긍정 단어 하나 이상 · 개인 신체치수 없음 · 8자+.
+    깔끔하게 읽히는 것을 우선(긍정 단어 많고, 지나치게 길지 않은 것). 통과가 없으면
+    None → 상품 특징 문구로 폴백(장황하거나 부정 꼬리가 붙은 후기를 억지로 쓰지 않는다).
     """
-    candidates = []
+    scored = []
     for r in reviews:
         text = " ".join((r.get("text") or "").split())
         if len(text) < 8:
@@ -147,11 +159,21 @@ def _pick_positive_review(reviews: list[dict]) -> str | None:
         low = text.lower()
         if any(m in low for m in _NEGATIVE_MARKERS):
             continue
-        candidates.append(r)
-    if not candidates:
+        if _PERSONAL_RE.search(text):
+            continue
+        pos_hits = sum(1 for w in _POSITIVE_WORDS if w in text)
+        if pos_hits == 0:
+            continue
+        first = _split_sentences(text)[0] if _split_sentences(text) else text
+        # 첫 문장에도 부정/개인정보가 있으면 제외
+        if any(m in first.lower() for m in _NEGATIVE_MARKERS) or _PERSONAL_RE.search(first):
+            continue
+        # 짧고 긍정 신호 많은 문장 우선 (장황함 회피)
+        scored.append((pos_hits, -len(first), r.get("likes") or 0, first))
+    if not scored:
         return None
-    candidates.sort(key=lambda r: (r.get("likes") or 0, r.get("score") or 0), reverse=True)
-    return _clip_sentence(candidates[0].get("text") or "")
+    scored.sort(reverse=True)
+    return _clip_sentence(scored[0][3])
 
 
 # 계절·상황·무드 문구 테이블 (랭킹 키워드 대신 계절감/상황/무드를 살린다).
@@ -255,12 +277,13 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
         # 부정 후기를 홍보 문구로 쓰지 않는다 — 긍정·대표 후기만, 문장 단위로.
         # 적합한 후기가 없으면 후기 인용을 포기하고 상품 특징 문구로 폴백한다.
         positive = _pick_positive_review(reviews)
+        cat_word = category_name or "요즘"
         if positive:
             sp = f"\"{positive}\" — 실제 후기"
         elif review_count:
-            sp = f"후기 {review_count}개가 쌓인 {category_name or '랭킹'} 상위 아이템"
+            sp = f"후기 {review_count}개가 쌓인 {cat_word} 아이템"
         else:
-            sp = f"{category_name or '지금'} 랭킹 {rank}위 아이템"
+            sp = f"요즘 눈에 띄는 {cat_word} 한 벌"
 
         badge = f"{discount_rate}%" if discount_rate > 0 else None
         cr = "이미지 출처 : 무신사" if mall == "musinsa" else "이미지 출처 : 29CM"

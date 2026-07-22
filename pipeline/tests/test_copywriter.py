@@ -32,7 +32,8 @@ def test_fallback_structure_and_rules():
     assert "실제 후기" in it["sp"]
     it2 = c["items"][1]
     assert it2["proof"] == "신상 픽"
-    assert "랭킹 3위" in it2["sp"]
+    # 후기 없을 때 sp 는 계절·상황형 문구 — '랭킹' 키워드를 쓰지 않는다 (사용자 지시)
+    assert "랭킹" not in it2["sp"] and "상의" in it2["sp"]
     cap = c["caption"]
     assert "#" not in cap  # 2026-07-22 사용자 지시: 해시태그 금지
     assert "…" not in cap and "..." not in cap
