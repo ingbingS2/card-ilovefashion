@@ -15,10 +15,16 @@ export function toggleSelection(
   return next;
 }
 
-export function buildSelectionPayload(map: Record<string, RankItem>) {
+// notes: selKey → 사용자가 상품별로 적은 한 줄 코멘트(에디터 의견). 카드 본문의 핵심이 된다.
+export function buildSelectionPayload(
+  map: Record<string, RankItem>,
+  notes: Record<string, string> = {},
+) {
   return {
     createdAt: new Date().toISOString(),
-    items: Object.values(map).sort((a, b) => a.rank - b.rank),
+    items: Object.values(map)
+      .sort((a, b) => a.rank - b.rank)
+      .map((item) => ({ ...item, note: (notes[selKey(item)] || "").trim() })),
   };
 }
 

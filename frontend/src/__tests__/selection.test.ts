@@ -28,6 +28,17 @@ it("buildSelectionPayload rank 순 정렬", () => {
   expect(typeof p.createdAt).toBe("string");
 });
 
+it("buildSelectionPayload 는 상품별 내 코멘트(note)를 붙인다", () => {
+  const yItem = item("y", 2);
+  const m = toggleSelection(toggleSelection({}, item("x", 9)), yItem);
+  const notes = { [selKey(yItem)]: "  장마철 출근템  " };
+  const p = buildSelectionPayload(m, notes);
+  const y = p.items.find((i) => i.product_id === "y")!;
+  const x = p.items.find((i) => i.product_id === "x")!;
+  expect(y.note).toBe("장마철 출근템");  // 앞뒤 공백 제거
+  expect(x.note).toBe("");               // 코멘트 없으면 빈 문자열
+});
+
 it("sendSelection: POST 성공", async () => {
   const mock = vi.fn().mockResolvedValue({ ok: true });
   vi.stubGlobal("fetch", mock);

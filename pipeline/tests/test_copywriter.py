@@ -99,3 +99,37 @@ def test_clip_sentence_ends_on_boundary():
     out = copywriter._clip_sentence(long, 20)
     assert out.endswith("다녀요.") or out.endswith("요.") or out.endswith("요") or out.endswith("…") is False
     assert "\n" not in out
+
+
+def test_fallback_long_note_becomes_editor_pick_line():
+    """긴 코멘트 → '에디터 픽' 라인, 후기 인용은 밀려나고 후기는 근거로만."""
+    p = prod()
+    p["note"] = "장마철 출근할 때 딱 좋고 색이 실물이 더 예뻐요"
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    it = c["items"][0]
+    assert "에디터 픽" in it["sp"] and "장마철 출근할 때 딱" in it["sp"]
+    assert "실제 후기" not in it["sp"]           # 후기 인용은 사용자 의견에 밀림
+    assert "후기 5개" in it["proof"]             # 후기는 근거로 남음
+
+
+def test_fallback_short_note_becomes_headline():
+    """짧은 코멘트 → 큰 헤드라인으로 (사용자 목소리를 크게)."""
+    p = prod()
+    p["note"] = "데일리로 최고"
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    it = c["items"][0]
+    assert "데일리로" in it["title"] and "<em>" in it["title"]
+    assert "에디터 픽" not in it["sp"]           # 짧은 코멘트는 헤드라인, sp 는 근거 후기
+
+
+def test_fallback_no_note_keeps_auto_copy():
+    p = prod()
+    p["note"] = ""  # 빈 코멘트는 자동 문구 유지
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    assert "에디터 픽" not in c["items"][0]["sp"]
+
+
+def test_headline_from_note_short_and_long():
+    assert "<em>" in copywriter._headline_from_note("가성비 최고")
+    long = copywriter._headline_from_note("장마철 출근할 때 딱 좋고 색이 실물이 더 예뻐요")
+    assert "<br>" in long and "<em>" in long and "\n" not in long

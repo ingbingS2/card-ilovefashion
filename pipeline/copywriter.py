@@ -6,6 +6,12 @@ import re
 
 SYSTEM_PROMPT = """당신은 패션 카드뉴스(인스타그램) 전문 카피라이터입니다.
 
+# 가장 중요 — 에디터(사용자) 의견 우선
+- 각 상품에 `note`(에디터가 직접 쓴 한 줄 의견)가 있으면, 그 상품 카드의 헤드라인과 sp 는
+  **그 의견을 핵심으로** 만듭니다. 의견의 뜻을 바꾸거나 지어내지 말고 자연스럽게 다듬어 씁니다.
+  후기·가격·평점은 그 의견을 뒷받침하는 근거로만 작게 배치합니다.
+- `note` 가 없는 상품만 계절·상황·무드 기반의 자동 문구를 씁니다.
+
 # 카드뉴스 본문 톤 (C안 · 후킹형)
 - "랭킹 N위", "오늘의 픽", "베스트" 같은 순위·랭킹 키워드를 헤드라인에 쓰지 않습니다.
   대신 **계절감·상황·무드**(예: 장마, 환절기, 데일리, 출근룩, 무더위)를 살린 문구를 씁니다.
@@ -226,6 +232,32 @@ def _season(month: int) -> str:
     return _SEASON_BY_MONTH.get(month, "여름")
 
 
+def _headline_from_note(note: str) -> str:
+    """사용자 코멘트에서 큰 헤드라인을 만든다. 코멘트 자체를 존중하되 카드에 맞게 다듬는다.
+
+    - 짧으면(≤16자) 그대로 헤드라인으로.
+    - 길면 앞부분을 단어 경계에서 자르고 <br> 로 두 줄 배치, 마지막 어절에 <em> 강조.
+    코멘트를 지어내거나 바꾸지 않는다 (사용자의 말 그대로).
+    """
+    text = " ".join(note.split())
+    words = text.split(" ")
+    if len(text) <= 16 or len(words) <= 2:
+        # 두 어절이면 뒤 어절 강조, 한 어절이면 통째 강조
+        if len(words) >= 2:
+            return f"{' '.join(words[:-1])}<br><em>{words[-1]}</em>"
+        return f"<em>{text}</em>"
+    # 앞에서부터 ~10자 근처의 어절 경계에서 1행/2행을 나눈다
+    line1, i = "", 0
+    while i < len(words) and len(line1) + len(words[i]) <= 12:
+        line1 += (" " if line1 else "") + words[i]
+        i += 1
+    if not line1:  # 첫 단어가 너무 길면 강제로 한 어절
+        line1, i = words[0], 1
+    rest = words[i:] or [""]
+    line2 = " ".join(rest[:-1] + [f"<em>{rest[-1]}</em>"]) if rest[-1] else f"<em>{line1}</em>"
+    return f"{line1}<br>{line2}"
+
+
 def _category_hook(category_name: str | None, brand: str, idx: int = 0) -> str:
     for key, variants in _CATEGORY_HOOK.items():
         if category_name and key in category_name:
@@ -256,14 +288,9 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
         discount_rate = p.get("discount_rate") or 0
         reviews = p.get("reviews") or []
         category_name = p.get("category_name")
+        note = (p.get("note") or "").strip()  # 사용자(에디터)가 상품별로 적은 한 줄 의견
 
         prod = f"{brand} · <b>{name}</b>"
-        # 큰 헤드라인은 '랭킹 N위' 대신 계절·상황·무드를 살린다 (순위는 아래 proof 로만).
-        # 같은 카테고리가 여러 장이면 변주 인덱스를 올려 문구가 겹치지 않게 한다.
-        _hk = category_name or "_"
-        _idx = hook_seen.get(_hk, 0)
-        hook_seen[_hk] = _idx + 1
-        title = _category_hook(category_name, brand, _idx)
 
         meta = f"{mall_name} {price:,}원"
         if original_price:
@@ -274,16 +301,33 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
         else:
             proof = "신상 픽"
 
-        # 부정 후기를 홍보 문구로 쓰지 않는다 — 긍정·대표 후기만, 문장 단위로.
-        # 적합한 후기가 없으면 후기 인용을 포기하고 상품 특징 문구로 폴백한다.
-        positive = _pick_positive_review(reviews)
         cat_word = category_name or "요즘"
-        if positive:
-            sp = f"\"{positive}\" — 실제 후기"
-        elif review_count:
-            sp = f"후기 {review_count}개가 쌓인 {cat_word} 아이템"
+
+        def _auto_sp() -> str:
+            # 코멘트가 없거나 헤드라인으로 쓸 때, sp 는 긍정 후기(근거) 또는 특징 문구.
+            positive = _pick_positive_review(reviews)
+            if positive:
+                return f"\"{positive}\" — 실제 후기"
+            if review_count:
+                return f"후기 {review_count}개가 쌓인 {cat_word} 아이템"
+            return f"요즘 눈에 띄는 {cat_word} 한 벌"
+
+        if note and len(note) <= 14:
+            # 짧고 강한 코멘트 → 큰 헤드라인으로 (사용자 목소리를 크게). sp 는 근거 후기.
+            title = _headline_from_note(note)
+            sp = _auto_sp()
+        elif note:
+            # 긴 코멘트 → 헤드라인은 짧은 훅, 코멘트 전문은 '에디터 픽' 라인으로.
+            _idx = hook_seen.get(cat_word, 0)
+            hook_seen[cat_word] = _idx + 1
+            title = _category_hook(category_name, brand, _idx)
+            sp = f"“{note}” — 에디터 픽"
         else:
-            sp = f"요즘 눈에 띄는 {cat_word} 한 벌"
+            # 코멘트 없음 → 계절·상황형 자동 헤드라인 + 긍정 후기(폴백).
+            _idx = hook_seen.get(cat_word, 0)
+            hook_seen[cat_word] = _idx + 1
+            title = _category_hook(category_name, brand, _idx)
+            sp = _auto_sp()
 
         badge = f"{discount_rate}%" if discount_rate > 0 else None
         cr = "이미지 출처 : 무신사" if mall == "musinsa" else "이미지 출처 : 29CM"
