@@ -129,6 +129,59 @@ def test_fallback_no_note_keeps_auto_copy():
     assert "에디터 픽" not in c["items"][0]["sp"]
 
 
+def test_sp_prefers_clean_over_reserved_sentence():
+    """유보 뉘앙스('편하긴 합니다')보다 깔끔한 긍정 문장을 셀링포인트로 고른다."""
+    p = prod(reviews=[{"score": 5, "date": None, "likes": 1,
+                       "text": "적당히 쿠션감있고 편하긴 합니다. 핏이 예쁘고 매일 신어요"}])
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    sp = c["items"][0]["sp"]
+    assert "편하긴" not in sp
+    assert "핏이 예쁘고" in sp
+
+
+def test_sp_skips_advisory_sentence():
+    """'후기 꼭 확인해보세요' 같은 안내성 문장은 셀링포인트로 쓰지 않는다."""
+    p = prod(reviews=[{"score": 5, "date": None, "likes": 9, "text":
+                       "좀 크게 신는거 좋아하시는 분들은 후기 꼭 확인해보세요. 아치가 올라와 확실히 편하네요"}])
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    sp = c["items"][0]["sp"]
+    assert "확인해보세요" not in sp
+    assert "확실히 편하네요" in sp
+
+
+def test_sp_prefers_enthusiastic_sentence():
+    """같은 조건이면 강한 호감('너무 만족') 문장을 더 담백한 문장보다 우선한다."""
+    p = prod(reviews=[{"score": 5, "date": None, "likes": 1,
+                       "text": "발바닥 쿠션감은 좋아요. 너무 만족하는 스타일이에요"}])
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    assert "너무 만족하는 스타일이에요" in c["items"][0]["sp"]
+
+
+def test_sp_reserved_used_as_fallback_when_only_option():
+    """유보 문장뿐이면 그거라도 인용한다(깔끔한 긍정이 없을 때)."""
+    p = prod(reviews=[{"score": 5, "date": None, "likes": 1,
+                       "text": "발바닥 쿠션감은 좋아요"}])
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    assert "쿠션감은 좋아요" in c["items"][0]["sp"]
+
+
+def test_meta_hides_strikethrough_when_no_discount():
+    """정가==판매가면 취소선을 붙이지 않는다 (14% 배지인데 같은 가격 취소선 방지)."""
+    p = prod()
+    p["price"] = 64900
+    p["original_price"] = 64900
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    assert "<s>" not in c["items"][0]["meta"]
+
+
+def test_meta_shows_strikethrough_when_discounted():
+    p = prod()
+    p["price"] = 71200
+    p["original_price"] = 88000
+    c = copywriter.fallback_copy([p], "여름 무드", month=7)
+    assert "<s>88,000원</s>" in c["items"][0]["meta"]
+
+
 def test_headline_from_note_short_and_long():
     assert "<em>" in copywriter._headline_from_note("가성비 최고")
     long = copywriter._headline_from_note("장마철 출근할 때 딱 좋고 색이 실물이 더 예뻐요")

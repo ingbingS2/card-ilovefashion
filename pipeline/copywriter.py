@@ -157,6 +157,13 @@ _POSITIVE_WORDS = (
 _PERSONAL_RE = re.compile(r"\d\s*(kg|cm|키로|주차|호|사이즈)", re.IGNORECASE)
 # 체형 언급(발볼/발등/발살/발가락 등)도 개인적이라 셀링포인트로 부적합
 _BODY_RE = re.compile(r"발볼|발등|발 살|발살|발가락|평발|무지외반|발이 (넓|좁|크|작)")
+# 유보/양보 뉘앙스 — "편하긴 합니다", "좋긴 한데", "그럭저럭", "나쁘지 않" 처럼
+# 긍정 단어가 있어도 후킹이 약해지는 문장은 뒤로 밀어낸다(완전 배제는 아님, 폴백용).
+_RESERVATION_RE = re.compile(r"긴\s*(하|합|해|했|한)|그럭저럭|나쁘지\s*않|무난하")
+# 안내/당부성 문장("후기 꼭 확인해보세요", "참고하세요")은 셀링포인트가 아니라 제외한다.
+_ADVISORY_RE = re.compile(r"확인해|참고하|후기\s*꼭|주문하시|사이즈\s*(잘|참고)")
+# 강한 호감 신호 — 있으면 셀링포인트로 더 후킹된다(같은 조건이면 우선 채택).
+_STRONG_WORDS = ("너무", "진짜", "완전", "강추", "재구매", "최고", "마음에", "만족", "확실히", "강력")
 
 
 def _pick_positive_review(reviews: list[dict]) -> str | None:
@@ -180,14 +187,19 @@ def _pick_positive_review(reviews: list[dict]) -> str | None:
                 continue
             if _PERSONAL_RE.search(s) or _BODY_RE.search(s):
                 continue
+            if _ADVISORY_RE.search(s):        # 안내/당부성 문장은 셀링포인트 아님
+                continue
             pos_hits = sum(1 for w in _POSITIVE_WORDS if w in s)
             if pos_hits == 0:
                 continue
-            scored.append((pos_hits, -len(s), likes, s))
+            # 유보 뉘앙스 문장은 깔끔한 긍정 문장보다 뒤로 민다(없을 때만 폴백으로 채택).
+            clean = 0 if _RESERVATION_RE.search(s) else 1
+            strong = 1 if any(w in s for w in _STRONG_WORDS) else 0
+            scored.append((clean, strong, pos_hits, -len(s), likes, s))
     if not scored:
         return None
     scored.sort(reverse=True)
-    return scored[0][3]
+    return scored[0][5]
 
 
 # 계절·상황·무드 문구 테이블 (랭킹 키워드 대신 계절감/상황/무드를 살린다).
@@ -320,7 +332,7 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
         prod = f"{brand} · <b>{name}</b>"
 
         meta = f"{mall_name} {price:,}원"
-        if original_price:
+        if original_price and original_price > price:
             meta += f" <s>{original_price:,}원</s>"
 
         if review_count:
