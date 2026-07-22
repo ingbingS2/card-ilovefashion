@@ -85,6 +85,16 @@ def _truncate(s: str, n: int) -> str:
     return s if len(s) <= n else s[:n]
 
 
+def _truncate_words(s: str, n: int) -> str:
+    """n 자 이내로 자르되 단어(어절) 중간에서 끊지 않는다 ('BLACK' 이 'BLAC' 로 잘리는 것 방지)."""
+    s = " ".join((s or "").split())
+    if len(s) <= n:
+        return s
+    cut = s[:n]
+    sp = cut.rfind(" ")
+    return (cut[:sp] if sp >= n // 2 else cut).rstrip()
+
+
 # 셀링포인트로 쓰면 안 되는 '명백한 불만' 신호만 담는다. 하나라도 있으면 후보에서 제외.
 # 주의: "배송", "cs", "품질" 같은 주제어는 넣지 않는다 — "배송 빨라요", "cs 친절해요",
 # "품질 좋아요" 처럼 긍정 언급에도 등장하기 때문. 불만 감정/하자 표현만 정밀하게 잡는다.
@@ -145,41 +155,39 @@ _POSITIVE_WORDS = (
 )
 # 개인정보/신체치수가 드러나는 후기는 홍보 문구로 부적합 (예: "163cm 52kg", "임신 30주차")
 _PERSONAL_RE = re.compile(r"\d\s*(kg|cm|키로|주차|호|사이즈)", re.IGNORECASE)
+# 체형 언급(발볼/발등/발살/발가락 등)도 개인적이라 셀링포인트로 부적합
+_BODY_RE = re.compile(r"발볼|발등|발 살|발살|발가락|평발|무지외반|발이 (넓|좁|크|작)")
 
 
 def _pick_positive_review(reviews: list[dict]) -> str | None:
-    """긍정·대표 후기 하나를 골라 첫 문장으로 다듬어 반환. 없으면 None.
+    """후기들에서 '긍정 문장' 하나를 골라 반환. 없으면 None.
 
-    규칙: 별점 4+ · 불만 키워드 없음 · 긍정 단어 하나 이상 · 개인 신체치수 없음 · 8자+.
-    깔끔하게 읽히는 것을 우선(긍정 단어 많고, 지나치게 길지 않은 것). 통과가 없으면
-    None → 상품 특징 문구로 폴백(장황하거나 부정 꼬리가 붙은 후기를 억지로 쓰지 않는다).
+    리뷰 전체가 아니라 문장 단위로 본다 — 긍정 단어가 든 짧고 깔끔한 문장만 후보로 삼아,
+    "후기 남겨볼게요"(약함)·"발볼 없고 발등 얇고"(개인 체형)·부정 꼬리 문장을 걸러낸다.
+    별점 4+ 리뷰만. 없으면 None → 상품 특징 문구로 폴백.
     """
     scored = []
     for r in reviews:
-        text = " ".join((r.get("text") or "").split())
-        if len(text) < 8:
-            continue
         score = r.get("score")
         if score is not None and score < 4:
             continue
-        low = text.lower()
-        if any(m in low for m in _NEGATIVE_MARKERS):
-            continue
-        if _PERSONAL_RE.search(text):
-            continue
-        pos_hits = sum(1 for w in _POSITIVE_WORDS if w in text)
-        if pos_hits == 0:
-            continue
-        first = _split_sentences(text)[0] if _split_sentences(text) else text
-        # 첫 문장에도 부정/개인정보가 있으면 제외
-        if any(m in first.lower() for m in _NEGATIVE_MARKERS) or _PERSONAL_RE.search(first):
-            continue
-        # 짧고 긍정 신호 많은 문장 우선 (장황함 회피)
-        scored.append((pos_hits, -len(first), r.get("likes") or 0, first))
+        likes = r.get("likes") or 0
+        for s in _split_sentences(r.get("text") or ""):
+            if not (8 <= len(s) <= 45):          # 너무 짧거나 장황한 문장 제외
+                continue
+            low = s.lower()
+            if any(m in low for m in _NEGATIVE_MARKERS):
+                continue
+            if _PERSONAL_RE.search(s) or _BODY_RE.search(s):
+                continue
+            pos_hits = sum(1 for w in _POSITIVE_WORDS if w in s)
+            if pos_hits == 0:
+                continue
+            scored.append((pos_hits, -len(s), likes, s))
     if not scored:
         return None
     scored.sort(reverse=True)
-    return _clip_sentence(scored[0][3])
+    return scored[0][3]
 
 
 # 계절·상황·무드 문구 테이블 (랭킹 키워드 대신 계절감/상황/무드를 살린다).
@@ -296,7 +304,7 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
     hook_seen: dict[str, int] = {}  # 카테고리별 변주 인덱스
     for p in products:
         brand = p.get("brand") or ""
-        name = _truncate(p.get("name") or "", 30)
+        name = _truncate_words(p.get("name") or "", 40)
         rank = p.get("rank")
         mall = p.get("mall")
         mall_name = "무신사" if mall == "musinsa" else "29CM" if mall == "cm29" else (mall or "")
