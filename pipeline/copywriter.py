@@ -232,30 +232,52 @@ def _season(month: int) -> str:
     return _SEASON_BY_MONTH.get(month, "여름")
 
 
-def _headline_from_note(note: str) -> str:
-    """사용자 코멘트에서 큰 헤드라인을 만든다. 코멘트 자체를 존중하되 카드에 맞게 다듬는다.
+# 긴 코멘트 카드의 헤드라인 — 상품 종류를 오인하지 않는 중립 에디터 문구(변주로 돌림).
+_EDITOR_HEADLINES = [
+    "내가 고른<br><em>이유</em>",
+    "에디터<br><em>한마디</em>",
+    "이건<br><em>담아요</em>",
+    "골라온<br><em>이유</em>",
+]
 
-    - 짧으면(≤16자) 그대로 헤드라인으로.
-    - 길면 앞부분을 단어 경계에서 자르고 <br> 로 두 줄 배치, 마지막 어절에 <em> 강조.
-    코멘트를 지어내거나 바꾸지 않는다 (사용자의 말 그대로).
+
+def _emphasize_tail(words: list[str]) -> str:
+    """어절 목록의 뒤쪽을 <em> 로 강조하되, 한 글자만 홀로 강조되지 않게 한다.
+
+    마지막 어절이 2글자 미만이면(예: '중', '것', '템') 앞 어절과 묶어 함께 강조한다.
+    """
+    if not words:
+        return ""
+    # 뒤에서부터 강조 대상이 2글자 이상이 되도록 어절을 모은다
+    tail = [words[-1]]
+    head = words[:-1]
+    while head and len("".join(tail).replace(" ", "")) < 2:
+        tail.insert(0, head.pop())
+    em = " ".join(tail)
+    return (" ".join(head) + f" <em>{em}</em>").strip() if head else f"<em>{em}</em>"
+
+
+def _headline_from_note(note: str) -> str:
+    """사용자 코멘트에서 큰 헤드라인을 만든다. 코멘트를 지어내거나 바꾸지 않는다.
+
+    - 짧으면 한 줄, 뒤쪽 의미 어절을 강조(한 글자 홀로 강조 안 함).
+    - 길면 어절 경계에서 두 줄로 나누고 2행 뒤쪽을 강조.
     """
     text = " ".join(note.split())
     words = text.split(" ")
-    if len(text) <= 16 or len(words) <= 2:
-        # 두 어절이면 뒤 어절 강조, 한 어절이면 통째 강조
-        if len(words) >= 2:
-            return f"{' '.join(words[:-1])}<br><em>{words[-1]}</em>"
-        return f"<em>{text}</em>"
-    # 앞에서부터 ~10자 근처의 어절 경계에서 1행/2행을 나눈다
+    if len(text) <= 10 or len(words) <= 2:
+        return _emphasize_tail(words)
+    # 앞에서부터 ~12자 근처의 어절 경계에서 1행/2행을 나눈다
     line1, i = "", 0
     while i < len(words) and len(line1) + len(words[i]) <= 12:
         line1 += (" " if line1 else "") + words[i]
         i += 1
-    if not line1:  # 첫 단어가 너무 길면 강제로 한 어절
+    if not line1:  # 첫 어절이 너무 길면 강제로 한 어절
         line1, i = words[0], 1
-    rest = words[i:] or [""]
-    line2 = " ".join(rest[:-1] + [f"<em>{rest[-1]}</em>"]) if rest[-1] else f"<em>{line1}</em>"
-    return f"{line1}<br>{line2}"
+    rest = words[i:]
+    if not rest:  # 전부 1행에 들어가면 뒤 어절만 강조해 한 줄로
+        return _emphasize_tail(words)
+    return f"{line1}<br>{_emphasize_tail(rest)}"
 
 
 def _category_hook(category_name: str | None, brand: str, idx: int = 0) -> str:
@@ -313,15 +335,17 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
             return f"요즘 눈에 띄는 {cat_word} 한 벌"
 
         if note and len(note) <= 14:
-            # 짧고 강한 코멘트 → 큰 헤드라인으로 (사용자 목소리를 크게). sp 는 근거 후기.
+            # 짧고 강한 코멘트 → 코멘트 그대로 큰 헤드라인 (사용자 목소리를 크게). sp 는 근거 후기.
             title = _headline_from_note(note)
             sp = _auto_sp()
         elif note:
-            # 긴 코멘트 → 헤드라인은 짧은 훅, 코멘트 전문은 '에디터 픽' 라인으로.
-            _idx = hook_seen.get(cat_word, 0)
-            hook_seen[cat_word] = _idx + 1
-            title = _category_hook(category_name, brand, _idx)
-            sp = f"“{note}” — 에디터 픽"
+            # 긴 코멘트 → 헤드라인은 상품을 오인하지 않는 중립 에디터 문구(변주), 코멘트 전문은 sp 로.
+            # (카테고리 훅은 캐리어를 '데일리 백'이라 부르는 등 상품과 어긋날 수 있어 쓰지 않는다)
+            _idx = hook_seen.get("_note", 0)
+            hook_seen["_note"] = _idx + 1
+            title = _EDITOR_HEADLINES[_idx % len(_EDITOR_HEADLINES)]
+            # 헤드라인이 이미 '에디터/내가 고른'을 말하므로 sp 엔 꼬리표 없이 코멘트만.
+            sp = f"“{note}”"
         else:
             # 코멘트 없음 → 계절·상황형 자동 헤드라인 + 긍정 후기(폴백).
             _idx = hook_seen.get(cat_word, 0)

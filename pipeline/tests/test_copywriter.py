@@ -107,7 +107,7 @@ def test_fallback_long_note_becomes_editor_pick_line():
     p["note"] = "장마철 출근할 때 딱 좋고 색이 실물이 더 예뻐요"
     c = copywriter.fallback_copy([p], "여름 무드", month=7)
     it = c["items"][0]
-    assert "에디터 픽" in it["sp"] and "장마철 출근할 때 딱" in it["sp"]
+    assert "장마철 출근할 때 딱" in it["sp"]  # 코멘트 전문이 sp
     assert "실제 후기" not in it["sp"]           # 후기 인용은 사용자 의견에 밀림
     assert "후기 5개" in it["proof"]             # 후기는 근거로 남음
 
@@ -119,7 +119,7 @@ def test_fallback_short_note_becomes_headline():
     c = copywriter.fallback_copy([p], "여름 무드", month=7)
     it = c["items"][0]
     assert "데일리로" in it["title"] and "<em>" in it["title"]
-    assert "에디터 픽" not in it["sp"]           # 짧은 코멘트는 헤드라인, sp 는 근거 후기
+    assert "실제 후기" in it["sp"]  # 짧은 코멘트는 헤드라인, sp 는 근거 후기
 
 
 def test_fallback_no_note_keeps_auto_copy():
