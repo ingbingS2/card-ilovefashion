@@ -325,3 +325,29 @@ def test_trusted_host_middleware_rejects_unknown_host():
     TrustedHostMiddleware 가 라우팅 이전에 거부해야 한다."""
     resp = client.get("/api/jobs/nonexistent", headers={"Host": "evil.example"})
     assert resp.status_code == 400
+
+
+def test_publish_from_preview_page_origin_allowed(monkeypatch, tmp_path):
+    """미리보기 페이지(앱 자신)에서 누른 게시 요청 — 브라우저가 붙이는
+    Origin: http://localhost:8787 을 서버가 거부하면 안 된다 (2026-07-22 회귀).
+    이걸 막으면 원클릭 게시가 브라우저에서 아예 동작하지 않는다."""
+    job = _make_ready_job(tmp_path)
+    monkeypatch.setattr(app_module.publisher, "publish", lambda folder: "https://instagram.com/p/ok")
+    for origin in ("http://localhost:8787", "http://127.0.0.1:8787"):
+        # 각 오리진마다 새 잡이 필요(게시 후 상태가 바뀌므로)
+        j = _make_ready_job(tmp_path)
+        resp = client.post(f"/api/jobs/{j['id']}/publish", headers={"Origin": origin})
+        assert resp.status_code == 200, f"{origin} 이 거부됨"
+        app_module._THREADS[j["id"]].join(timeout=5)
+        assert jobs.JOBS[j["id"]]["status"] == "완료"
+
+
+def test_publish_rejects_foreign_origin(monkeypatch, tmp_path):
+    """외부 사이트 오리진에서 온 게시 요청은 거부한다."""
+    called = {"n": 0}
+    monkeypatch.setattr(app_module.publisher, "publish",
+                        lambda folder: called.__setitem__("n", called["n"] + 1) or "x")
+    j = _make_ready_job(tmp_path)
+    resp = client.post(f"/api/jobs/{j['id']}/publish", headers={"Origin": "https://evil.example"})
+    assert resp.status_code == 403
+    assert called["n"] == 0

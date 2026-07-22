@@ -36,6 +36,9 @@ ALLOWED_ORIGINS = [
     "https://fashion-cardnews.web.app",
     "http://localhost:5173",
     "http://localhost:4173",
+    # 미리보기 페이지(이 앱이 직접 서빙)의 "게시" 버튼도 자기 오리진으로 POST 하므로 허용해야 한다.
+    "http://localhost:8787",
+    "http://127.0.0.1:8787",
 ]
 
 app.add_middleware(
@@ -200,11 +203,23 @@ def get_preview(job_id: str):
 <h2>캡션</h2>
 <pre>{html.escape(caption_text)}</pre>
 <button id='publish-btn' onclick="
-  this.disabled = true;
-  this.textContent = '게시 중…';
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = '게시 중…';
+  function reset() {{ btn.disabled = false; btn.textContent = '인스타에 게시'; }}
   fetch('/api/jobs/{job_id}/publish', {{method: 'POST'}})
-    .then(function() {{ alert('게시를 시작했습니다. 잠시 후 새로고침해 확인하세요.'); }})
-    .catch(function() {{ alert('게시 요청에 실패했습니다. 새로고침 후 다시 시도하세요.'); }});
+    .then(function(res) {{
+      if (res.ok) {{
+        alert('게시를 시작했습니다. 잠시 후 새로고침해 확인하세요.');
+      }} else {{
+        reset();
+        alert('게시할 수 없습니다 (상태 ' + res.status + '). 새로고침 후 다시 시도하세요.');
+      }}
+    }})
+    .catch(function() {{
+      reset();
+      alert('게시 요청에 실패했습니다. 새로고침 후 다시 시도하세요.');
+    }});
 ">인스타에 게시</button>
 <p>완성된 이미지는 다음 폴더에서도 확인할 수 있습니다: {html.escape(folder or '')}</p>
 </body></html>
