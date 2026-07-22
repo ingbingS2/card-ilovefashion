@@ -1,0 +1,18 @@
+{
+ "상의": {
+  "facet": "{\"largeId\":268100100,\"middleId\":268103100}",
+  "url": "period=HOURLY&ranking=POPULARITY&gender=F&age=30&categoryLargeCode=268100100&categoryMediumCode=268103100"
+ },
+ "바지": {
+  "facet": "{\"largeId\":268100100,\"middleId\":268106100}",
+  "url": "period=HOURLY&ranking=POPULARITY&gender=F&age=30&categoryLargeCode=268100100&categoryMediumCode=268106100"
+ },
+ "스커트": {
+  "facet": "{\"largeId\":268100100,\"middleId\":268107100}",
+  "url": "period=HOURLY&ranking=POPULARITY&gender=F&age=30&categoryLargeCode=268100100&categoryMediumCode=268107100"
+ },
+ "원피스": {
+  "facet": "{\"largeId\":268100100,\"middleId\":268104100}",
+  "url": "period=HOURLY&ranking=POPULARITY&gender=F&age=30&categoryLargeCode=268100100&categoryMediumCode=268104100"
+ }
+}
