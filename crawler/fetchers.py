@@ -68,12 +68,16 @@ def fetch_musinsa_reviews(goods_no: str, size: int = 10) -> dict:
 
 
 def fetch_cm29_best(page: int = 1, size: int = 100,
-                    category_large_id: str | None = None) -> dict:
+                    category_large_id: str | int | None = None,
+                    category_middle_id: str | int | None = None) -> dict:
     facets: dict = {"periodFacetInput": {"type": "HOURLY", "order": "DESC"},
                     "rankingFacetInput": {"type": "POPULARITY"}}
     if category_large_id:
-        # 실측 (2026-07-21): 카테고리 필터는 대분류 largeId 배열로 전달
-        facets["categoryFacetInputs"] = [{"largeId": int(category_large_id)}]
+        # 실측 (2026-07-21): 대분류 largeId, 중분류는 middleId 를 함께 전달
+        cat: dict = {"largeId": int(category_large_id)}
+        if category_middle_id:
+            cat["middleId"] = int(category_middle_id)
+        facets["categoryFacetInputs"] = [cat]
     return _request("POST", CM29_BEST_URL, json_body={
         "pageRequest": {"page": page, "size": size},
         "userSegment": {"gender": "F", "age": "THIRTIES"},

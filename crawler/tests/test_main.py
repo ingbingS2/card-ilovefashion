@@ -26,7 +26,7 @@ class FakeFetch:
     def fetch_musinsa_ranking(self, category_code, page=1):
         return {"cat": category_code}
 
-    def fetch_cm29_best(self, page=1, size=100, category_large_id=None):
+    def fetch_cm29_best(self, page=1, size=100, category_large_id=None, category_middle_id=None):
         return {"best": True}
 
     def fetch_musinsa_reviews(self, goods_no, size=10):
@@ -161,22 +161,61 @@ def test_crawl_once_product_save_failure_skips_ranking_snapshot(tmp_path, monkey
     assert store.load_ranking("musinsa", "002") is not None
 
 
-def test_crawl_once_cm29_categories(tmp_path, monkeypatch):
+def test_crawl_once_cm29_single_facet_category(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {})
-    monkeypatch.setattr(config, "CM29_CATEGORIES", {"269100100": "여성가방"})
+    monkeypatch.setattr(config, "CM29_CATEGORIES",
+                        {"bag": {"name": "가방", "facets": [{"large": 269100100}]}})
     store = LocalJsonStore(str(tmp_path))
     fetch = FakeFetch()
     calls = []
     orig = fetch.fetch_cm29_best
 
-    def spy(page=1, size=100, category_large_id=None):
-        calls.append(category_large_id)
-        return orig(page=page, size=size, category_large_id=category_large_id)
+    def spy(page=1, size=100, category_large_id=None, category_middle_id=None):
+        calls.append((category_large_id, category_middle_id))
+        return orig(page=page, size=size)
 
     fetch.fetch_cm29_best = spy
     parse = FakeParse({}, [_prod("cm29", "x", 7)])
     stats = crawl_once(store, "t1", fetch=fetch, parse=parse)
-    assert calls == [None, "269100100"]          # 전체 베스트 + 카테고리 1개
+    assert calls == [(None, None), (269100100, None)]  # 전체 베스트 + 가방
     assert stats["rankings_saved"] == 2
-    snap = store.load_ranking("cm29", "269100100")
-    assert snap["items"][0]["category_name"] == "여성가방"
+    snap = store.load_ranking("cm29", "bag")
+    assert snap["items"][0]["category_name"] == "가방"
+
+
+def test_crawl_once_cm29_combined_category_interleaves(tmp_path, monkeypatch):
+    """원피스/스커트 처럼 facet 이 둘이면 두 랭킹을 교차 병합한다."""
+    monkeypatch.setattr(config, "MUSINSA_CATEGORIES", {})
+    monkeypatch.setattr(config, "CM29_CATEGORIES", {"opset": {"name": "원피스/스커트", "facets": [
+        {"large": 268100100, "middle": 268104100},
+        {"large": 268100100, "middle": 268107100},
+    ]}})
+    store = LocalJsonStore(str(tmp_path))
+    fetch = FakeFetch()
+    mids = []
+    orig = fetch.fetch_cm29_best
+
+    def spy(page=1, size=100, category_large_id=None, category_middle_id=None):
+        mids.append(category_middle_id)
+        # facet 별로 다른 상품을 돌려주도록 middle 을 태그로 심는다
+        return {"mid": category_middle_id}
+
+    fetch.fetch_cm29_best = spy
+
+    class P2:
+        def parse_cm29_best(self, data):
+            mid = data.get("mid")
+            if mid is None:
+                return [_prod("cm29", "best", 1)]
+            tag = "dress" if mid == 268104100 else "skirt"
+            return [_prod("cm29", f"{tag}{i}", 1) for i in range(3)]
+        def parse_musinsa_ranking(self, d): return []
+        def parse_musinsa_reviews(self, d): return []
+        def parse_cm29_reviews(self, d): return []
+
+    stats = crawl_once(store, "t1", fetch=fetch, parse=P2())
+    assert 268104100 in mids and 268107100 in mids
+    snap = store.load_ranking("cm29", "opset")
+    ids = [it["product_id"] for it in snap["items"]]
+    assert ids[:4] == ["dress0", "skirt0", "dress1", "skirt1"]  # 교차 병합
+    assert snap["items"][0]["rank"] == 1 and snap["items"][1]["rank"] == 2

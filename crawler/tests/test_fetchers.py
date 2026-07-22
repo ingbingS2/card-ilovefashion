@@ -108,3 +108,16 @@ def test_cm29_best_category_filter_body(monkeypatch):
     # 카테고리 없으면 필드 자체가 없어야 함
     fetchers.fetch_cm29_best()
     assert "categoryFacetInputs" not in captured["json"]["facets"]
+
+
+def test_cm29_best_middle_category_filter(monkeypatch):
+    captured = {}
+
+    def fake_request(method, url, **kw):
+        captured.update(method=method, url=url, **kw)
+        return FakeResp()
+
+    monkeypatch.setattr(fetchers.requests, "request", fake_request)
+    fetchers.fetch_cm29_best(category_large_id=268100100, category_middle_id=268103100)
+    assert captured["json"]["facets"]["categoryFacetInputs"] == [
+        {"largeId": 268100100, "middleId": 268103100}]

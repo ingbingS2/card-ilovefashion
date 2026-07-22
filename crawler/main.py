@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import sys
 from datetime import datetime, timezone
+from itertools import zip_longest
 
 import config
 import fetchers as _fetchers
@@ -66,15 +67,26 @@ def crawl_once(store, now_iso: str, fetch=_fetchers, parse=_parsers) -> dict:
         _run_job(store, "cm29", "best", products, now_iso, fetch, parse, stats)
     except Exception as e:
         stats["errors"].append(f"29CM best 실패: {e}")
-    for cat, cat_name in config.CM29_CATEGORIES.items():
+    for doc_key, cfg in config.CM29_CATEGORIES.items():
         try:
-            products = parse.parse_cm29_best(
-                fetch.fetch_cm29_best(category_large_id=cat))[:config.TOP_N]
-            for p in products:
-                p["category_code"], p["category_name"] = cat, cat_name
-            _run_job(store, "cm29", cat, products, now_iso, fetch, parse, stats)
+            per_facet = [
+                parse.parse_cm29_best(fetch.fetch_cm29_best(
+                    category_large_id=f["large"], category_middle_id=f.get("middle")))
+                for f in cfg["facets"]
+            ]
+            if len(per_facet) == 1:
+                products = per_facet[0]
+            else:
+                # 여러 랭킹을 교차 병합 (1위 A, 1위 B, 2위 A, …) — 원피스/스커트 통합 탭
+                products = [p for group in zip_longest(*per_facet)
+                            for p in group if p is not None]
+            products = products[:config.TOP_N]
+            for i, p in enumerate(products):
+                p["rank"] = i + 1  # 병합 후 순위 재부여 (단일 facet 이면 원 순위와 동일)
+                p["category_code"], p["category_name"] = doc_key, cfg["name"]
+            _run_job(store, "cm29", doc_key, products, now_iso, fetch, parse, stats)
         except Exception as e:
-            stats["errors"].append(f"29CM {cat}({cat_name}) 실패: {e}")
+            stats["errors"].append(f"29CM {cfg['name']} 실패: {e}")
     return stats
 
 

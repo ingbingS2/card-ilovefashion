@@ -11,14 +11,20 @@ MUSINSA_CATEGORIES: dict[str, str] = {
     "103": "신발",
 }
 
-# 29CM 대분류 코드 → 한글명 (2026-07-21 실측: facets.categoryFacetInputs[].largeId)
-CM29_CATEGORIES: dict[str, str] = {
-    "268100100": "여성의류",
-    "269100100": "여성가방",
-    "270100100": "여성슈즈",
-    "271100100": "여성액세서리",
-    "305100100": "여성주얼리",
-    "310100100": "여성모자",
+# 29CM 카테고리 → {문서키: {한글명, facets}} (2026-07-22 실측).
+# facets 는 categoryFacetInputs 로 보낼 {large, middle?} 목록. 여러 개면 랭킹을
+# 교차 병합한다(무신사 "원피스/스커트" 단일 탭에 대응 — 29CM 은 원피스·스커트가 분리).
+# large=여성의류 268100100 하위 middle: 상의 268103100 / 바지 268106100 /
+#   원피스 268104100 / 스커트 268107100. 가방=269100100, 여성슈즈=270100100.
+CM29_CATEGORIES: dict[str, dict] = {
+    "sang": {"name": "상의", "facets": [{"large": 268100100, "middle": 268103100}]},
+    "baji": {"name": "바지", "facets": [{"large": 268100100, "middle": 268106100}]},
+    "opset": {"name": "원피스/스커트", "facets": [
+        {"large": 268100100, "middle": 268104100},   # 원피스
+        {"large": 268100100, "middle": 268107100},   # 스커트
+    ]},
+    "bag": {"name": "가방", "facets": [{"large": 269100100}]},
+    "shoes": {"name": "신발", "facets": [{"large": 270100100}]},
 }
 
 TOP_N = 50          # 카테고리당 저장 상위 개수
