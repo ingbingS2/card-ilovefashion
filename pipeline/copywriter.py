@@ -232,15 +232,6 @@ def _season(month: int) -> str:
     return _SEASON_BY_MONTH.get(month, "여름")
 
 
-# 긴 코멘트 카드의 헤드라인 — 상품 종류를 오인하지 않는 중립 에디터 문구(변주로 돌림).
-_EDITOR_HEADLINES = [
-    "내가 고른<br><em>이유</em>",
-    "에디터<br><em>한마디</em>",
-    "이건<br><em>담아요</em>",
-    "골라온<br><em>이유</em>",
-]
-
-
 def _emphasize_tail(words: list[str]) -> str:
     """어절 목록의 뒤쪽을 <em> 로 강조하되, 한 글자만 홀로 강조되지 않게 한다.
 
@@ -258,25 +249,26 @@ def _emphasize_tail(words: list[str]) -> str:
 
 
 def _headline_from_note(note: str) -> str:
-    """사용자 코멘트에서 큰 헤드라인을 만든다. 코멘트를 지어내거나 바꾸지 않는다.
+    """사용자 코멘트를 큰 헤드라인으로 만든다. 코멘트를 지어내거나 바꾸지 않는다.
 
     - 짧으면 한 줄, 뒤쪽 의미 어절을 강조(한 글자 홀로 강조 안 함).
-    - 길면 어절 경계에서 두 줄로 나누고 2행 뒤쪽을 강조.
+    - 길면 두 줄을 균형 있게(가운데 어절 경계) 나누고 2행 뒤쪽을 강조.
     """
     text = " ".join(note.split())
     words = text.split(" ")
     if len(text) <= 10 or len(words) <= 2:
         return _emphasize_tail(words)
-    # 앞에서부터 ~12자 근처의 어절 경계에서 1행/2행을 나눈다
-    line1, i = "", 0
-    while i < len(words) and len(line1) + len(words[i]) <= 12:
-        line1 += (" " if line1 else "") + words[i]
-        i += 1
-    if not line1:  # 첫 어절이 너무 길면 강제로 한 어절
-        line1, i = words[0], 1
-    rest = words[i:]
-    if not rest:  # 전부 1행에 들어가면 뒤 어절만 강조해 한 줄로
-        return _emphasize_tail(words)
+    # 두 줄이 비슷한 길이가 되도록 가운데에 가장 가까운 어절 경계를 찾는다
+    half = len(text) / 2
+    best_i, best_gap = 1, 1e9
+    acc = 0
+    for i in range(len(words) - 1):
+        acc += len(words[i]) + (1 if i else 0)
+        gap = abs(acc - half)
+        if gap < best_gap:
+            best_gap, best_i = gap, i + 1
+    line1 = " ".join(words[:best_i])
+    rest = words[best_i:]
     return f"{line1}<br>{_emphasize_tail(rest)}"
 
 
@@ -334,18 +326,12 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
                 return f"후기 {review_count}개가 쌓인 {cat_word} 아이템"
             return f"요즘 눈에 띄는 {cat_word} 한 벌"
 
-        if note and len(note) <= 14:
-            # 짧고 강한 코멘트 → 코멘트 그대로 큰 헤드라인 (사용자 목소리를 크게). sp 는 근거 후기.
+        if note:
+            # 사용자가 쓴 코멘트 그 자체가 헤드라인(에디터 목소리)이 된다 — 자동 문구를 끼우지 않는다.
+            # 코멘트는 그 상품에 대한 사용자의 말이므로 상품을 오인할 일이 없다.
+            # 후기는 아래(proof/sp)에 근거로만 남긴다.
             title = _headline_from_note(note)
             sp = _auto_sp()
-        elif note:
-            # 긴 코멘트 → 헤드라인은 상품을 오인하지 않는 중립 에디터 문구(변주), 코멘트 전문은 sp 로.
-            # (카테고리 훅은 캐리어를 '데일리 백'이라 부르는 등 상품과 어긋날 수 있어 쓰지 않는다)
-            _idx = hook_seen.get("_note", 0)
-            hook_seen["_note"] = _idx + 1
-            title = _EDITOR_HEADLINES[_idx % len(_EDITOR_HEADLINES)]
-            # 헤드라인이 이미 '에디터/내가 고른'을 말하므로 sp 엔 꼬리표 없이 코멘트만.
-            sp = f"“{note}”"
         else:
             # 코멘트 없음 → 계절·상황형 자동 헤드라인 + 긍정 후기(폴백).
             _idx = hook_seen.get(cat_word, 0)

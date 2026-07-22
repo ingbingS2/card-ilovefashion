@@ -101,14 +101,14 @@ def test_clip_sentence_ends_on_boundary():
     assert "\n" not in out
 
 
-def test_fallback_long_note_becomes_editor_pick_line():
-    """긴 코멘트 → '에디터 픽' 라인, 후기 인용은 밀려나고 후기는 근거로만."""
+def test_fallback_note_becomes_headline_no_filler():
+    """코멘트가 있으면 코멘트 자체가 헤드라인이 되고, '에디터 한마디' 같은 자동 문구는 없다."""
     p = prod()
     p["note"] = "장마철 출근할 때 딱 좋고 색이 실물이 더 예뻐요"
     c = copywriter.fallback_copy([p], "여름 무드", month=7)
     it = c["items"][0]
-    assert "장마철 출근할 때 딱" in it["sp"]  # 코멘트 전문이 sp
-    assert "실제 후기" not in it["sp"]           # 후기 인용은 사용자 의견에 밀림
+    assert "장마철" in it["title"] and "출근" in it["title"]  # 코멘트가 헤드라인
+    assert "에디터 한마디" not in it["title"] and "내가 고른" not in it["title"]  # 자동 문구 없음
     assert "후기 5개" in it["proof"]             # 후기는 근거로 남음
 
 
