@@ -32,6 +32,7 @@ import requests
 
 GRAPH = "https://graph.instagram.com/v23.0"
 LITTERBOX = "https://litterbox.catbox.moe/resources/internals/api.php"
+UGUU = "https://uguu.se/upload"
 BASE_DIR = r"C:\Users\yepdo\OneDrive\Desktop\카드뉴스"
 TOKEN_FILE = os.path.join(BASE_DIR, "ig_api_token.txt")
 
@@ -113,8 +114,7 @@ def api(method: str, endpoint: str, token: str, **data):
     return r.json()
 
 
-def host_image(path: str) -> str:
-    """litterbox 에 올리고 공개 URL 반환 (1시간 뒤 자동 삭제 — 컨테이너 생성이면 충분)."""
+def _host_litterbox(path: str) -> str:
     with open(path, "rb") as f:
         r = requests.post(
             LITTERBOX,
@@ -127,6 +127,34 @@ def host_image(path: str) -> str:
     if not url.startswith("http"):
         raise RuntimeError(f"litterbox 업로드 실패: {r.text[:200]}")
     return url
+
+
+def _host_uguu(path: str) -> str:
+    with open(path, "rb") as f:
+        r = requests.post(UGUU, files={"files[]": f}, timeout=120)
+    r.raise_for_status()
+    try:
+        url = r.json()["files"][0]["url"]
+    except (ValueError, KeyError, IndexError, TypeError):
+        raise RuntimeError(f"uguu 업로드 실패: {r.text[:200]}")
+    if not isinstance(url, str) or not url.startswith("http"):
+        raise RuntimeError(f"uguu 업로드 실패: {r.text[:200]}")
+    return url
+
+
+def host_image(path: str) -> str:
+    """임시 호스팅에 올리고 공개 URL 반환 (컨테이너 생성 시점에 인스타가 가져가므로 단시간이면 충분).
+
+    litterbox(1시간) 우선, 장애 시 uguu.se(3시간)로 폴백한다
+    (2026-07-27 litterbox 412/500 장애 실제 발생 — 폴백 없으면 게시 전체가 막힘).
+    """
+    try:
+        return _host_litterbox(path)
+    except Exception as e1:
+        try:
+            return _host_uguu(path)
+        except Exception as e2:
+            raise RuntimeError(f"이미지 호스팅 실패 — litterbox: {e1} / uguu: {e2}")
 
 
 def wait_ready(container_id: str, token: str, timeout_sec: int = 120) -> None:

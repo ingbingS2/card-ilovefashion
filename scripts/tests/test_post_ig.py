@@ -163,6 +163,33 @@ def test_host_image_rejects_non_url(monkeypatch, tmp_path):
         post_ig.host_image(str(img))
 
 
+def test_host_image_falls_back_to_uguu(monkeypatch, tmp_path):
+    """litterbox 장애(HTTP 오류) 시 uguu 로 폴백해 URL 을 반환한다 (2026-07-27 실제 장애)."""
+    img = tmp_path / "1.jpg"
+    img.write_bytes(b"x")
+
+    class LitterboxDown:
+        text = "500 Internal Server Error"
+
+        def raise_for_status(self):
+            raise post_ig.requests.exceptions.HTTPError("500")
+
+    class UguuOk:
+        text = '{"success": true}'
+
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"success": True, "files": [{"url": "https://n.uguu.se/abc.jpg"}]}
+
+    def fake_post(url, *a, **k):
+        return LitterboxDown() if url == post_ig.LITTERBOX else UguuOk()
+
+    monkeypatch.setattr(post_ig.requests, "post", fake_post)
+    assert post_ig.host_image(str(img)) == "https://n.uguu.se/abc.jpg"
+
+
 def test_wait_ready_finished_and_error(monkeypatch):
     seq = iter(["IN_PROGRESS", "FINISHED"])
     monkeypatch.setattr(post_ig, "api", lambda *a, **k: {"status_code": next(seq)})
