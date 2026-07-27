@@ -90,9 +90,17 @@ def build_html(copy: dict, products: list[dict]) -> str:
             card["badge"] = item["badge"]
         cards.append(card)
 
+    # CTA(마지막) 카드 이미지: copy["cta"]["image_path"] 가 주어지면 그 이미지를 쓴다.
+    # (KEYWORD-POLICY.md — 마지막 카드는 항상 CARD/zzal 최신 짤 사용)
+    cta_key = first_key
+    if cta.get("image_path"):
+        images["cta"] = _image_data_uri(cta["image_path"])
+        meta["cta"] = _image_meta(cta["image_path"])
+        cta_key = "cta"
+
     cards.append({
         "kind": "cta",
-        "img": first_key,
+        "img": cta_key,
         "lab": "CTA",
         "pw": 300,
         "title": cta["title"],

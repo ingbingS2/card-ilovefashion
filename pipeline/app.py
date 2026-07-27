@@ -55,6 +55,21 @@ app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1
 # 완성본 저장 위치: 바탕화면\카드뉴스\YYYYMMDD 주제\ (사용자 확정 규칙)
 CARDNEWS_BASE_DIR = os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
 
+# 마지막(CTA) 카드 이미지로 쓰는 무한도전 짤 폴더 (KEYWORD-POLICY.md — 항상 최신 파일 사용)
+ZZAL_DIR = Path(__file__).resolve().parents[1] / "CARD" / "zzal"
+
+
+def _latest_zzal() -> str | None:
+    """CARD/zzal 에서 가장 최근 수정된 이미지 경로. 폴더가 없거나 비어 있으면 None."""
+    try:
+        files = [p for p in ZZAL_DIR.iterdir()
+                 if p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp")]
+    except OSError:
+        return None
+    if not files:
+        return None
+    return str(max(files, key=lambda p: p.stat().st_mtime))
+
 _FILE_NAME_RE = re.compile(r"^([0-9]+\.jpg|caption\.txt)\Z")
 
 # job_id -> Thread. 백그라운드 스레드 참조를 보관해 테스트에서 join 할 수 있게 한다.
@@ -112,6 +127,11 @@ def run_pipeline(job: dict, items: list[dict], topic: str | None = None) -> None
         products = reader.load_products(items, assets_dir)
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         copy = copywriter.write_copy(products, topic, api_key=api_key)
+
+        # 마지막(CTA) 카드는 항상 무한도전 짤 (KEYWORD-POLICY.md). 짤이 없으면 기존 폴백 유지.
+        zzal = _latest_zzal()
+        if zzal and isinstance(copy.get("cta"), dict):
+            copy["cta"]["image_path"] = zzal
 
         jobs.set_status(job, "렌더 중")
         folder_name = f"{datetime.now().strftime('%Y%m%d')} {season}무드"

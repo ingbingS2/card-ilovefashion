@@ -3,6 +3,7 @@
 패션/AI 카드뉴스 자동 생성 웹앱. React(프론트) + FastAPI(백엔드) + Firebase(DB·호스팅).
 
 ## 절대 규칙
+- **카드뉴스 키워드는 [KEYWORD-POLICY.md](KEYWORD-POLICY.md)를 반드시 따른다**: 랭킹 키워드는 사용자가 명시적으로 요청하지 않는 한 금지, 항상 시즌성 키워드 사용. 현재 지정 키워드도 그 파일에서 확인.
 - 모든 사용자 노출 UI 텍스트는 **한국어**만 사용한다 (코드 식별자·주석은 영어 허용).
 - 셸 명령은 **Bash 툴**로 실행한다. `node/npm/npx/python/pip/firebase` shim이 `~/.local/bin`에 있다.
 - **중요:** `npm install`/`npm run build` 는 내부적으로 cmd.exe 로 `node` 를 호출하므로,
