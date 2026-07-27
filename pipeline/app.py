@@ -20,6 +20,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -27,8 +28,26 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import copywriter
 import jobs
 import publisher
+import qa
 import reader
 import renderer
+
+
+def _load_env_file() -> None:
+    """pipeline/.env 가 있으면 환경변수로 로드한다 (이미 설정된 값이 우선)."""
+    try:
+        lines = (Path(__file__).resolve().parent / ".env").read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return
+    for line in lines:
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        os.environ.setdefault(k.strip(), v.strip())
+
+
+_load_env_file()
 
 app = FastAPI(title="패션 카드뉴스 자동 생성")
 
@@ -41,9 +60,12 @@ ALLOWED_ORIGINS = [
     "http://127.0.0.1:8787",
 ]
 
+# CORS 에는 "null"(file:// 로 연 대시보드)도 허용해 조회(GET)는 되게 한다.
+# 상태를 바꾸는 POST 는 _reject_untrusted_origin 이 ALLOWED_ORIGINS 로만 판정하므로
+# file:// 페이지는 여전히 게시/질문 등록을 못 한다 (읽기 전용).
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=ALLOWED_ORIGINS + ["null"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -277,6 +299,51 @@ def get_file(job_id: str, name: str):
         raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다")
 
     return FileResponse(path)
+
+
+DASHBOARD_FILE = os.path.join(CARDNEWS_BASE_DIR, "_dashboard.html")
+
+# 대시보드 썸네일(카드뉴스 폴더의 1.jpg 등)을 서버 모드에서도 쓸 수 있게 서빙.
+if os.path.isdir(CARDNEWS_BASE_DIR):
+    app.mount("/cardnews-files", StaticFiles(directory=CARDNEWS_BASE_DIR), name="cardnews-files")
+
+
+class QABody(BaseModel):
+    question: str
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+def get_dashboard():
+    if not os.path.isfile(DASHBOARD_FILE):
+        raise HTTPException(status_code=404, detail="대시보드 파일이 없습니다")
+    return HTMLResponse(open(DASHBOARD_FILE, encoding="utf-8").read())
+
+
+@app.get("/api/qa")
+def list_qa():
+    return {"items": qa.load_qas()}
+
+
+@app.post("/api/qa")
+def post_qa(body: QABody, request: Request):
+    _reject_untrusted_origin(request)
+
+    question = body.question.strip()
+    if not question:
+        raise HTTPException(status_code=400, detail="질문이 비어 있습니다")
+    if len(question) > 2000:
+        raise HTTPException(status_code=400, detail="질문이 너무 깁니다 (2000자 이내)")
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        # 키가 없으면 즉답 불가 — "대기"로 저장하고 다음 Claude Code 세션이 채운다.
+        return qa.add_qa(question, None, "대기")
+
+    try:
+        answer = qa.answer_question(question, api_key)
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"답변 생성 실패: {e}")
+    return qa.add_qa(question, answer, "완료")
 
 
 @app.post("/api/jobs/{job_id}/publish")
