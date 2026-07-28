@@ -341,8 +341,10 @@ def post_qa(body: QABody, request: Request):
 
     try:
         answer = qa.answer_question(question, api_key)
-    except Exception as e:
-        raise HTTPException(status_code=502, detail=f"답변 생성 실패: {e}")
+    except Exception:
+        # 답변 생성 실패(네트워크·크레딧·과부하 등)로 질문까지 잃으면 안 된다 —
+        # "대기"로 폴백 저장하고 성공 응답을 돌려준다 (프런트가 대기 안내를 표시).
+        return qa.add_qa(question, None, "대기")
     return qa.add_qa(question, answer, "완료")
 
 

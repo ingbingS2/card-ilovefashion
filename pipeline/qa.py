@@ -33,18 +33,29 @@ SYSTEM_PROMPT = """당신은 @i_s2_fashion 인스타그램 카드뉴스 계정�
 
 
 def load_qas() -> list[dict]:
-    """_qa.json 의 질문·답변 목록. 파일이 없거나 깨졌으면 빈 목록."""
+    """_qa.json 의 질문·답변 목록. 파일이 없으면 빈 목록."""
     try:
         with open(QA_FILE, encoding="utf-8") as f:
             data = json.load(f)
         return data if isinstance(data, list) else []
-    except (OSError, ValueError):
+    except OSError:
+        return []
+    except ValueError:
+        # 깨진 파일을 빈 목록으로 취급한 채 다음 저장이 덮어쓰면 히스토리가 영구
+        # 소실된다 — 백업해 두어 복구 여지를 남긴다 (OneDrive 동기화 충돌 대비).
+        try:
+            os.replace(QA_FILE, QA_FILE + ".corrupt")
+        except OSError:
+            pass
         return []
 
 
 def _save_all(items: list[dict]) -> None:
-    with open(QA_FILE, "w", encoding="utf-8") as f:
+    # 임시 파일에 쓴 뒤 원자 교체 — 쓰기 도중 크래시로 JSON 이 깨지는 것을 방지.
+    tmp = QA_FILE + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, QA_FILE)
 
 
 def add_qa(question: str, answer: str | None, status: str) -> dict:
@@ -89,13 +100,19 @@ def build_context() -> str:
 
 
 def answer_question(question: str, api_key: str) -> str:
-    """Claude 로 답변 텍스트를 생성한다. 실패는 예외로 전파."""
+    """Claude 로 답변 텍스트를 생성한다. 실패는 예외로 전파.
+
+    timeout 60초: "즉시 답변 창"이라 SDK 기본(10분)을 그대로 두면 사용자가
+    "기록 중…"만 보며 갇힌다. max_tokens 는 사고(thinking) 토큰까지 포함하는
+    상한이라 짧은 답변용이어도 여유를 둔다 (effort=low 로 사고량은 낮게).
+    """
     from anthropic import Anthropic
 
-    client = Anthropic(api_key=api_key)
+    client = Anthropic(api_key=api_key, timeout=60.0, max_retries=1)
     resp = client.messages.create(
         model="claude-sonnet-5",
-        max_tokens=1000,
+        max_tokens=4000,
+        output_config={"effort": "low"},
         system=SYSTEM_PROMPT,
         messages=[{
             "role": "user",

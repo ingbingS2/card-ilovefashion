@@ -43,7 +43,8 @@ def test_post_qa_with_key_returns_answer(monkeypatch):
     assert qa.load_qas()[0]["answer"] == "답변입니다"
 
 
-def test_post_qa_answer_failure_is_502_and_not_saved(monkeypatch):
+def test_post_qa_answer_failure_falls_back_to_pending(monkeypatch):
+    """Claude 호출 실패 시 질문을 잃지 않고 "대기"로 폴백 저장한다."""
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
 
     def boom(q, api_key):
@@ -51,8 +52,33 @@ def test_post_qa_answer_failure_is_502_and_not_saved(monkeypatch):
 
     monkeypatch.setattr(qa, "answer_question", boom)
     r = client.post("/api/qa", json={"question": "질문"})
-    assert r.status_code == 502
+    assert r.status_code == 200
+    assert r.json()["status"] == "대기"
+    assert qa.load_qas()[0]["question"] == "질문"
+
+
+def test_post_qa_rejects_null_origin(monkeypatch):
+    """file:// 로 연 대시보드(Origin: null)는 조회만 가능, 등록은 차단된다."""
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    r = client.post("/api/qa", json={"question": "질문"}, headers={"Origin": "null"})
+    assert r.status_code == 403
     assert qa.load_qas() == []
+
+
+def test_load_qas_backs_up_corrupt_file():
+    """깨진 _qa.json 은 .corrupt 로 백업하고 빈 목록을 반환한다 (히스토리 소실 방지)."""
+    with open(qa.QA_FILE, "w", encoding="utf-8") as f:
+        f.write('[{"broken": ')
+    assert qa.load_qas() == []
+    assert not __import__("os").path.exists(qa.QA_FILE)
+    assert __import__("os").path.exists(qa.QA_FILE + ".corrupt")
+
+
+def test_add_qa_appends_to_existing():
+    qa.add_qa("질문1", "답1", "완료")
+    qa.add_qa("질문2", None, "대기")
+    items = qa.load_qas()
+    assert [i["question"] for i in items] == ["질문1", "질문2"]
 
 
 def test_post_qa_rejects_empty():
