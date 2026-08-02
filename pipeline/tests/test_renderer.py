@@ -94,6 +94,40 @@ def test_build_html_raises_when_template_anchor_missing(monkeypatch, tmp_path):
         renderer.build_html(copy2(), prods())
 
 
+def test_build_html_cover_uses_own_image_when_given(tmp_path):
+    """표지에 cover.image_path 를 주면 첫 상품 이미지 대신 그 이미지를 쓴다.
+    (KEYWORD-POLICY 디자인 규칙 1 — 표지와 2번 카드가 같은 사진이면 안 된다.
+     CTA 의 image_path 와 동일한 메커니즘.)"""
+    import json, re
+    from PIL import Image
+
+    cover_img = tmp_path / "cover.png"
+    Image.new("RGB", (8, 8), (10, 20, 30)).save(cover_img)
+
+    c = copy2()
+    c["cover"]["image_path"] = str(cover_img)
+    html = renderer.build_html(c, prods())
+
+    cards = json.loads(re.search(r"var CARDS  = (\[.*?\]);", html, re.S).group(1))
+    assert cards[0]["kind"] == "cover"
+    assert cards[0]["img"] == "cover"        # 첫 상품 키(p0)가 아니라 전용 키
+    assert cards[1]["img"] == "p0"           # 상품 카드는 그대로 첫 상품 이미지
+
+    images = json.loads(re.search(r"var IMAGES = (\{.*?\});", html, re.S).group(1))
+    assert "cover" in images and images["cover"].startswith("data:image/png;base64,")
+    assert images["cover"] != images["p0"]   # 표지와 2번 카드 사진이 실제로 다름
+
+
+def test_build_html_cover_falls_back_to_first_product_image():
+    """cover.image_path 가 없으면 기존대로 첫 상품 이미지를 쓴다 (하위 호환)."""
+    import json, re
+    html = renderer.build_html(copy2(), prods())
+    cards = json.loads(re.search(r"var CARDS  = (\[.*?\]);", html, re.S).group(1))
+    assert cards[0]["img"] == "p0"
+    images = json.loads(re.search(r"var IMAGES = (\{.*?\});", html, re.S).group(1))
+    assert "cover" not in images
+
+
 def test_build_html_cr_derived_from_product_mall_not_copy_engine():
     """이미지 출처(cr)는 카피 엔진(Claude/폴백)이 뭐라고 주든 무시하고 항상
     상품의 실제 mall 에서 파생돼야 한다 (폴백/Claude 경로 모두 정확한 출처 보장)."""
