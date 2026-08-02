@@ -1,6 +1,13 @@
 # CLAUDE.md — 개발 가이드
 
+> ## 🟥 시작 전 필독 — [PROJECT-BRIEF.md](PROJECT-BRIEF.md)
+> 이 저장소에서 **처음 작업하는 에이전트는 어떤 행동보다 먼저 [PROJECT-BRIEF.md](PROJECT-BRIEF.md) 를 읽는다.**
+> 프로젝트 전체 지도(서브시스템·데이터 흐름·산출물 위치·알려진 함정)가 거기 한 장으로 정리돼 있다.
+> `.claude/hooks/session-start-brief.sh` 가 세션 시작 시 자동 주입하지만, 주입이 안 됐다면 직접 읽어라.
+> 카드뉴스 작업이면 [KEYWORD-POLICY.md](KEYWORD-POLICY.md) 도 반드시 함께 연다.
+
 패션/AI 카드뉴스 자동 생성 웹앱. React(프론트) + FastAPI(백엔드) + Firebase(DB·호스팅).
+(실제 운영 라인은 크롤러 → 파이프라인 → 인스타 게시다 — PROJECT-BRIEF.md §3 참조.)
 
 ## 절대 규칙
 - **카드뉴스 키워드는 [KEYWORD-POLICY.md](KEYWORD-POLICY.md)를 반드시 따른다**: 랭킹 키워드는 사용자가 명시적으로 요청하지 않는 한 금지, 항상 시즌성 키워드 사용. 현재 지정 키워드도 그 파일에서 확인.

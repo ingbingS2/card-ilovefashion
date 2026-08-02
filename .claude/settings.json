@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/session-start-brief.sh\"",
+            "timeout": 15,
+            "statusMessage": "PROJECT-BRIEF.md 로드 중..."
+          }
+        ]
+      }
+    ]
+  }
+}
