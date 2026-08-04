@@ -59,13 +59,34 @@ def test_write_copy_claude_success(monkeypatch):
             "items": [{"prod": "p", "title": "t", "meta": "m", "proof": "pr", "sp": "s", "badge": None}],
             "cta": {"title": "c", "sub": "s"}, "caption": "cap"}
     import json
-    monkeypatch.setattr(copywriter, "_call_claude", lambda products, topic, key: json.dumps(fake))
+    monkeypatch.setattr(
+        copywriter, "_call_claude",
+        lambda products, topic, key, topic_note=None: json.dumps(fake),
+    )
     c = copywriter.write_copy([prod()], topic="T", api_key="sk-test")
     assert c["cover"]["kicker"] == "K"
 
 
+def test_write_copy_passes_topic_note_to_claude(monkeypatch):
+    """대시보드가 고른 주제의 트렌드 근거가 카피 생성까지 전달된다."""
+    seen: dict = {}
+    fake = {"topic": "T", "cover": {"kicker": "K", "title": "t", "sub": "s"},
+            "items": [{"prod": "p", "title": "t", "meta": "m", "proof": "pr", "sp": "s", "badge": None}],
+            "cta": {"title": "c", "sub": "s"}, "caption": "cap"}
+    import json
+
+    def capture(products, topic, key, topic_note=None):
+        seen["topic_note"] = topic_note
+        return json.dumps(fake)
+
+    monkeypatch.setattr(copywriter, "_call_claude", capture)
+    copywriter.write_copy([prod()], topic="늦여름 클로그", api_key="sk-test",
+                          topic_note="굽을 다르게 변주한 실루엣")
+    assert seen["topic_note"] == "굽을 다르게 변주한 실루엣"
+
+
 def test_write_copy_claude_failure_falls_back(monkeypatch):
-    def boom(products, topic, key):
+    def boom(products, topic, key, topic_note=None):
         raise RuntimeError("api down")
     monkeypatch.setattr(copywriter, "_call_claude", boom)
     c = copywriter.write_copy([prod()], api_key="sk-test")

@@ -47,12 +47,21 @@ items 배열의 개수는 전달받은 상품 개수와 정확히 같아야 합�
 """
 
 
-def _call_claude(products: list[dict], topic: str, key: str) -> str:
+def _call_claude(
+    products: list[dict], topic: str, key: str, topic_note: str | None = None
+) -> str:
     from anthropic import Anthropic
 
     client = Anthropic(api_key=key)
+    trend = ""
+    if topic_note:
+        # 대시보드가 넘긴 트렌드 근거. 매체 기사에서 확인된 내용이므로 카드에 써도 되는 사실이다.
+        trend = (
+            f"\n이 주제가 지금 주목받는 이유(매체 확인 사실):\n{topic_note}\n"
+            "이 내용을 카드 카피에 녹여 쓰되, 문장을 그대로 복사하지 말고 다시 쓰세요.\n"
+        )
     user_content = (
-        f"주제: {topic}\n\n상품 데이터(JSON):\n{json.dumps(products, ensure_ascii=False)}\n\n"
+        f"주제: {topic}\n{trend}\n상품 데이터(JSON):\n{json.dumps(products, ensure_ascii=False)}\n\n"
         "위 상품들로 카드뉴스 Copy JSON을 생성하세요."
     )
     resp = client.messages.create(
@@ -402,11 +411,16 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
     }
 
 
-def write_copy(products: list[dict], topic: str = "랭킹 픽", api_key: str | None = None) -> dict:
+def write_copy(
+    products: list[dict],
+    topic: str = "랭킹 픽",
+    api_key: str | None = None,
+    topic_note: str | None = None,
+) -> dict:
     if not api_key:
         return fallback_copy(products, topic)
     try:
-        text = _call_claude(products, topic, api_key)
+        text = _call_claude(products, topic, api_key, topic_note)
         data = _parse(text)
         if len(data["items"]) != len(products):
             raise ValueError("items 개수가 상품 개수와 다름")

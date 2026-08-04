@@ -16,12 +16,17 @@ export function toggleSelection(
 }
 
 // notes: selKey → 사용자가 상품별로 적은 한 줄 코멘트(에디터 의견). 카드 본문의 핵심이 된다.
+// topic: 대시보드 상단에서 고른 주제. 결과 폴더명·카피 주제가 된다.
+//   안 보내면 파이프라인이 "여름 무드" 같은 계절 기본값으로 떨어진다 (폴더명이 매번 겹치는 원인).
 export function buildSelectionPayload(
   map: Record<string, RankItem>,
   notes: Record<string, string> = {},
+  topic?: { label: string; note: string } | null,
 ) {
   return {
     createdAt: new Date().toISOString(),
+    topic: topic?.label?.trim() || null,
+    topicNote: topic?.note?.trim() || null,
     items: Object.values(map)
       .sort((a, b) => a.rank - b.rank)
       .map((item) => ({ ...item, note: (notes[selKey(item)] || "").trim() })),

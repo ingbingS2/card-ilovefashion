@@ -39,6 +39,19 @@ it("buildSelectionPayload 는 상품별 내 코멘트(note)를 붙인다", () =>
   expect(x.note).toBe("");               // 코멘트 없으면 빈 문자열
 });
 
+it("buildSelectionPayload 는 고른 주제를 함께 싣는다", () => {
+  const m = toggleSelection({}, item("a"));
+  const p = buildSelectionPayload(m, {}, { label: "  늦여름 클로그 ", note: " 잇 아이템 " });
+  expect(p.topic).toBe("늦여름 클로그");
+  expect(p.topicNote).toBe("잇 아이템");
+});
+
+it("buildSelectionPayload 는 주제 미선택 시 null 을 보낸다 (파이프라인이 계절 기본값으로 처리)", () => {
+  const p = buildSelectionPayload(toggleSelection({}, item("a")));
+  expect(p.topic).toBeNull();
+  expect(p.topicNote).toBeNull();
+});
+
 it("sendSelection: POST 성공", async () => {
   const mock = vi.fn().mockResolvedValue({ ok: true });
   vi.stubGlobal("fetch", mock);

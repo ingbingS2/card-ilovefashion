@@ -65,7 +65,7 @@ def test_selections_pipeline_reaches_preview_ready(monkeypatch, tmp_path):
     )
     monkeypatch.setattr(
         app_module.copywriter, "write_copy",
-        lambda products, topic, api_key=None: {
+        lambda products, topic, api_key=None, topic_note=None: {
             "topic": topic,
             "cover": {"kicker": "K", "title": "T", "sub": "s"},
             "items": [{"prod": "p", "title": "t", "meta": "m", "proof": "pr", "sp": "s", "badge": None}],
@@ -101,6 +101,87 @@ def test_selections_pipeline_reaches_preview_ready(monkeypatch, tmp_path):
     assert len(job["images"]) == 3
     assert job["folder"]
     assert (Path(job["folder"]) / "caption.txt").read_text(encoding="utf-8") == "캡션 내용"
+
+
+def _stub_pipeline(monkeypatch, tmp_path, seen: dict):
+    """주제 전달 검증용 최소 스텁 — 카피/렌더를 목 처리하고 write_copy 인자를 기록한다."""
+    monkeypatch.setattr(app_module, "CARDNEWS_BASE_DIR", str(tmp_path))
+    monkeypatch.setattr(
+        app_module.reader, "load_products",
+        lambda items, assets_dir: [{"mall": "musinsa", "product_id": "1", "image_path": None}],
+    )
+
+    def write_copy(products, topic, api_key=None, topic_note=None):
+        seen["topic"] = topic
+        seen["topic_note"] = topic_note
+        return {
+            "topic": topic,
+            "cover": {"kicker": "K", "title": "T", "sub": "s"},
+            "items": [{"prod": "p", "title": "t", "meta": "m", "proof": "pr", "sp": "s", "badge": None}],
+            "cta": {"title": "c", "sub": "s"},
+            "caption": "캡션",
+        }
+
+    monkeypatch.setattr(app_module.copywriter, "write_copy", write_copy)
+
+    def fake_render(copy, products, out_dir):
+        Path(out_dir).mkdir(parents=True, exist_ok=True)
+        p = Path(out_dir) / "1.jpg"
+        p.write_bytes(b"JPG")
+        return [str(p)]
+
+    monkeypatch.setattr(app_module.renderer, "render", fake_render)
+
+
+def test_selections_topic_drives_copy_and_folder_name(monkeypatch, tmp_path):
+    """대시보드에서 고른 주제가 카피 주제이자 결과 폴더명이 된다."""
+    seen: dict = {}
+    _stub_pipeline(monkeypatch, tmp_path, seen)
+
+    resp = client.post(
+        "/api/selections",
+        json={
+            "topic": "늦여름 클로그",
+            "topicNote": "브랜드마다 굽을 다르게 변주한 실루엣",
+            "items": [{"mall": "musinsa", "product_id": "1"}],
+        },
+    )
+    job_id = resp.json()["job_id"]
+    app_module._THREADS[job_id].join(timeout=5)
+
+    assert seen["topic"] == "늦여름 클로그"
+    assert seen["topic_note"] == "브랜드마다 굽을 다르게 변주한 실루엣"
+    assert Path(jobs.JOBS[job_id]["folder"]).name.endswith(" 늦여름 클로그")
+
+
+def test_selections_without_topic_falls_back_to_season(monkeypatch, tmp_path):
+    """주제를 안 보내면 계절 기본값으로 떨어진다 (기존 동작 유지)."""
+    seen: dict = {}
+    _stub_pipeline(monkeypatch, tmp_path, seen)
+
+    resp = client.post("/api/selections", json={"items": [{"mall": "musinsa", "product_id": "1"}]})
+    job_id = resp.json()["job_id"]
+    app_module._THREADS[job_id].join(timeout=5)
+
+    assert seen["topic"].endswith(" 무드")
+    assert seen["topic_note"] is None
+    assert Path(jobs.JOBS[job_id]["folder"]).name.endswith("무드")
+
+
+def test_selections_topic_with_path_chars_cannot_escape_folder(monkeypatch, tmp_path):
+    """주제 문자열이 경로 구분자를 담고 있어도 카드뉴스 폴더 밖으로 나가지 않는다."""
+    seen: dict = {}
+    _stub_pipeline(monkeypatch, tmp_path, seen)
+
+    resp = client.post(
+        "/api/selections",
+        json={"topic": "../../evil\\x", "items": [{"mall": "musinsa", "product_id": "1"}]},
+    )
+    job_id = resp.json()["job_id"]
+    app_module._THREADS[job_id].join(timeout=5)
+
+    folder = Path(jobs.JOBS[job_id]["folder"]).resolve()
+    assert folder.parent == Path(tmp_path).resolve()
 
 
 def test_selections_pipeline_marks_failure_on_exception(monkeypatch, tmp_path):

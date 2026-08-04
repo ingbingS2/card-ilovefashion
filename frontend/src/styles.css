@@ -209,6 +209,32 @@ input[type="range"] {
 /* ── 앱 탭 셸 ── */
 .app-tabs { display:flex; gap:6px; justify-content:center; margin-top:10px; }
 
+/* ── 주제 선택기 (대시보드 최상단) ── */
+.topicbar { background:#fff; border:1px solid #ececef; border-radius:12px;
+            padding:14px 16px; margin-bottom:16px; }
+.topic-head { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.topic-title { font-size:15px; font-weight:800; }
+.topic-guide { font-size:12px; color:#8b8b90; flex:1; min-width:200px; }
+.topic-stamp { font-size:11px; color:#b0b0b6; font-variant-numeric:tabular-nums; }
+.topic-list { display:flex; gap:6px; flex-wrap:wrap; }
+.topic-chip { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600;
+              padding:7px 12px; border-radius:99px; border:1px solid #e3e3e6;
+              background:#fff; cursor:pointer; color:inherit; }
+.topic-chip:hover { border-color:#cfcfd4; }
+.topic-on { background:#101012; color:#fff; border-color:#101012; }
+.topic-when { font-size:10.5px; font-weight:800; letter-spacing:.2px; padding:2px 6px;
+              border-radius:99px; background:#f1f1f4; color:#8b8b90; }
+.topic-when.when-now { background:#ffe9ef; color:#ff3366; }
+.topic-on .topic-when { background:rgba(255,255,255,.18); color:#fff; }
+.topic-detail { margin-top:12px; padding-top:12px; border-top:1px solid #f0f0f3; }
+.topic-note { font-size:13.5px; line-height:1.65; margin:0 0 8px; word-break:keep-all; }
+.topic-where, .topic-src { font-size:12px; color:#8b8b90; margin:0 0 4px; }
+.topic-where b, .topic-src b { color:#101012; margin-right:6px; }
+.topic-src a { color:#8b8b90; text-decoration:underline; }
+.topic-src a:hover { color:#101012; }
+.topic-empty { font-size:12.5px; color:#b0b0b6; margin:12px 0 0; padding-top:12px;
+               border-top:1px solid #f0f0f3; }
+
 /* ── 랭킹 대시보드 ── */
 .dash-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
 .chip { font-size:13px; font-weight:600; padding:8px 13px; border-radius:99px;
@@ -239,6 +265,9 @@ input[type="range"] {
 .sel-bar { position:fixed; left:0; right:0; bottom:0; display:flex; gap:10px; align-items:center;
            background:#101012; color:#fff; padding:12px 18px; z-index:30; flex-wrap:wrap; }
 .sel-info { font-weight:700; font-size:14px; }
+.sel-topic { font-size:12.5px; font-weight:600; color:#101012; background:#f1f1f4;
+             padding:4px 10px; border-radius:99px; }
+.sel-topic-none { background:#fff4e5; color:#b06d00; font-weight:500; }
 .sel-btn { background:#ff3366; color:#fff; border:none; border-radius:8px; padding:10px 16px;
            font-weight:800; font-size:14px; cursor:pointer; }
 .sel-btn:disabled { opacity:.6; }

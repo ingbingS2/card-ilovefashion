@@ -2,12 +2,15 @@ import { useState } from "react";
 import { CM29_TABS, MUSINSA_TABS } from "../firestore";
 import type { RankItem } from "../rankTypes";
 import { buildSelectionPayload, selKey, sendSelection, toggleSelection } from "../selection";
+import type { Topic } from "../topics";
 import ProductPanel from "./ProductPanel";
 import RankList from "./RankList";
+import TopicPicker from "./TopicPicker";
 
 export default function Dashboard() {
   const [cat, setCat] = useState("001");
   const [cmCat, setCmCat] = useState("best");
+  const [topic, setTopic] = useState<Topic | null>(null);
   const [selected, setSelected] = useState<Record<string, RankItem>>({});
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [panelOpen, setPanelOpen] = useState(false);
@@ -26,8 +29,8 @@ export default function Dashboard() {
     setSending(true);
     setNotice(null);
     try {
-      await sendSelection(buildSelectionPayload(selected, notes));
-      setNotice(`로컬 파이프라인으로 전송했습니다 (${count}개)`);
+      await sendSelection(buildSelectionPayload(selected, notes, topic));
+      setNotice(`로컬 파이프라인으로 전송했습니다 (${count}개${topic ? ` · ${topic.label}` : ""})`);
     } catch (e) {
       setNotice(e instanceof Error ? e.message : "전송에 실패했습니다");
     } finally {
@@ -41,6 +44,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
+      <TopicPicker value={topic} onChange={setTopic} />
       <div className="dash-tabs">
         <span className="tabs-label">무신사</span>
         {MUSINSA_TABS.map((t) => (
@@ -99,6 +103,9 @@ export default function Dashboard() {
       {count > 0 && (
         <div className="sel-bar">
           <span className="sel-info">선택 {count}개 · 내 코멘트 {withNote}개</span>
+          <span className={"sel-topic" + (topic ? "" : " sel-topic-none")}>
+            {topic ? `주제 ${topic.label}` : "주제 미선택 — 폴더명이 계절 기본값이 됩니다"}
+          </span>
           <button className="sel-comment" onClick={() => setPanelOpen((v) => !v)}>
             {panelOpen ? "코멘트 접기" : "내 의견 적기"}
           </button>

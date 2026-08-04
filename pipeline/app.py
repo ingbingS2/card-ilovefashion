@@ -113,7 +113,23 @@ def _reject_untrusted_origin(request: Request) -> None:
 
 class SelectionsBody(BaseModel):
     createdAt: str | None = None
+    topic: str | None = None       # 대시보드 주제 선택기에서 고른 트렌드 키워드
+    topicNote: str | None = None   # 그 주제가 왜 지금 유행인지 한 줄 (카드 정보 블록 근거)
     items: list[dict]
+
+
+_FOLDER_FORBIDDEN = '<>:"/\\|?*'
+
+
+def _safe_folder_part(name: str) -> str:
+    """주제 문자열을 윈도우 폴더명으로 쓸 수 있게 정리한다.
+
+    주제는 topics.ts 에서 오는 한국어 키워드지만, 사용자가 임의 문자열을 보낼 수도 있어
+    경로 구분자·예약문자를 제거한다. 전부 걸러져 비면 호출부가 계절 기본값을 쓰도록 빈 문자열을 돌려준다.
+    """
+    cleaned = "".join(" " if c in _FOLDER_FORBIDDEN else c for c in name)
+    cleaned = " ".join(cleaned.split()).strip(" .")
+    return cleaned[:60]
 
 
 def _unique_folder(base_dir: str, name: str) -> str:
@@ -133,22 +149,30 @@ _SEASON_BY_MONTH = {12: "겨울", 1: "겨울", 2: "겨울", 3: "봄", 4: "봄", 
                     6: "여름", 7: "여름", 8: "여름", 9: "가을", 10: "가을", 11: "가을"}
 
 
-def run_pipeline(job: dict, items: list[dict], topic: str | None = None) -> None:
+def run_pipeline(
+    job: dict,
+    items: list[dict],
+    topic: str | None = None,
+    topic_note: str | None = None,
+) -> None:
     """선택 상품으로 카드뉴스를 생성한다.
 
     운영에서는 POST /api/selections 가 이 함수를 스레드로 띄우고,
     테스트에서는 (모듈 레벨 reader/copywriter/renderer 를 목 처리한 뒤)
     스레드를 join 하거나 이 함수를 직접 호출해 동기적으로 검증할 수 있다.
+
+    topic 은 대시보드 상단 주제 선택기에서 고른 트렌드 키워드다. 카피 주제이자
+    결과 폴더명이 된다. topic_note 는 그 주제가 왜 지금 유행인지에 대한 한 줄로,
+    카피라이터가 카드 정보 블록을 쓸 때 근거로 쓴다.
     """
     try:
         jobs.set_status(job, "문구 생성 중")
         season = _SEASON_BY_MONTH.get(datetime.now().month, "여름")
-        if topic is None:
-            topic = f"{season} 무드"  # 랭킹 키워드 대신 계절·무드 주제
+        topic = (topic or "").strip() or f"{season} 무드"  # 미선택 시 계절 기본값
         assets_dir = os.path.join(CARDNEWS_BASE_DIR, "_assets", job["id"])
         products = reader.load_products(items, assets_dir)
         api_key = os.environ.get("ANTHROPIC_API_KEY")
-        copy = copywriter.write_copy(products, topic, api_key=api_key)
+        copy = copywriter.write_copy(products, topic, api_key=api_key, topic_note=topic_note)
 
         # 마지막(CTA) 카드는 항상 무한도전 짤 (KEYWORD-POLICY.md). 짤이 없으면 기존 폴백 유지.
         zzal = _latest_zzal()
@@ -156,7 +180,10 @@ def run_pipeline(job: dict, items: list[dict], topic: str | None = None) -> None
             copy["cta"]["image_path"] = zzal
 
         jobs.set_status(job, "렌더 중")
-        folder_name = f"{datetime.now().strftime('%Y%m%d')} {season}무드"
+        # 폴더명 = "YYYYMMDD 키워드" (KEYWORD-POLICY). 주제를 고르지 않으면 계절 기본값이라
+        # 폴더명이 매번 겹친다 — 그래서 대시보드가 주제 미선택을 경고한다.
+        folder_part = _safe_folder_part(topic) or f"{season}무드"
+        folder_name = f"{datetime.now().strftime('%Y%m%d')} {folder_part}"
         folder = _unique_folder(CARDNEWS_BASE_DIR, folder_name)
         images = renderer.render(copy, products, folder)
 
@@ -193,7 +220,9 @@ def run_publish(job: dict, folder: str) -> None:
 def post_selections(body: SelectionsBody, request: Request):
     _reject_untrusted_origin(request)
     job = jobs.create_job()
-    t = threading.Thread(target=run_pipeline, args=(job, body.items), daemon=True)
+    t = threading.Thread(
+        target=run_pipeline, args=(job, body.items, body.topic, body.topicNote), daemon=True
+    )
     _THREADS[job["id"]] = t
     t.start()
     return {"job_id": job["id"], "preview_url": f"http://localhost:8787/preview/{job['id']}"}
