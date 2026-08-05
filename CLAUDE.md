@@ -24,14 +24,19 @@
   - `firebase deploy`, `firebase login`, 실제 Firestore 접속 금지 → 설정 파일만 작성/검증.
   - `ANTHROPIC_API_KEY`, Firebase 서비스 계정 등은 `.env.example`로만 문서화하고 커밋하지 않는다.
 
-## 디렉토리 구조 (목표)
+## 디렉토리 구조 (실제 — 2026-08-05 기준)
 ```
-frontend/          # React + Vite + TypeScript
-backend/           # FastAPI (Python 3.12)
-firebase.json      # Firestore + Hosting 설정
-.firebaserc
-firestore.rules
+crawler/           # 무신사·29CM 랭킹/후기 수집 → Firestore (매시 7분 cron) ✅ 가동 중
+pipeline/          # ★ 카드뉴스 생성 원클릭 앱 (127.0.0.1:8787, UI 는 /dashboard) — 주력
+frontend/          # React + Vite + TS. 랭킹 대시보드(활용) + 레거시 생성기
+backend/           # FastAPI (Python 3.12) — 초기 웹앱 API, 사실상 미사용
+scripts/           # post_ig.py (인스타 캐러셀 게시) — pipeline 이 재사용
+card-drafts/       # 렌더 템플릿. 현역은 uvparasol-insta.html 하나뿐
+CARD/zzal/         # CTA 카드용 짤 (수정일 최신 파일을 쓴다)
+firebase.json / .firebaserc / firestore.rules
 ```
+산출물·데이터는 저장소 밖에 있다 → `바탕화면\카드뉴스\YYYYMMDD 키워드\`.
+전체 지도는 [PROJECT-BRIEF.md](PROJECT-BRIEF.md).
 
 ## 실행/검증 명령
 프론트엔드:

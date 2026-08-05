@@ -74,7 +74,8 @@ cd crawler && ./.venv/Scripts/python.exe -m pytest -q   # 테스트 (네트워�
 cd pipeline && ../crawler/.venv/Scripts/python.exe app.py
 ```
 
-- 결과물 저장: `바탕화면\카드뉴스\YYYYMMDD 랭킹픽.jpg~N.jpg` + `caption.txt`
+- 결과물 저장: `바탕화면\카드뉴스\YYYYMMDD 키워드\1.jpg~N.jpg` + `caption.txt`
+  (예: `20260724 여름 슈즈`. 폴더명 키워드는 **항상 시즌성** — 랭킹 키워드 금지, [KEYWORD-POLICY.md](KEYWORD-POLICY.md) 참고)
 - 게시는 `scripts/post_ig.py` 재사용 (토큰: `카드뉴스\ig_api_token.txt`)
 - CORS 로 `https://fashion-cardnews.web.app` 에서 직접 호출 허용
 

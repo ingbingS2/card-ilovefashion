@@ -1,5 +1,10 @@
 # QA 보고서 — AI 카드뉴스 자동 생성기
 
+> ⚠️ **2026-07-17 시점 기록이다. 대상은 지금 거의 쓰지 않는 ① 초기 웹앱(`Generator.tsx` + `backend/`)이다.**
+> 실제 운영 라인(② `crawler/` → `pipeline/` → 인스타)은 이 보고서 범위 밖이며, 여기서 지적한
+> PNG 1080×1350 미달 이슈도 운영 라인에는 해당되지 않는다 (`pipeline/renderer.py` 가 자체 크롭한다).
+> 현재 구조는 [PROJECT-BRIEF.md](PROJECT-BRIEF.md) 를 볼 것.
+
 실제 브라우저(Playwright + Chromium)로 앱을 조작해 기능별로 검증한 결과입니다.
 단위 테스트가 아니라 **사용자가 실제로 클릭하는 경로**를 그대로 따라갔습니다.
 
@@ -83,7 +88,7 @@ SPEC 은 슬라이드를 **4:5, 1080×1350** 으로 내보내도록 정하고 �
 실제로는 화면에 렌더된 카드에 `pixelRatio: 3` 을 곱해 내보내는데,
 화면 카드 크기가 CSS 그리드(`repeat(auto-fill, minmax(260px,1fr))`)라 **뷰포트에 따라 변합니다.**
 
-`frontend/src/App.tsx:56`
+`frontend/src/Generator.tsx:56` (2026-07-21 Phase 2 에서 `App.tsx` → `Generator.tsx` 로 분리됨)
 ```ts
 const dataUrl = await toPng(node, { pixelRatio: 3, cacheBust: true });
 ```
