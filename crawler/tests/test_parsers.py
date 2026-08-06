@@ -58,8 +58,22 @@ def test_parse_cm29_best_normalizes():
     assert p["category_code"] is None or isinstance(p["category_code"], str)
     # 가격·할인율: saleRate 는 float 이므로 _to_int() 가 float 파싱해야 함
     assert p["discount_rate"] == 66
-    assert isinstance(p["price"], int) and p["price"] == 27500
+    # price 는 화면 표시가(displayPrice=20630) 여야 한다. sellPrice(27500) 를 쓰면
+    # originalPrice(60000)·saleRate(66%) 와 검산이 어긋난다 (실제 게시물 가격 오류 원인).
+    assert isinstance(p["price"], int) and p["price"] == 20630
     assert isinstance(p["original_price"], int) and p["original_price"] == 60000
+    # 검산: 표시가가 정가·할인율과 (반올림 오차 범위에서) 일치한다
+    for it in items:
+        expected = it["original_price"] * (100 - it["discount_rate"]) / 100
+        assert abs(it["price"] - expected) / it["original_price"] < 0.01
+
+
+def test_parse_cm29_best_price_falls_back_to_sell_price():
+    """displayPrice 가 없는 응답이면 sellPrice 로 폴백한다 (필드 부재 시 가격 유실 방지)."""
+    from parsers import parse_cm29_best
+    data = {"data": {"list": [{"itemId": 1, "itemInfo": {
+        "sellPrice": 27500, "originalPrice": 60000, "saleRate": 66.0}}]}}
+    assert parse_cm29_best(data)[0]["price"] == 27500
 
 
 def test_parse_cm29_best_empty():

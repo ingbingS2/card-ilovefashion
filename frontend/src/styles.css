@@ -40,7 +40,10 @@ body {
   margin: 0 0 24px;
 }
 
-.panel,
+/* 레거시 생성기(Generator)의 카드 컨테이너.
+   대시보드 상품 상세 드로어가 쓰는 `.panel`(아래 참고)과 이름이 겹쳐 있었는데,
+   드로어 규칙이 뒤에 와서 이겨 생성기 폼이 좁은 흰 박스로 깨졌다 → `.gen-panel` 로 분리. */
+.gen-panel,
 .result,
 .saved {
   background: var(--panel);

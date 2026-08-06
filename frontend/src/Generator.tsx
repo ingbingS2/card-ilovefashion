@@ -74,7 +74,7 @@ export default function Generator() {
 
   return (
     <>
-      <section className="panel">
+      <section className="gen-panel">
         <GeneratorForm onSubmit={handleGenerate} loading={loading} />
         {error && <p className="error">⚠️ {error}</p>}
       </section>

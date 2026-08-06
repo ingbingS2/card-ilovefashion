@@ -67,7 +67,11 @@ def parse_cm29_best(data: dict) -> list[dict]:
             "rank": i + 1,
             "brand": info.get("brandName") or props.get("brandName") or "",
             "name": info.get("productName") or "",
-            "price": _to_int(info.get("sellPrice")),
+            # 화면 표시가는 displayPrice 다. sellPrice 는 즉시할인 전 금액이라
+            # originalPrice·saleRate 와 검산이 어긋난다 (2026-08-06 확인 —
+            # 픽스처 3건 모두 originalPrice×(1-saleRate) ≒ displayPrice, sellPrice 는 불일치).
+            # 이 필드를 잘못 쓰면 카드에 실제와 다른 가격이 나간다. FINDINGS.md 참고.
+            "price": _to_int(info.get("displayPrice")) or _to_int(info.get("sellPrice")),
             "original_price": _to_int(info.get("originalPrice")),
             "discount_rate": _to_int(info.get("saleRate")),
             "review_score": round(float(score), 2) if score is not None else None,

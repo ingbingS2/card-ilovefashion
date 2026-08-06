@@ -99,12 +99,31 @@
   | 상품 URL | `item.itemUrl.webLink` (`https://product.29cm.co.kr/catalog/{itemId}`) |
   | 브랜드명 | `item.itemInfo.brandName` (또는 `item.itemEvent.eventProperties.brandName`) |
   | 상품명 | `item.itemInfo.productName` |
-  | 가격 | `item.itemInfo.originalPrice`(정가) / `displayPrice`(즉시할인가) / `sellPrice`(멤버십 등 추가할인가) / `saleRate`(할인율%) |
+  | 가격 | `item.itemInfo.originalPrice`(정가) / **`displayPrice`(화면 표시가 — 크롤러가 채택)** / `sellPrice`(즉시할인 전 금액, 표시가 아님) / `saleRate`(할인율%) |
   | 평점 | `item.itemInfo.reviewScore` (숫자, 5점 만점, 예: 5.0) |
   | 후기수 | `item.itemInfo.reviewCount` (숫자, 예: 3442) |
   | 썸네일 | `item.itemInfo.thumbnailUrl` |
   | 카테고리코드 | `item.itemEvent.eventProperties.{largeCategoryNo, largeCategoryName, middleCategoryNo, middleCategoryName, smallCategoryNo, smallCategoryName}` |
   - 무신사와 달리 평점·후기수가 이벤트 로그가 아닌 `itemInfo` 에 바로 노출되어 있어 필드 경로가 더 단순함.
+
+#### 🚨 가격 필드 정정 (2026-08-06)
+
+Phase 0 기록은 `displayPrice`를 "즉시할인가", `sellPrice`를 "멤버십 등 추가할인가"로 추정했는데
+**반대였다.** 실측 결과 **`displayPrice` 가 상품 페이지에 뜨는 최종 표시가**이고,
+`sellPrice` 는 그보다 **높은** 즉시할인 전 금액이다.
+
+| 픽스처 상품(itemId) | originalPrice | saleRate | 정가×(1-할인율) | displayPrice | sellPrice |
+|---|---|---|---|---|---|
+| 3867297 (Pajama Set) | 60,000 | 66% | 20,400 | **20,630** ✅ | 27,500 ❌ |
+| 4052450 (V-neck Knit) | 73,000 | 31% | 50,370 | **50,270** ✅ | 65,700 ❌ |
+| 3911359 (U-Neck Blouse) | 129,000 | 34% | 85,140 | **85,660** ✅ | 103,200 ❌ |
+
+- `itemEvent.eventProperties.price` 도 `displayPrice` 와 같은 값이다 (교차 확인용).
+- **영향**: 크롤러가 `sellPrice` 를 담고 있던 기간(2026-07-20 ~ 08-06)의 29CM `price` 는
+  전부 실제보다 높다. 그 데이터로 만든 카드에 틀린 가격이 나갔을 수 있다
+  (2026-08-05 실측 5건: 코즈넉 8,900 vs 실제 6,520, 컴포트랩 35,900 vs 32,310 등).
+  `crawler/out`·Firestore 의 **기존 스냅샷은 소급 보정되지 않는다** — 다음 크롤부터 정상값이 쌓인다.
+- 무신사는 `info.finalPrice` 가 표시가와 일치해 이 문제가 없다.
   - `data.pagination` = `{"page": 1, "size": 100, "hasNext": true}` (실측)
 
 ### 후기 엔드포인트
