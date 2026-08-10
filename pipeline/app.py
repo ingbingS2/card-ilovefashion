@@ -198,12 +198,19 @@ def run_pipeline(
         jobs.set_status(job, "실패", error=str(e) or "처리 실패")
         return
 
-    # 브라우저 자동 열기는 부가 기능일 뿐이라, try 밖에서 별도로 감싼다 — 이게
-    # 실패해도(예: 브라우저 없음) 이미 정상 완료된 잡을 "실패"로 되돌리면 안 된다.
-    try:
-        webbrowser.open(f"http://localhost:8787/preview/{job['id']}")
-    except Exception:
-        pass
+    # 미리보기 창 자동 열기는 기본으로 끈다 — 생성·재수정을 반복하면 탭이 계속 쌓인다
+    # (2026-08-06 사용자 지시). 주소는 아래 로그와 POST /api/selections 응답에 있으니
+    # 사용자가 이미 열어둔 탭을 새로고침하면 된다. 예전 동작이 필요하면 pipeline/.env 에
+    # PIPELINE_AUTO_OPEN=1 을 넣는다.
+    preview_url = f"http://localhost:8787/preview/{job['id']}"
+    print(f"미리보기 준비 완료: {preview_url}")
+    if os.environ.get("PIPELINE_AUTO_OPEN", "").strip().lower() in ("1", "true", "yes"):
+        # 자동 열기는 부가 기능일 뿐이라 try 밖에서 별도로 감싼다 — 이게 실패해도
+        # (예: 브라우저 없음) 이미 정상 완료된 잡을 "실패"로 되돌리면 안 된다.
+        try:
+            webbrowser.open(preview_url)
+        except Exception:
+            pass
 
 
 def run_publish(job: dict, folder: str) -> None:

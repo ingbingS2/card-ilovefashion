@@ -21,7 +21,7 @@ def prod(pid="1", rank=1, count=5, reviews=None):
 
 
 def test_fallback_structure_and_rules():
-    c = copywriter.fallback_copy([prod(), prod("2", rank=3, count=0, reviews=[])], "랭킹 픽")
+    c = copywriter.fallback_copy([prod(), prod("2", rank=3, count=0, reviews=[])], "여름 무드")
     assert set(c) == {"topic", "cover", "items", "cta", "caption"}
     assert len(c["items"]) == 2
     it = c["items"][0]
@@ -42,7 +42,7 @@ def test_fallback_structure_and_rules():
 def test_fallback_cm29_mall_name():
     p = prod()
     p["mall"] = "cm29"
-    c = copywriter.fallback_copy([p], "랭킹 픽")
+    c = copywriter.fallback_copy([p], "여름 무드")
     it = c["items"][0]
     assert "29CM" in it["meta"]
     assert "cm29" not in it["meta"]
@@ -99,7 +99,7 @@ def test_fallback_sp_skips_negative_reviews():
         {"score": 2, "text": "상품은 괜찮은데 cs랑 배송이 너무 불편해요 환불도 안 되고", "date": None, "likes": 50},
         {"score": 5, "text": "핏이 예쁘고 재질도 좋아서 매일 입어요", "date": None, "likes": 3},
     ])
-    c = copywriter.fallback_copy([p], "랭킹 픽")
+    c = copywriter.fallback_copy([p], "여름 무드")
     sp = c["items"][0]["sp"]
     assert "cs" not in sp.lower() and "불편" not in sp and "환불" not in sp
     assert "핏이 예쁘고" in sp  # 긍정 후기가 선택됨
@@ -108,7 +108,7 @@ def test_fallback_sp_skips_negative_reviews():
 def test_fallback_sp_no_positive_review_uses_feature_line():
     """긍정 후기가 하나도 없으면 후기 인용을 포기하고 상품 특징으로 폴백."""
     p = prod(reviews=[{"score": 1, "text": "배송 지연에 불량까지 최악이에요", "date": None, "likes": 9}])
-    c = copywriter.fallback_copy([p], "랭킹 픽")
+    c = copywriter.fallback_copy([p], "여름 무드")
     sp = c["items"][0]["sp"]
     assert "최악" not in sp and "불량" not in sp and "지연" not in sp
     assert "실제 후기" not in sp  # 후기 인용 안 함
@@ -211,6 +211,21 @@ def test_meta_shows_strikethrough_when_discounted():
     p["original_price"] = 88000
     c = copywriter.fallback_copy([p], "여름 무드", month=7)
     assert "<s>88,000원</s>" in c["items"][0]["meta"]
+
+
+def test_write_copy_default_topic_is_not_ranking_keyword():
+    """주제를 안 넘겨도 랭킹 키워드가 기본값으로 들어가지 않는다 (KEYWORD-POLICY 규칙 1)."""
+    c = copywriter.write_copy([prod()])  # api_key 없음 → 규칙 기반 폴백 경로
+    topic = c["topic"]
+    assert topic
+    for banned in ("랭킹", "베스트", "TOP", "오늘의 픽"):
+        assert banned not in topic
+    assert topic.endswith("무드")  # "{계절} 무드" — app.py 미선택 기본값과 같은 규칙
+
+
+def test_write_copy_blank_topic_falls_back_to_season_mood():
+    """공백만 넘어와도 계절 무드로 채운다 (빈 폴더명·빈 주제 방지)."""
+    assert copywriter.write_copy([prod()], "   ")["topic"].endswith("무드")
 
 
 def test_headline_from_note_short_and_long():

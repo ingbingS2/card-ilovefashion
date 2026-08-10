@@ -279,6 +279,17 @@ def _season(month: int) -> str:
     return _SEASON_BY_MONTH.get(month, "여름")
 
 
+def _default_topic() -> str:
+    """주제 미지정 시 기본값.
+
+    랭킹 키워드(랭킹 픽·베스트 등)는 KEYWORD-POLICY 위반이라 기본값으로도 쓰지 않는다.
+    app.py 가 주제 미선택 시 넣는 값("{계절} 무드")과 같은 규칙을 따른다.
+    """
+    from datetime import datetime
+
+    return f"{_season(datetime.now().month)} 무드"
+
+
 def _emphasize_tail(words: list[str]) -> str:
     """어절 목록의 뒤쪽을 <em> 로 강조하되, 한 글자만 홀로 강조되지 않게 한다.
 
@@ -428,10 +439,13 @@ def fallback_copy(products: list[dict], topic: str, month: int | None = None) ->
 
 def write_copy(
     products: list[dict],
-    topic: str = "랭킹 픽",
+    topic: str = "",
     api_key: str | None = None,
     topic_note: str | None = None,
 ) -> dict:
+    # 주제가 비었으면 계절 무드로 채운다 — 기본값이 곧 폴더명·카피 주제가 되므로
+    # 랭킹 키워드가 기본값으로 들어가면 정책 위반이 그대로 산출물에 나간다.
+    topic = (topic or "").strip() or _default_topic()
     if not api_key:
         return fallback_copy(products, topic)
     try:

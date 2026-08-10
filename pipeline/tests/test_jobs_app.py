@@ -168,6 +168,37 @@ def test_selections_without_topic_falls_back_to_season(monkeypatch, tmp_path):
     assert Path(jobs.JOBS[job_id]["folder"]).name.endswith("무드")
 
 
+def test_preview_window_does_not_open_by_default(monkeypatch, tmp_path):
+    """렌더가 끝나도 미리보기 창을 자동으로 띄우지 않는다 (수정할 때마다 탭이 쌓이는 것을 막는다)."""
+    seen: dict = {}
+    _stub_pipeline(monkeypatch, tmp_path, seen)
+    opened: list = []
+    monkeypatch.setattr(app_module.webbrowser, "open", lambda url, *a, **k: opened.append(url))
+    monkeypatch.delenv("PIPELINE_AUTO_OPEN", raising=False)
+
+    resp = client.post("/api/selections", json={"items": [{"mall": "musinsa", "product_id": "1"}]})
+    job_id = resp.json()["job_id"]
+    app_module._THREADS[job_id].join(timeout=5)
+
+    assert jobs.JOBS[job_id]["status"] == "미리보기 대기"
+    assert opened == []
+
+
+def test_preview_window_opens_when_opted_in(monkeypatch, tmp_path):
+    """PIPELINE_AUTO_OPEN=1 을 넣으면 예전처럼 미리보기 창을 띄운다."""
+    seen: dict = {}
+    _stub_pipeline(monkeypatch, tmp_path, seen)
+    opened: list = []
+    monkeypatch.setattr(app_module.webbrowser, "open", lambda url, *a, **k: opened.append(url))
+    monkeypatch.setenv("PIPELINE_AUTO_OPEN", "1")
+
+    resp = client.post("/api/selections", json={"items": [{"mall": "musinsa", "product_id": "1"}]})
+    job_id = resp.json()["job_id"]
+    app_module._THREADS[job_id].join(timeout=5)
+
+    assert opened == [f"http://localhost:8787/preview/{job_id}"]
+
+
 def test_selections_topic_with_path_chars_cannot_escape_folder(monkeypatch, tmp_path):
     """주제 문자열이 경로 구분자를 담고 있어도 카드뉴스 폴더 밖으로 나가지 않는다."""
     seen: dict = {}
