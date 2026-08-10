@@ -51,8 +51,11 @@
   .card.cover .kicker { font-size:14px; font-weight:800; color:var(--accent); letter-spacing:.14em; margin-bottom:10px; }
   .card.cover .sub { font-size:14.5px; font-weight:600; color:#55555a; margin:14px 0 0; line-height:1.6; }
   .card.cover .caption { align-items:flex-start; text-align:left; }
-  /* 표지는 첫 상품 카드와 같은 원본이어도 상반신 줌 크롭으로 차별화한다 (2026-07-28 디자인 피드백) */
-  .card.cover .photo img { object-fit:cover; transform:scale(1.45); transform-origin:50% 20%; }
+  /* 표지 사진은 확대하지 않는다 — 상품 카드와 똑같이 원본 그대로 보여준다 (2026-08-10 피드백).
+     예전엔 표지·2번 카드가 같은 원본일 때 구분하려고 scale(1.45) 줌 크롭을 걸었는데,
+     확대 때문에 화질이 뭉개지고 구도가 잘려 표지가 오히려 안 예뻐졌다.
+     표지 차별화는 줌이 아니라 **다른 사진을 지정**하는 방식으로 한다
+     (renderer 가 copy["cover"]["image_path"] 를 지원한다 — KEYWORD-POLICY 디자인 규칙 1). */
 
   /* CTA */
   .card.cta .title { font-size:38px; line-height:1.28; letter-spacing:-.8px; }
