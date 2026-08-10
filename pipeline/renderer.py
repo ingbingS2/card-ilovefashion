@@ -72,7 +72,9 @@ def build_html(copy: dict, products: list[dict]) -> str:
         "kind": "cover",
         "img": cover_key,
         "lab": "표지",
-        "pw": 300,
+        # 표지 사진 폭은 상품 카드와 같은 330 — 300이면 표지만 사진이 작아 보여
+        # 첫 장이 어색해진다 (2026-08-10 사용자 피드백).
+        "pw": 330,
         "kicker": cover["kicker"],
         "title": cover["title"],
         "sub": cover["sub"],
