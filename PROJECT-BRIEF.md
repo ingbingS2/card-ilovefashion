@@ -71,7 +71,7 @@
 | `frontend/` | 랭킹 대시보드 + (레거시)생성기 SPA | `npm run dev` (5173) | ✅ 대시보드만 활용 |
 | `backend/` | Claude 카드뉴스 생성 API | `uvicorn app.main:app` (8000) | ⚠️ 사실상 미사용 |
 | `scripts/` | 인스타 게시 (`post_ig.py`) | `python post_ig.py "<폴더명>"` | ✅ pipeline이 재사용 |
-| `card-drafts/` | **렌더 템플릿**(`uvparasol-insta.html`) + 과거 초안 | — | ✅ 템플릿은 현역 |
+| `card-drafts/` | **렌더 템플릿**(`uvparasol-insta.html`) — 2026-08-11 부터 이 파일 하나뿐 | — | ✅ 현역 |
 | `CARD/zzal/` | CTA 카드용 무한도전 짤 | — | ✅ **수정일 최신 파일**을 씀 |
 | `docs/`, `.superpowers/sdd/` | Phase 0~3 계획서·작업 리포트 | — | 이력 |
 
@@ -168,13 +168,16 @@ export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/L
 - Firebase 웹 API 키가 `frontend/src/firestore.ts`, `public/rankings.html`, `pipeline/reader.py` **3곳**에 하드코딩.
 - 모델 ID `claude-sonnet-5`가 `backend/app/config.py`, `pipeline/copywriter.py`, `pipeline/qa.py`, `.env.example`에 분산 하드코딩.
 **템플릿 (card-drafts/)**
-- **현역 템플릿은 `uvparasol-insta.html` 하나뿐이다.** 같은 C안 템플릿이 5개 파일에 복붙 복제돼 있고, 2026-07-28 디자인 피드백(표지 줌 크롭 `scale(1.45)`, CTA 짤 확대 `pw 400`)이 **uvparasol에만** 반영돼 이미 갈라졌다. 디자인을 고치려면 렌더러가 쓰는 uvparasol을 고쳐야 한다.
-- `version-b-vendors.html`은 업체명이 전부 `업체명 ①` **플레이스홀더** — 그대로 쓰면 허위 정보다.
-  (2026-08-11: 파일 맨 위에 경고 배너를 붙였다. 플레이스홀더 자체는 그대로다.)
-  `cards.js`의 핸들은 **2026-08-11 `@i_s2_fashion` 으로 정정**했다(예전 `@your_trend`).
-- ~~`ably-parasol-insta.html` / `uvparasol-insta.html` / `rehearsal_build.html`의 `<title>`이 전부 "카시오 시계"~~
-  → **2026-08-11 해소**. (`casio-insta.html` 은 실제 카시오 초안이라 그대로 둔다.)
-- `.superpowers/rehearsal_build.html`은 리허설 산출물인데 랭킹 키워드("오늘의 픽, 가방 랭킹", "랭킹 1위")를 쓰고 후기를 원문 그대로 인용했다. **참고용으로 쓰면 안 된다** (정책 위반 샘플).
+- **`card-drafts/` 에는 이제 `uvparasol-insta.html` 하나만 있다** (2026-08-11 정리).
+  복붙 복제본 4개, 과거 초안(롱스커트·가방·슬라임·카시오), 공통 자산(`cards.js`·`pixel.css`),
+  소재 이미지 폴더 `CARD/1`~`CARD/4` 를 전부 삭제했다 — 코드 참조 0건이었다.
+  덩달아 아래 함정들도 같이 사라졌다: 5중 복붙으로 디자인이 갈라지던 문제,
+  `version-b-vendors.html` 의 `업체명 ①` 플레이스홀더(허위 정보 위험),
+  `cards.js` 의 `@your_trend` 가짜 핸들, `<title>` 에 남아 있던 "카시오 시계",
+  정책 위반 샘플이던 `.superpowers/rehearsal_build.html`(랭킹 키워드 + 후기 원문 인용).
+  **디자인 수정은 이제 고를 것 없이 `uvparasol-insta.html` 하나다.** 되살리려면 git 히스토리에서.
+- 템플릿을 고칠 때 `var IMAGES = {` / `var META   = {` / `var CARDS  = [` 표기(공백 포함)를
+  바꾸면 렌더가 앵커를 못 찾아 실패한다 — 자세한 건 `card-drafts/README.md`.
 
 **문서 vs 현실**
 - ~~`RESULT-TEMPLATE.md`가 "48시간 측정" 구 정책 그대로~~ → **2026-08-05 해소**: +72h·도달 지표·실험 #4 반영.
@@ -187,7 +190,9 @@ export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/L
 - `.superpowers/sdd/task-N-report.md`는 **페이즈 구분 없이 파일명이 재사용·덮어쓰기**됐다. 파일명만으로 어느 페이즈 기록인지 알 수 없다.
 - 계획서상 "Phase 4(실전 게시) 미착수"로 적혀 있으나 **실제로는 이미 여러 건 게시됐다**(예: 20260728 여름 티셔츠 → 인스타 permalink 존재). 진행 상태는 계획서가 아니라 `바탕화면\카드뉴스\*\result.md`로 판단할 것.
 - 스펙이 규정한 Firestore `selections` 컬렉션은 **구현되지 않았다.** 프론트가 localhost:8787로 직접 POST하고 잡은 인메모리에만 있다 → "실패 단계부터 재시도"는 불가능.
-- Firebase 웹 API 키는 `.superpowers/webapp_config.json`까지 포함해 **4곳**에 커밋돼 있다.
+- Firebase 웹 API 키는 ~~4곳~~ → **3곳**에 커밋돼 있다 (`frontend/src/firestore.ts`,
+  `frontend/public/rankings.html`, `pipeline/reader.py`). 2026-08-11 에 `.superpowers/webapp_config.json`
+  을 삭제해 한 곳이 줄었다. 남은 3곳은 공개 웹 API 키라 Firestore 규칙으로 보호하는 것이 정상 구조다.
 
 ---
 
