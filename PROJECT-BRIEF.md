@@ -138,7 +138,11 @@ export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/L
 ## 8. 알려진 함정 (밟지 말 것)
 
 **운영**
-- `ANTHROPIC_API_KEY`가 없으면 copywriter가 **로그 한 줄 없이** 규칙 기반 폴백으로 떨어진다. 헤드라인이 몇 종류로만 반복되면 이걸 의심할 것. 키가 없으면 **에이전트가 직접 카피를 쓴다.**
+- ~~`ANTHROPIC_API_KEY`가 없으면 copywriter가 **로그 한 줄 없이** 규칙 기반 폴백으로 떨어진다~~
+  → **2026-08-11 해소**: 키 없음·Claude 호출 실패 모두 `경고: …` 한 줄을 찍는다. 폴백 자체는 그대로이므로
+  **키가 없으면 여전히 에이전트가 직접 카피를 쓴다.** 헤드라인이 몇 종류로만 반복되면 앱 콘솔의 경고를 먼저 볼 것.
+  같은 날 `max_tokens` 도 4096 → 16000, `effort=low` 로 바꿨다 — claude-sonnet-5 는 사고(thinking)가 기본 적응형이라
+  4096 이면 사고에 다 쓰고 JSON 이 잘려 **성공 호출도 조용히 폴백으로 떨어질 수 있었다.**
 - ~~🚨 **크롤 데이터의 `price`가 29CM 실제 표시가와 다르다**~~ → **2026-08-06 원인 규명·수정 완료**.
   파서가 `itemInfo.sellPrice`(즉시할인 **전** 금액)를 담고 있었다. 실제 표시가는 **`displayPrice`** 이며,
   픽스처 3건 모두 `originalPrice×(1-saleRate) ≒ displayPrice` 로 검산이 맞는다 (`crawler/FINDINGS.md` 정정표).
@@ -147,8 +151,11 @@ export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/L
   그 기간 데이터로 카드를 만들 때와, 29CM 할인이 수시로 바뀌는 특성상 **게시 직전에는 여전히
   상품 페이지에서 실제 표시가를 확인할 것.** 무신사(`info.finalPrice`)는 원래 문제 없었다.
 - `pipeline/jobs.py`의 `JOBS`는 인메모리 dict. 서버 재시작 시 잡·선정 상품 데이터가 **소실**된다 → 나중에 가격 대조가 불가능해진다.
-- `renderer._crop_to_1080x1350`은 실패해도 `print` 한 줄 남기고 통과한다 → 규격 미달 이미지가 게시될 수 있다.
-- `/cardnews-files`가 카드뉴스 폴더 전체를 인증 없이 마운트한다. 그 폴더에 **인스타 토큰이 있다.** 127.0.0.1 바인딩이 유일한 방어선.
+- ~~`renderer._crop_to_1080x1350`은 실패해도 `print` 한 줄 남기고 통과한다~~ → **2026-08-11 해소**:
+  실패 시 예외를 던지고, 저장된 결과가 실제로 1080×1350 인지도 검사한다. 잡은 "실패"로 끝나므로 다시 돌리면 된다.
+- ~~`/cardnews-files`가 카드뉴스 폴더 전체를 인증 없이 마운트한다~~ → **2026-08-11 해소**: `StaticFiles` 마운트를
+  이미지 확장자(jpg/jpeg/png/webp)만 내보내는 라우트로 교체했고 경로 탈출(`../`)도 막는다.
+  `ig_api_token.txt`·`_qa.json` 은 이제 403. (127.0.0.1 바인딩은 그대로 유지)
 - 게시는 litterbox/uguu 무료 호스팅에 의존한다. 둘 다 죽으면 게시 불가 (2026-07-27 실장애 이력).
 
 **코드**
@@ -156,13 +163,17 @@ export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/L
 - ~~`frontend/src/styles.css`의 `.panel`이 두 번 정의돼 충돌~~ → **2026-08-06 해소**: 레거시 생성기
   컨테이너를 `.gen-panel` 로 분리했다(`Generator.tsx` + `styles.css`). `.panel` 은 이제 대시보드
   상품 상세 드로어 전용이다.
-- `selection.ts`의 `PIPELINE_URL`이 `http://localhost:8787` 하드코딩 → 배포본에서는 mixed-content로 항상 실패.
+- ~~`selection.ts`의 `PIPELINE_URL`이 `http://localhost:8787` 하드코딩~~ → **2026-08-11 완화**:
+  `VITE_PIPELINE_URL` 로 뺐다(미설정 시 기존 로컬 기본값). 배포본에서 쓰려면 https 주소를 넣어야 하는 것은 그대로다.
 - Firebase 웹 API 키가 `frontend/src/firestore.ts`, `public/rankings.html`, `pipeline/reader.py` **3곳**에 하드코딩.
 - 모델 ID `claude-sonnet-5`가 `backend/app/config.py`, `pipeline/copywriter.py`, `pipeline/qa.py`, `.env.example`에 분산 하드코딩.
 **템플릿 (card-drafts/)**
 - **현역 템플릿은 `uvparasol-insta.html` 하나뿐이다.** 같은 C안 템플릿이 5개 파일에 복붙 복제돼 있고, 2026-07-28 디자인 피드백(표지 줌 크롭 `scale(1.45)`, CTA 짤 확대 `pw 400`)이 **uvparasol에만** 반영돼 이미 갈라졌다. 디자인을 고치려면 렌더러가 쓰는 uvparasol을 고쳐야 한다.
-- `version-b-vendors.html`은 업체명이 전부 `업체명 ①` **플레이스홀더** — 그대로 쓰면 허위 정보다. `cards.js`의 핸들도 `@your_trend` 플레이스홀더(실제는 `@i_s2_fashion`).
-- `ably-parasol-insta.html` / `uvparasol-insta.html` / `rehearsal_build.html`의 `<title>`이 전부 "카시오 시계"로 남아 있다.
+- `version-b-vendors.html`은 업체명이 전부 `업체명 ①` **플레이스홀더** — 그대로 쓰면 허위 정보다.
+  (2026-08-11: 파일 맨 위에 경고 배너를 붙였다. 플레이스홀더 자체는 그대로다.)
+  `cards.js`의 핸들은 **2026-08-11 `@i_s2_fashion` 으로 정정**했다(예전 `@your_trend`).
+- ~~`ably-parasol-insta.html` / `uvparasol-insta.html` / `rehearsal_build.html`의 `<title>`이 전부 "카시오 시계"~~
+  → **2026-08-11 해소**. (`casio-insta.html` 은 실제 카시오 초안이라 그대로 둔다.)
 - `.superpowers/rehearsal_build.html`은 리허설 산출물인데 랭킹 키워드("오늘의 픽, 가방 랭킹", "랭킹 1위")를 쓰고 후기를 원문 그대로 인용했다. **참고용으로 쓰면 안 된다** (정책 위반 샘플).
 
 **문서 vs 현실**

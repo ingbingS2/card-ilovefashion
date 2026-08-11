@@ -463,3 +463,54 @@ def test_publish_rejects_foreign_origin(monkeypatch, tmp_path):
     resp = client.post(f"/api/jobs/{j['id']}/publish", headers={"Origin": "https://evil.example"})
     assert resp.status_code == 403
     assert called["n"] == 0
+
+
+def test_cardnews_files_serves_images(monkeypatch, tmp_path):
+    """대시보드 썸네일(이미지)은 그대로 내려가야 한다."""
+    monkeypatch.setattr(app_module, "CARDNEWS_BASE_DIR", str(tmp_path))
+    folder = tmp_path / "20260810 여름 긴바지"
+    folder.mkdir(parents=True)
+    (folder / "1.jpg").write_bytes(b"\xff\xd8\xff\xdb")  # JPEG 매직만 있으면 충분
+
+    resp = client.get("/cardnews-files/20260810 여름 긴바지/1.jpg")
+    assert resp.status_code == 200
+    assert resp.content == b"\xff\xd8\xff\xdb"
+
+
+def test_cardnews_files_blocks_non_image_files(monkeypatch, tmp_path):
+    """카드뉴스 폴더에는 인스타 장기 토큰(ig_api_token.txt)이 같이 들어 있다.
+    폴더를 통째로 마운트하면 인증 없이 토큰이 내려가므로, 이미지가 아닌 파일은 거부한다."""
+    monkeypatch.setattr(app_module, "CARDNEWS_BASE_DIR", str(tmp_path))
+    (tmp_path / "ig_api_token.txt").write_text("SECRET-TOKEN", encoding="utf-8")
+    (tmp_path / "_qa.json").write_text("[]", encoding="utf-8")
+
+    for name in ("ig_api_token.txt", "_qa.json"):
+        resp = client.get(f"/cardnews-files/{name}")
+        assert resp.status_code == 403, name
+        assert "SECRET-TOKEN" not in resp.text
+
+
+def test_cardnews_files_blocks_path_traversal(monkeypatch, tmp_path):
+    """../ 로 카드뉴스 폴더 밖(예: 저장소·홈 디렉토리)을 읽지 못한다."""
+    base = tmp_path / "카드뉴스"
+    base.mkdir()
+    (tmp_path / "outside.jpg").write_bytes(b"\xff\xd8")
+    monkeypatch.setattr(app_module, "CARDNEWS_BASE_DIR", str(base))
+
+    # URL 정규화로 클라이언트가 ../ 를 미리 지워버릴 수 있어, 핸들러를 직접도 확인한다.
+    resp = client.get("/cardnews-files/../outside.jpg")
+    assert resp.status_code in (403, 404)
+    assert resp.content != b"\xff\xd8"
+
+    import pytest
+    from fastapi import HTTPException
+
+    with pytest.raises(HTTPException) as exc:
+        app_module.get_cardnews_file("../outside.jpg")
+    assert exc.value.status_code == 403
+
+
+def test_selections_rejects_empty_items():
+    """상품을 하나도 안 고르고 제출하면 렌더 단계까지 가지 않고 바로 거부한다."""
+    resp = client.post("/api/selections", json={"createdAt": "2026-08-11", "items": []})
+    assert resp.status_code == 400

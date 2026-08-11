@@ -20,7 +20,6 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -226,6 +225,10 @@ def run_publish(job: dict, folder: str) -> None:
 @app.post("/api/selections")
 def post_selections(body: SelectionsBody, request: Request):
     _reject_untrusted_origin(request)
+    if not body.items:
+        # 빈 선택으로 잡을 띄우면 썸네일까지 받아온 뒤 렌더 단계에서야 터진다.
+        # 여기서 바로 막아 대시보드가 이유를 보여줄 수 있게 한다.
+        raise HTTPException(status_code=400, detail="선택된 상품이 없습니다")
     job = jobs.create_job()
     t = threading.Thread(
         target=run_pipeline, args=(job, body.items, body.topic, body.topicNote), daemon=True
@@ -340,8 +343,29 @@ def get_file(job_id: str, name: str):
 DASHBOARD_FILE = os.path.join(CARDNEWS_BASE_DIR, "_dashboard.html")
 
 # 대시보드 썸네일(카드뉴스 폴더의 1.jpg 등)을 서버 모드에서도 쓸 수 있게 서빙.
-if os.path.isdir(CARDNEWS_BASE_DIR):
-    app.mount("/cardnews-files", StaticFiles(directory=CARDNEWS_BASE_DIR), name="cardnews-files")
+# StaticFiles 로 카드뉴스 폴더를 통째로 마운트하면 같은 폴더에 있는
+# ig_api_token.txt(인스타 장기 토큰)·_qa.json 까지 인증 없이 내려간다.
+# 대시보드가 실제로 쓰는 건 썸네일 이미지뿐이므로 이미지 확장자만 내보낸다.
+_CARDNEWS_IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".webp")
+
+
+@app.get("/cardnews-files/{path:path}")
+def get_cardnews_file(path: str):
+    base = Path(CARDNEWS_BASE_DIR).resolve()
+    try:
+        target = (base / path).resolve()
+    except OSError:
+        raise HTTPException(status_code=400, detail="잘못된 경로입니다")
+
+    # 경로 탈출(../, 심볼릭 링크)로 카드뉴스 폴더 밖을 읽는 것을 막는다.
+    if not target.is_relative_to(base):
+        raise HTTPException(status_code=403, detail="허용되지 않은 경로입니다")
+    if target.suffix.lower() not in _CARDNEWS_IMAGE_EXTS:
+        raise HTTPException(status_code=403, detail="이미지 파일만 제공합니다")
+    if not target.is_file():
+        raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다")
+
+    return FileResponse(target)
 
 
 class QABody(BaseModel):

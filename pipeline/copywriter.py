@@ -71,7 +71,12 @@ def _call_claude(
     )
     resp = client.messages.create(
         model="claude-sonnet-5",
-        max_tokens=4096,
+        # max_tokens 는 사고(thinking) 토큰까지 포함한 상한이다. claude-sonnet-5 는
+        # thinking 을 안 켜도 기본이 적응형(adaptive)이라, 4096 이면 사고에 다 쓰고
+        # JSON 이 중간에서 잘려 파싱 실패 → 조용히 규칙 기반 폴백으로 떨어졌다.
+        # 상한을 넉넉히 주고 effort 를 낮춰 카피 생성에 토큰이 가게 한다.
+        max_tokens=16000,
+        output_config={"effort": "low"},
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_content}],
     )
@@ -447,6 +452,10 @@ def write_copy(
     # 랭킹 키워드가 기본값으로 들어가면 정책 위반이 그대로 산출물에 나간다.
     topic = (topic or "").strip() or _default_topic()
     if not api_key:
+        # 폴백은 조용히 일어나면 안 된다 — 헤드라인이 몇 종류로만 반복되는 원인이
+        # 대부분 이것인데, 로그가 없으면 원인을 못 찾는다 (PROJECT-BRIEF 함정 참고).
+        print("경고: ANTHROPIC_API_KEY 가 없어 규칙 기반 폴백 카피를 씁니다 "
+              "— 게시 전 에이전트가 카피를 다시 써야 합니다")
         return fallback_copy(products, topic)
     try:
         text = _call_claude(products, topic, api_key, topic_note)
@@ -454,5 +463,7 @@ def write_copy(
         if len(data["items"]) != len(products):
             raise ValueError("items 개수가 상품 개수와 다름")
         return data
-    except Exception:
+    except Exception as e:
+        print(f"경고: Claude 카피 생성 실패({type(e).__name__}: {e}) "
+              "— 규칙 기반 폴백 카피를 씁니다")
         return fallback_copy(products, topic)

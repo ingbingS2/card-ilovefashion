@@ -37,18 +37,59 @@ def test_build_html_card_count():
     assert cards[1]["prod"] == "브랜드 · <b>상품</b>"
 
 
+def _fake_shots(html, n_cards, out_dir):
+    """스크린샷 대신 실제 JPEG 를 써 둔다 (크롭 보정이 진짜로 돌아야 하므로)."""
+    from PIL import Image
+
+    paths = []
+    for i in range(n_cards):
+        p = Path(out_dir) / f"{i+1}.jpg"
+        Image.new("RGB", (1080, 1400), (200, 200, 200)).save(p, "JPEG")
+        paths.append(str(p))
+    return paths
+
+
 def test_render_writes_numbered_jpgs(monkeypatch, tmp_path):
-    def fake_shots(html, n_cards, out_dir):
+    from PIL import Image
+
+    monkeypatch.setattr(renderer, "_screenshot_cards", _fake_shots)
+    out = renderer.render(copy2(), prods(), str(tmp_path))
+    assert [Path(p).name for p in out] == ["1.jpg", "2.jpg", "3.jpg"]
+    # 규격(1080x1350)으로 보정되어 저장돼야 한다
+    for p in out:
+        with Image.open(p) as img:
+            assert img.size == (1080, 1350)
+
+
+def test_render_fails_loudly_when_crop_fails(monkeypatch, tmp_path):
+    """크롭 보정에 실패하면 조용히 넘기지 않고 예외로 알린다.
+
+    예전에는 경고만 찍고 통과시켜, 규격 미달 이미지가 그대로 인스타 게시까지
+    흘러갈 수 있었다 (게시는 되돌릴 수 없다).
+    """
+    import pytest
+
+    def broken_shots(html, n_cards, out_dir):
         paths = []
         for i in range(n_cards):
             p = Path(out_dir) / f"{i+1}.jpg"
-            p.write_bytes(b"JPG")
+            p.write_bytes(b"NOT-A-JPEG")   # Pillow 가 못 여는 손상 파일
             paths.append(str(p))
         return paths
 
-    monkeypatch.setattr(renderer, "_screenshot_cards", fake_shots)
-    out = renderer.render(copy2(), prods(), str(tmp_path))
-    assert [Path(p).name for p in out] == ["1.jpg", "2.jpg", "3.jpg"]
+    monkeypatch.setattr(renderer, "_screenshot_cards", broken_shots)
+    with pytest.raises(RuntimeError, match="크롭 보정 실패"):
+        renderer.render(copy2(), prods(), str(tmp_path))
+
+
+def test_build_html_rejects_empty_products():
+    """상품이 하나도 없으면 IndexError 대신 원인이 보이는 메시지로 실패한다."""
+    import pytest
+
+    c = copy2()
+    c["items"] = []
+    with pytest.raises(ValueError, match="선택된 상품이 없습니다"):
+        renderer.build_html(c, [])
 
 
 def test_render_requires_cover_and_cta(tmp_path):
@@ -71,7 +112,7 @@ def test_build_html_escapes_special_chars_for_js():
     assert "</script>" not in block   # <\/script> 로 이스케이프됨
     import json as _json
     # 블록이 유효한 JSON 으로 다시 파싱되어야 함 (JS 로도 유효)
-    _json.loads(block.replace("<\/", "</"))
+    _json.loads(block.replace(r"<\/", "</"))
 
 
 def test_build_html_raises_when_template_anchor_missing(monkeypatch, tmp_path):

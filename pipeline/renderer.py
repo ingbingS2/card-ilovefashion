@@ -43,6 +43,11 @@ def _image_meta(image_path: str | None) -> dict:
 
 def build_html(copy: dict, products: list[dict]) -> str:
     """템플릿의 IMAGES/META/CARDS 블록을 copy·products 데이터로 교체한다."""
+    if not products:
+        # 아래에서 keys[0] 을 쓰므로 빈 목록이면 IndexError 로 터진다.
+        # 원인을 알 수 있는 메시지로 바꿔 잡 실패 사유가 그대로 보이게 한다.
+        raise ValueError("선택된 상품이 없습니다 — 카드뉴스를 만들 수 없습니다")
+
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
 
     keys = [f"p{i}" for i in range(len(products))]
@@ -149,7 +154,12 @@ def build_html(copy: dict, products: list[dict]) -> str:
 
 
 def _crop_to_1080x1350(path: str) -> None:
-    """스크린샷을 1080x1350 으로 중앙 크롭 보정한다. 손상된 파일은 조용히 건너뛴다."""
+    """스크린샷을 1080x1350 으로 중앙 크롭 보정한다.
+
+    실패하면 예외를 던진다 — 예전에는 경고만 찍고 통과시켰는데, 그러면 규격 미달
+    이미지가 그대로 게시까지 흘러간다(인스타 게시는 되돌릴 수 없다). 여기서 실패하면
+    잡이 "실패"로 끝나고 사용자가 다시 돌리면 되므로, 조용히 넘기는 쪽이 더 위험하다.
+    """
     try:
         with Image.open(path) as img:
             img = img.convert("RGB")
@@ -163,7 +173,13 @@ def _crop_to_1080x1350(path: str) -> None:
             img = img.crop((left, top, left + target_w, top + target_h))
             img.save(path, "JPEG", quality=92)
     except Exception as e:
-        print(f"경고: 크롭 보정 실패({path}): {e} — 원본 크기 유지")
+        raise RuntimeError(f"크롭 보정 실패({path}): {e}") from e
+
+    # 저장된 결과가 실제로 규격을 만족하는지 확인한다 (Pillow 버전/모드 차이로
+    # 위 계산이 어긋나도 규격 미달본이 게시로 넘어가지 않게 하는 마지막 방어선).
+    with Image.open(path) as saved:
+        if saved.size != (1080, 1350):
+            raise RuntimeError(f"크롭 후 크기가 1080x1350 이 아닙니다({path}): {saved.size}")
 
 
 def render(copy: dict, products: list[dict], out_dir: str) -> list[str]:

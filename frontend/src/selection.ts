@@ -1,7 +1,11 @@
 // 상품 선택 상태 + Phase 3 로컬 파이프라인 연동 (POST localhost:8787)
 import type { RankItem } from "./rankTypes";
 
-const PIPELINE_URL = "http://localhost:8787/api/selections";
+// 로컬 파이프라인 앱 주소. 배포본(https)에서 http://localhost 로 POST 하면
+// mixed-content 로 브라우저가 막으므로, 환경에 따라 바꿀 수 있게 env 로 뺀다
+// (frontend/.env.example 의 VITE_PIPELINE_URL). 미설정 시 기존 로컬 기본값.
+const PIPELINE_URL =
+  import.meta.env.VITE_PIPELINE_URL || "http://localhost:8787/api/selections";
 
 export const selKey = (item: RankItem): string => `${item.mall}_${item.product_id}`;
 
