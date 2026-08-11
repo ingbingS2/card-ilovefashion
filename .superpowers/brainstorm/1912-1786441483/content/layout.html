@@ -1,0 +1,160 @@
+<h2>데이터랩 형식을 우리 데이터로 옮기면</h2>
+<p class="subtitle">둘 다 데이터랩 뼈대(필터 → 순위 → 추이)를 따릅니다. 차이는 <b>무엇을 화면 주인공으로 두느냐</b>입니다.</p>
+
+<div class="options" style="margin-bottom:28px">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>데이터랩 그대로 — 차트가 주인공</h3>
+      <p>큰 추이 그래프 옆에 순위 리스트. 데이터랩 쇼핑인사이트와 가장 비슷합니다.</p>
+
+      <div class="mockup" style="margin-top:14px">
+        <div class="mockup-header">키워드 · fashion-cardnews.web.app</div>
+        <div class="mockup-body" style="font-size:12px">
+
+          <div class="mock-nav" style="margin-bottom:10px">랭킹 &nbsp;|&nbsp; <b>키워드</b></div>
+
+          <div style="border:1px solid #d8d8de;border-radius:6px;padding:10px;margin-bottom:12px;background:#fafafb">
+            <div class="label">분야</div>
+            <div style="margin:4px 0 8px">
+              <span style="background:#111;color:#fff;padding:3px 9px;border-radius:11px">전체</span>
+              <span style="padding:3px 9px">상의</span><span style="padding:3px 9px">아우터</span>
+              <span style="padding:3px 9px">바지</span><span style="padding:3px 9px">원피스·스커트</span>
+              <span style="padding:3px 9px">가방</span><span style="padding:3px 9px">신발</span>
+            </div>
+            <div class="label">기간</div>
+            <div style="margin:4px 0 8px">
+              <span style="background:#111;color:#fff;padding:3px 9px;border-radius:11px">최근 1주</span>
+              <span style="padding:3px 9px">1개월</span><span style="padding:3px 9px">3개월</span>
+            </div>
+            <div class="label">소스</div>
+            <div style="margin:4px 0">
+              <span style="background:#111;color:#fff;padding:3px 9px;border-radius:11px">전체</span>
+              <span style="padding:3px 9px">네이버</span><span style="padding:3px 9px">무신사</span>
+              <span style="padding:3px 9px">29CM</span>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px">
+            <div style="flex:1.7;border:1px solid #d8d8de;border-radius:6px;padding:10px">
+              <div class="label">가디건 · 검색·판매 추이</div>
+              <div style="height:150px;position:relative;margin-top:8px;border-bottom:1px solid #ddd;border-left:1px solid #ddd">
+                <svg viewBox="0 0 300 140" style="width:100%;height:100%">
+                  <polyline points="4,120 46,112 88,96 130,84 172,58 214,44 256,22 296,14"
+                            fill="none" stroke="#ff3366" stroke-width="2.5"/>
+                  <polyline points="4,128 46,124 88,122 130,110 172,104 214,88 256,80 296,66"
+                            fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="4 3"/>
+                </svg>
+              </div>
+              <div style="margin-top:7px;color:#777">
+                <span style="color:#ff3366">━</span> 네이버 검색지수 &nbsp;
+                <span style="color:#4a90d9">┅</span> 랭킹 노출 상품 수
+              </div>
+            </div>
+
+            <div style="flex:1;border:1px solid #d8d8de;border-radius:6px;padding:10px">
+              <div class="label">종합 키워드 순위</div>
+              <div style="margin-top:8px;line-height:2.0">
+                <div><b>1</b> 가디건 <span style="color:#0a0">▲12</span><br>
+                  <span style="font-size:10px;color:#888">네이버·무신사·29CM</span></div>
+                <div><b>2</b> 린넨 <span style="color:#0a0">▲8</span><br>
+                  <span style="font-size:10px;color:#888">네이버·무신사</span></div>
+                <div><b>3</b> 시어 <span style="color:#0a0">▲5</span><br>
+                  <span style="font-size:10px;color:#888">무신사·29CM</span></div>
+                <div style="color:#aaa">4 워시드진 · 5 발레코어 …</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>순위가 주인공 — 차트는 눌렀을 때</h3>
+      <p>순위 목록을 넓게 펴서 소스별 위치를 한눈에 대조합니다. 키워드를 누르면 아래에 추이가 펼쳐집니다.</p>
+
+      <div class="mockup" style="margin-top:14px">
+        <div class="mockup-header">키워드 · fashion-cardnews.web.app</div>
+        <div class="mockup-body" style="font-size:12px">
+
+          <div class="mock-nav" style="margin-bottom:10px">랭킹 &nbsp;|&nbsp; <b>키워드</b></div>
+
+          <div style="margin-bottom:10px">
+            <span style="background:#111;color:#fff;padding:3px 9px;border-radius:11px">전체</span>
+            <span style="padding:3px 9px">상의</span><span style="padding:3px 9px">아우터</span>
+            <span style="padding:3px 9px">바지</span><span style="padding:3px 9px">가방</span>
+            <span style="padding:3px 9px">신발</span>
+            <span style="float:right;color:#888">최근 1주 ▾</span>
+          </div>
+
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <tr style="border-bottom:2px solid #333;color:#666">
+              <th style="text-align:left;padding:6px 4px">#</th>
+              <th style="text-align:left">키워드</th>
+              <th>네이버</th><th>무신사</th><th>29CM</th>
+              <th style="text-align:right">변동</th>
+            </tr>
+            <tr style="border-bottom:1px solid #eee;background:#fffbe8">
+              <td style="padding:7px 4px"><b>1</b></td>
+              <td><b>가디건</b></td>
+              <td align="center">3위</td><td align="center">1위</td><td align="center">4위</td>
+              <td align="right" style="color:#0a0"><b>▲12</b></td>
+            </tr>
+            <tr style="border-bottom:1px solid #eee">
+              <td style="padding:7px 4px">2</td><td><b>린넨</b></td>
+              <td align="center">7위</td><td align="center">5위</td><td align="center">—</td>
+              <td align="right" style="color:#0a0">▲8</td>
+            </tr>
+            <tr style="border-bottom:1px solid #eee">
+              <td style="padding:7px 4px">3</td><td><b>시어</b></td>
+              <td align="center">—</td><td align="center">9위</td><td align="center">6위</td>
+              <td align="right" style="color:#0a0">▲5</td>
+            </tr>
+            <tr style="border-bottom:1px solid #eee;color:#999">
+              <td style="padding:7px 4px">4</td><td>워시드진</td>
+              <td align="center">12위</td><td align="center">—</td><td align="center">—</td>
+              <td align="right" style="color:#c33">▼2</td>
+            </tr>
+          </table>
+
+          <div style="margin-top:10px;border:1px dashed #bbb;border-radius:6px;padding:10px;background:#fafafb">
+            <div class="label">▼ 가디건 — 눌러서 펼친 상세</div>
+            <div style="height:78px;margin-top:6px">
+              <svg viewBox="0 0 300 70" style="width:100%;height:100%">
+                <polyline points="4,60 46,55 88,47 130,40 172,27 214,20 256,10 296,6"
+                          fill="none" stroke="#ff3366" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <div style="color:#777">이 키워드를 가진 랭킹 상품 8개 · 평균 22위 → 11위</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pros-cons">
+  <div class="pros">
+    <h4>A안이 나은 경우</h4>
+    <ul>
+      <li>데이터랩과 거의 같은 인상 — 익숙합니다</li>
+      <li>추이(오르는 중인지)를 항상 보게 됩니다</li>
+      <li>키워드 하나를 깊게 볼 때 좋습니다</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h4>B안이 나은 경우</h4>
+    <ul>
+      <li>소스별 순위를 나란히 대조할 수 있습니다 — A안은 "네·무·29" 뱃지로만 보입니다</li>
+      <li>"어디서만 뜨는지"가 바로 읽힙니다 (예: 워시드진은 네이버만)</li>
+      <li>휴대폰에서 표가 더 잘 맞습니다</li>
+    </ul>
+  </div>
+</div>
