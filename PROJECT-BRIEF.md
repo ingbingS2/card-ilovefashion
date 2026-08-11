@@ -244,6 +244,7 @@ export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/L
 | 대시보드 UI | — | `frontend/src/Dashboard.tsx`, `styles.css` |
 | 게시 실패 | §8 함정 (토큰 만료·호스팅 장애) | `scripts/post_ig.py` |
 | 실험/성과 분석 | RESULT-TEMPLATE.md + 각 폴더 result.md | `바탕화면\카드뉴스\*\result.md` |
+| 브랜드 계정·태그 전략 | [BRAND-ROSTER.md](BRAND-ROSTER.md) | 캡션의 `📌 브랜드 계정` 목록 |
 
 ---
 
