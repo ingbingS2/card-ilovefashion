@@ -150,6 +150,32 @@ Phase 0 기록은 `displayPrice`를 "즉시할인가", `sellPrice`를 "멤버십
   | 작성자 | `item.userId` (마스킹됨, 예: `"ang*******"`) |
 - 집계값: `data.count`(=3443, 랭킹 응답의 reviewCount=3442와 거의 일치 — 실시간 변동 추정), `data.averagePoint`(=5.0)
 
+## 29CM 상품 검색 API (2026-08-25 확인) — 게시 직전 가격 재확인용
+
+랭킹 50위 밖 상품은 크롤 스냅샷에 없어 가격을 다시 볼 방법이 없었다. 검색 API 로 해결된다.
+
+- 핵심 URL: `GET https://search-api.29cm.co.kr/api/v4/products/search`
+- 파라미터: `keyword`(브랜드+상품명), `page`(1-base), `size`
+- 필요 헤더: **없음** (UA 만으로 200)
+- 필드 경로 (item = `data.products[]`):
+
+  | 항목 | 필드 |
+  |---|---|
+  | 상품ID | `itemNo` (= 랭킹 API 의 `itemId`) |
+  | 상품명 / 브랜드 | `itemName` / `frontBrandNameKor` |
+  | 정가 | `consumerPrice` |
+  | **표시가** | **`saleInfoV2.totalSellPrice`** |
+  | 할인율 | `saleInfoV2.totalSaleRate` (= `saleRate` + `couponSaleRate`) |
+  | 후기수 / 평점 | `reviewCount` / `reviewAveragePoint` |
+  | 품절 | `isSoldOut` |
+
+- ✅ **검산**: 누스 `3156398` 의 `totalSellPrice`(58,660)가 같은 시각 크롤 스냅샷의
+  `displayPrice`(58,660)와 일치했다 → `totalSellPrice` 를 표시가로 써도 된다.
+- `/api/v4/products` (search 없이)도 200 이지만 `data` 가 바로 배열이라 형태가 다르다.
+- ⚠️ **무신사 `goodsPrice.couponPrice` 는 쿠폰 다운로드가 필요한 값이다.** 몰 간 최저가를
+  비교할 땐 `salePrice`(표시가)끼리 비교할 것 — `couponPrice` 로 비교하면 무신사가
+  부당하게 싸 보인다 (2026-08-25 위띠아 건: salePrice 121,130 vs couponPrice 96,910).
+
 ## 29CM 카테고리 중분류 (2026-07-22 추가 실측)
 
 여성의류(large=268100100) 클릭 후 하위 카테고리를 누르면 POST 바디에
