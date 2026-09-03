@@ -45,7 +45,14 @@
 .card .over .title{font-size:30px;line-height:1.3;letter-spacing:-.3px;color:#fff}
 .card .over .title em{box-shadow:none;color:#ffe14d}
 .card .over .metarow{margin-top:12px;gap:10px}
-.card .over .pct{background:var(--accent);color:#fff;font-size:13px;font-weight:800;padding:5px 9px;border-radius:4px;line-height:1}
+.card .over .pricebox{margin-top:14px}
+.card .over .was{font-size:12px;font-weight:600;color:rgba(255,255,255,.62)}
+.card .over .was s{color:rgba(255,255,255,.62);margin-left:2px}
+.card .over .now{display:flex;align-items:baseline;gap:10px;margin-top:2px}
+.card .over .now b{font-size:24px;font-weight:800;letter-spacing:-.3px;color:#fff}
+.card .over .off{font-size:17px;font-weight:800;color:#ffe14d;letter-spacing:-.2px}
+.card .over .off i{font-style:normal;font-size:14px;margin-left:1px}
+.card .over .now .proof{margin-left:auto;align-self:center}
 .card .over .meta{font-size:14px;color:#fff}
 .card .over .meta s{color:rgba(255,255,255,.55)}
 .card .over .proof{background:rgba(255,255,255,.16);color:#fff;font-size:12px}
@@ -69,7 +76,7 @@ const cards=[
 {kind:'cta',img:'../../CARD/zzal/20260830.jpg',lab:'CTA',title:'다 사고 싶지만<br><em>통장은 하나</em>',sub:'이번 가을 가장 먼저 살 한 벌부터<br>골라서 저장해두세요'}];
 function html(c,i){const handle='@i_s2_fashion';if(c.kind==='cta'){return `<div class="card cta" id="card${i}"><div class="toprow"><span class="handle">&nbsp;</span><span class="num">&nbsp;</span></div><div class="photo"><img src="${c.img}" alt="" onload="sizePhoto(this)"></div><div class="caption"><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p></div><div class="foot">${handle}</div></div>`}
 let photo=`<div class="photo"><img src="${c.img}" alt="" style="--pos:${c.pos||'50% 15%'}"></div>`;
-let body=c.kind==='cover'?`<div class="kicker">${c.kicker}</div><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p>`:`<div class="prodline">${c.prod}</div><h2 class="title">${c.title}</h2><div class="metarow">${c.badge?`<span class="pct">${c.badge}</span>`:''}<span class="meta">${c.meta}</span><span class="proof">${c.proof}</span></div><div class="credit">이미지 출처 : 무신사</div><div class="selling">${c.sp}</div>`;
+let body=c.kind==='cover'?`<div class="kicker">${c.kicker}</div><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p>`:`<div class="prodline">${c.prod}</div><h2 class="title">${c.title}</h2>${(()=>{const m=c.meta.match(/^(\S+) <s>(.*?)<\/s> (.*)$/);return `<div class="pricebox"><div class="was">${m[1]} <s>${m[2]}</s></div><div class="now"><b>${m[3]}</b>${c.badge?`<span class="off">${c.badge}<i>↓</i></span>`:''}<span class="proof">${c.proof}</span></div></div>`})()}<div class="credit">이미지 출처 : 무신사</div><div class="selling">${c.sp}</div>`;
 return `<div class="card ${c.kind}" id="card${i}">${photo}<div class="shade"></div><div class="over">${body}<div class="bottom"><span>옆으로 넘기기 →</span><span class="handle">${handle}</span></div></div></div>`}
 function sizePhoto(img){const wrap=img.parentElement,isCta=wrap.closest('.cta'),maxW=isCta?400:330,maxH=isCta?380:330,ratio=img.naturalWidth/img.naturalHeight;let w=maxW,h=Math.round(w/ratio);if(h>maxH){h=maxH;w=Math.round(h*ratio)}wrap.style.width=w+'px';wrap.style.height=h+'px'}
 cards.forEach((c,i)=>{let col=document.createElement('div');col.className='col';col.innerHTML=`<div class="slot">${html(c,i)}</div><div class="cap"><span>0${i+1} · ${c.lab}</span><button onclick="save(${i})">PNG 저장</button></div>`;board.append(col)});function fit(){document.querySelectorAll('.col').forEach(col=>{let card=col.querySelector('.card'),slot=col.querySelector('.slot'),s=Math.min(1,col.clientWidth/540);card.style.transform=`scale(${s})`;slot.style.height=675*s+'px'})}fit();addEventListener('resize',fit);
