@@ -1,10 +1,20 @@
 # card-drafts — 카드뉴스 렌더 템플릿
 
-이 폴더에는 **현역 렌더 템플릿 하나만** 있다.
+## 🎨 2026-09-04 — 디자인이 바뀌었다. 먼저 `early-autumn-outer/README.md` 를 읽어라
+
+`20260831 초가을 아우터`에서 사용자 피드백으로 **전면 이미지형**(사진이 카드 전체, 멘트 오버레이, 페이지 번호 없음,
+계정명 오른쪽 하단) 디자인이 확정됐다. 규칙은 KEYWORD-POLICY 디자인 규칙 9, **재현 가이드·CSS·데이터 원문은
+[`early-autumn-outer/README.md`](early-autumn-outer/README.md)** 에 있다. 새 주제는 그 폴더를 복제해 만든다.
+아래 `uvparasol-insta.html` 은 **구 레이아웃**이며 파이프라인이 아직 이것을 읽는다 — 이식은 다음 과제.
+
+---
+
+이 폴더에는 **현역 렌더 템플릿 하나**와 **현행 디자인 레퍼런스 폴더 하나**가 있다.
 
 | 파일 | 역할 |
 |------|------|
-| `uvparasol-insta.html` | C안(인스타 후킹형) 템플릿. `pipeline/renderer.py` 가 이 파일만 읽는다. |
+| `uvparasol-insta.html` | C안(인스타 후킹형) 템플릿 — **구 레이아웃**. `pipeline/renderer.py` 가 이 파일만 읽는다. |
+| `early-autumn-outer/` | **현행 디자인(전면 이미지형) 레퍼런스.** `index.html` + `render.py` 로 단독 렌더. README 참조. |
 
 ## 렌더러가 하는 일
 
