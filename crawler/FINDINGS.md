@@ -53,6 +53,7 @@
 
 **검색(게시 직전 가격 재확인)** `GET https://search-api.29cm.co.kr/api/v4/products/search?keyword=…&page=1&size=20`
 - `data.products[]`: `itemNo`(=itemId) · `itemName` · `frontBrandNameKor` · `consumerPrice`(정가) · **`saleInfoV2.totalSellPrice`(표시가, displayPrice와 일치 검산됨)** · `saleInfoV2.totalSaleRate` · `reviewCount` · `reviewAveragePoint` · `isSoldOut`
+- ⚠️ 2026-09-05: 이 검색 API도 내 PC `requests`에는 **403**. Playwright로 `www.29cm.co.kr`를 연 뒤 페이지 안에서 fetch하면 200(무신사와 같은 방식). 29CM 상품 페이지(`product.29cm.co.kr/catalog/{itemNo}`)는 Playwright로 열리고 `img.29cm.co.kr/item/…` 이미지가 DOM에 있다(갤러리 1000×1000 + 상세 착용컷 2333×3500, requests로 받아진다). 페이지의 큰 가격은 쿠폰·첫구매가 — 표시가는 `totalSellPrice`.
 - 29CM 상세 페이지는 JS 렌더 — WebFetch로 소재표가 안 잡히면 무신사에서 같은 상품을 찾는다.
 
 ## 운영 확인
