@@ -137,7 +137,7 @@ def test_build_html_raises_when_template_anchor_missing(monkeypatch, tmp_path):
 
 def test_build_html_cover_uses_own_image_when_given(tmp_path):
     """표지에 cover.image_path 를 주면 첫 상품 이미지 대신 그 이미지를 쓴다.
-    (KEYWORD-POLICY 디자인 규칙 1 — 표지와 2번 카드가 같은 사진이면 안 된다.
+    (KEYWORD-POLICY §4 디자인 — 표지와 2번 카드가 같은 사진이면 안 된다.
      CTA 의 image_path 와 동일한 메커니즘.)"""
     import json, re
     from PIL import Image

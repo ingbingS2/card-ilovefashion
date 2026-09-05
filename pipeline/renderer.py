@@ -64,7 +64,7 @@ def build_html(copy: dict, products: list[dict]) -> str:
     cta = copy["cta"]
 
     # 표지 카드 이미지: copy["cover"]["image_path"] 가 주어지면 그 이미지를 쓴다.
-    # (KEYWORD-POLICY.md 디자인 규칙 1 — 표지는 2번(첫 상품) 카드와 같은 사진을 그대로
+    # (KEYWORD-POLICY.md §4 디자인(표지 착용컷·다른 원본) — 표지는 2번(첫 상품) 카드와 같은 사진을 그대로
     #  재사용하지 않는다. 템플릿의 scale(1.45) 줌 크롭만으로는 전신 스튜디오컷을
     #  차별화하지 못하는 경우가 있어, 아예 다른 사진을 지정할 수 있게 한다.)
     cover_key = first_key

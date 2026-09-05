@@ -1,48 +1,65 @@
-# card-drafts — 카드뉴스 렌더 템플릿
+# card-drafts — 카드뉴스 디자인과 제작 방법
 
-## 🎨 2026-09-04 — 디자인이 바뀌었다. 먼저 `early-autumn-outer/README.md` 를 읽어라
+> 정책(무엇을 써야 하나)은 [KEYWORD-POLICY.md](../KEYWORD-POLICY.md). 여기는 **어떻게 만드나**.
 
-`20260831 초가을 아우터`에서 사용자 피드백으로 **전면 이미지형**(사진이 카드 전체, 멘트 오버레이, 페이지 번호 없음,
-계정명 오른쪽 하단) 디자인이 확정됐다. 규칙은 KEYWORD-POLICY 디자인 규칙 9, **재현 가이드·CSS·데이터 원문은
-[`early-autumn-outer/README.md`](early-autumn-outer/README.md)** 에 있다. 새 주제는 그 폴더를 복제해 만든다.
-아래 `uvparasol-insta.html` 은 **구 레이아웃**이며 파이프라인이 아직 이것을 읽는다 — 이식은 다음 과제.
+## 폴더
 
----
+| 경로 | 역할 |
+|---|---|
+| `early-autumn-denim/` | **최신 회차(게시 대기).** 새 회차는 이 폴더를 복제한다. `verify.py`(무신사 재검증) 포함. |
+| `early-autumn-outer/` | 전면 이미지형 **첫 적용·확정 회차**(09-04 게시). 디자인 원본. |
+| `uvparasol-insta.html` | `pipeline/renderer.py`가 읽는 파이프라인 템플릿 — **구 레이아웃**(사진 프레임형). 전면 이미지형 이식은 미완. `uvparasol-insta.backup-20260819.html`은 폰트 축소 전 백업. |
 
-이 폴더에는 **현역 렌더 템플릿 하나**와 **현행 디자인 레퍼런스 폴더 하나**가 있다.
+## 새 회차 만드는 순서
+```bash
+export PATH="/c/Users/yepdo/AppData/Local/Programs/Python/Python312:$PATH" PYTHONIOENCODING=utf-8
+cd card-drafts && cp -r early-autumn-denim <new-slug> && cd <new-slug>
+rm -rf _old assets/cand/* ; # 사진은 무신사 _big 원본을 assets/cand/{goodsNo}/ 에 받아 고른다
+# index.html: <title>·.head 문구·const cards=[…] 만 교체. CSS·JS는 건드리지 않는다.
+# verify.py: CARDS 딕셔너리를 새 5종으로 교체.
+python render.py      # 1~7.jpg (1080×1350)
+python verify.py      # 전부 [OK] 여야 게시 가능
+```
+그 다음 caption.txt · _preview.html · result.md 작성 → 바탕화면 `카드뉴스\YYYYMMDD 키워드\`에 1~7.jpg+caption.txt+_preview.html+result.md 복사 → README.md는 회차 상태·상품표·사진 매핑·캡션만 담아 갱신.
 
-| 파일 | 역할 |
-|------|------|
-| `uvparasol-insta.html` | C안(인스타 후킹형) 템플릿 — **구 레이아웃**. `pipeline/renderer.py` 가 이 파일만 읽는다. |
-| `early-autumn-outer/` | **현행 디자인(전면 이미지형) 레퍼런스.** `index.html` + `render.py` 로 단독 렌더. README 참조. |
-| `early-autumn-denim/` | 전면 이미지형 두 번째 적용(2026-09-05, 게시 대기). 아우터 폴더 복제 방식의 실례. README 하나만 읽으면 이어서 할 수 있고, `verify.py` 가 Chrome 확장 없이 무신사 5종을 재검증한다. |
+Playwright는 시스템 Python 3.12에 설치돼 있고 `C:\Program Files\Google\Chrome\Application\chrome.exe`를 쓴다. DPR 2로 540×675 카드를 캡처하므로 결과가 정확히 1080×1350이다.
 
-## 렌더러가 하는 일
+## `cards` 배열 필드
+```js
+{kind:'cover', img:'assets/cover-x.jpg', pos:'50% 50%', lab:'표지', kicker:'EARLY AUTUMN DENIM',
+ title:'여름엔 뺐던 청바지<br><em>이제 꺼낼 때</em>', sub:'커브드 · 와이드 · 부츠컷 · 플레어 · 벌룬'},
+{kind:'item', img:'assets/01-x.jpg', pos:'50% 50%', lab:'브랜드', badge:'31%',
+ prod:'브랜드 · <b>상품명</b>', title:'헤드라인 1줄<br><em>강조 2줄</em>',
+ meta:'무신사 <s>66,000원</s> 45,540원',            // 이 형식 필수 — JS가 정규식으로 쪼갠다
+ proof:'후기 99개 · ⭐ 4.9', sp:'“후기 원문 통인용” —&nbsp;실제&nbsp;후기'},
+{kind:'cta', img:'../../CARD/zzal/<최신>.jpg', lab:'CTA', title:'…<br><em>…</em>', sub:'…<br>…'}
+```
+`pos`는 `object-position`(세로 착용컷 1500×1800은 4:5 카드에 거의 안 잘려 보통 `50% 50%`). `badge`는 판매가 옆 `31%↓` 노란 타이포로 렌더된다. `&nbsp;`로 "실제 후기"가 줄 끝에서 고아가 되지 않게 한다.
 
-`renderer.build_html()` 이 템플릿 안의 JS 블록 세 개를 데이터로 치환한다.
+## 전면 이미지형 스펙 (2026-09-04 사용자 확정 · CSS 원문은 `early-autumn-outer/index.html`의 마지막 `<style>` 블록)
 
-| 앵커 | 내용 |
-|------|------|
-| `var IMAGES = {...};` | 카드별 이미지 (data URI) |
-| `var META   = {...};` | 이미지 원본 크기·배경색 |
-| `var CARDS  = [...];` | 표지 + 상품 카드 N장 + CTA 의 문구·설정 |
+| 요소 | 값 |
+|---|---|
+| 카드 | 540×675 (×2 = 1080×1350). 표지·상품 공통, CTA만 예외 |
+| 사진 | `position:absolute; inset:0; object-fit:cover; object-position:var(--pos)` |
+| 그라데이션 | `linear-gradient(to top, rgba(10,10,12,.9) 0%, .66 24%, .22 46%, 0 62%)` |
+| 텍스트 블록 | `left/right:32px; bottom:24px; color:#fff` |
+| 상품명 줄 | 12px 흰 78% — `브랜드 · <b>상품명</b>` |
+| 헤드라인 | 상품 30px/1.3/-.3px · 표지 42px/1.22/-.5px. `<em>`은 **노란 글자 #ffe14d**(밑줄 아님) |
+| 가격 블록 | `무신사 ~~정가~~` 12px 62% → 판매가 **24px 굵게** + `31%↓` 17px #ffe14d. 후기 칩(반투명 흰, 12px)은 같은 줄 오른쪽 끝 |
+| 출처 | `이미지 출처 : 무신사` 8px 흰 50% |
+| 인용문 | 12.5px/1.65, 위에 1px 흰 22% 구분선, 끝에 `— 실제 후기` |
+| 마지막 줄 | 왼쪽 `옆으로 넘기기 →`, 오른쪽 `@i_s2_fashion` 11.5px. **페이지 번호·상단 계정명 줄 없음** |
+| 표지 추가 | 키커 13px #ff5c85 자간 .14em · 서브 15px 흰 85% |
+| CTA | 흰 배경·가운데 정렬·짤 400×380·노란 밑줄 강조·계정명 오른쪽 하단 |
+| 폰트·색 | Pretendard Variable(CDN) · 악센트 #ff3366 · 노랑 #ffe14d |
 
-이 세 문자열이 **앵커**다. 템플릿을 고칠 때 `var IMAGES = {` 같은 표기(공백 개수 포함)를
-바꾸면 렌더가 `템플릿 앵커를 찾지 못했습니다` 로 실패한다. 회귀 테스트가
-`pipeline/tests/test_renderer.py` 에 있다.
+**기각된 시도(다시 하지 말 것)** — 블러 배경 확장("이질감") · 좌우 70px 인셋(오독) · 가로 풀블리드 540×340(옷이 안 보임) · 디테일 클로즈업 나열(옷 형태가 안 읽힘) · 세로 2단 270px 사진 기둥("어중간하게 잘린 느낌") · 사진 위 할인 배지("붕 뜬 느낌") · 가격 앞 핑크 칩("아쉽다") · 페이지 번호 · 상단 계정명 줄. 채택된 것: 전면 이미지형 + 가격 옆 노란 `36%↓`("훨씬 낫다").
 
-## 디자인을 고칠 때
+## 사진 고르는 법
+- 무신사 상세 API `goods-detail.musinsa.com/api2/goods/{no}`의 `goodsImages[]` → `https://image.msscdn.net` + 경로, `_500` 대신 `_big`(1500×1800)으로 받는다(requests 가능).
+- 표지: 얼굴 보이는 착용컷, 상품 카드와 **다른 원본**. 상품 카드: 옷이 어깨~밑단까지 통째로 보이는 세로 착용컷. 흰 여백 있는 원본은 PIL bbox로 여백을 먼저 잘라낸다.
+- 헤드라인이 가리키는 것(소매 안감·밑단 등)이 그 사진에 실제로 보여야 한다.
 
-카드 디자인·레이아웃 변경은 **이 파일을 직접 고친다**. 렌더 결과는 1080×1350 으로
-크롭 보정되며(`renderer._crop_to_1080x1350`), 규격이 안 맞으면 렌더가 실패한다.
-
-디자인 규칙(표지 사진 선택, CTA 짤 크기 등)은 [KEYWORD-POLICY.md](../KEYWORD-POLICY.md)
-의 "디자인 세부 규칙" 절이 원본이다.
-
-## 과거 초안
-
-2026-08-11 에 과거 카드뉴스 초안(롱스커트·가방·슬라임·카시오 등)과 그 공통 자산
-(`cards.js`, `pixel.css`), 소재 이미지 폴더(`CARD/1`~`CARD/4`)를 전부 삭제했다.
-어느 것도 코드에서 참조하지 않았고, 같은 템플릿이 여러 파일에 복붙 복제돼 있어
-디자인 수정 시 어느 것이 현역인지 헷갈리는 원인이었다.
-필요하면 git 히스토리에서 되살릴 수 있다.
+## 파이프라인 템플릿(`uvparasol-insta.html`) 주의
+`renderer.build_html()`이 `var IMAGES = {` / `var META   = {` / `var CARDS  = [` 세 문자열을 앵커로 치환한다 — 표기(공백 포함)를 바꾸면 `템플릿 앵커를 찾지 못했습니다`로 실패. 회귀 테스트 `pipeline/tests/test_renderer.py`. 결과는 `renderer._crop_to_1080x1350`이 검증한다.

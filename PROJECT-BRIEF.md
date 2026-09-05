@@ -1,254 +1,88 @@
-# PROJECT-BRIEF — 새 에이전트 온보딩 (제일 먼저 읽을 것)
+# PROJECT-BRIEF — 새 에이전트는 이것부터 (세션 시작 시 자동 주입됨)
 
-> 이 저장소에서 처음 작업하는 에이전트를 위한 단일 진입 문서.
-> 여기를 읽고 나면 **무엇을 하는 프로젝트인지 / 어디를 건드려야 하는지 / 무엇을 절대 하면 안 되는지**를 안다.
-> 마지막 갱신: 2026-08-02
-
----
+> 마지막 갱신: 2026-09-05. 규칙 원본은 [KEYWORD-POLICY.md](KEYWORD-POLICY.md), 개발 규칙은 [CLAUDE.md](CLAUDE.md). 이 문서는 **지도**다.
 
 ## 1. 30초 요약
+인스타그램 패션 계정 **@i_s2_fashion** 운영 자동화 저장소. 무신사·29CM 랭킹을 매시간 크롤링해 Firestore에 쌓고 → 상품 5종을 고르고 → 후기를 근거로 문구를 써서 1080×1350 카드 7장(표지+상품 5+CTA)을 렌더하고 → 미리보기 승인 후 인스타 캐러셀로 게시하고 → +72시간 뒤 인사이트를 조회해 실험 로그를 갱신한다.
+**코드가 맞게 도는 것보다 게시물이 정확하고 정책에 맞는 것이 중요하다.**
 
-인스타그램 패션 계정 **@i_s2_fashion** 운영 자동화 저장소다.
+## 2. 절대 규칙 (어기면 사고)
+1. 카드뉴스 작업은 [KEYWORD-POLICY.md](KEYWORD-POLICY.md) 전문을 읽고 따른다. 랭킹 키워드 금지, 시즌성 키워드.
+2. **실제 게시(`scripts/post_ig.py`, `POST /api/jobs/{id}/publish`)는 사용자 승인 없이 절대 실행 금지.** 되돌릴 수 없다.
+3. 테스트에서 Claude API·Firestore 실호출 금지(목 처리). `firebase deploy/login` 금지. 비밀키 커밋 금지(`.env.example`만).
+4. 사용자 노출 UI 텍스트는 한국어.
+5. "피드백" 요청 = 수정 완료까지. 완성본은 3+1회 검토 후 `_preview.html` 경로만 알린다(창은 사용자가 연다).
+6. 프로세스를 싹 죽이지 않는다 — 내가 띄운 PID만 종료.
+7. npm/python 명령 전 PATH export(§5). 저장소에 임시 파일을 남기지 않는다 — 턴마다 자동 커밋·푸시된다.
 
-무신사·29CM 랭킹을 매시간 크롤링해 Firestore에 쌓고 → 대시보드에서 사람이 상품을 고르면
-→ 로컬 파이프라인이 문구를 쓰고 1080×1350 카드뉴스 7장을 렌더하고 → 미리보기 승인 후
-→ 인스타그램에 캐러셀로 게시하고 → +72시간 뒤 인사이트를 조회해 실험 로그를 갱신한다.
-
-**핵심: 이건 "코드 프로젝트"이자 "콘텐츠 운영 프로젝트"다.** 코드가 맞게 도는 것보다
-게시물이 정책에 맞고 사실이 정확한 것이 더 중요하다.
-
----
-
-## 2. 🚨 시작 전 필독 — 어기면 사고
-
-| # | 규칙 | 근거 |
-|---|---|---|
-| 1 | **[KEYWORD-POLICY.md](KEYWORD-POLICY.md)를 반드시 읽고 따른다.** 카드뉴스 관련 작업은 예외 없이. | CLAUDE.md 절대 규칙 |
-| 2 | **랭킹 키워드 금지** (랭킹픽·TOP 50·베스트). 사용자가 명시 요청할 때만 허용. 항상 시즌성 키워드. | KEYWORD-POLICY §규칙 |
-| 3 | **사용자 노출 UI 텍스트는 전부 한국어.** 코드 식별자·주석은 영어 허용. | CLAUDE.md |
-| 4 | **실제 게시(`POST /api/jobs/{id}/publish`, `scripts/post_ig.py`)는 되돌릴 수 없다.** Graph API로 수정·삭제 불가 — 인스타 앱에서 수동 삭제해야 한다. 사용자 승인 없이 절대 실행 금지. | pipeline/publisher.py |
-| 5 | **테스트에서 Claude API·Firestore 실호출 금지.** 전부 목 처리. `firebase deploy`/`firebase login` 금지. | CLAUDE.md |
-| 6 | **비밀키 커밋 금지.** `.env.example`로만 문서화. | CLAUDE.md 완료 기준 6 |
-| 7 | **"피드백" 요청 = 지적이 아니라 수정 완료까지.** 선택지를 되묻지 말고 판단해서 고친 뒤 보고한다. | KEYWORD-POLICY §완성본 피드백 처리 규칙 |
-| 8 | **완성본은 보여주기 전 3+1회 검토.** 맞춤법 / 사실 대조 / 정책·형식 / 브랜드 핸들 3중 검증. | KEYWORD-POLICY §완성본 검토 규칙 |
-| 9 | **프로세스를 싹 죽이지 않는다.** `python` 전체 kill 금지 — 내가 띄운 PID만 종료 (다른 AI 작업물 보호). | 사용자 지시 |
-| 10 | **셸 명령 전 PATH 선행 export** (npm/vite/python 계열). 아래 §6 참조. | CLAUDE.md |
-
----
-
-## 3. 저장소에 제품이 **둘** 들어있다 — 헷갈리지 말 것
-
+## 3. 지도
 ```
-① 원래 웹앱 (SPEC.md 가 정의한 것 — 지금은 거의 안 씀)
-   frontend/src/Generator.tsx  ──►  backend/  ──►  Claude  ──►  10장 카드 미리보기 → PNG 내보내기
-   * 주제를 입력하면 Claude가 슬라이드를 만들어주는 초기 버전.
-   * 실제 인스타 운영에는 쓰이지 않는다. 손대기 전에 정말 이쪽이 맞는지 확인할 것.
-
-② 실제 운영 라인 (매일 도는 것) ★
-   crawler/ ──매시간──► Firestore(rankings, products)
-                              │
-                              ├──► frontend/src/Dashboard.tsx (랭킹 비교·상품 선택·코멘트)
-                              │         │ POST localhost:8787/api/selections
-                              │         ▼
-                              └──► pipeline/  reader → copywriter → renderer → [미리보기 승인] → publisher
-                                        │                                              │
-                                        ▼                                              ▼
-                              바탕화면\카드뉴스\YYYYMMDD 키워드\1~7.jpg              Instagram 캐러셀
-                                        │
-                                        └──► +72h 인사이트 조회 → result.md 갱신 → 표지 풀 누적 저장률
+crawler/   무신사·29CM 랭킹/후기 수집 → Firestore   (GitHub Actions 매시 7분, 가동 중)
+frontend/  React+Vite 대시보드 https://fashion-cardnews.web.app (랭킹 비교·상품 선택) + 레거시 생성기 탭
+pipeline/  로컬 원클릭 앱 127.0.0.1:8787 (/dashboard) — reader → copywriter → renderer → 미리보기 → publisher
+scripts/   post_ig.py — 인스타 캐러셀 게시 (pipeline이 재사용)
+card-drafts/  카드 디자인. ★ 현행 디자인 = early-autumn-outer/index.html (전면 이미지형). uvparasol-insta.html은 파이프라인용 구 레이아웃
+CARD/zzal/    CTA 카드용 무한도전 짤 — 수정일 최신 파일을 쓴다
+backend/      초기 웹앱 API — 사실상 미사용
 ```
+**실제로 카드뉴스는 지금 `card-drafts/<회차>/` 폴더를 복제해 수동 제작한다**(index.html의 `cards` 배열 교체 → `render.py`). 파이프라인 템플릿에 새 디자인을 이식하는 것은 미완 과제.
 
-**"카드뉴스 만들어줘 / 고쳐줘"는 거의 항상 ②다.**
+산출물과 데이터는 저장소 밖: `C:\Users\yepdo\OneDrive\Desktop\카드뉴스\`
+- `YYYYMMDD 키워드\` 1~7.jpg · caption.txt · result.md · _preview.html
+- `_dashboard.html`(사용자용 대시보드, "실험 노트" 코너 유지) · `_qa.json` · `ig_api_token.txt`(🔑 만료 ~09-17)
 
----
+## 4. 카드뉴스 표준 절차
+1. KEYWORD-POLICY §10 최신 행에서 지정 키워드 확인. 직전 게시물 2~3개 `caption.txt`와 `result.md`를 읽는다.
+2. 상품 5종 선정(축 하나) → 무신사 상세에서 가격·후기·소재·**구매 가능** 확인, 착용컷 `_big` 다운로드.
+3. `card-drafts/early-autumn-denim/`(가장 최근 회차)을 복제 → `cards` 배열·`assets/`·캡션 교체 → `python render.py`.
+4. 3+1회 검토(맞춤법 / 사실 / 정책 / 핸들 3중) → `result.md` 작성 → 바탕화면 폴더에 복사 → `_preview.html` 경로 보고.
+5. 승인 후 `post_ig.py --dry-run` → 게시 직전 재검증(`verify.py`) → 게시 → result.md에 시각·permalink.
+6. +72h 인사이트 API 조회 → result.md·KEYWORD-POLICY 표·BRAND-ROSTER 갱신.
 
-## 4. 서브시스템 지도
-
-| 디렉토리 | 역할 | 진입점 | 상태 |
-|---|---|---|---|
-| `crawler/` | 무신사·29CM 랭킹/후기 수집 → Firestore | `main.py --store json\|firestore` | ✅ 가동 중 (매시 7분 cron) |
-| `pipeline/` | **카드뉴스 생성 원클릭 앱** (127.0.0.1:8787) | `python app.py` | ✅ 주력 |
-| `frontend/` | 랭킹 대시보드 + (레거시)생성기 SPA | `npm run dev` (5173) | ✅ 대시보드만 활용 |
-| `backend/` | Claude 카드뉴스 생성 API | `uvicorn app.main:app` (8000) | ⚠️ 사실상 미사용 |
-| `scripts/` | 인스타 게시 (`post_ig.py`) | `python post_ig.py "<폴더명>"` | ✅ pipeline이 재사용 |
-| `card-drafts/` | **렌더 템플릿**(`uvparasol-insta.html`) — 2026-08-11 부터 이 파일 하나뿐 | — | ✅ 현역 |
-| `CARD/zzal/` | CTA 카드용 무한도전 짤 | — | ✅ **수정일 최신 파일**을 씀 |
-| `docs/`, `.superpowers/sdd/` | Phase 0~3 계획서·작업 리포트 | — | 이력 |
-
-### 파일 단위 요점 (자주 건드리는 것만)
-
-- `pipeline/app.py` — 라우트 + `run_pipeline` 오케스트레이션. `/` 는 404가 정상, UI는 **`/dashboard`**.
-- `pipeline/copywriter.py` — 문구 생성. Claude 우선, 실패 시 **조용히** 규칙 기반 폴백. 후기 선별 휴리스틱(부정어 37종 등)이 여기 하드코딩.
-- `pipeline/renderer.py` — `card-drafts/uvparasol-insta.html`의 `IMAGES`/`META`/`CARDS` JS 블록을 치환 → Playwright 스크린샷 → Pillow 1080×1350 크롭.
-- `pipeline/publisher.py` → `scripts/post_ig.py` — litterbox(→uguu 폴백) 임시 호스팅 후 Graph API 캐러셀 게시.
-- `crawler/FINDINGS.md` — 두 몰의 내부 API 엔드포인트·파라미터 실측 문서. 크롤러 고칠 땐 여기부터.
-- `frontend/src/firestore.ts`, `selection.ts` — 대시보드의 읽기/선택 로직.
-
----
-
-## 5. 산출물과 데이터는 **저장소 밖**에 있다
-
-```
-C:\Users\yepdo\OneDrive\Desktop\카드뉴스\
-├── YYYYMMDD 키워드\          ← 완성본. 1.jpg~N.jpg (1080×1350) + caption.txt + result.md + _preview.html
-├── _assets\{job_id}\         ← 파이프라인이 받아둔 상품 썸네일
-├── _dashboard.html           ← 사용자용 바탕화면 대시보드 ("실험 노트" 코너 유지할 것)
-├── _qa.json                  ← 대시보드 질문/답변 로그
-└── ig_api_token.txt          ← 🔑 인스타 장기 토큰 (커밋 금지, 만료 예상 2026-09-17경)
-```
-
-크롤 결과 로컬 사본: `crawler/out/rankings`, `crawler/out/products` (gitignore 대상).
-
----
-
-## 6. 실행 명령
-
+## 5. 실행 명령
 ```bash
-# npm/python 계열 명령 전에 반드시 선행
 export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/Local/Programs/Python/Python312:/c/Users/yepdo/AppData/Local/Programs/Python/Python312/Scripts:$PATH"
+export PYTHONIOENCODING=utf-8
 ```
-
 | 목적 | 명령 |
 |---|---|
-| 카드뉴스 앱 기동 | `cd pipeline && ../crawler/.venv/Scripts/python.exe app.py` → http://127.0.0.1:8787/dashboard |
-| 파이프라인 테스트 | `cd pipeline && ../crawler/.venv/Scripts/python.exe -m pytest -q` (67개) |
-| 크롤러 테스트 | `cd crawler && ./.venv/Scripts/python.exe -m pytest -q` (약 45개, 네트워크 없음) |
-| 백엔드 테스트 | `cd backend && ./.venv/Scripts/python.exe -m pytest -q` (8개) |
+| 카드 렌더 (수동 제작) | `cd card-drafts/<회차> && python render.py` |
+| 게시 전 재검증 | `cd card-drafts/early-autumn-denim && python verify.py` (Chrome 확장 불필요) |
+| 인스타 게시 | `python scripts/post_ig.py "<폴더명>" --dry-run` → 승인 후 `--dry-run` 없이 |
+| 카드뉴스 앱 | `cd pipeline && ../crawler/.venv/Scripts/python.exe app.py` → http://127.0.0.1:8787/dashboard |
+| 테스트 | pipeline `../crawler/.venv/Scripts/python.exe -m pytest -q` · crawler `./.venv/Scripts/python.exe -m pytest -q` · backend `./.venv/Scripts/python.exe -m pytest -q` |
 | 프론트 빌드 | `cd frontend && npm run build` |
 | 로컬 크롤 | `cd crawler && ./.venv/Scripts/python.exe main.py --store json` |
-| 인스타 게시 | `python scripts/post_ig.py "<폴더명>" --dry-run` ← **먼저 dry-run** |
 
----
+## 6. 현재 상태 (2026-09-05)
+- **게시 대기: `20260904 초가을 데님`** — 렌더·검증 완료. 이어서 할 일은 `card-drafts/early-autumn-denim/README.md`.
+- **측정 대기: `20260831 초가을 아우터`** — 09-04 02:49 게시, 09-07 02:49 이후 +72h 조회.
+- 진행 중 실험 #5 브랜드 반응·공유. 반응 브랜드 9곳(BRAND-ROSTER). 게시 실적·도달은 KEYWORD-POLICY §10.
+- 인스타 토큰 만료 ~09-17 — 갱신 필요 시 사용자에게.
+- 미완 과제: 전면 이미지형을 `pipeline` 템플릿(`uvparasol-insta.html`)에 이식.
 
-## 7. 카드뉴스 제작 표준 절차 (가장 자주 하는 작업)
+## 7. 살아있는 함정
+- **무신사는 `requests`로 403.** Chrome 확장 또는 Playwright+실제 Chrome으로 페이지를 열고 페이지 안에서 API fetch. 확장은 `goods-detail.musinsa.com`·`instagram.com` 이동이 막혀 있고, Playwright 경로는 막히지 않는다. 인스타 프로필·공식몰 footer는 WebFetch.
+- 무신사 페이지가 크게 보여주는 가격은 쿠폰가일 수 있다. 카드는 `goodsPrice.salePrice`. 29CM은 `displayPrice`(08-06 이전 크롤 스냅샷은 `sellPrice`가 담겨 실제보다 높다 — 소급 보정 안 됨).
+- 가격·품절은 하루 사이에도 바뀐다. **게시 직전 재검증 필수**, 구매하기 버튼까지 본다.
+- 게시 호스팅(litterbox/uguu 무료)이 둘 다 죽으면 게시 불가(07-27 실장애).
+- `pipeline/jobs.py`의 잡은 인메모리 — 서버 재시작 시 소실. copywriter는 API 키 없으면 경고 한 줄 후 규칙 기반 폴백(자동 카피를 그대로 쓰지 않는다).
+- `.claude/hooks/auto-commit-push.sh`가 턴마다 `git add -A` 후 main 푸시 → `deploy.yml` 자동 배포.
+- Firebase 웹 API 키가 `frontend/src/firestore.ts`, `frontend/public/rankings.html`, `pipeline/reader.py` 3곳에 하드코딩(공개 키, Firestore 규칙으로 보호하는 구조). 모델 ID `claude-sonnet-5`가 backend/pipeline 4곳에 분산.
+- 템플릿 `uvparasol-insta.html`의 `var IMAGES = {` / `var META   = {` / `var CARDS  = [` 표기(공백 포함)를 바꾸면 렌더러가 앵커를 못 찾는다.
+- BRAND-ROSTER의 좋아요 목록은 API로 못 받는다 — 사용자가 앱에서 확인해 알려준 것만.
 
-1. **지정 키워드 확인** — KEYWORD-POLICY.md 맨 아래 표의 최신 행.
-2. **직전 게시물 2~3개의 `caption.txt` 를 먼저 읽는다** — 문형·어휘 중복 회피용. 필수.
-3. **직전 `result.md` 로 표지 유형 확인** — 무드형 ↔ 가격형을 **번갈아** 간다.
-4. 상품 선정 → **상세 페이지를 WebFetch로 직접 열어** 소재·가격·후기 확인 (상품명 추정 금지).
-   29CM은 JS 렌더라 안 잡히면 무신사에서 같은 상품 검색.
-5. 카피 작성 → 렌더 → **CTA 카드 이미지는 `CARD/zzal/` 최신 파일**.
-6. **캡션은 자동 생성본을 절대 그대로 두지 않는다** — 이모지 3~5개, 브랜드 계정 목록(핸들 3회 독립 검증), 해시태그 금지.
-7. **게시 전 `result.md` 작성** (양식: RESULT-TEMPLATE.md) — 가설·바꾼 변수 1개·판정 기준.
-8. **3+1회 검토** → `_preview.html` 생성 → 브라우저로 사용자에게 확인.
-9. 승인 후 게시 → **+72시간** 인사이트 API 조회 → result.md 갱신 → 표지 풀 누적 저장률 반영.
-
----
-
-## 8. 알려진 함정 (밟지 말 것)
-
-**운영**
-- ~~`ANTHROPIC_API_KEY`가 없으면 copywriter가 **로그 한 줄 없이** 규칙 기반 폴백으로 떨어진다~~
-  → **2026-08-11 해소**: 키 없음·Claude 호출 실패 모두 `경고: …` 한 줄을 찍는다. 폴백 자체는 그대로이므로
-  **키가 없으면 여전히 에이전트가 직접 카피를 쓴다.** 헤드라인이 몇 종류로만 반복되면 앱 콘솔의 경고를 먼저 볼 것.
-  같은 날 `max_tokens` 도 4096 → 16000, `effort=low` 로 바꿨다 — claude-sonnet-5 는 사고(thinking)가 기본 적응형이라
-  4096 이면 사고에 다 쓰고 JSON 이 잘려 **성공 호출도 조용히 폴백으로 떨어질 수 있었다.**
-- ~~🚨 **크롤 데이터의 `price`가 29CM 실제 표시가와 다르다**~~ → **2026-08-06 원인 규명·수정 완료**.
-  파서가 `itemInfo.sellPrice`(즉시할인 **전** 금액)를 담고 있었다. 실제 표시가는 **`displayPrice`** 이며,
-  픽스처 3건 모두 `originalPrice×(1-saleRate) ≒ displayPrice` 로 검산이 맞는다 (`crawler/FINDINGS.md` 정정표).
-  `crawler/parsers.py` 를 `displayPrice` 로 고쳤고 검산 테스트를 추가했다.
-  → **남은 주의**: 2026-07-20~08-06 사이에 쌓인 기존 스냅샷(`crawler/out`·Firestore)은 **소급 보정되지 않는다.**
-  그 기간 데이터로 카드를 만들 때와, 29CM 할인이 수시로 바뀌는 특성상 **게시 직전에는 여전히
-  상품 페이지에서 실제 표시가를 확인할 것.** 무신사(`info.finalPrice`)는 원래 문제 없었다.
-- `pipeline/jobs.py`의 `JOBS`는 인메모리 dict. 서버 재시작 시 잡·선정 상품 데이터가 **소실**된다 → 나중에 가격 대조가 불가능해진다.
-- ~~`renderer._crop_to_1080x1350`은 실패해도 `print` 한 줄 남기고 통과한다~~ → **2026-08-11 해소**:
-  실패 시 예외를 던지고, 저장된 결과가 실제로 1080×1350 인지도 검사한다. 잡은 "실패"로 끝나므로 다시 돌리면 된다.
-- ~~`/cardnews-files`가 카드뉴스 폴더 전체를 인증 없이 마운트한다~~ → **2026-08-11 해소**: `StaticFiles` 마운트를
-  이미지 확장자(jpg/jpeg/png/webp)만 내보내는 라우트로 교체했고 경로 탈출(`../`)도 막는다.
-  `ig_api_token.txt`·`_qa.json` 은 이제 403. (127.0.0.1 바인딩은 그대로 유지)
-- 게시는 litterbox/uguu 무료 호스팅에 의존한다. 둘 다 죽으면 게시 불가 (2026-07-27 실장애 이력).
-
-**코드**
-- `.claude/hooks/auto-commit-push.sh`가 **턴 종료마다 `git add -A` 후 main에 자동 push**한다 → `deploy.yml`이 걸려 검토 없이 배포된다. CI 실패와 무관하게 배포된다. 저장소에 임시 파일 남기지 말 것.
-- ~~`frontend/src/styles.css`의 `.panel`이 두 번 정의돼 충돌~~ → **2026-08-06 해소**: 레거시 생성기
-  컨테이너를 `.gen-panel` 로 분리했다(`Generator.tsx` + `styles.css`). `.panel` 은 이제 대시보드
-  상품 상세 드로어 전용이다.
-- ~~`selection.ts`의 `PIPELINE_URL`이 `http://localhost:8787` 하드코딩~~ → **2026-08-11 완화**:
-  `VITE_PIPELINE_URL` 로 뺐다(미설정 시 기존 로컬 기본값). 배포본에서 쓰려면 https 주소를 넣어야 하는 것은 그대로다.
-- Firebase 웹 API 키가 `frontend/src/firestore.ts`, `public/rankings.html`, `pipeline/reader.py` **3곳**에 하드코딩.
-- 모델 ID `claude-sonnet-5`가 `backend/app/config.py`, `pipeline/copywriter.py`, `pipeline/qa.py`, `.env.example`에 분산 하드코딩.
-**템플릿 (card-drafts/)**
-- **`card-drafts/` 에는 이제 `uvparasol-insta.html` 하나만 있다** (2026-08-11 정리).
-  복붙 복제본 4개, 과거 초안(롱스커트·가방·슬라임·카시오), 공통 자산(`cards.js`·`pixel.css`),
-  소재 이미지 폴더 `CARD/1`~`CARD/4` 를 전부 삭제했다 — 코드 참조 0건이었다.
-  덩달아 아래 함정들도 같이 사라졌다: 5중 복붙으로 디자인이 갈라지던 문제,
-  `version-b-vendors.html` 의 `업체명 ①` 플레이스홀더(허위 정보 위험),
-  `cards.js` 의 `@your_trend` 가짜 핸들, `<title>` 에 남아 있던 "카시오 시계",
-  정책 위반 샘플이던 `.superpowers/rehearsal_build.html`(랭킹 키워드 + 후기 원문 인용).
-  **디자인 수정은 이제 고를 것 없이 `uvparasol-insta.html` 하나다.** 되살리려면 git 히스토리에서.
-- 템플릿을 고칠 때 `var IMAGES = {` / `var META   = {` / `var CARDS  = [` 표기(공백 포함)를
-  바꾸면 렌더가 앵커를 못 찾아 실패한다 — 자세한 건 `card-drafts/README.md`.
-
-**문서 vs 현실**
-- ~~`RESULT-TEMPLATE.md`가 "48시간 측정" 구 정책 그대로~~ → **2026-08-05 해소**: +72h·도달 지표·실험 #4 반영.
-- ~~`CLAUDE.md`의 "디렉토리 구조(목표)"가 실제와 다름~~ → **2026-08-05 해소**: 실제 구조로 교체.
-  `QA-REPORT.md`(2026-07-17)는 여전히 ① 초기 웹앱 기준이지만 문서 상단에 경고 배너를 붙였다.
-- ~~`pipeline/copywriter.py` 프롬프트가 "이모지 0~1개"로 정책(3~5개)과 충돌~~ → **2026-08-05 해소**.
-  프롬프트에 숫자 스펙 브리핑 금지·상투적 마무리 금지·핸들 창작 금지도 함께 넣었고, 규칙 기반
-  폴백 캡션도 정책에 맞게 고쳤다. **다만 자동 캡션을 그대로 게시하지 않는 규칙은 그대로다.**
-- **계획 문서(`docs/superpowers/plans/`)를 계약으로 믿지 말 것.** Phase 3 계획서는 아직 "캡션 해시태그 10개", "셀링포인트 = 첫 후기"로 적혀 있는데 둘 다 실사고 후 정반대로 바뀌었다(해시태그 전면 금지 / 긍정 후기 선별). `.superpowers/sdd/progress.md`와 실제 코드·테스트가 진실이다.
-- `.superpowers/sdd/task-N-report.md`는 **페이즈 구분 없이 파일명이 재사용·덮어쓰기**됐다. 파일명만으로 어느 페이즈 기록인지 알 수 없다.
-- 계획서상 "Phase 4(실전 게시) 미착수"로 적혀 있으나 **실제로는 이미 여러 건 게시됐다**(예: 20260728 여름 티셔츠 → 인스타 permalink 존재). 진행 상태는 계획서가 아니라 `바탕화면\카드뉴스\*\result.md`로 판단할 것.
-- 스펙이 규정한 Firestore `selections` 컬렉션은 **구현되지 않았다.** 프론트가 localhost:8787로 직접 POST하고 잡은 인메모리에만 있다 → "실패 단계부터 재시도"는 불가능.
-- Firebase 웹 API 키는 ~~4곳~~ → **3곳**에 커밋돼 있다 (`frontend/src/firestore.ts`,
-  `frontend/public/rankings.html`, `pipeline/reader.py`). 2026-08-11 에 `.superpowers/webapp_config.json`
-  을 삭제해 한 곳이 줄었다. 남은 3곳은 공개 웹 API 키라 Firestore 규칙으로 보호하는 것이 정상 구조다.
-
----
-
-## 9. 현재 상태 (2026-08-06)
-
-- **Phase 0~3 완료** — 프로브 → 크롤러 → 대시보드 → 파이프라인까지 구축됨. 매시간 크롤 가동 중.
-- **현재 지정 키워드**: 2026-08-10 **여름 긴바지** (렌더 완료·게시 대기 — 실험 #4 3회차).
-  그 이전 08-06 한여름 시스루 셔츠(게시 완료 — 08-07 19:00).
-- **게시 실적**: **12개** (2026-07-14 ~ 08-08). 누적 도달 1,409 는 **08-06 시점 10개 기준이라 낡았다**
-  — 8/07·8/08 두 건이 더해졌으므로 **다음 측정 때 전수 재조회로 갱신할 것.**
-  로컬 폴더는 15개인데 그중 **5개가 미게시**다(`20260722 랭킹픽`×3, `20260722 블랙슈즈`,
-  `20260722 여름 신발`). 반대로 게시물 중 2개(7/14 동묘 완구시장, 7/17 여름 가방)는 폴더가 없다
-  → **폴더 수로 게시 실적을 세면 안 된다.**
-  (`20260720 우양산` 은 오래 "미게시"였으나 **2026-08-08 게시됐다** — 제작일과 게시일이 19일 차이다.)
-- 🚨 **2026-08-04 피드 전수 분석 — 실험 설계 변경됨** (`카드뉴스\_feed-analysis-20260804.md`)
-  - **실험 #1(표지 무드형 vs 가격형)은 보류.** 게시 시각이 통제되지 않아 오염됐고,
-    저장률은 현 도달 규모에서 측정 자체가 불가능하다.
-  - **진행 중 실험은 #4 — 게시 시각 저녁 19:00~21:00 KST 고정, 판정 지표 = 도달.**
-    관측상 저녁 게시(220/335/661) vs 그 외(4~59)로 **도달이 30배** 갈렸다.
-  - 대조군 수치: 무드형 풀 저장 1 ÷ 도달 **1,303 = 0.077%** (2026-08-06 전수 재조회).
-- **2026-08-06 전수 재조회 결과** (10개 전부, 인사이트 API)
-  - **8/03 게시물 +72h 도달 4 (계정 최저).** 그러나 같은 시점 나머지 9개는 도달이 모두
-    정상적으로 늘고 있었다 → **계정 단위 배포 제한 가설 기각.** 원인은 게시 시각(심야 00:17).
-  - **8/05 냉감 이너에서 계정 최초 팔로우 1건 + 공유 1건** 발생 (+24h 도달 59).
-    정식 +72h 측정은 **2026-08-08 14:52 이후**.
-  - **실험 #4 저녁 게시 표본 2회차까지 적립됨** (2026-08-10 기준). 8/05 건(14:52)은 대조 표본.
-    - **1회차 — 8/07 19:00 `20260806 한여름 시스루 셔츠`** (통제 조건 정상). 측정 +72h = 8/10 19:00~.
-    - **2회차 — 8/08 19:00 `20260720 우양산`** (사용자 지시로 편입). 측정 +72h = 8/11 19:00~.
-      ⚠️ **변수 오염**: 2026-07-20 제작본을 그대로 재게시한 것이라 캡션이 2줄뿐이고(이모지 0,
-      브랜드 계정 목록 없음), CTA 가 짤이 아니며, 표지에 랭킹 키워드("PICK 5", "인기 랭킹")가 있다.
-      **도달을 시간대 효과로 단독 해석하면 안 된다** — 상세는 그 폴더의 `result.md`.
-    - ⚠️ **8/10 `여름 긴바지` 는 23:23 게시라 #4 표본이 아니다** (심야 대조군으로 적립).
-      저녁 표본은 여전히 2회 — **진짜 3회차는 다음 게시물이며 반드시 19:00~21:00 안에 올려야 한다.**
-    - **3회차는 통제 조건을 지킨 새 카드로 저녁 게시할 것.**
-- **도달은 게시 후에도 몇 주간 계속 오른다** (7/19 롱스커트 647→661). 풀끼리 비교할 땐
-  반드시 **같은 날 전수 재조회한 값**으로 맞출 것.
-- **실험 백로그** (#4 판정 후 착수): #1 표지 유형 재설계, #2 사이즈 팁 한 줄 추가, #3 검색 질문형 캡션.
-- **콘텐츠 포지션**: "예쁜 것 골라주는 계정"이 아니라 **"구매 불안을 후기·평점 데이터로 대신 검증해주는 에디터"**.
-
----
-
-## 10. 작업 유형별 시작점
-
+## 8. 작업 유형별 시작점
 | 요청 | 먼저 읽을 것 | 건드릴 곳 |
 |---|---|---|
-| 카드뉴스 만들기/고치기 | KEYWORD-POLICY.md 전문 + 직전 caption.txt 2~3개 | `pipeline/`, `바탕화면\카드뉴스\` |
-| 완성본 피드백 | KEYWORD-POLICY §완성본 검토·피드백 처리 규칙 | 렌더 이미지 직접 열어볼 것 |
-| 크롤러 오류 | `crawler/FINDINGS.md` | `crawler/fetchers.py`, `parsers.py` |
+| 카드뉴스 만들기/고치기/이어서 | KEYWORD-POLICY 전문 + 최신 회차 `card-drafts/*/README.md` + 직전 caption.txt 2~3개 | `card-drafts/<회차>/`, `바탕화면\카드뉴스\` |
+| 완성본 피드백 | KEYWORD-POLICY §6·§7 | 렌더 이미지를 직접 열어본다 |
+| 게시 / 게시 실패 | KEYWORD-POLICY §9, §7 함정(토큰·호스팅) | `scripts/post_ig.py` |
+| 성과 측정·분석 | RESULT-TEMPLATE.md + 각 폴더 result.md + KEYWORD-POLICY §8·§10 | `바탕화면\카드뉴스\*\result.md` |
+| 브랜드 태그 전략 | BRAND-ROSTER.md | 캡션 `📌 브랜드 계정` |
+| 크롤러 오류 | crawler/FINDINGS.md | `crawler/fetchers.py`, `parsers.py` |
 | 대시보드 UI | — | `frontend/src/Dashboard.tsx`, `styles.css` |
-| 게시 실패 | §8 함정 (토큰 만료·호스팅 장애) | `scripts/post_ig.py` |
-| 실험/성과 분석 | RESULT-TEMPLATE.md + 각 폴더 result.md | `바탕화면\카드뉴스\*\result.md` |
-| 브랜드 계정·태그 전략 | [BRAND-ROSTER.md](BRAND-ROSTER.md) | 캡션의 `📌 브랜드 계정` 목록 |
+| 카드 디자인 구현 | card-drafts/README.md | `card-drafts/early-autumn-*/index.html` |
 
----
-
-## 11. 이 문서 갱신 규칙
-
-구조가 바뀌거나(새 서브시스템, 진입점 변경) 함정을 새로 발견하면 **이 파일을 갱신한다.**
-정책 규칙 자체는 여기가 아니라 `KEYWORD-POLICY.md`에 쓴다 — 이 문서는 **지도**이고, 정책의 원본이 아니다.
+## 9. 갱신 규칙
+구조가 바뀌거나 함정을 새로 발견하면 이 파일을, 정책이 바뀌면 KEYWORD-POLICY.md를, 회차 상태는 KEYWORD-POLICY §10 표를 갱신한다. 이력·경위는 각 회차 폴더 README 끝에 몇 줄로만 남긴다 — 별도 HISTORY 파일을 만들지 않는다.

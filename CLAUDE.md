@@ -1,67 +1,40 @@
-# CLAUDE.md — 개발 가이드
+# CLAUDE.md — 개발 규칙
 
-> ## 🟥 시작 전 필독 — [PROJECT-BRIEF.md](PROJECT-BRIEF.md)
-> 이 저장소에서 **처음 작업하는 에이전트는 어떤 행동보다 먼저 [PROJECT-BRIEF.md](PROJECT-BRIEF.md) 를 읽는다.**
-> 프로젝트 전체 지도(서브시스템·데이터 흐름·산출물 위치·알려진 함정)가 거기 한 장으로 정리돼 있다.
-> `.claude/hooks/session-start-brief.sh` 가 세션 시작 시 자동 주입하지만, 주입이 안 됐다면 직접 읽어라.
-> 카드뉴스 작업이면 [KEYWORD-POLICY.md](KEYWORD-POLICY.md) 도 반드시 함께 연다.
+> 처음 작업하는 에이전트는 **[PROJECT-BRIEF.md](PROJECT-BRIEF.md)**(지도·현재 상태)를 먼저 읽는다. 세션 시작 훅이 자동 주입하지만 안 됐으면 직접 읽어라.
+> 카드뉴스 작업이면 **[KEYWORD-POLICY.md](KEYWORD-POLICY.md)**(규칙 원본)를 반드시 함께 연다.
 
-패션/AI 카드뉴스 자동 생성 웹앱. React(프론트) + FastAPI(백엔드) + Firebase(DB·호스팅).
-(실제 운영 라인은 크롤러 → 파이프라인 → 인스타 게시다 — PROJECT-BRIEF.md §3 참조.)
+패션 인스타 계정 @i_s2_fashion 운영 자동화: 크롤러(무신사·29CM → Firestore) → 카드뉴스 제작(card-drafts/, pipeline/) → 인스타 게시(scripts/post_ig.py). React 대시보드 + FastAPI + Firebase.
 
 ## 절대 규칙
-- **카드뉴스 키워드는 [KEYWORD-POLICY.md](KEYWORD-POLICY.md)를 반드시 따른다**: 랭킹 키워드는 사용자가 명시적으로 요청하지 않는 한 금지, 항상 시즌성 키워드 사용. 현재 지정 키워드도 그 파일에서 확인.
-- 모든 사용자 노출 UI 텍스트는 **한국어**만 사용한다 (코드 식별자·주석은 영어 허용).
-- 셸 명령은 **Bash 툴**로 실행한다. `node/npm/npx/python/pip/firebase` shim이 `~/.local/bin`에 있다.
-- **중요:** `npm install`/`npm run build` 는 내부적으로 cmd.exe 로 `node` 를 호출하므로,
-  npm/vite/python 관련 명령 앞에 반드시 아래를 먼저 실행해 실제 툴 디렉토리를 PATH 에 올린다:
+- 카드뉴스 키워드·문구·디자인·검증·게시는 KEYWORD-POLICY.md를 따른다. 랭킹 키워드 금지, 항상 시즌성.
+- **실제 인스타 게시는 사용자 승인 후에만.** 되돌릴 수 없다.
+- 사용자 노출 UI 텍스트는 한국어(코드 식별자·주석은 영어 허용).
+- 실제 외부 호출·비밀키·배포 금지: 테스트는 Claude API·Firestore 목 처리, `firebase deploy/login` 금지, 키는 `.env.example`로만 문서화.
+- 셸 명령은 Bash 툴. npm/vite/python 명령 앞에 반드시:
   ```bash
   export PATH="/c/Users/yepdo/tools/node-v22.23.1-win-x64:/c/Users/yepdo/AppData/Local/Programs/Python/Python312:/c/Users/yepdo/AppData/Local/Programs/Python/Python312/Scripts:$PATH"
   ```
-- 백엔드는 venv 사용: `cd backend && ./.venv/Scripts/python.exe -m pytest -q`
-- **실제 외부 호출·비밀키·배포 금지**:
-  - Claude API 실제 호출 금지 → 백엔드 테스트는 반드시 API 응답을 **목(mock)** 처리.
-  - `firebase deploy`, `firebase login`, 실제 Firestore 접속 금지 → 설정 파일만 작성/검증.
-  - `ANTHROPIC_API_KEY`, Firebase 서비스 계정 등은 `.env.example`로만 문서화하고 커밋하지 않는다.
+- 백엔드는 venv: `cd backend && ./.venv/Scripts/python.exe -m pytest -q`. 파이프라인은 `../crawler/.venv/Scripts/python.exe`.
+- 프로세스를 싹 죽이지 않는다 — 내가 띄운 PID만.
+- 턴 종료마다 `git add -A` 자동 커밋·푸시된다(`.claude/hooks/auto-commit-push.sh`) → 저장소에 임시 파일을 남기지 않는다.
 
-## 디렉토리 구조 (실제 — 2026-08-05 기준)
+## 디렉토리
 ```
-crawler/           # 무신사·29CM 랭킹/후기 수집 → Firestore (매시 7분 cron) ✅ 가동 중
-pipeline/          # ★ 카드뉴스 생성 원클릭 앱 (127.0.0.1:8787, UI 는 /dashboard) — 주력
-frontend/          # React + Vite + TS. 랭킹 대시보드(활용) + 레거시 생성기
-backend/           # FastAPI (Python 3.12) — 초기 웹앱 API, 사실상 미사용
-scripts/           # post_ig.py (인스타 캐러셀 게시) — pipeline 이 재사용
-card-drafts/       # 렌더 템플릿. 현역은 uvparasol-insta.html 하나뿐
-CARD/zzal/         # CTA 카드용 짤 (수정일 최신 파일을 쓴다)
-firebase.json / .firebaserc / firestore.rules
+crawler/  pipeline/  frontend/  backend/  scripts/  card-drafts/  CARD/zzal/  firebase.json  firestore.rules  .firebaserc
 ```
-산출물·데이터는 저장소 밖에 있다 → `바탕화면\카드뉴스\YYYYMMDD 키워드\`.
-전체 지도는 [PROJECT-BRIEF.md](PROJECT-BRIEF.md).
+역할·데이터 흐름·산출물 위치(`바탕화면\카드뉴스\`)는 PROJECT-BRIEF.md §3.
 
-## 실행/검증 명령
-프론트엔드:
-```
-cd frontend && npm install
-npm run build          # 프로덕션 빌드 (성공해야 함)
-npm run lint --if-present
-npm test --if-present
-```
-백엔드:
-```
-cd backend && python -m venv .venv && source .venv/Scripts/activate
-pip install -r requirements.txt
-pytest                 # 통과해야 함 (Claude API는 목 처리)
-python -c "import app.main"   # import 오류 없어야 함
-```
-Firebase 설정 검증:
-```
-firebase --version     # 설정 문법만 확인, 실제 배포 X
+## 검증 명령
+```bash
+cd frontend && npm install && npm run build
+cd backend && ./.venv/Scripts/python.exe -m pytest -q && ./.venv/Scripts/python.exe -c "import app.main"
+cd pipeline && ../crawler/.venv/Scripts/python.exe -m pytest -q
+cd crawler && ./.venv/Scripts/python.exe -m pytest -q
+firebase --version   # 설정 문법만, 배포 X
 ```
 
-## 완료 기준 (이 모두를 만족해야 함)
-1. `frontend` 에서 `npm run build` 성공.
-2. `backend` 에서 `pytest` 전부 통과 (목 기반).
-3. 백엔드 앱이 import/기동 오류 없이 로드됨.
-4. `firebase.json`, `firestore.rules`, `.firebaserc` 존재하고 형식이 유효함.
-5. 루트 README에 셋업/실행 방법 문서화.
-6. 비밀키/자격증명이 저장소에 커밋되지 않음 (`.env.example`만 존재).
+## 완료 기준 (코드 변경 시)
+1. `frontend` 빌드 성공 2. 백엔드·파이프라인·크롤러 pytest 통과(목 기반) 3. 백엔드 앱 import 오류 없음 4. `firebase.json`·`firestore.rules`·`.firebaserc` 유효 5. README에 셋업·실행 문서화 6. 비밀키 미커밋.
+
+## 문서 규칙
+문서는 6개만 유지한다: CLAUDE.md(개발 규칙) · PROJECT-BRIEF.md(지도·상태) · KEYWORD-POLICY.md(카드뉴스 규칙) · BRAND-ROSTER.md · RESULT-TEMPLATE.md · README.md(셋업). 서브시스템 문서는 `crawler/FINDINGS.md`, `card-drafts/README.md`, 각 회차 `README.md`+`result.md`. 별도 HISTORY·계획서·QA 보고서를 새로 만들지 않는다 — 경위는 회차 README 끝에 몇 줄로.
