@@ -5,24 +5,79 @@
 /* 원본 비율을 유지하므로 남는 영역을 채우는 인위적인 사진 프레임은 사용하지 않는다. */
 .photo{background:transparent}
 .meta s{color:#b6b3ac;font-weight:500;margin-right:4px}
-.card.item .photo,.card.cover .photo{width:540px;margin-left:-32px;margin-right:-32px;align-self:stretch;border-radius:0;background:#f0efec}
+.card.item .photo,.card.cover .photo{width:540px;margin-left:-32px;margin-right:-32px;align-self:stretch;border-radius:0;background:#fff}
 .card.item .photo .badge,.card.cover .photo .badge{left:32px;top:14px}
-.card.cover .photo{height:380px}
+.card.cover .photo{height:340px}
 .card.item .photo{height:340px;box-shadow:none}
 .card.item .caption{margin-top:12px}
-.card.item .photo img,.card.cover .photo img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 20%)}
-.cover .caption{margin-top:14px}
-</style></head><body><div class="head"><h1>초가을 데님 카드뉴스 · 인스타 후킹형 · @i_s2_fashion</h1><p>표지 → 커브드 · 와이드 · 부츠컷 · 로우라이즈 플레어 · 벌룬 → CTA (7장)<br>C안 고정 디자인 · 상품 정보: 무신사 2026-09-04 실측</p></div><div class="toolbar"><button onclick="exportAll()">⬇ 전체 PNG 내보내기 (7장)</button></div><div class="board" id="board"></div>
+.card.item .photo img,.card.cover .photo img{width:100%;height:100%;object-fit:var(--fit,cover);object-position:var(--pos,50% 20%)}
+.cover .caption{margin-top:12px}
+
+/* ===== 2026-09-04 (폐기) 2단 레이아웃: 왼쪽 세로 사진 기둥 + 오른쪽 텍스트 기둥 (표지·상품 카드) ===== */
+.card.item .body,.card.cover .body{display:flex;flex:1;min-height:0;gap:20px;margin:0 -32px -24px -32px}
+.card.item .body .photo,.card.cover .body .photo{flex:none;width:270px;height:auto;align-self:stretch;margin:0;border-radius:0;background:#fff;box-shadow:none}
+.card.item .body .photo img,.card.cover .body .photo img{width:100%;height:100%;object-fit:var(--fit,cover);object-position:var(--pos,50% 50%)}
+.card.item .body .photo .badge,.card.cover .body .photo .badge{left:14px;top:14px}
+.card.item .body .col,.card.cover .body .col{flex:1;min-width:0;display:flex;flex-direction:column;padding:0 32px 24px 0}
+.card.item .body .caption,.card.cover .body .caption{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;margin:0}
+.card.item .body .foot,.card.cover .body .foot{flex:none;margin-top:12px}
+.card.item .body .title{font-size:21px;line-height:1.36;letter-spacing:-.3px}
+.card.item .body .prodline{font-size:11px;margin-bottom:8px}
+.card.item .body .metarow{gap:8px;margin-top:10px}
+.card.item .body .meta{font-size:13px}
+.card.item .body .meta s{margin-right:3px}
+.card.item .body .proof{font-size:11px;padding:5px 10px}
+.card.item .body .credit{margin-top:8px}
+.card.item .body .selling{font-size:11.5px;line-height:1.62;margin-top:10px;padding-top:10px}
+.card.cover .body .kicker{font-size:12px;letter-spacing:.12em;margin-bottom:10px}
+.card.cover .body .title{font-size:30px;line-height:1.28;letter-spacing:-.4px}
+.card.cover .body .sub{font-size:13.5px;line-height:1.7;margin-top:14px}
+
+/* ===== 2026-09-04 전면 이미지형: 사진이 카드 전체, 멘트는 사진 위 하단 오버레이, 숫자 제거, 계정명 오른쪽 하단 ===== */
+.card.item,.card.cover{padding:0;display:block}
+.card.item .photo,.card.cover .photo{position:absolute;inset:0;width:540px;height:675px;margin:0;border-radius:0;background:#fff;box-shadow:none}
+.card.item .photo img,.card.cover .photo img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 15%)}
+.card.item .photo .badge,.card.cover .photo .badge{left:32px;top:28px;font-size:15px;padding:7px 11px}
+.card .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,12,.9) 0%,rgba(10,10,12,.66) 24%,rgba(10,10,12,.22) 46%,rgba(10,10,12,0) 62%)}
+.card .over{position:absolute;left:32px;right:32px;bottom:24px;color:#fff}
+.card .over .prodline{font-size:12px;color:rgba(255,255,255,.78);margin-bottom:8px}
+.card .over .prodline b{color:#fff}
+.card .over .title{font-size:30px;line-height:1.3;letter-spacing:-.3px;color:#fff}
+.card .over .title em{box-shadow:none;color:#ffe14d}
+.card .over .metarow{margin-top:12px;gap:10px}
+.card .over .pricebox{margin-top:14px}
+.card .over .was{font-size:12px;font-weight:600;color:rgba(255,255,255,.62)}
+.card .over .was s{color:rgba(255,255,255,.62);margin-left:2px}
+.card .over .now{display:flex;align-items:baseline;gap:10px;margin-top:2px}
+.card .over .now b{font-size:24px;font-weight:800;letter-spacing:-.3px;color:#fff}
+.card .over .off{font-size:17px;font-weight:800;color:#ffe14d;letter-spacing:-.2px}
+.card .over .off i{font-style:normal;font-size:14px;margin-left:1px}
+.card .over .now .proof{margin-left:auto;align-self:center}
+.card .over .meta{font-size:14px;color:#fff}
+.card .over .meta s{color:rgba(255,255,255,.55)}
+.card .over .proof{background:rgba(255,255,255,.16);color:#fff;font-size:12px}
+.card .over .credit{color:rgba(255,255,255,.5);margin-top:8px}
+.card .over .selling{color:rgba(255,255,255,.92);border-top:1px solid rgba(255,255,255,.22);font-size:12.5px;line-height:1.65;margin-top:10px;padding-top:10px}
+.card .over .bottom{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:11px;font-weight:700;color:rgba(255,255,255,.8)}
+.card .over .bottom .handle{font-size:11.5px;letter-spacing:.08em;color:#fff}
+.card.cover .over .kicker{font-size:13px;letter-spacing:.14em;color:#ff5c85;margin-bottom:10px}
+.card.cover .over .title{font-size:42px;line-height:1.22;letter-spacing:-.5px}
+.card.cover .over .sub{font-size:15px;color:rgba(255,255,255,.85);margin-top:14px;line-height:1.65}
+.card.cta .foot{text-align:right;color:#101012;letter-spacing:.08em}
+</style></head><body><div class="head"><h1>초가을 데님 카드뉴스 · 전면 이미지형 · @i_s2_fashion</h1><p>표지 → 세미 커브드 · 시그니처 와이드 · 논페이드 부츠컷 · 로우라이즈 플레어 · 벌룬 데미지 → CTA (7장)<br>2026-09-04 확정 전면 이미지형 · 상품 정보: 무신사 2026-09-05 실측</p></div><div class="toolbar"><button onclick="exportAll()">⬇ 전체 PNG 내보내기 (7장)</button></div><div class="board" id="board"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script>
 const cards=[
-{kind:'cover',img:'assets/cover-secondsalt.jpg',pos:'50% 18%',lab:'표지',kicker:'EARLY AUTUMN DENIM',title:'여름엔 뺐던 청바지<br><em>이제 꺼낼 때</em>',sub:'커브드부터 벌룬까지, 핏으로 고른 다섯 벌'},
-{kind:'item',img:'assets/01-ourdayz.jpg',pos:'50% 60%',lab:'아워데이즈',badge:'31%',prod:'아워데이즈 · <b>세미 커브드 데님 팬츠</b>',title:'마른 체형도 핏 살고<br><em>다리는 길어 보여</em>',meta:'무신사 <s>66,000원</s> 45,540원',proof:'후기 90개 · ⭐ 5.0',sp:'“입었을 때 마른 사람도 핏 괜찮게 떨어지고 무엇보다 다리 길어보이는 게 좋네요” —&nbsp;실제&nbsp;후기'},
-{kind:'item',img:'assets/02-michiko.jpg',pos:'50% 50%',lab:'미치코런던 코시노',badge:'5%',prod:'미치코런던 코시노 · <b>시그니처 와이드 데님</b>',title:'뒤 포켓은 귀엽고<br><em>실루엣은 세련되게</em>',meta:'무신사 <s>89,000원</s> 84,550원',proof:'후기 7개 · ⭐ 5.0',sp:'“뒤 포켓 디자인이 너무 귀여워요! 와이드 실루엣이 세련돼서 마음에 들어요. 잘 입을거같아요!” —&nbsp;실제&nbsp;후기'},
-{kind:'item',img:'assets/03-mireco.jpg',pos:'50% 40%',lab:'미레코',badge:'10%',prod:'미레코 · <b>논페이드 부츠컷 데님</b>',title:'생지인데 편하고<br><em>핏은 예쁘게</em>',meta:'무신사 <s>90,000원</s> 81,000원',proof:'후기 35개 · ⭐ 4.8',sp:'“생지 데님인데 너무 편하고 그러면서 바지 핏도 예뻐요 길이는 좀 길어서 수선했습니다” —&nbsp;실제&nbsp;후기'},
-{kind:'item',img:'assets/04-notfornerd.jpg',pos:'50% 55%',lab:'낫포너드',badge:'40%',prod:'낫포너드 · <b>로우라이즈 플레어 데님</b>',title:'다들 어디 거냐고<br><em>물어보는 핏</em>',meta:'무신사 <s>99,000원</s> 59,000원',proof:'후기 27개 · ⭐ 4.8',sp:'“핏 존예 다들 어디꺼냐고 물어봐요 로우라이즈 핏 딱 좋고 허리사이즈 길이 다 완전 저한테 딱 이에요 스판이 많이 없어서 앉아있을때 좀 불편하긴한데 그래도 예뻐서 참을만해요 ㅎ” —&nbsp;실제&nbsp;후기'},
-{kind:'item',img:'assets/05-secondsalt.jpg',pos:'50% 30%',lab:'세컨드솔트',badge:'12%',prod:'세컨드솔트 · <b>벌룬 데미지 데님 팬츠</b>',title:'찢청에 벌룬핏은<br><em>신의 한 수</em>',meta:'무신사 <s>79,000원</s> 69,520원',proof:'후기 73개 · ⭐ 4.8',sp:'“찢청 원래도 좋아하지만 이 벌룬핏이 신의한수!! 진짜 넘 예뻐요...  색상도 딱 예쁜 연청!” —&nbsp;실제&nbsp;후기'},
-{kind:'cta',img:'../../CARD/zzal/20260830.jpg',lab:'CTA',title:'청바지 딱 한 벌만<br><em>고르라면 몇 번</em>',sub:'올가을 처음 꺼낼 청바지부터<br>번호 골라 저장해두세요'}];
-function html(c,i){let photo=c.kind==='cta'?`<div class="photo"><img src="${c.img}" alt="" onload="sizePhoto(this)"></div>`:`<div class="photo"><img src="${c.img}" alt="" style="--pos:${c.pos||'50% 20%'}">${c.badge?`<span class="badge">${c.badge}</span>`:''}</div>`,body=c.kind==='cover'?`<div class="caption"><div class="kicker">${c.kicker}</div><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p></div>`:c.kind==='cta'?`<div class="caption"><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p></div>`:`<div class="caption"><div class="prodline">${c.prod}</div><h2 class="title">${c.title}</h2><div class="metarow"><span class="meta">${c.meta}</span><span class="proof">${c.proof}</span></div><div class="credit">이미지 출처 : 무신사</div><div class="selling">${c.sp}</div></div>`;return `<div class="card ${c.kind}" id="card${i}"><div class="toprow"><span class="handle">@i_s2_fashion</span><span class="num">${i+1}<i>/7</i></span></div>${photo}${body}<div class="foot">${i<6?'옆으로 넘기기 →':'&nbsp;'}</div></div>`}
+{kind:'cover',img:'assets/cover-secondsalt.jpg',pos:'50% 50%',lab:'표지',kicker:'EARLY AUTUMN DENIM',title:'여름엔 뺐던 청바지<br><em>이제 꺼낼 때</em>',sub:'커브드 · 와이드 · 부츠컷 · 플레어 · 벌룬'},
+{kind:'item',img:'assets/01-ourdayz.jpg',pos:'50% 50%',lab:'아워데이즈',badge:'31%',prod:'아워데이즈 · <b>세미 커브드 데님 팬츠</b>',title:'마른 체형도 핏 살고<br><em>다리는 길어 보여</em>',meta:'무신사 <s>66,000원</s> 45,540원',proof:'후기 99개 · ⭐ 4.9',sp:'“입었을 때 마른 사람도 핏 괜찮게 떨어지고 무엇보다 다리 길어보이는 게 좋네요” —&nbsp;실제&nbsp;후기'},
+{kind:'item',img:'assets/02-michiko.jpg',pos:'50% 50%',lab:'미치코런던 코시노',badge:'5%',prod:'미치코런던 코시노 · <b>시그니처 와이드 데님</b>',title:'통은 넓은데<br><em>실루엣은 세련되게</em>',meta:'무신사 <s>89,000원</s> 84,550원',proof:'후기 8개 · ⭐ 5.0',sp:'“뒤 포켓 디자인이 너무 귀여워요! 와이드 실루엣이 세련돼서 마음에 들어요. 잘 입을거같아요!” —&nbsp;실제&nbsp;후기'},
+{kind:'item',img:'assets/03-mireco.jpg',pos:'50% 50%',lab:'미레코',badge:'10%',prod:'미레코 · <b>논페이드 부츠컷 데님</b>',title:'생지인데 편하고<br><em>핏은 예쁘게</em>',meta:'무신사 <s>90,000원</s> 81,000원',proof:'후기 35개 · ⭐ 4.8',sp:'“생지 데님인데 너무 편하고 그러면서 바지 핏도 예뻐요 길이는 좀 길어서 수선했습니다” —&nbsp;실제&nbsp;후기'},
+{kind:'item',img:'assets/04-notfornerd.jpg',pos:'50% 50%',lab:'낫포너드',badge:'30%',prod:'낫포너드 · <b>로우라이즈 플레어 데님</b>',title:'다들 어디 거냐고<br><em>물어보는 핏</em>',meta:'무신사 <s>99,000원</s> 69,000원',proof:'후기 28개 · ⭐ 4.8',sp:'“핏 존예 다들 어디꺼냐고 물어봐요 로우라이즈 핏 딱 좋고 허리사이즈 길이 다 완전 저한테 딱 이에요 스판이 많이 없어서 앉아있을때 좀 불편하긴한데 그래도 예뻐서 참을만해요 ㅎ” —&nbsp;실제&nbsp;후기'},
+{kind:'item',img:'assets/05-secondsalt.jpg',pos:'50% 50%',lab:'세컨드솔트',badge:'12%',prod:'세컨드솔트 · <b>벌룬 데미지 데님 팬츠</b>',title:'찢청에 벌룬핏은<br><em>신의 한 수</em>',meta:'무신사 <s>79,000원</s> 69,520원',proof:'후기 73개 · ⭐ 4.8',sp:'“찢청 원래도 좋아하지만 이 벌룬핏이 신의한수!! 진짜 넘 예뻐요...  색상도 딱 예쁜 연청!” —&nbsp;실제&nbsp;후기'},
+{kind:'cta',img:'../../CARD/zzal/20260905.jpg',lab:'CTA',title:'청바지 핏 고민이면<br><em>댓글로 연락주세요</em>',sub:'체형 한 줄만 적어주시면<br>이 중에서 골라드릴게요'}];
+function html(c,i){const handle='@i_s2_fashion';if(c.kind==='cta'){return `<div class="card cta" id="card${i}"><div class="toprow"><span class="handle">&nbsp;</span><span class="num">&nbsp;</span></div><div class="photo"><img src="${c.img}" alt="" onload="sizePhoto(this)"></div><div class="caption"><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p></div><div class="foot">${handle}</div></div>`}
+let photo=`<div class="photo"><img src="${c.img}" alt="" style="--pos:${c.pos||'50% 15%'}"></div>`;
+let body=c.kind==='cover'?`<div class="kicker">${c.kicker}</div><h2 class="title">${c.title}</h2><p class="sub">${c.sub}</p>`:`<div class="prodline">${c.prod}</div><h2 class="title">${c.title}</h2>${(()=>{const m=c.meta.match(/^(\S+) <s>(.*?)<\/s> (.*)$/);return `<div class="pricebox"><div class="was">${m[1]} <s>${m[2]}</s></div><div class="now"><b>${m[3]}</b>${c.badge?`<span class="off">${c.badge}<i>↓</i></span>`:''}<span class="proof">${c.proof}</span></div></div>`})()}<div class="credit">이미지 출처 : 무신사</div><div class="selling">${c.sp}</div>`;
+return `<div class="card ${c.kind}" id="card${i}">${photo}<div class="shade"></div><div class="over">${body}<div class="bottom"><span>옆으로 넘기기 →</span><span class="handle">${handle}</span></div></div></div>`}
 function sizePhoto(img){const wrap=img.parentElement,isCta=wrap.closest('.cta'),maxW=isCta?400:330,maxH=isCta?380:330,ratio=img.naturalWidth/img.naturalHeight;let w=maxW,h=Math.round(w/ratio);if(h>maxH){h=maxH;w=Math.round(h*ratio)}wrap.style.width=w+'px';wrap.style.height=h+'px'}
 cards.forEach((c,i)=>{let col=document.createElement('div');col.className='col';col.innerHTML=`<div class="slot">${html(c,i)}</div><div class="cap"><span>0${i+1} · ${c.lab}</span><button onclick="save(${i})">PNG 저장</button></div>`;board.append(col)});function fit(){document.querySelectorAll('.col').forEach(col=>{let card=col.querySelector('.card'),slot=col.querySelector('.slot'),s=Math.min(1,col.clientWidth/540);card.style.transform=`scale(${s})`;slot.style.height=675*s+'px'})}fit();addEventListener('resize',fit);
 async function save(i){if(!window.html2canvas)return;let el=document.querySelector('#card'+i),old=el.style.transform;el.style.transform='none';let canvas=await html2canvas(el,{scale:2,useCORS:true,backgroundColor:'#fff'});el.style.transform=old;let a=document.createElement('a');a.download=`${i+1}.jpg`;a.href=canvas.toDataURL('image/jpeg',.95);a.click()}async function exportAll(){for(let i=0;i<7;i++){await save(i);await new Promise(r=>setTimeout(r,250))}}

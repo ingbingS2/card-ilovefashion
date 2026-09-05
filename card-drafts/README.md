@@ -15,6 +15,7 @@
 |------|------|
 | `uvparasol-insta.html` | C안(인스타 후킹형) 템플릿 — **구 레이아웃**. `pipeline/renderer.py` 가 이 파일만 읽는다. |
 | `early-autumn-outer/` | **현행 디자인(전면 이미지형) 레퍼런스.** `index.html` + `render.py` 로 단독 렌더. README 참조. |
+| `early-autumn-denim/` | 전면 이미지형 두 번째 적용(2026-09-05, 게시 대기). 아우터 폴더 복제 방식의 실례 + Chrome 확장 없이 무신사 검증하는 절차(README §6). |
 
 ## 렌더러가 하는 일
 
