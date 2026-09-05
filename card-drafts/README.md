@@ -6,7 +6,7 @@
 
 | 경로 | 역할 |
 |---|---|
-| `early-autumn-denim/` | **최신 회차(게시 대기).** 새 회차는 이 폴더를 복제한다. `verify.py`(무신사 재검증) 포함. |
+| `early-autumn-denim/` | **최신 회차(09-05 게시).** 새 회차는 이 폴더를 복제한다. `verify.py`(무신사·29CM 재검증 + 몰 간 최저가) 포함. |
 | `early-autumn-outer/` | 전면 이미지형 **첫 적용·확정 회차**(09-04 게시). 디자인 원본. |
 | `uvparasol-insta.html` | `pipeline/renderer.py`가 읽는 파이프라인 템플릿 — **구 레이아웃**(사진 프레임형). 전면 이미지형 이식은 미완. `uvparasol-insta.backup-20260819.html`은 폰트 축소 전 백업. |
 

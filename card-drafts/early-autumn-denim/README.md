@@ -1,23 +1,15 @@
 # 20260904 초가을 데님 — 이 폴더만 읽고 바로 이어서 할 것
 
-**상태 (2026-09-05 20:45): 7장 렌더·검증 완료. 게시만 남았고, 게시는 사용자 승인 후에만.**
+**상태: 게시 완료 2026-09-05 21:24 → https://www.instagram.com/p/Dc59FwxFENz/ · +72h 측정은 09-08 21:24 이후** (`result.md` §5 채우기).
 완성본 사본: `바탕화면\카드뉴스\20260904 초가을 데님\` (1~7.jpg · caption.txt · _preview.html · result.md).
 사용자에게 보여줄 때는 그 폴더의 `_preview.html` 경로만 알린다 (창은 사용자가 연다).
 
-## 다음 할 일 (순서대로)
+## 다음 할 일
 
-```bash
-export PATH="/c/Users/yepdo/AppData/Local/Programs/Python/Python312:$PATH" PYTHONIOENCODING=utf-8
-cd card-drafts/early-autumn-denim
-python verify.py                          # 1) 게시 직전 5종 재확인 — 전부 [OK] 여야 한다
-python render.py                          # 2) verify 에서 숫자가 달라졌으면 index.html 의 cards 를 고치고 재렌더
-cp [1-7].jpg caption.txt _preview.html result.md "/c/Users/yepdo/OneDrive/Desktop/카드뉴스/20260904 초가을 데님/"
-python ../../scripts/post_ig.py "20260904 초가을 데님" --dry-run
-python ../../scripts/post_ig.py "20260904 초가을 데님"   # 3) ★ 사용자 승인 후에만. 되돌릴 수 없다
-```
-4) 게시 후: `result.md` §4 에 게시 시각(분)·permalink·호스팅 기록 → **+72시간 뒤** 인사이트 API로 §5 채움
-   (`GET graph.instagram.com/v23.0/me/media` → media_id → `/{id}/insights?metric=reach,saved,shares,likes,comments,total_interactions,profile_visits,follows,views`, 토큰은 `카드뉴스\ig_api_token.txt`).
-5) `KEYWORD-POLICY.md` 맨 아래 표의 2026-09-04 행을 "게시 완료 + permalink"로, `BRAND-ROSTER.md` 의 미확인 목록을 갱신.
+게시는 끝났다. 남은 것은 측정과 기록.
+1) **09-08 21:24 이후** 인사이트 API로 `result.md` §5 채움 (`GET graph.instagram.com/v23.0/17930635761142732/insights?metric=reach,saved,shares,likes,comments,total_interactions,profile_visits,follows,views`, 토큰 `카드뉴스\ig_api_token.txt`).
+2) `KEYWORD-POLICY.md` §10 행에 도달·공유 기록, `BRAND-ROSTER.md` 반응 확인란 갱신(사용자가 앱에서 확인해 알려준 것만).
+3) 새 회차를 만들 땐 이 폴더를 복제한다(`../README.md`). ⚠️ **미치코런던은 2026-10-05까지 넣지 않는다**(사용자 지시 09-05 — 3연속 태그로 무료 광고처럼 보임).
 
 ## 파일
 

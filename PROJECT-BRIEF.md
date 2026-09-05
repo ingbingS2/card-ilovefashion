@@ -55,8 +55,8 @@ export PYTHONIOENCODING=utf-8
 | 로컬 크롤 | `cd crawler && ./.venv/Scripts/python.exe main.py --store json` |
 
 ## 6. 현재 상태 (2026-09-05)
-- **게시 대기: `20260904 초가을 데님`** — 렌더·검증 완료. 이어서 할 일은 `card-drafts/early-autumn-denim/README.md`.
-- **측정 대기: `20260831 초가을 아우터`** — 09-04 02:49 게시, 09-07 02:49 이후 +72h 조회.
+- **측정 대기 2건**: `20260831 초가을 아우터`(09-04 02:49 게시 → 09-07 02:49 이후) · `20260904 초가을 데님`(09-05 21:24 게시 → 09-08 21:24 이후). 각 폴더 `result.md` §5 를 인사이트 API로 채운다.
+- 다음 키워드 미지정 — 사용자와 정한다. 새 회차는 `card-drafts/early-autumn-denim/` 복제. **미치코런던은 10-05까지 상품·태그 제외**(사용자 지시).
 - 진행 중 실험 #5 브랜드 반응·공유. 반응 브랜드 9곳(BRAND-ROSTER). 게시 실적·도달은 KEYWORD-POLICY §10.
 - 인스타 토큰 만료 ~09-17 — 갱신 필요 시 사용자에게.
 - 미완 과제: 전면 이미지형을 `pipeline` 템플릿(`uvparasol-insta.html`)에 이식.
