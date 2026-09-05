@@ -27,7 +27,7 @@ Playwright는 시스템 Python 3.12에 설치돼 있고 `C:\Program Files\Google
 ## `cards` 배열 필드
 ```js
 {kind:'cover', img:'assets/cover-x.jpg', pos:'50% 50%', lab:'표지', kicker:'EARLY AUTUMN DENIM',
- title:'여름엔 뺐던 청바지<br><em>이제 꺼낼 때</em>', sub:'커브드 · 와이드 · 부츠컷 · 플레어 · 벌룬'},
+ title:'가을 데님<br><em>이제는 꺼낼 때</em>', sub:'커브드 · 와이드 · 부츠컷 · 플레어 · 벌룬'},
 {kind:'item', img:'assets/01-x.jpg', pos:'50% 50%', lab:'브랜드', badge:'31%',
  prod:'브랜드 · <b>상품명</b>', title:'헤드라인 1줄<br><em>강조 2줄</em>',
  meta:'무신사 <s>66,000원</s> 45,540원',            // 이 형식 필수 — JS가 정규식으로 쪼갠다
