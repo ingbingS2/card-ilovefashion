@@ -1,43 +1,78 @@
-# 20260904 초가을 데님 — 재현 가이드
+# 20260904 초가을 데님 — 이 폴더만 읽고 바로 이어서 할 것
 
-> 디자인·절차는 [`../early-autumn-outer/README.md`](../early-autumn-outer/README.md) (전면 이미지형 원본)와 같다. 이 문서는 **이 회차에서 다른 것만** 적는다.
-> 상태: **렌더·검증 완료, 게시 대기(사용자 승인 필요)**. 완성본은 `바탕화면\카드뉴스\20260904 초가을 데님\`.
+**상태 (2026-09-05 20:45): 7장 렌더·검증 완료. 게시만 남았고, 게시는 사용자 승인 후에만.**
+완성본 사본: `바탕화면\카드뉴스\20260904 초가을 데님\` (1~7.jpg · caption.txt · _preview.html · result.md).
+사용자에게 보여줄 때는 그 폴더의 `_preview.html` 경로만 알린다 (창은 사용자가 연다).
 
-## 1. 폴더
-| 경로 | 역할 |
-|---|---|
-| `index.html` | 디자인 원본 (아우터 index.html 복제 + `cards` 교체). |
-| `render.py` | 아우터와 동일. `python render.py` → 1~7.jpg (1080×1350). |
-| `assets/` | 표지 1 + 상품 5. `assets/cand/{goodsNo}/NN.jpg` 는 무신사 원본 후보(1500×1800). |
-| `_old/` | 09-04 구 레이아웃 초안(`index-oldlayout-20260904.html`, 렌더 시트, 후보 컨택트 시트). |
-| `caption.txt` · `_preview.html` · `result.md` · `review-selection.md` · `HISTORY.md` | 아우터 폴더와 같은 역할. |
+## 다음 할 일 (순서대로)
 
-## 2. 실행
 ```bash
 export PATH="/c/Users/yepdo/AppData/Local/Programs/Python/Python312:$PATH" PYTHONIOENCODING=utf-8
 cd card-drafts/early-autumn-denim
-python render.py
+python verify.py                          # 1) 게시 직전 5종 재확인 — 전부 [OK] 여야 한다
+python render.py                          # 2) verify 에서 숫자가 달라졌으면 index.html 의 cards 를 고치고 재렌더
 cp [1-7].jpg caption.txt _preview.html result.md "/c/Users/yepdo/OneDrive/Desktop/카드뉴스/20260904 초가을 데님/"
 python ../../scripts/post_ig.py "20260904 초가을 데님" --dry-run
-python ../../scripts/post_ig.py "20260904 초가을 데님"      # ★ 사용자 승인 후에만
+python ../../scripts/post_ig.py "20260904 초가을 데님"   # 3) ★ 사용자 승인 후에만. 되돌릴 수 없다
 ```
+4) 게시 후: `result.md` §4 에 게시 시각(분)·permalink·호스팅 기록 → **+72시간 뒤** 인사이트 API로 §5 채움
+   (`GET graph.instagram.com/v23.0/me/media` → media_id → `/{id}/insights?metric=reach,saved,shares,likes,comments,total_interactions,profile_visits,follows,views`, 토큰은 `카드뉴스\ig_api_token.txt`).
+5) `KEYWORD-POLICY.md` 맨 아래 표의 2026-09-04 행을 "게시 완료 + permalink"로, `BRAND-ROSTER.md` 의 미확인 목록을 갱신.
 
-## 3. 사진 매핑 (카드 데이터 원문은 `index.html` 의 `const cards=[…]`)
+## 파일
 
-| 카드 | 파일 | 원본 |
-|---|---|---|
-| 표지 | `cover-secondsalt.jpg` | `cand/6507751/00` (벤치 정면 착용컷, 얼굴) |
-| 2 아워데이즈 | `01-ourdayz.jpg` | `cand/7009519/09` |
-| 3 미치코런던 | `02-michiko.jpg` | `cand/5984093/00` (유일한 착용컷, 얼굴 없음) |
-| 4 미레코 | `03-mireco.jpg` | `cand/6026753/01` |
-| 5 낫포너드 | `04-notfornerd.jpg` | `cand/6135920/05` |
-| 6 세컨드솔트 | `05-secondsalt.jpg` | `cand/6507751/04` |
-| 7 CTA | `../../CARD/zzal/20260905.jpg` | zzal 최신 (09-05 추가 · "도움 필요하신 분 연락주세요") |
+| 파일 | 역할 |
+|---|---|
+| `index.html` | 카드 7장 원본. **바꿀 것은 `const cards=[…]` 배열만** (CSS·JS는 `../early-autumn-outer/index.html` 과 동일한 전면 이미지형). |
+| `render.py` | `#card0`~`#card6` 을 1080×1350 JPG 로 캡처. |
+| `verify.py` | 무신사 5종 가격·후기·구매 가능·인용문 존재를 카드 값과 대조. Chrome 확장 없이 돈다. |
+| `assets/` | 표지 1 + 상품 5 사진. `assets/cand/{goodsNo}/` 는 무신사 원본 후보(1500×1800), 다른 컷이 필요하면 여기서 고른다. |
+| `caption.txt` | 인스타 캡션 원문. `_preview.html` 안의 캡션과 항상 같게 유지. |
+| `result.md` | 실험 로그 (게시 폴더에도 복사). 게시 전 설계는 채워져 있고 §4~§8 은 게시 후 채운다. |
+| `_old/` | 09-04 구 레이아웃 초안. 참고용, 삭제 가능. |
 
-## 6. 검증 — Chrome 확장 없이 (2026-09-05 실제 사용)
-Playwright + 실제 Chrome 헤드리스로 `https://www.musinsa.com/products/{goodsNo}` 를 열고(`--disable-blink-features=AutomationControlled`, 일반 Chrome UA), 페이지 안에서 fetch:
-- 가격: `https://goods-detail.musinsa.com/api2/goods/{no}` → `data.goodsPrice.salePrice / normalPrice / discountRate` (카드 표기). `finalPrice` 는 쿠폰가 — 쓰지 않는다.
-- 후기 수·평점: `https://goods.musinsa.com/api2/review/v1/goods/{no}/reviews/summary` → `totalCount`, `satisfactionScore`.
-- 후기 원문: `…/review/v1/view/list?page=N&pageSize=20&goodsNo={no}&sort=up_cnt_desc&selectedSimilarNo={no}&myFilter=false&hasPhoto=false&isExperience=false` 를 빈 목록까지 순회.
-- 품절: `document.body.innerText` 에 `구매하기` 가 있는지 (없고 `재입고 알림 신청`만 있으면 품절).
-- 핸들: 웹검색 + 공식몰 footer(WebFetch) + 인스타 프로필(WebFetch) 3중.
+## 카드 구성 (2026-09-05 실측 · 전부 무신사 단독 · 전부 구매 가능)
+
+| 카드 | 브랜드 · 상품 (goodsNo) | 정가 → 판매가 (할인) | 후기 · 평점 | 사진 원본 | 인스타 핸들 (3중 검증 완료) |
+|---|---|---|---|---|---|
+| 1 표지 | 세컨드솔트 벌룬 데미지 (6507751) 벤치 정면 착용컷 | — | — | `cand/6507751/00` | — |
+| 2 | 아워데이즈 · [젠플록스X아워데이즈] 세미 커브드 데님 팬츠 (7009519) | 66,000 → 45,540 (31%) | 99 · 4.9 | `cand/7009519/09` | `@ourdayz_official` (1.2K) |
+| 3 | 미치코런던 코시노 · 시그니처 와이드 데님 미드 블루 (5984093) | 89,000 → 84,550 (5%) | 8 · 5.0 | `cand/5984093/00` (얼굴 없음, 유일한 착용컷) | `@michiko_london_kr` (52.6K, **로스터** 3회차) |
+| 4 | 미레코 · NON-FADE BOOTCUT DENIM PT TRUE BLACK (6026753) | 90,000 → 81,000 (10%) | 35 · 4.8 | `cand/6026753/01` | `@to.mireco` (19.1K) |
+| 5 | 낫포너드 · W Symbol Stitch Low Rise Flare Fit Denim Pants (6135920) | 99,000 → 69,000 (30%) | 28 · 4.8 | `cand/6135920/05` | `@not4nerd` (46K · 공식몰엔 `@not4nerd_official` 도 병기, footer 쪽인 이걸 택함) |
+| 6 | 세컨드솔트 · 벌룬 데미지 데님 팬츠 빈티지블루 (6507751) | 79,000 → 69,520 (12%) | 73 · 4.8 | `cand/6507751/04` | `@secondsalt_official` (2.1K) |
+| 7 CTA | 무한도전 짤 `../../CARD/zzal/20260905.jpg` ("도움 필요하신 분 연락주세요") | — | — | zzal 폴더 **최신 파일**을 쓴다 | — |
+
+- 가격은 `goodsPrice.salePrice`(쿠폰 전). 무신사 페이지가 크게 보여주는 더 낮은 값은 쿠폰가(`finalPrice`) — 카드에 쓰지 않는다.
+- 인용문 5건은 후기 목록에 원문 그대로 존재한다 (통인용·오타 그대로). 헤드라인은 인용 후기에서만 뽑고, **사진에 실제로 보이는 것**만 가리킨다 (3번은 뒤 포켓이 안 보여 "통은 넓은데 / 실루엣은 세련되게").
+- 표지와 6번은 같은 상품이지만 **다른 원본**이다 (규칙: 표지 사진은 상품 카드와 같은 사진 금지).
+- 09-04 초안 → 09-05 재검증 사이 낫포너드 할인율이 40→30%로 바뀌었다. **게시 직전 verify.py 를 반드시 다시 돌린다.**
+
+## 캡션 (caption.txt 원문 — 직전 3개 게시물과 문형·어휘 겹치지 않게 쓴 것)
+
+```
+8월에 긴바지를 고를 때는 청바지를 한 벌도 넣지 않았습니다 👖
+
+무겁고 잘 마르지 않아서였는데, 땀 걱정이 사라진 지금은 그 이유도 같이 사라졌습니다. 이번에는 색이나 워싱 대신 핏 하나로 갈라서, 같은 청바지가 통과 기장에서 얼마나 다른 옷이 되는지를 기준으로 삼았습니다 🍂
+
+올해 청바지를 다시 꺼낸 날, 기억나세요 💬
+
+📌 브랜드 계정
+아워데이즈 @ourdayz_official
+미치코런던 코시노 @michiko_london_kr
+미레코 @to.mireco
+낫포너드 @not4nerd
+세컨드솔트 @secondsalt_official
+```
+첫 줄은 `20260810 여름 긴바지` 의 선정 기준("청바지를 한 벌도 넣지 않았다")을 되받는 것. 캡션을 고치면 `_preview.html` 도 같이 고친다.
+
+## 수정할 때 지킬 것 (이 회차에서 실제로 걸린 것만)
+- 디자인은 바꾸지 않는다 — 전면 이미지형은 2026-09-04 사용자가 확정한 것. 상세 규칙은 `KEYWORD-POLICY.md` 디자인 규칙 9.
+- 상품을 바꾸면: 무신사 착용컷(`_big`, 1500×1800)이 있는 상품만. 누끼만 있는 상품은 흰 배경이 그대로 노출된다.
+- 로스터(반응 이력) 브랜드는 한 게시물에 1곳만 — 지금은 미치코런던.
+- 랭킹 키워드·해시태그·상품코드(의류) 금지. 페이지 번호 없음, 계정명은 오른쪽 하단.
+- 게시 전 검토 3+1회: 맞춤법 / 사실(verify.py) / 정책·형식 / 핸들. 하나라도 고치면 처음부터 다시.
+
+## 이전 판과 기록
+- 09-04 01:29 구 레이아웃으로 1차 렌더(`_old/`) → 09-05 전면 이미지형으로 전부 재제작·재검증(수치 4곳 갱신, 낫포너드 사진 교체, 미치코런던 헤드라인 교체, 표지·CTA 서브 교체, CTA 짤 20260830→20260905).
+- 디자인 원본과 확정 경위는 `../early-autumn-outer/README.md`.
