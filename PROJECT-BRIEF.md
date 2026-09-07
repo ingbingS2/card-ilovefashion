@@ -27,7 +27,9 @@ backend/      초기 웹앱 API — 사실상 미사용
 ```
 **실제로 카드뉴스는 지금 `card-drafts/<회차>/` 폴더를 복제해 수동 제작한다**(index.html의 `cards` 배열 교체 → `render.py`). 파이프라인 템플릿에 새 디자인을 이식하는 것은 미완 과제.
 
-산출물과 데이터는 저장소 밖: `C:\Users\yepdo\OneDrive\Desktop\카드뉴스\`
+**2026-09-07부터 작업 본체는 USB(D:)다**: `D:\fashion-cardnews`(저장소) + `D:\카드뉴스`(산출물) + `D:\_claude\memory`(클로드 메모리 백업). `frontend/node_modules`는 복사하지 않았으니 프론트 작업 전 `npm install`. `.venv`는 이 PC의 Python 3.12를 가리키므로 다른 PC에서는 `python -m venv .venv && pip install -r requirements.txt`로 다시 만든다. OneDrive 원본은 사용자 확인 전까지 남겨 둔다.
+
+산출물과 데이터는 저장소 밖의 **`카드뉴스` 폴더**. 코드(`scripts/post_ig.py`·`pipeline/app.py`·`pipeline/qa.py`)는 이 순서로 찾는다: 환경변수 `CARDNEWS_DIR` → **저장소 바로 옆의 `카드뉴스`**(USB면 `D:\카드뉴스`) → `C:\Users\yepdo\OneDrive\Desktop\카드뉴스`(원래 위치). 회차 폴더 README의 복사 명령은 아직 C: 경로 문자열이니 D:에서는 경로만 바꿔 쓴다.
 - `YYYYMMDD 키워드\` 1~7.jpg · caption.txt · result.md · _preview.html
 - `_dashboard.html`(사용자용 대시보드, "실험 노트" 코너 유지) · `_qa.json` · `ig_api_token.txt`(🔑 만료 ~09-17)
 

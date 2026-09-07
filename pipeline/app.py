@@ -74,7 +74,18 @@ app.add_middleware(
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1"])
 
 # 완성본 저장 위치: 바탕화면\카드뉴스\YYYYMMDD 주제\ (사용자 확정 규칙)
-CARDNEWS_BASE_DIR = os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
+def _cardnews_dir() -> str:
+    """산출물 폴더. 우선순위: 환경변수 CARDNEWS_DIR → 저장소 옆의 '카드뉴스' 폴더(USB 등) → OneDrive 바탕화면."""
+    env = os.environ.get("CARDNEWS_DIR")
+    if env:
+        return env
+    sibling = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "카드뉴스"))
+    if os.path.isdir(sibling):
+        return sibling
+    return os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
+
+
+CARDNEWS_BASE_DIR = _cardnews_dir()
 
 # 마지막(CTA) 카드 이미지로 쓰는 무한도전 짤 폴더 (KEYWORD-POLICY.md — 항상 최신 파일 사용)
 ZZAL_DIR = Path(__file__).resolve().parents[1] / "CARD" / "zzal"

@@ -33,7 +33,19 @@ import requests
 GRAPH = "https://graph.instagram.com/v23.0"
 LITTERBOX = "https://litterbox.catbox.moe/resources/internals/api.php"
 UGUU = "https://uguu.se/upload"
-BASE_DIR = r"C:\Users\yepdo\OneDrive\Desktop\카드뉴스"
+def _default_base_dir() -> str:
+    """산출물 폴더. 우선순위: 환경변수 CARDNEWS_DIR → 저장소 옆의 '카드뉴스' 폴더(USB 등) → OneDrive 바탕화면."""
+    env = os.environ.get("CARDNEWS_DIR")
+    if env:
+        return env
+    repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sibling = os.path.normpath(os.path.join(repo_root, "..", "카드뉴스"))
+    if os.path.isdir(sibling):
+        return sibling
+    return os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
+
+
+BASE_DIR = _default_base_dir()
 TOKEN_FILE = os.path.join(BASE_DIR, "ig_api_token.txt")
 
 

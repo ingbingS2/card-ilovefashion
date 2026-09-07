@@ -22,7 +22,7 @@
 ```
 crawler/  pipeline/  frontend/  backend/  scripts/  card-drafts/  CARD/zzal/  firebase.json  firestore.rules  .firebaserc
 ```
-역할·데이터 흐름·산출물 위치(`바탕화면\카드뉴스\`)는 PROJECT-BRIEF.md §3.
+역할·데이터 흐름·산출물 위치(저장소 옆 `카드뉴스\` — USB면 `D:\카드뉴스`, 없으면 OneDrive 바탕화면)는 PROJECT-BRIEF.md §3.
 
 ## 검증 명령
 ```bash

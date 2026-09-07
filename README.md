@@ -18,7 +18,7 @@
 | `backend/` | 초기 웹앱 API(FastAPI + Claude) | 사실상 미사용 |
 | `CARD/zzal/` | CTA 카드용 짤 (수정일 최신 파일 사용) | |
 
-산출물은 저장소 밖 `C:\Users\yepdo\OneDrive\Desktop\카드뉴스\YYYYMMDD 키워드\`.
+산출물은 저장소 밖 `카드뉴스\YYYYMMDD 키워드\`. 위치 탐색 순서: `CARDNEWS_DIR` 환경변수 → 저장소 옆 `카드뉴스` 폴더(USB `D:\카드뉴스`) → `C:\Users\yepdo\OneDrive\Desktop\카드뉴스`. 2026-09-07부터 작업 본체는 `D:\fashion-cardnews` + `D:\카드뉴스`.
 
 ## 실행
 

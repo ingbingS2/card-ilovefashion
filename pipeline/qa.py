@@ -13,7 +13,18 @@ import threading
 import uuid
 from datetime import datetime
 
-CARDNEWS_DIR = os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
+def _cardnews_dir() -> str:
+    """산출물 폴더. 우선순위: 환경변수 CARDNEWS_DIR → 저장소 옆의 '카드뉴스' 폴더(USB 등) → OneDrive 바탕화면."""
+    env = os.environ.get("CARDNEWS_DIR")
+    if env:
+        return env
+    sibling = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "카드뉴스"))
+    if os.path.isdir(sibling):
+        return sibling
+    return os.path.join(os.path.expanduser("~"), "OneDrive", "Desktop", "카드뉴스")
+
+
+CARDNEWS_DIR = _cardnews_dir()
 QA_FILE = os.path.join(CARDNEWS_DIR, "_qa.json")
 POLICY_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "KEYWORD-POLICY.md"
