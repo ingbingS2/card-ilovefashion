@@ -26,7 +26,7 @@ CARDS = [
          quote="차르르 떨어져 다림질 필요 없네요", other=("musinsa", "2890244")),
     dict(brand="커스텀어클락 우먼", mall="29cm", no="3462638", price=49600, normal=62000, rate=20, reviews=545, score=5.0,
          kw="커스텀어클락 H라인 맥시 스커트", name="[듀닝 PICK] 포멀 슬릿 H라인 맥시 스커트 차콜 COWSK002CHARCOAL",
-         quote="발목까지 오는 맥시스커트라 좋아요", other=("musinsa", "5366191")),
+         quote="허리끈도 뺏다꼈다 할 수 있어서", other=("musinsa", "5366191")),
     dict(brand="노우드", mall="29cm", no="3736187", price=56000, normal=56000, rate=0, reviews=557, score=5.0,
          kw="노우드 Soft Ease Skirt", name="Soft Ease Skirt (Black)",
          quote="슬릿없는스커트 찾고있었는데 딱이에요", other=("musinsa", "5984932"),
