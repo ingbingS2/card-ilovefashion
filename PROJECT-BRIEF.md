@@ -59,6 +59,7 @@ export PYTHONIOENCODING=utf-8
 ## 6. 현재 상태 (2026-09-08)
 - **다음 키워드 = `가을 스커트`**(09-08 지정). 축은 실루엣 변주(플리츠·A라인·랩·슬릿 롱·카고), **데님 스커트 제외**(직전 회차 축 중복). 로스터 1곳 = 핀카 `@finca_planet` + 신규 4. 새 회차는 `card-drafts/early-autumn-denim/` 복제. **미치코런던은 10-05까지 상품·태그 제외**(사용자 지시).
 - **측정 완료**: `20260831 초가을 아우터` → 09-08 조회 도달 **119**·공유 0 → 판정 기준(200+·공유 1+) **미달**, result.md §5~§8 작성 완료. 로스터 0곳으로 짠 유일한 회차였다.
+- **`20260908 가을 스커트` 제작 완료 · 게시 승인 대기** — `카드뉴스60908 가을 스커트\_preview.html`. 5종 전부 29CM, 로스터 1(노우드)+신규 4. 새 회차 폴더는 `card-drafts/early-autumn-skirt/`.
 - **측정 대기 1건**: `20260904 초가을 데님`(09-05 21:24 게시 → **09-08 21:24 이후**). 09-08 15시 잠정값 도달 293·공유 2로 이미 기준 통과 — 정식 값으로 `result.md` §5 를 채운다.
 - 인사이트 전수 재조회 스냅샷: `카드뉴스\_insights-20260908.json`(20건). **KEYWORD-POLICY §10 표의 도달 값은 측정 시점이 섞여 있으니 축 비교는 §10 맨 아래 재조회 줄을 본다** — 특히 비키니는 표에 15로 적혀 있으나 누적 1,260(계정 최고)이다.
 - 진행 중 실험 #5 브랜드 반응·공유. 반응 브랜드 9곳(BRAND-ROSTER). 게시 실적·도달은 KEYWORD-POLICY §10.
@@ -67,6 +68,7 @@ export PYTHONIOENCODING=utf-8
 
 ## 7. 살아있는 함정
 - **무신사는 `requests`로 403.** Chrome 확장 또는 Playwright+실제 Chrome으로 페이지를 열고 페이지 안에서 API fetch. 확장은 `goods-detail.musinsa.com`·`instagram.com` 이동이 막혀 있고, Playwright 경로는 막히지 않는다. 인스타 프로필·공식몰 footer는 WebFetch.
+- **29CM은 쿠폰가 함정이 더 크다(09-08 발견)**: 상품 페이지 대표가·랭킹 `displayPrice`·검색 `totalSellPrice` 전부 쿠폰 반영가다. 카드에 쓸 정상가는 `bff-api.29cm.co.kr/api/v5/product-detail/{no}` 의 **`sellPrice`**. 무신사 랭킹 API `info.finalPrice`도 쿠폰가.
 - 무신사 페이지가 크게 보여주는 가격은 쿠폰가일 수 있다. 카드는 `goodsPrice.salePrice`. 29CM은 `displayPrice`(08-06 이전 크롤 스냅샷은 `sellPrice`가 담겨 실제보다 높다 — 소급 보정 안 됨).
 - 가격·품절은 하루 사이에도 바뀐다. **게시 직전 재검증 필수**, 구매하기 버튼까지 본다.
 - 게시 호스팅(litterbox/uguu 무료)이 둘 다 죽으면 게시 불가(07-27 실장애).
