@@ -23,8 +23,12 @@ def render(cards: list[dict], base_dir: Path, out_dir: Path) -> list[dict]:
     try:
         with sync_playwright() as pw:
             launch = {"headless": True}
-            if os.environ.get("CHROME_PATH"):
-                launch["executable_path"] = os.environ["CHROME_PATH"]
+            chrome = os.environ.get("CHROME_PATH") or next(
+                (p for p in (r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+                             r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
+                 if os.path.exists(p)), None)  # 이 PC는 Playwright 번들 Chromium 대신 설치된 Chrome
+            if chrome:
+                launch["executable_path"] = chrome
             browser = pw.chromium.launch(**launch)
             page = browser.new_page(viewport={"width": 600, "height": 900}, device_scale_factor=2)
             page.add_init_script(f"window.CARDS = {json.dumps(cards, ensure_ascii=False)};")

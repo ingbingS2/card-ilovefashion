@@ -99,14 +99,20 @@ def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description="+72h 측정·토큰 연장")
     ap.add_argument("--token", action="store_true")
     args = ap.parse_args(argv)
+    from_env = bool(os.environ.get("IG_ACCESS_TOKEN"))
     token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
     if args.token:
         data = refresh_token(token)
         days = int(data.get("expires_in", 0)) // 86400
         print(f"토큰 연장 완료 — 남은 기간 약 {days}일")
-        if data.get("access_token") and data["access_token"] != token:
-            print("⚠️ 새 토큰 문자열이 발급됐습니다. 클라우드 환경변수 IG_ACCESS_TOKEN을 바꿔야 합니다"
-                  " (값은 출력하지 않음 — 사용자에게 Meta 앱에서 새 토큰을 발급해 넣도록 안내).")
+        new = data.get("access_token")
+        if new and new != token:
+            if from_env:
+                print("⚠️ 새 토큰 문자열이 발급됐습니다. 환경변수 IG_ACCESS_TOKEN을 바꿔야 합니다(값은 출력하지 않음).")
+            else:  # 저장소 밖 카드뉴스 폴더의 토큰 파일 — 커밋되지 않는다
+                with open(post_ig.TOKEN_FILE, "w", encoding="utf-8") as f:
+                    f.write(new + "\n")
+                print(f"새 토큰을 {post_ig.TOKEN_FILE}에 저장했습니다(값은 출력하지 않음).")
         return
     done, errors = measure(token)
     for h in done:
