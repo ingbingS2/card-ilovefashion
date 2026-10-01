@@ -232,3 +232,57 @@ def test_zzal_rules(episode):
     assert any("없음" in m for _, m in rules.check_zzal({"zzal": "nope.jpg"}, idx, [], today))
     assert any("cta.zzal" in m for _, m in rules.check_zzal({}, idx, [], today))
     assert rules.check_zzal({"zzal": "../x.jpg"}, idx, [], today)[0][0] == "error"  # 폴더 밖 경로 금지
+
+
+def test_photo_tags_only_verified_product_cards(episode, cands, handles):
+    write_episode(episode["folder"], episode, cands)
+    state.save_handles(handles)
+    tags = publish.photo_tags(episode["folder"])
+    # 2~6번 = 상품 1~5. 5번 상품(신규브랜드)은 핸들 미검증 → 6번 사진 태그 없음, 표지(1)·CTA(7)도 없음
+    assert sorted(tags) == [2, 3, 4, 5]
+    assert tags[2] == [{"username": "moodinside_official", "x": publish.TAG_X, "y": publish.TAG_Y}]
+    assert tags[4][0]["username"] == "generalidea_official"
+
+
+def test_publish_sends_user_tags_and_falls_back(episode, cands, handles, monkeypatch):
+    folder = episode["folder"]
+    d = write_episode(folder, episode, cands)
+    state.save_handles(handles)
+    state.save_history([])
+    for i in range(1, 8):
+        (d / f"{i}.jpg").write_bytes(b"x")
+    (d / "caption.txt").write_text("본문", encoding="utf-8")
+    (d / "result.md").write_text("- (게시 후 publish가 채운다)\n", encoding="utf-8")
+    state.save_status(folder, {"stage": "built"})
+    calls = []
+
+    def fake_api(method, endpoint, token, **data):
+        calls.append((endpoint, data))
+        if endpoint == "me":
+            return {"username": "i_s2_fashion"}
+        if endpoint == "me/media" and method == "GET":
+            return {"data": []}
+        if endpoint == "me/media" and data.get("is_carousel_item"):
+            if "verdnt" in data.get("user_tags", ""):
+                raise RuntimeError("invalid user tag")
+            return {"id": f"c{len(calls)}"}
+        if endpoint == "me/media":
+            return {"id": "CAR"}
+        if endpoint == "me/media_publish":
+            return {"id": "M1"}
+        if data.get("fields") == "status_code":
+            return {"status_code": "FINISHED"}
+        return {"permalink": "https://www.instagram.com/p/x/", "caption": "본문"}
+
+    monkeypatch.setattr(publish, "api", fake_api)
+    monkeypatch.setattr(publish, "public_url", lambda f, p: f"https://img/{p.name}")
+    monkeypatch.setattr(publish, "push_data", lambda m: True)
+    monkeypatch.setattr(publish.time, "sleep", lambda s: None)
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "T")
+    st = publish.publish(folder)
+    sent = [json.loads(dt["user_tags"])[0]["username"] for ep_, dt in calls
+            if ep_ == "me/media" and dt.get("user_tags")]
+    assert "moodinside_official" in sent and "generalidea_official" in sent
+    assert st["user_tags"]["3"]["result"] == "태그 없이 올림"   # 버던트 태그 실패 → 태그 빼고 성공
+    assert st["user_tags"]["2"]["result"] == "ok"
+    assert "사진 태그(user_tags): 2번 @moodinside_official" in (d / "result.md").read_text(encoding="utf-8")

@@ -26,7 +26,8 @@ from urllib.parse import quote
 import requests
 
 from . import config
-from .state import fingerprint, last_post, load_history, load_status, parse_dt, save_history, save_status
+from .state import (find_handle, fingerprint, last_post, load_handles, load_history, load_status, parse_dt,
+                    save_history, save_status)
 
 sys.path.insert(0, str(config.REPO_ROOT / "scripts"))
 import post_ig  # noqa: E402  (기존 검증된 Graph API 플로우 재사용)
@@ -55,6 +56,25 @@ def public_url(folder: str, local: Path) -> str:
     except requests.exceptions.RequestException:
         pass
     return post_ig.host_image(str(local))
+
+
+TAG_X, TAG_Y = 0.5, 0.42  # 상품 카드에서 옷이 있는 중앙 부근(하단 35%는 글자 영역)
+
+
+def photo_tags(folder: str) -> dict[int, list[dict]]:
+    """캐러셀 사진 번호(1~7) → user_tags. 상품 카드(2~6)에 그 브랜드의 검증된 핸들만. 표지·CTA는 태그 없음."""
+    ep_dir = config.episode_dir(folder)
+    ep = json.loads((ep_dir / "episode.json").read_text(encoding="utf-8"))
+    cands = {str(c["goodsNo"]): c for c in
+             json.loads((ep_dir / "candidates.json").read_text(encoding="utf-8"))["candidates"]}
+    handles = load_handles()
+    out: dict[int, list[dict]] = {}
+    for i, p in enumerate(ep["products"], 2):
+        c = cands[str(p["goodsNo"])]
+        entry = find_handle(handles, c["brand"], c.get("brand_en", ""), c.get("brand_id", ""))
+        if entry and entry.get("verified") and entry.get("handle"):
+            out[i] = [{"username": entry["handle"].lstrip("@"), "x": TAG_X, "y": TAG_Y}]
+    return out
 
 
 def too_soon(prev: datetime, now: datetime) -> bool:
@@ -123,15 +143,24 @@ def publish(folder: str) -> dict:
             raise SystemExit(f"인스타 최근 게시물({ts.astimezone(config.KST):%m-%d %H:%M})과 너무 가깝습니다 — 게시 중단")
 
     urls = [public_url(folder, Path(p)) for p in images]
+    tags = photo_tags(folder)
+    tag_result: dict[int, str] = {}
     children = []
-    for url in urls:
+    for i, url in enumerate(urls, 1):
+        extra = {"user_tags": json.dumps(tags[i])} if tags.get(i) else {}
         last = None
-        for _ in range(3):  # 9004 간헐 오류는 재시도로 풀린다 (post_ig 주석)
+        for attempt in range(4):  # 9004 간헐 오류는 재시도로 풀린다 (post_ig 주석)
             try:
-                children.append(api("POST", "me/media", token, image_url=url, is_carousel_item="true")["id"])
+                children.append(api("POST", "me/media", token, image_url=url, is_carousel_item="true",
+                                    **extra)["id"])
+                if tags.get(i):
+                    tag_result[i] = "ok" if extra else "태그 없이 올림"
                 break
             except RuntimeError as e:
                 last = e
+                if extra and attempt >= 1:  # 태그 때문일 수 있다 — 두 번 실패하면 태그를 빼고 다시
+                    print(f"⚠️ {i}번 사진 태그 실패 → 태그 없이 다시 시도: {str(e)[:120]}")
+                    extra = {}
                 time.sleep(4)
         else:
             raise RuntimeError(f"아이템 컨테이너 생성 실패: {last}")
@@ -149,6 +178,8 @@ def publish(folder: str) -> dict:
 
     st = load_status(folder)
     st.update(stage="publishing", carousel_id=carousel, image_urls=urls,
+              user_tags={str(i): {"tags": [t["username"] for t in tags.get(i, [])], "result": r}
+                         for i, r in tag_result.items()},
               publishing_at=config.now_kst().isoformat(timespec="seconds"))
     save_status(folder, st)
     media_id = api("POST", "me/media_publish", token, creation_id=carousel)["id"]
@@ -198,7 +229,10 @@ def record(folder: str, st: dict) -> None:
                else "litterbox/uguu 포함")
     block = (f"<!-- publish -->\n- 게시 {st['posted_at']} (KST) · {st.get('permalink', '(permalink 미확인)')} · "
              f"media_id {st['media_id']}\n- 게시 방식: autopost.publish (Graph API) · 호스팅: {hosting}\n"
-             f"- 캡션 재조회 일치: {st.get('caption_ok')}\n- 측정 예정: +72h\n<!-- /publish -->")
+             f"- 캡션 재조회 일치: {st.get('caption_ok')}\n"
+             f"- 사진 태그(user_tags): "
+             f"{', '.join(f'{k}번 @' + '/@'.join(v['tags']) + ('' if v['result'] == 'ok' else ' (실패→태그 없이)') for k, v in sorted(st.get('user_tags', {}).items())) or '없음'}\n"
+             f"- 측정 예정: +72h\n<!-- /publish -->")
     if "<!-- publish -->" in text:
         text = text[:text.index("<!-- publish -->")] + block + text[text.index("<!-- /publish -->") + 17:]
     else:
@@ -218,6 +252,9 @@ def main(argv=None) -> None:
     if problems:
         sys.exit(1)
     if args.check:
+        tags = photo_tags(args.folder)
+        for i in range(1, 8):
+            print(f"  {i}번 사진 태그: {', '.join('@' + t['username'] for t in tags.get(i, [])) or '없음'}")
         print("게시 조건 충족 (--check: 게시하지 않음)")
         return
     st = publish(args.folder)
