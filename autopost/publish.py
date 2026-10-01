@@ -27,7 +27,7 @@ import requests
 
 from . import config
 from .state import (find_handle, fingerprint, last_post, load_handles, load_history, load_status, parse_dt,
-                    save_history, save_status)
+                    save_handles, save_history, save_status)
 
 sys.path.insert(0, str(config.REPO_ROOT / "scripts"))
 import post_ig  # noqa: E402  (기존 검증된 Graph API 플로우 재사용)
@@ -72,9 +72,21 @@ def photo_tags(folder: str) -> dict[int, list[dict]]:
     for i, p in enumerate(ep["products"], 2):
         c = cands[str(p["goodsNo"])]
         entry = find_handle(handles, c["brand"], c.get("brand_en", ""), c.get("brand_id", ""))
-        if entry and entry.get("verified") and entry.get("handle"):
+        if entry and entry.get("verified") and entry.get("handle") and entry.get("photo_tag", True):
             out[i] = [{"username": entry["handle"].lstrip("@"), "x": TAG_X, "y": TAG_Y}]
     return out
+
+
+def mark_tag_blocked(usernames: list[str]) -> None:
+    """인스타가 태그를 거부한 계정(태그 허용 안 함 설정 등)은 다음부터 사진 태그를 건너뛴다. 캡션 멘션은 유지."""
+    if not usernames:
+        return
+    handles = load_handles()
+    for e in handles.get("brands", []):
+        if (e.get("handle") or "").lstrip("@") in usernames:
+            e["photo_tag"] = False
+            e["photo_tag_note"] = f"{config.now_kst().date().isoformat()} 사진 태그 거부(Invalid user id) — 계정의 태그 허용 설정으로 추정"
+    save_handles(handles)
 
 
 def too_soon(prev: datetime, now: datetime) -> bool:
@@ -176,6 +188,7 @@ def publish(folder: str) -> dict:
     else:
         raise RuntimeError("캐러셀 컨테이너 준비 대기 시간 초과")
 
+    mark_tag_blocked([t["username"] for i, r in tag_result.items() if r != "ok" for t in tags.get(i, [])])
     st = load_status(folder)
     st.update(stage="publishing", carousel_id=carousel, image_urls=urls,
               user_tags={str(i): {"tags": [t["username"] for t in tags.get(i, [])], "result": r}

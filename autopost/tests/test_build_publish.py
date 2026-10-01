@@ -284,5 +284,15 @@ def test_publish_sends_user_tags_and_falls_back(episode, cands, handles, monkeyp
             if ep_ == "me/media" and dt.get("user_tags")]
     assert "moodinside_official" in sent and "generalidea_official" in sent
     assert st["user_tags"]["3"]["result"] == "태그 없이 올림"   # 버던트 태그 실패 → 태그 빼고 성공
+    assert {b["handle"]: b for b in state.load_handles()["brands"]}["verdnt_official"]["photo_tag"] is False
     assert st["user_tags"]["2"]["result"] == "ok"
     assert "사진 태그(user_tags): 2번 @moodinside_official" in (d / "result.md").read_text(encoding="utf-8")
+
+
+def test_tag_blocked_handle_is_skipped_next_time(episode, cands, handles):
+    write_episode(episode["folder"], episode, cands)
+    state.save_handles(handles)
+    publish.mark_tag_blocked(["verdnt_official"])
+    saved = {b["handle"]: b for b in state.load_handles()["brands"]}
+    assert saved["verdnt_official"]["photo_tag"] is False and saved["we_are_urago"].get("photo_tag", True)
+    assert 3 not in publish.photo_tags(episode["folder"])          # 버던트(3번 사진) 태그 건너뜀
