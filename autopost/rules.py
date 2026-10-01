@@ -26,14 +26,14 @@ _FACT_TERM = re.compile(
     r"|(?<![가-힣])면(?:(?![가-힣])|(?=소재|혼방|혼용|원단))"
     r"|(?<![가-힣])울(?:(?![가-힣])|(?=소재|혼방|혼용|원단|니트|로|이|과|은|의|을|처럼))")
 _FACT_SYNONYMS = {
-    "면": ("면", "코튼", "cotton"), "코튼": ("면", "코튼", "cotton"),
-    "울": ("울", "wool", "양모"), "캐시미어": ("캐시미어", "cashmere"), "알파카": ("알파카", "alpaca"),
+    "면": ("면", "순면", "코튼", "cotton"), "코튼": ("면", "순면", "코튼", "cotton"),
+    "울": ("울", "wool", "양모", "메리노", "램스울", "모~"), "캐시미어": ("캐시미어", "cashmere"), "알파카": ("알파카", "alpaca"),
     "모헤어": ("모헤어", "mohair"), "폴리": ("폴리", "polyester"), "나일론": ("나일론", "nylon", "폴리아미드"),
     "레이온": ("레이온", "rayon", "viscose", "비스코스"), "아크릴": ("아크릴", "acrylic"),
     "린넨": ("린넨", "리넨", "linen"), "리넨": ("린넨", "리넨", "linen"),
     "드라이클리닝": ("드라이클리닝", "드라이크리닝", "dryclean"), "드라이크리닝": ("드라이클리닝", "드라이크리닝", "dryclean"),
 }
-_CHEAPER_CLAIM = re.compile(r"저렴한\s*쪽|더\s*저렴|최저가|싼\s*쪽|더\s*싼")
+_CHEAPER_CLAIM = re.compile(r"저렴한\s*쪽|더\s*저렴|최저가|싼\s*쪽|더\s*싼(?!티)")
 
 
 # ---------- 후기 인용 (§3) ----------
@@ -128,6 +128,8 @@ def fact_terms_missing(caption: str, source: str) -> list[str]:
         for s in _FACT_SYNONYMS.get(term, (term,)):
             if s in ("면", "울"):   # 원문에서도 '정면'·'겨울' 같은 단어 속 글자는 치지 않는다
                 found = bool(re.search(rf"(?<![가-힣]){s}", source or ""))
+            elif s == "모~":          # 혼용률 표기 '모 70%'·'모70%'(=울)
+                found = bool(re.search(r"(?<![가-힣])모\s*\d", source or ""))
             else:
                 found = s.lower() in flat
             if found:
@@ -285,6 +287,9 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
                     f"숫자를 빼거나 인용 후기로(추측 금지 §3)")
             elif missing:
                 err(f"{tag}: spec_line의 {missing}가 상세 페이지 텍스트에 없음(추측 금지 §3)")
+            terms = fact_terms_missing(str(p["spec_line"]), detail_text(c))
+            if terms:
+                err(f"{tag}: spec_line의 소재·세탁 표현 {terms}가 상세 원문에 없음 — 카드에 '상세 페이지 표기'로 찍힌다(§3)")
             if not re.search(r"\d", str(p["spec_line"])):
                 warn(f"{tag}: 숫자 없는 스펙 주장 — 상세 원문에 있는 사실인지 확인: '{str(p['spec_line'])[:40]}'")
             if c.get("quotes"):

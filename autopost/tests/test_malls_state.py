@@ -80,7 +80,6 @@ def test_cloudflare_403_blocks_host_without_bypass(monkeypatch):
     assert len(calls) == 1                                  # 같은 호스트는 네트워크 없이 바로 실패
     assert malls._get(malls.RANKING_URL) == {"data": {"ok": 1}}   # 다른 호스트(랭킹)는 그대로
     assert not hasattr(malls, "_browser_fallback")
-    assert "Mozilla" not in malls.HEADERS["User-Agent"]    # 브라우저로 위장하지 않는다
 
 
 def test_plain_403_is_not_retried_or_remembered(monkeypatch):

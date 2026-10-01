@@ -166,3 +166,12 @@ def test_result_md_cover_type_confounds_and_build_time_handles(episode, cands, h
     episode.pop("cover_type"); episode.pop("confounds")
     text = build.result_md(episode, build.enrich(episode, cands, handles), [], [])
     assert "**표지 유형**: 기록 없음" in text and "**변수 오염·주의**: 기록 없음" in text
+
+
+def test_token_refresh_skipped_within_24h(monkeypatch, capsys):
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "TOKEN-A")
+    measure.record_token_refresh("TOKEN-A", 5184000)
+    called = []
+    monkeypatch.setattr(measure, "refresh_token", lambda t: called.append(t) or {})
+    measure.main(["--token"])
+    assert called == [] and "건너뜀" in capsys.readouterr().out

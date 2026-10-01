@@ -37,7 +37,7 @@ def _bff_get(url: str) -> dict:
     재시도 뒤에도 403인 실패가 BFF_TRIP_AFTER번 이어지면 차단으로 보고 이번 실행 동안 바로 실패한다(성공하면 0으로)."""
     global _session, _bff_403_streak
     if _bff_403_streak >= BFF_TRIP_AFTER:
-        raise malls.MallError(f"29CM 상세 차단 — 이번 실행 중단(403 연속 {_bff_403_streak}회)")
+        raise malls.MallBlocked(f"29CM 상세 차단 — 이번 실행 중단(403 연속 {_bff_403_streak}회)")
     if _session is None:
         _session = requests.Session()
         _session.headers.update(HEADERS)
@@ -63,7 +63,7 @@ def _bff_get(url: str) -> dict:
     if status == 403:
         _bff_403_streak += 1
         if _bff_403_streak >= BFF_TRIP_AFTER:
-            raise malls.MallError(f"29CM 상세 차단 — 이번 실행 중단(403 연속 {_bff_403_streak}회): {url}")
+            raise malls.MallBlocked(f"29CM 상세 차단 — 이번 실행 중단(403 연속 {_bff_403_streak}회): {url}")
     raise malls.MallError(f"GET {url} 실패: {last}")
 
 

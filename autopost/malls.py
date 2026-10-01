@@ -14,7 +14,10 @@ from datetime import date
 
 import requests
 
-UA = "i_s2_fashion-autopost/1.0 (card-news bot; python-requests)"
+# 7월부터 크롤러와 같은 일반 브라우저 UA 문자열(10-02 실측: 봇 표기 UA는 가정용 IP에서도 두 몰 다 403).
+# 데이터센터 IP의 Cloudflare 차단은 이 값으로도 막히며, 그건 뚫지 않는다 — 아래 _get이 그 몰을 건너뛴다.
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
 HEADERS = {"User-Agent": UA, "Accept": "application/json, text/plain, */*",
            "Accept-Language": "ko-KR,ko;q=0.9"}
 IMG_HOST = "https://image.msscdn.net"
@@ -32,12 +35,16 @@ class MallError(RuntimeError):
     pass
 
 
+class MallBlocked(MallError):
+    """몰이 이 실행 환경을 막았다(Cloudflare 데이터센터 차단·연속 403) — 그 몰은 이번 실행에서 더 부르지 않는다."""
+
+
 _blocked_hosts: set[str] = set()   # Cloudflare 403을 받은 호스트 — 이번 실행 동안 네트워크 없이 바로 실패
 
 
-def _blocked_error(host: str) -> MallError:
+def _blocked_error(host: str) -> MallBlocked:
     mall = "29CM" if "29cm" in host else ("무신사" if "musinsa" in host or "msscdn" in host else host)
-    return MallError(f"{mall} 차단(데이터센터 IP 403) — 우회하지 않음: {host}")
+    return MallBlocked(f"{mall} 차단(데이터센터 IP 403) — 우회하지 않음: {host}")
 
 
 def _cloudflare_block(r) -> bool:

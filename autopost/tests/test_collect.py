@@ -259,3 +259,29 @@ def test_cli_append_flag(monkeypatch):
     assert seen["kw"] == {"append": True}
     collect.main(["candidates", "--folder", "f", "-q", "니트"])
     assert seen["kw"] == {"append": False}
+
+
+def test_single_29cm_failure_does_not_kill_mall(monkeypatch):
+    """한 상품의 403·404는 그 후보만 버린다 — 몰 전체 차단(MallBlocked)일 때만 그 몰을 끊는다."""
+    monkeypatch.setattr(malls, "search", lambda q, gf="A", size=60: [])
+    monkeypatch.setattr(malls29, "search", lambda q, size=50: [
+        {"itemNo": n, "frontBrandNameKor": b, "itemName": "울 니트", "reviewCount": 80}
+        for n, b in ((900, "노티아"), (901, "커스텀어클락"), (902, "로에일"))])
+
+    def build(no, handles):
+        if no == 900:
+            raise malls.MallError("29CM 상세 403 Forbidden")
+        return make_candidate(no, {901: "커스텀어클락", 902: "로에일"}[no], mall="29CM")
+    monkeypatch.setitem(collect.BUILDERS, "29CM", build)
+    monkeypatch.setattr(collect, "contact_sheet", lambda c, p: None)
+    monkeypatch.setattr(collect, "cheaper_elsewhere", lambda c: None)
+    _fix_now(monkeypatch)
+    res = collect.candidates("20261002 가을 니트", ["가을 니트"], gf="F")
+    assert [c["goodsNo"] for c in res["candidates"]] == [901, 902]
+    assert not any("차단" in n for n in res["notes"])
+
+    def blocked(no, handles):
+        raise malls.MallBlocked("29CM 상세 차단 — 이번 실행 중단")
+    monkeypatch.setitem(collect.BUILDERS, "29CM", blocked)
+    res = collect.candidates("20261002 가을 니트", ["가을 니트"], gf="F")
+    assert res["candidates"] == [] and any("29CM 상세 API 차단" in n for n in res["notes"])

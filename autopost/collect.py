@@ -29,7 +29,7 @@ MAX_PER_BRAND = 2      # 한 브랜드의 색상 변형이 후보를 다 채우�
 MAX_DETAIL_CALLS = 80  # 상세·후기 조회 상한 (몰 API 연속 호출 매너)
 MUSINSA, CM29 = "무신사", malls29.MALL
 # 29CM은 재입고·컬러 추가 때 availableBeginTimestamp가 새로 찍혀 오래된 상품이 신상으로 보인다 — 이런 표기는 거른다
-REORDER_MARKERS = re.compile(r"컬러\s*추가|색상\s*추가|[\[(]\s*\d+\s*차|리오더|재입고", re.I)
+REORDER_MARKERS = re.compile(r"컬러\s*추가|색상\s*추가|[\[(]\s*[2-9]\d*\s*차(?!\s*예약)|(?<!프)리오더|재입고", re.I)  # '[1차 예약]'·'프리오더'는 신상 선주문
 REORDER_DROP = "재입고·컬러추가 표기(판매 개시일 신뢰 불가)"
 
 
@@ -356,10 +356,11 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30, 
         calls += 1
         try:
             c = BUILDERS[row["mall"]](row["no"], handles)
-        except malls.MallError as e:
-            if "차단" in str(e) or "403" in str(e):
-                dead_malls.add(row["mall"])   # 데이터센터 IP 차단 — 남은 호출 예산을 다른 몰에 쓴다
-                notes.append(f"{row['mall']} 상세 API 차단(403) — 이 몰 후보는 수집하지 못함: {str(e)[:100]}")
+        except malls.MallBlocked as e:      # 몰 전체 차단(Cloudflare·29CM 차단기) — 남은 호출 예산을 다른 몰에 쓴다
+            dead_malls.add(row["mall"])
+            notes.append(f"{row['mall']} 상세 API 차단 — 이 몰 후보는 수집하지 못함: {str(e)[:100]}")
+            drop(f"{row['mall']} 상세 조회 실패"); continue
+        except malls.MallError:             # 한 상품의 403·404 등 — 그 후보만 버린다
             drop(f"{row['mall']} 상세 조회 실패"); continue
         if c["sold_out"]:
             drop("품절(상세)"); continue

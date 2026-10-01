@@ -79,9 +79,10 @@ def test_quote_missing_from_contents_blocks(ep29, monkeypatch, contents):
     assert not failed
 
 
-def test_review_api_failure_falls_back_to_detail_rating(ep29, monkeypatch):
+def test_review_api_failure_keeps_card_rating(ep29, monkeypatch):
+    """후기 API가 실패하면 0.5 단위 상세 평점으로 '변경'을 만들지 않고 카드 값을 유지한다."""
     _mall29(monkeypatch, review_fail=True)
     blocks, changes, failed, fresh = verify.check(FOLDER)
     assert not blocks and not failed
-    assert fresh["100"]["rating"] == 5.0
-    assert all("rating 4.9 → 5.0" in c for c in changes)
+    assert fresh["100"]["rating"] == 4.9
+    assert not any("rating" in c for c in changes)

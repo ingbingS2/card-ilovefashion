@@ -92,13 +92,27 @@ def mark_tag_blocked(usernames: list[str]) -> None:
     save_handles(handles)
 
 
+def recent_posts(history: list[dict], exclude: str = "") -> list[tuple[str, datetime]]:
+    """게시 시각 목록 — history의 게시 + 아직 history에 안 올라간 다른 회차의 publishing/posted(동시 실행 대비)."""
+    out = [(h.get("folder", ""), parse_dt(h["posted_at"])) for h in posted(history) if h.get("folder") != exclude]
+    if config.EPISODES_DIR.exists():
+        for d in config.EPISODES_DIR.iterdir():
+            if d.name == exclude or not (d / "status.json").exists():
+                continue
+            st = load_status(d.name)
+            t = st.get("posted_at") if st.get("stage") == "posted" else st.get("publishing_at")
+            if st.get("stage") in ("publishing", "posted") and t:
+                out.append((d.name, parse_dt(t)))
+    return out
+
+
 def earliest_post_time(now=None) -> datetime | None:
     """직전 게시 기준으로 다음 게시가 허용되는 가장 이른 시각(KST). 이력이 없으면 None(지금 가능)."""
     now = now or config.now_kst()
-    lp = last_post(load_history())
-    if not lp:
+    times = [t for _, t in recent_posts(load_history())]
+    if not times:
         return None
-    prev = parse_dt(lp["posted_at"]).astimezone(config.KST)
+    prev = max(times).astimezone(config.KST)
     by_hours = prev + timedelta(hours=config.MIN_HOURS_BETWEEN_POSTS)
     next_day = (prev + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
     return max(by_hours, next_day)
@@ -191,33 +205,99 @@ def gate(folder: str, approved: bool, now=None) -> list[str]:
         elif now - parse_dt(v) > timedelta(minutes=config.VERIFY_FRESH_MINUTES):
             problems.append(f"재검증이 {config.VERIFY_FRESH_MINUTES}분보다 오래됨 — verify 다시")
     history = load_history()
-    lp = last_post(history)
-    if lp and too_soon(parse_dt(lp["posted_at"]), now):
-        problems.append(f"직전 게시({lp['posted_at']})와 같은 날이거나 {config.MIN_HOURS_BETWEEN_POSTS}시간 미만")
+    for name, t in sorted(recent_posts(history, exclude=folder), key=lambda x: x[1], reverse=True):
+        if too_soon(t, now):
+            problems.append(f"직전 게시({name} {t.astimezone(config.KST):%m-%d %H:%M})와 같은 날이거나 "
+                            f"{config.MIN_HOURS_BETWEEN_POSTS}시간 미만")
+            break
     if stage in ("built", "approved"):
         problems += continuity_problems(folder, history)
     return problems
 
 
 def _git(*args: str, check: bool = True) -> subprocess.CompletedProcess:
-    return subprocess.run(["git", "-C", str(config.DATA_DIR), *args], check=check, capture_output=True, text=True)
+    return subprocess.run(["git", "-c", "core.quotepath=false", "-C", str(config.DATA_DIR), *args],
+                          check=check, capture_output=True, text=True, encoding="utf-8",
+                          env={**os.environ, "GIT_EDITOR": "true"})
+
+
+STAGE_RANK = {"posted": 6, "publishing": 5, "blocked": 4, "expired": 4, "skipped": 4, "approved": 3, "built": 2}
+
+
+def merge_data_file(path: str, upstream: str, mine: str) -> str | None:
+    """rebase 충돌 해결. status.json은 더 진행된 단계(같으면 원격), history.json은 행 합집합. 그 밖은 None(원격 우선)."""
+    name = path.replace("\\", "/").rsplit("/", 1)[-1]
+    try:
+        up, me = json.loads(upstream), json.loads(mine)
+    except ValueError:
+        return None
+    if name == "status.json" and isinstance(up, dict) and isinstance(me, dict):
+        pick = me if STAGE_RANK.get(me.get("stage"), 0) > STAGE_RANK.get(up.get("stage"), 0) else up
+    elif name == "history.json" and isinstance(up, list) and isinstance(me, list):
+        key = lambda h: h.get("media_id") or f"{h.get('folder')}|{h.get('posted_at')}"
+        rows = {key(h): dict(h) for h in up}
+        for h in me:
+            row = rows.setdefault(key(h), {})
+            for f, v in h.items():
+                if row.get(f) in (None, "", [], {}):
+                    row[f] = v
+        pick = sorted(rows.values(), key=lambda h: h.get("posted_at") or "")
+    else:
+        return None
+    return json.dumps(pick, ensure_ascii=False, indent=2) + "\n"
+
+
+def _rebase_in_progress() -> bool:
+    for name in ("rebase-merge", "rebase-apply"):
+        out = _git("rev-parse", "--git-path", name, check=False).stdout.strip()
+        if out and (Path(out) if Path(out).is_absolute() else config.DATA_DIR / out).exists():
+            return True
+    return False
+
+
+def _rebase_onto_remote() -> bool:
+    """원격을 받아 내 커밋을 그 위에 다시 쌓는다. 충돌은 merge_data_file 규칙으로 풀고, 못 풀면 abort."""
+    if _git("pull", "-q", "--rebase", "origin", config.DATA_BRANCH, check=False).returncode == 0:
+        return True
+    for _ in range(30):
+        if not _rebase_in_progress():
+            return False                       # pull 자체가 실패(네트워크 등)
+        files = [f for f in _git("diff", "--name-only", "-z", "--diff-filter=U", check=False).stdout.split("\0") if f]
+        for f in files:
+            up = _git("show", f":2:{f}", check=False)     # rebase 중 :2 = 원격(upstream), :3 = 내 커밋
+            me = _git("show", f":3:{f}", check=False)
+            merged = merge_data_file(f, up.stdout, me.stdout) if up.returncode == 0 and me.returncode == 0 else None
+            if merged is not None:
+                (config.DATA_DIR / f).write_text(merged, encoding="utf-8")
+                _git("add", "--", f)
+            elif up.returncode == 0:
+                _git("checkout", "--ours", "--", f, check=False)
+                _git("add", "--", f)
+            else:
+                _git("rm", "-q", "--", f, check=False)
+        if _git("rebase", "--continue", check=False).returncode != 0 and not files:
+            _git("rebase", "--skip", check=False)    # 해결 결과가 원격과 같아 빈 커밋이 된 경우
+        if not _rebase_in_progress():
+            return True
+    _git("rebase", "--abort", check=False)
+    return False
 
 
 def push_data(message: str) -> bool:
-    """데이터 브랜치에 커밋·푸시. 다른 세션이 먼저 밀었으면 rebase 후 다시(강제 푸시 없음). 실패하면 False."""
+    """데이터 브랜치에 커밋·푸시. 다른 세션이 먼저 밀었으면 rebase(충돌은 규칙대로 해결) 후 다시. 강제 푸시 없음."""
     try:
         _git("add", "-A")
         if _git("diff", "--cached", "--quiet", check=False).returncode != 0:
             _git("commit", "-qm", message)
         push = ("push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}")
         if _git(*push, check=False).returncode != 0:
-            if _git("pull", "-q", "--rebase", "origin", config.DATA_BRANCH, check=False).returncode != 0:
-                _git("rebase", "--abort", check=False)     # 충돌 — 작업 트리를 rebase 도중 상태로 남기지 않는다
-                raise subprocess.CalledProcessError(1, "git pull --rebase (충돌)")
+            if not _rebase_onto_remote():
+                raise subprocess.CalledProcessError(1, "git pull --rebase (충돌을 풀지 못함)")
             _git(*push)
         return True
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        print(f"⚠️ 데이터 브랜치 푸시 실패: {e} — 반드시 수동으로 푸시할 것(안 하면 다음 회차가 이 게시를 모른다)")
+        print(f"⚠️ 데이터 브랜치 푸시 실패: {e} — `git -C autopost-data pull --rebase origin {config.DATA_BRANCH}` 후 "
+              "다시 푸시할 것. 충돌하면 원격(다른 세션의 게시 기록)을 우선한다")
         return False
 
 
@@ -424,12 +504,21 @@ def publish_pending(now=None) -> list[str]:
             line, done = _publish_one(folder, now, verify_mod, build_episode)
         except SystemExit as e:           # 게이트·잠금 거부
             line, done = f"⏳ {folder}: {e}", False
-        except Exception as e:            # 한 회차의 예외가 뒤 회차·푸시·보고를 끊지 않게
-            line, done = f"⚠️ {folder}: 처리 중 오류 — {type(e).__name__}: {str(e)[:200]}", False
+        except Exception as e:            # 예외는 보고하고 멈춘다 — 게시 잠금 뒤 실패였다면 다음 회차를 올리면 안 된다
+            lines.append(f"⚠️ {folder}: 처리 중 오류 — {type(e).__name__}: {str(e)[:200]} (이번 실행 중단)")
+            break
         lines.append(line)
         if done:
             break  # 하루 한 건
     return lines
+
+
+def _needs_reapproval(folder: str, reasons: list[str]) -> None:
+    st = load_status(folder)
+    st.update(approved_at=None, approved_fingerprint=None, approved_quote=None, needs_reapproval=reasons)
+    if st.get("stage") == "approved":
+        st["stage"] = "built"
+    save_status(folder, st)
 
 
 def _publish_one(folder: str, now, verify_mod, build_episode) -> tuple[str, bool]:
@@ -452,19 +541,24 @@ def _publish_one(folder: str, now, verify_mod, build_episode) -> tuple[str, bool
         save_status(folder, st)
         return f"⛔ {folder}: 게시 불가 — " + "; ".join(blocks) + " (상품 교체 후 다시 승인 필요)", False
     if failed:
+        if any("차단" in f for f in failed):
+            return (f"🖥️ {folder}: 이 환경(데이터센터 IP)에서는 차단된 몰을 재검증할 수 없음 — PC에서 "
+                    f"`sh autopost/ap.sh publish --pending`을 실행해야 게시된다(승인 {config.APPROVAL_TTL_HOURS}시간 안에): "
+                    + "; ".join(failed)), False
         return f"⚠️ {folder}: 몰 조회 실패 — 다음 실행에 다시 시도: " + "; ".join(failed), False
     if changes:
         risky = risky_changes(folder, fresh)
-        if risky:
-            st.update(stage="built", approved_at=None, approved_fingerprint=None, approved_quote=None,
-                      needs_reapproval=risky)
-            save_status(folder, st)
-            return f"⚠️ {folder}: 승인 뒤 숫자가 크게 바뀜 — 다시 보여주고 승인받아야 함: " + "; ".join(risky), False
-        verify_mod.apply(folder, fresh)          # 숫자 갱신 → stage=stale
-        rep = build_episode(folder)              # 같은 선택으로 다시 렌더
-        if not rep["rendered"] or any(l == "error" for l, _ in rep["issues"]):
-            return (f"⚠️ {folder}: 숫자 갱신 후 렌더 실패 — "
-                    + "; ".join(m for l, m in rep["issues"] if l == "error"), False)
+        try:
+            verify_mod.apply(folder, fresh)      # 숫자 갱신 → stage=stale
+            rep = build_episode(folder)          # 같은 선택으로 다시 렌더(크게 바뀐 경우도 새 카드를 보여줘야 하니)
+        except Exception as e:
+            _needs_reapproval(folder, [f"숫자 갱신·재렌더 중 오류: {type(e).__name__}: {str(e)[:120]}"])
+            raise
+        errors = [m for l, m in rep["issues"] if l == "error"]
+        if risky or not rep["rendered"] or errors:
+            reasons = risky + ([f"숫자 갱신 후 렌더 실패: {'; '.join(errors)}"] if (errors or not rep["rendered"]) else [])
+            _needs_reapproval(folder, reasons)
+            return (f"⚠️ {folder}: 승인 뒤 숫자가 바뀌어 새 카드로 다시 승인받아야 함 — " + "; ".join(reasons)), False
         st = load_status(folder)                 # 가격·할인·후기 수 갱신은 승인 범위 안(SKILL 8단계) — 원래 승인 유지
         st.update(stage="approved", approved_fingerprint=st["fingerprint"], refreshed_numbers=changes, **approval)
         save_status(folder, st)
@@ -482,12 +576,13 @@ def _publish_one(folder: str, now, verify_mod, build_episode) -> tuple[str, bool
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description="인스타 게시 (사용자 승인 후에만)")
     ap.add_argument("folder", nargs="?")
-    ap.add_argument("--user-approved", action="store_true")
-    ap.add_argument("--check", action="store_true", help="게시하지 않고 조건만 확인")
-    ap.add_argument("--approve", action="store_true", help="사용자 승인을 기록하고 데이터 브랜치에 푸시(게시는 --pending)")
+    mode = ap.add_mutually_exclusive_group()   # '--pending --check' 같은 조합으로 확인 창·의도를 비껴가지 않게
+    mode.add_argument("--user-approved", action="store_true")
+    mode.add_argument("--check", action="store_true", help="게시하지 않고 조건만 확인")
+    mode.add_argument("--approve", action="store_true", help="사용자 승인을 기록하고 데이터 브랜치에 푸시(게시는 --pending)")
+    mode.add_argument("--pending", action="store_true", help="승인 기록된 회차를 재검증 후 게시(하루 한 건)")
+    mode.add_argument("--next", action="store_true", help="다음 게시 가능 시각(KST)만 출력")
     ap.add_argument("--quote", default="", help="--approve와 함께: 사용자가 보낸 승인 메시지 원문")
-    ap.add_argument("--pending", action="store_true", help="승인 기록된 회차를 재검증 후 게시(하루 한 건)")
-    ap.add_argument("--next", action="store_true", help="다음 게시 가능 시각(KST)만 출력")
     args = ap.parse_args(argv)
     if args.next:
         t = earliest_post_time()

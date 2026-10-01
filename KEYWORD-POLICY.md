@@ -66,7 +66,7 @@
 4. **핸들 3중 독립 검증**: ① 웹검색(계정명·팔로워) ② 공식몰 footer 인스타 링크 ③ 인스타 프로필 직접 확인(표시명 일치) ④ 공식 X/Threads. 세 곳 미만이면 캡션에서 빼고 사용자에게 알린다. 가짜 계정 사고 방지.
 
 **게시 직전 재검증은 별도로 한 번 더 한다**(가격은 하루 사이에도 바뀐다 — 09-04 미쏘 25→24%, 09-05 낫포너드 40→30%). 항목: 가격·할인율·후기 수·평점·**구매하기 버튼 존재**(09-04 캘빈클라인은 가격 정상인데 품절이었다)·인용문 존재.
-무신사 접근: 가정용 IP(PC)에서는 `requests`로 API가 열린다. 데이터센터 IP(클라우드·Actions)는 Cloudflare 403 — **자동화 탐지 회피(브라우저 위장·`AutomationControlled` 끄기·UA 위장)로 뚫지 않는다**(10-02, autopost는 그 몰을 건너뛴다). 수동 확인이 필요하면 사람이 쓰는 브라우저(claude-in-chrome)로 `www.musinsa.com/products/{no}`를 열고 페이지 안에서 `goods-detail.musinsa.com/api2/goods/{no}`(가격 `goodsPrice.salePrice/normalPrice/discountRate`), `goods.musinsa.com/api2/review/v1/goods/{no}/reviews/summary`, 후기 list API를 fetch. 동작하는 스크립트: `card-drafts/early-autumn-denim/verify.py`. 상세 엔드포인트는 [crawler/FINDINGS.md](crawler/FINDINGS.md).
+무신사 접근: 가정용 IP(PC)에서는 `requests`로 API가 열린다. 데이터센터 IP(클라우드·Actions)는 Cloudflare 403 — **자동화 탐지 회피(헤드리스 브라우저 위장·`AutomationControlled` 끄기·헤드리스 UA 숨기기)로 뚫지 않는다**(10-02, autopost는 그 몰을 건너뛴다). 수동 확인이 필요하면 사람이 쓰는 브라우저(claude-in-chrome)로 `www.musinsa.com/products/{no}`를 열고 페이지 안에서 `goods-detail.musinsa.com/api2/goods/{no}`(가격 `goodsPrice.salePrice/normalPrice/discountRate`), `goods.musinsa.com/api2/review/v1/goods/{no}/reviews/summary`, 후기 list API를 fetch. 수동 회차의 `card-drafts/*/verify.py`는 10-02부터 탐지 회피 플래그·헤드리스 UA 숨기기를 뺐다(데이터센터 IP에선 막힐 수 있고, 막히면 그대로 둔다). autopost 회차는 `sh autopost/ap.sh verify`. 상세 엔드포인트는 [crawler/FINDINGS.md](crawler/FINDINGS.md).
 
 ## 7. 미리보기·피드백 처리
 - 완성본은 결과 폴더에 `_preview.html`(1~N.jpg + 캡션, `?t=Date.now()` 캐시 우회)을 만들고 **경로만 알린다. 브라우저 창을 직접 띄우지 않는다**(08-06). 수정 시 같은 파일명으로 덮어쓰고 "F5" 안내.

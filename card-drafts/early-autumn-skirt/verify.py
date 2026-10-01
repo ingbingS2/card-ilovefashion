@@ -94,9 +94,8 @@ def cm29(page, card):
 def main():
     problems = []
     with sync_playwright() as p:
-        browser = p.chromium.launch(executable_path=CHROME, headless=True,
-                                    args=["--disable-blink-features=AutomationControlled"])
-        ctx = browser.new_context(locale="ko-KR", user_agent=UA, viewport={"width": 1280, "height": 900})
+        browser = p.chromium.launch(executable_path=CHROME, headless=True)  # 자동화 탐지 회피 플래그 없음(10-02: 봇 차단 우회 금지)
+        ctx = browser.new_context(locale="ko-KR", viewport={"width": 1280, "height": 900})
         page = ctx.new_page()
         # 29CM API 는 29cm 페이지 컨텍스트에서만 200 — 미리 한 번 열어둔다
         page.goto("https://www.29cm.co.kr/", wait_until="domcontentloaded", timeout=60000)

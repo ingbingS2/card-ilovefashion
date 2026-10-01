@@ -234,6 +234,10 @@ def main(argv=None) -> None:
         return
     token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
     if args.token:
+        last = load_token_meta()["tokens"].get(token_key(token), {}).get("refreshed_at")
+        if last and config.now_kst() - parse_dt(last) < timedelta(hours=24):
+            print(f"토큰 연장 건너뜀 — {last[:16]}에 이미 연장함(인스타는 24시간 안 재연장을 거부할 수 있다)")
+            return
         data = refresh_token(token)
         days = int(data.get("expires_in", 0)) // 86400
         print(f"토큰 연장 완료 — 남은 기간 약 {days}일")

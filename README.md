@@ -59,7 +59,7 @@ sh autopost/ap.sh measure                                                  # +72
   `www.musinsa.com` `api.musinsa.com` `goods-detail.musinsa.com` `goods.musinsa.com` `client.musinsa.com` `image.msscdn.net` `www.29cm.co.kr` `product.29cm.co.kr` `search-api.29cm.co.kr` `bff-api.29cm.co.kr` `review-api.29cm.co.kr` `img.29cm.co.kr` `graph.instagram.com` `raw.githubusercontent.com` `github.com` `api.open-meteo.com` `cdn.jsdelivr.net` `www.jjalbang.today` `litterbox.catbox.moe` `uguu.se` `playwright.azureedge.net` `cdn.playwright.dev` `playwright.download.prss.microsoft.com`
   + "일반적인 패키지 매니저 기본 목록 포함" 체크. 설정 스크립트: `pip install -q requests pillow playwright pytest || true` / `python -m playwright install --with-deps chromium || true` / `apt-get install -y fonts-noto-cjk fonts-noto-color-emoji || true`.
 - **토큰은 게시 루틴 전용 환경에만**: 환경을 하나 더 만들어(예: "autopost-publish", 같은 도메인·설정 스크립트) 거기에만 `IG_ACCESS_TOKEN=<인스타 장기 토큰>`을 넣고 게시·측정 루틴을 그 환경으로 돌린다. 웹 글·후기를 읽는 제작 세션에는 토큰이 없어서 인젝션으로 토큰이 새거나 직접 게시될 수 없다(승인 기록만 하고 게시는 루틴이 한다). 환경변수 값은 그 환경을 쓰는 모든 세션에 보인다.
-- 무신사 검색·상세·후기 API는 데이터센터 IP를 Cloudflare 403으로 막는다(랭킹만 열림). 코드는 차단을 받으면 그 실행 동안 무신사를 건너뛰고 29CM로 채운다 — 브라우저 위장·프록시·캡차 같은 우회는 하지 않는다(crawler/FINDINGS). PC(가정용 회선)에서 돌면 두 몰 다 된다.
+- 무신사 검색·상세·후기 API는 데이터센터 IP를 Cloudflare 403으로 막는다(랭킹만 열림). 코드는 차단을 받으면 그 실행 동안 무신사를 건너뛰고 29CM로 채운다 — 헤드리스 브라우저 위장·프록시·캡차 같은 우회는 하지 않는다(crawler/FINDINGS). PC(가정용 회선)에서 돌면 두 몰 다 된다.
 
 크롤러:
 ```bash

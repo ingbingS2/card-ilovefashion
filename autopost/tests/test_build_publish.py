@@ -429,19 +429,125 @@ def test_publish_aborts_when_lock_push_is_rejected(episode, cands, handles, monk
     assert "me/media_publish" not in calls
 
 
-def test_push_data_aborts_rebase_on_conflict(monkeypatch):
-    seen = []
+def _git_ok():
+    try:
+        return subprocess.run(["git", "--version"], capture_output=True).returncode == 0
+    except FileNotFoundError:
+        return False
 
-    def fake_git(*args, check=True):
-        seen.append(args[0] if args[0] != "rebase" else "rebase " + args[1])
-        rc = {"diff": 1, "push": 1, "pull": 1}.get(args[0], 0)
-        if check and rc:
-            raise subprocess.CalledProcessError(rc, args)
-        return subprocess.CompletedProcess(args, rc, "", "")
 
-    monkeypatch.setattr(publish, "_git", fake_git)
-    assert publish.push_data("m") is False
-    assert "rebase --abort" in seen
+@pytest.mark.skipif(not _git_ok(), reason="git 없음")
+def test_push_data_resolves_conflicts_with_real_git(tmp_path, monkeypatch):
+    """두 세션이 같은 status.json·history.json을 고친 채 푸시 — 진 쪽이 규칙대로 합쳐 푸시한다(실제 git)."""
+    def g(cwd, *a):
+        return subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", "-C", str(cwd), *a],
+                              check=True, capture_output=True, text=True, encoding="utf-8")
+    remote, a, b = tmp_path / "remote.git", tmp_path / "a", tmp_path / "b"
+    subprocess.run(["git", "init", "-q", "--bare", str(remote)], check=True)
+    subprocess.run(["git", "clone", "-q", str(remote), str(a)], check=True, capture_output=True)
+    for c in (a,):
+        g(c, "checkout", "-q", "-b", config.DATA_BRANCH)
+    ep = "episodes/20261002 가을 니트"
+    (a / ep).mkdir(parents=True)
+    (a / ep / "status.json").write_text(json.dumps({"stage": "approved", "x": 1}, indent=2) + "\n", encoding="utf-8")
+    (a / "history.json").write_text(json.dumps([{"folder": "old", "posted_at": "2026-09-30T20:00+09:00", "media_id": "1"}],
+                                               indent=2) + "\n", encoding="utf-8")
+    g(a, "add", "-A"); g(a, "commit", "-qm", "init"); g(a, "push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}")
+    subprocess.run(["git", "clone", "-q", "-b", config.DATA_BRANCH, str(remote), str(b)], check=True, capture_output=True)
+    for c in (a, b):
+        g(c, "config", "user.name", "t"); g(c, "config", "user.email", "t@t")
+    # A: 게시 완료 기록을 먼저 푸시
+    (a / ep / "status.json").write_text(json.dumps({"stage": "posted", "media_id": "2"}, indent=2) + "\n", encoding="utf-8")
+    hist = json.loads((a / "history.json").read_text(encoding="utf-8")) + [{"folder": "20261002 가을 니트", "media_id": "2",
+                                                                            "posted_at": "2026-10-02T20:30+09:00"}]
+    (a / "history.json").write_text(json.dumps(hist, indent=2) + "\n", encoding="utf-8")
+    g(a, "add", "-A"); g(a, "commit", "-qm", "A posted"); g(a, "push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}")
+    # B: 같은 파일을 다르게 고침(재검증 기록 + 측정값)
+    (b / ep / "status.json").write_text(json.dumps({"stage": "approved", "verified_at": "x"}, indent=2) + "\n", encoding="utf-8")
+    (b / "history.json").write_text(json.dumps([{"folder": "old", "posted_at": "2026-09-30T20:00+09:00", "media_id": "1",
+                                                 "metrics": {"reach": 300}}], indent=2) + "\n", encoding="utf-8")
+    monkeypatch.setattr(config, "DATA_DIR", b)
+    assert publish.push_data("B") is True
+    g(a, "pull", "-q", "origin", config.DATA_BRANCH)
+    st = json.loads((a / ep / "status.json").read_text(encoding="utf-8"))
+    rows = {h["media_id"]: h for h in json.loads((a / "history.json").read_text(encoding="utf-8"))}
+    assert st["stage"] == "posted"                                   # 더 진행된 단계(원격의 posted)가 이긴다
+    assert set(rows) == {"1", "2"} and rows["1"]["metrics"] == {"reach": 300}   # 행 합집합 + 빈 칸 채움
+    assert not publish._rebase_in_progress()
+
+
+def test_merge_data_file_rules():
+    up = json.dumps({"stage": "publishing", "a": 1})
+    assert json.loads(publish.merge_data_file("episodes/x/status.json", up, json.dumps({"stage": "approved"})))["stage"] == "publishing"
+    assert json.loads(publish.merge_data_file("episodes/x/status.json", up, json.dumps({"stage": "posted"})))["stage"] == "posted"
+    assert publish.merge_data_file("episodes/x/episode.json", "{}", "{}") is None      # 그 밖은 원격 우선
+    assert publish.merge_data_file("history.json", "[", "[]") is None
+
+
+def test_gate_sees_other_episode_publishing(episode, cands):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    now = config.now_kst().replace(hour=12)
+    state.save_history([])
+    _approved(folder, now)
+    assert publish.gate(folder, approved=False, now=now) == []
+    state.save_status("20261001 다른 회차", {"stage": "publishing", "publishing_at": (now - timedelta(minutes=1)).isoformat()})
+    assert any("같은 날" in p and "다른 회차" in p for p in publish.gate(folder, approved=False, now=now))
+    assert publish.earliest_post_time(now) > now
+
+
+def test_main_rejects_mixed_modes(capsys):
+    with pytest.raises(SystemExit):
+        publish.main(["x", "--pending", "--check"])
+
+
+def test_risky_change_rerenders_and_unapproves(episode, cands, monkeypatch):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    now = config.now_kst().replace(hour=12)
+    state.save_history([])
+    _approved(folder, now)
+
+    class V:
+        EXIT_OK = 0
+
+        @staticmethod
+        def check(f):
+            return [], ["가격 변경"], [], {"100": {"sale_price": 49900, "discount": 0}}
+
+        @staticmethod
+        def apply(f, fresh):
+            pass
+
+    built = []
+
+    def fake_build(f):
+        built.append(f)
+        st = state.load_status(f)
+        st["stage"] = "built"
+        state.save_status(f, st)
+        return {"rendered": True, "issues": []}
+
+    line, done = publish._publish_one(folder, now, V, fake_build)
+    st = state.load_status(folder)
+    assert not done and built == [folder] and "다시 승인" in line
+    assert st["stage"] == "built" and not st.get("approved_quote") and any("할인" in r for r in st["needs_reapproval"])
+
+
+def test_blocked_mall_in_cloud_is_reported_distinctly(episode, cands):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    now = config.now_kst().replace(hour=12)
+    state.save_history([])
+    _approved(folder, now)
+
+    class V:
+        @staticmethod
+        def check(f):
+            return [], [], ["무드인사이드(100): 상세 조회 실패 무신사 차단(데이터센터 IP 403) — 우회하지 않음"], {}
+
+    line, done = publish._publish_one(folder, now, V, None)
+    assert line.startswith("🖥️") and "PC에서" in line and state.load_status(folder)["stage"] == "approved"
 
 
 def test_pending_newest_first_token_check_and_isolation(episode, cands, monkeypatch, tmp_path):
@@ -461,4 +567,4 @@ def test_pending_newest_first_token_check_and_isolation(episode, cands, monkeypa
 
     monkeypatch.setattr(publish, "_publish_one", one)
     out = publish.publish_pending()
-    assert out[0].startswith("⚠️ 20261002") and "KeyError" in out[0] and out[1] == "✅ 20261001 키워드0"
+    assert len(out) == 1 and out[0].startswith("⚠️ 20261002") and "KeyError" in out[0] and "중단" in out[0]
