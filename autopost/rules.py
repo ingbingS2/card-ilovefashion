@@ -91,8 +91,35 @@ def spec_missing(spec_line: str, source: str) -> list[str]:
 
 # ---------- 회차 검사 ----------
 
+def zzal_last_used(file: str, zzal_index: dict, history: list[dict]) -> date | None:
+    """목록의 last_used와 게시 이력(history.zzal) 중 가장 최근 날짜."""
+    dates = []
+    for z in zzal_index.get("zzal", []):
+        if z.get("file") == file and z.get("last_used"):
+            dates.append(date.fromisoformat(z["last_used"]))
+    for h in history:
+        if h.get("zzal") == file and h.get("posted_at"):
+            dates.append(date.fromisoformat(h["posted_at"][:10]))
+    return max(dates) if dates else None
+
+
+def check_zzal(cta: dict, zzal_index: dict, history: list[dict], today: date) -> list[tuple[str, str]]:
+    issues = []
+    f = cta.get("zzal")
+    if not f:
+        return [("error", "CTA 짤(cta.zzal)을 CARD/zzal/index.json에서 골라 적을 것")]
+    if "/" in f or "\\" in f or not (config.ZZAL_DIR / f).is_file():
+        return [("error", f"CTA 짤 파일이 CARD/zzal에 없음: {f}")]
+    if not any(z.get("file") == f for z in zzal_index.get("zzal", [])):
+        issues.append(("warn", f"짤 {f}가 index.json 목록에 없음 — 자막·장면을 보고 항목을 추가할 것"))
+    last = zzal_last_used(f, zzal_index, history)
+    if last and (today - last).days < config.ZZAL_COOLDOWN_DAYS:
+        issues.append(("error", f"짤 {f}는 {last.isoformat()}에 썼음 — {config.ZZAL_COOLDOWN_DAYS}일 안에 반복 금지"))
+    return issues
+
+
 def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
-                  today: date) -> list[tuple[str, str]]:
+                  today: date, zzal_index: dict | None = None) -> list[tuple[str, str]]:
     issues: list[tuple[str, str]] = []
     err = lambda m: issues.append(("error", m))
     warn = lambda m: issues.append(("warn", m))
@@ -254,6 +281,8 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
     for k in ("title", "sub"):
         if disallowed_tags(cta.get(k, "")):
             err(f"CTA {k}에 허용되지 않은 태그")
+    if zzal_index is not None:
+        issues.extend(check_zzal(cta, zzal_index, hist, today))
     return issues
 
 

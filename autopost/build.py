@@ -34,11 +34,8 @@ def won(n: int) -> str:
     return f"{n:,}원"
 
 
-def latest_zzal():
-    files = sorted(p for p in config.ZZAL_DIR.glob("*") if p.suffix.lower() in (".jpg", ".jpeg", ".png"))
-    if not files:
-        raise SystemExit(f"CTA 짤이 없습니다: {config.ZZAL_DIR}")
-    return files[-1]  # 파일명이 YYYYMMDD — git 체크아웃은 수정일을 보존하지 않아 이름으로 고른다
+def load_zzal_index() -> dict:
+    return json.loads(config.ZZAL_INDEX.read_text(encoding="utf-8")) if config.ZZAL_INDEX.exists() else {"zzal": []}
 
 
 def download(url: str, path) -> None:
@@ -170,7 +167,7 @@ def build(folder: str) -> dict:
     cands = json.loads((ep_dir / "candidates.json").read_text(encoding="utf-8"))
     history, handles = load_history(), load_handles()
     today = config.now_kst().date()
-    issues = rules.check_episode(ep, cands, history, handles, today)
+    issues = rules.check_episode(ep, cands, history, handles, today, load_zzal_index())
     if ep.get("folder") != folder:
         issues.append(("error", f"episode.json의 folder '{ep.get('folder')}'가 실행한 폴더와 다름"))
     report = {"folder": folder, "issues": issues, "rendered": False}
@@ -189,7 +186,9 @@ def build(folder: str) -> dict:
              assets / asset_name("cover", cover_cand["goodsNo"], ep["cover"]["image"]))
     for i, p in enumerate(prods, 1):
         download(p["images"][p["image"]], assets / asset_name(f"{i:02d}", p["goodsNo"], p["image"]))
-    zz = latest_zzal()
+    zz = config.ZZAL_DIR / ep["cta"]["zzal"]
+    for old in assets.glob("zzal.*"):
+        old.unlink()
     shutil.copyfile(zz, assets / f"zzal{zz.suffix.lower()}")
 
     from .render import render  # Playwright는 렌더할 때만 필요

@@ -213,5 +213,22 @@ def test_measure_parse_and_due():
     assert [h["media_id"] for h in measure.due(hist, now)] == ["1"]
 
 
-def test_latest_zzal_by_name():
-    assert build.latest_zzal().name >= "20260917.jpg"
+def test_zzal_index_lists_real_files():
+    idx = build.load_zzal_index()
+    files = [z["file"] for z in idx["zzal"]]
+    assert files and all((config.ZZAL_DIR / f).is_file() for f in files)
+
+
+def test_zzal_rules(episode):
+    from datetime import date
+    from autopost import rules
+    idx = {"zzal": [{"file": "20260719.jpg", "last_used": "2026-07-19"},
+                    {"file": "20260917.jpg", "last_used": "2026-09-17"}]}
+    today = date(2026, 10, 2)
+    assert rules.check_zzal({"zzal": "20260719.jpg"}, idx, [], today) == []
+    assert any("반복 금지" in m for _, m in rules.check_zzal({"zzal": "20260917.jpg"}, idx, [], today))
+    hist = [{"posted_at": "2026-09-30T09:00+09:00", "zzal": "20260719.jpg"}]
+    assert any("반복 금지" in m for _, m in rules.check_zzal({"zzal": "20260719.jpg"}, idx, hist, today))
+    assert any("없음" in m for _, m in rules.check_zzal({"zzal": "nope.jpg"}, idx, [], today))
+    assert any("cta.zzal" in m for _, m in rules.check_zzal({}, idx, [], today))
+    assert rules.check_zzal({"zzal": "../x.jpg"}, idx, [], today)[0][0] == "error"  # 폴더 밖 경로 금지

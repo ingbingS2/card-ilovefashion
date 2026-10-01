@@ -54,7 +54,9 @@ RANKING_WORDS = ("랭킹", "top", "베스트", "1위")
 # episode.json에서 세션이 쓸 수 있는 키 — 사실(가격·후기·인용 원문 등)은 candidates.json에서만 온다
 PRODUCT_KEYS = {"goodsNo", "image", "pos", "display_name", "color", "headline", "quote_no", "spec_line"}
 COVER_KEYS = {"goodsNo", "image", "pos", "kicker", "title", "sub"}
-CTA_KEYS = {"title", "sub"}
+CTA_KEYS = {"zzal", "title", "sub"}
+ZZAL_INDEX = ZZAL_DIR / "index.json"   # 짤 목록(자막·장면·무드·어울리는 주제·last_used)
+ZZAL_COOLDOWN_DAYS = 21                # 같은 짤은 3주 안에 다시 쓰지 않는다
 
 # 무신사 랭킹 카테고리 (crawler/FINDINGS.md)
 MUSINSA_CATEGORIES = {"001": "상의", "002": "아우터", "003": "바지", "100": "원피스/스커트",

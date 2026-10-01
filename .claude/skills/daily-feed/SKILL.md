@@ -90,6 +90,11 @@ python -m autopost.collect candidates --folder "<폴더명>" -q "<키워드>" -q
 - 표지 헤드라인: 시즌어+품목어를 **한글 그대로**(예: "아침저녁만 추운 날<br><em>가을 재킷</em> 다섯"). 키커(영문)는 보조.
 - 캡션(§5): 첫 줄 = 시즌어+품목어가 들어간 **구매 불안·손해를 건드리는 한 문장**. 그다음 선정 기준 단락 → 카드에 없는 실용 정보(상품별 한 줄, 후기·상세에서 확인한 것만) → 저장·공유를 구체적으로 요청하는 CTA → 경험을 묻는 질문. 이모지 3~5개, 해시태그 0개, 브랜드 목록은 쓰지 않는다(build가 붙인다). `autopost-data/episodes/` 최근 3개 `caption.txt`와 문형·시작 패턴·무드를 겹치지 않게.
 
+- **CTA(마지막 카드) 무한도전 짤은 직접 고른다.** `CARD/zzal/index.json`의 자막(caption)·장면·무드·어울리는 주제(fits)를 보고 이번 회차 주제·캡션 무드에 가장 맞는 짤을 `cta.zzal`에 파일명으로 적는다. 최근 21일 안에 쓴 짤은 build가 막는다. 고를 때 후보 2~3장은 Read로 직접 본다.
+  - **CTA 멘트는 그 짤의 자막·상황에 이어지게 쓴다.** 예: "이거 하고 거울 보니까 귀엽더라고" 짤 → "목선 하나 바꿨을 뿐인데 / 거울 볼 맛이 납니다". 짤 자막을 그대로 반복하지 말고, 이번 회차 품목과 연결한다. 2줄·`<em>`은 의미 단위로.
+  - 폴더에 index.json 항목이 없는 새 짤 파일이 있으면 Read로 보고 `{"file","caption","scene","mood","fits","last_used": ""}` 항목을 index.json에 추가한다(이 파일만은 main 작업 폴더에서 고쳐도 된다).
+  - 어울리는 짤이 없으면 가장 덜 어색한 것을 쓰고, 보고에 "새 짤이 있으면 좋을 장면"을 한 줄 적는다(사용자가 폴더에 넣는다).
+
 `autopost-data/episodes/<폴더명>/episode.json`:
 ```json
 {
@@ -103,7 +108,7 @@ python -m autopost.collect candidates --folder "<폴더명>" -q "<키워드>" -q
      "headline": "…<br><em>…</em>", "quote_no": 87372854},
     {"goodsNo": 0, "image": 1, "display_name": "…", "headline": "…", "spec_line": "총장 62cm · 어깨너비 51.5cm"}
   ],
-  "cta": {"title": "…<br><em>…</em>", "sub": "…"},
+  "cta": {"zzal": "20260719.jpg", "title": "…<br><em>…</em>", "sub": "…"},
   "caption": "첫 문장 …\n\n…"
 }
 ```

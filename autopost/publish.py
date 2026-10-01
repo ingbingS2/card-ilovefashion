@@ -186,6 +186,7 @@ def record(folder: str, st: dict) -> None:
             "mentions": [ln.split("@", 1)[1].strip() for ln in caption.split("📌", 1)[-1].splitlines()
                          if "📌" in caption and "@" in ln],
             "goods": [p["goodsNo"] for p in ep["products"]],
+            "zzal": (ep.get("cta") or {}).get("zzal", ""),
             "caption_first": caption.strip().split("\n", 1)[0], "auto": True}
         hist.append(row)
     row["permalink"] = st.get("permalink", "")
