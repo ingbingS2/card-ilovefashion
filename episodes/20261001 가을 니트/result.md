@@ -27,7 +27,13 @@
 | 5 | 수아레 우먼 | [무신사] 캐시미어 100 홀가먼트 터틀넥 니트 (5321066) | 86,400 | 135,000 | 36% | 142 | 4.7 | 2025-08-13 2025 F/W | 인용 | (태그 안 함) |
 
 ## 3. 게시 정보
-- (게시 후 publish가 채운다)
+<!-- publish -->
+- 게시 2026-10-01T23:31+09:00 (KST) · https://www.instagram.com/p/Dd9IRTljzJp/ · media_id 18090187292202527
+- 게시 방식: autopost.publish (Graph API) · 호스팅: raw.githubusercontent.com
+- 캡션 재조회 일치: True
+- 사진 태그(user_tags): 2번 @generalidea_official, 3번 @costumeoclock (실패→태그 없이), 4번 @we_are_urago, 5번 @siyazu_official, 6번 @suarestudio
+- 측정 예정: +72h
+<!-- /publish -->
 
 ## 4. 측정값 — 게시 +72시간
 - (measure가 채운다)

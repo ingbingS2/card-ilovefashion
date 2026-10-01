@@ -1,5 +1,5 @@
 {
-  "stage": "built",
+  "stage": "posted",
   "built_at": "2026-10-01T22:45:24+09:00",
   "issues": [],
   "shots": [
@@ -47,6 +47,53 @@
     }
   ],
   "fingerprint": "c7ff9f210ea945d929251adca6742c1a8eef4522a122bb15aee21dc9da1fff96",
-  "verified_at": "2026-10-01T22:45:35+09:00",
-  "verified_fingerprint": "c7ff9f210ea945d929251adca6742c1a8eef4522a122bb15aee21dc9da1fff96"
+  "verified_at": "2026-10-01T23:30:19+09:00",
+  "verified_fingerprint": "c7ff9f210ea945d929251adca6742c1a8eef4522a122bb15aee21dc9da1fff96",
+  "carousel_id": "18062384297615793",
+  "image_urls": [
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/1.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/2.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/3.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/4.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/5.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/6.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261001%20%EA%B0%80%EC%9D%84%20%EB%8B%88%ED%8A%B8/7.jpg"
+  ],
+  "user_tags": {
+    "2": {
+      "tags": [
+        "generalidea_official"
+      ],
+      "result": "ok"
+    },
+    "3": {
+      "tags": [
+        "costumeoclock"
+      ],
+      "result": "태그 없이 올림"
+    },
+    "4": {
+      "tags": [
+        "we_are_urago"
+      ],
+      "result": "ok"
+    },
+    "5": {
+      "tags": [
+        "siyazu_official"
+      ],
+      "result": "ok"
+    },
+    "6": {
+      "tags": [
+        "suarestudio"
+      ],
+      "result": "ok"
+    }
+  },
+  "publishing_at": "2026-10-01T23:31:10+09:00",
+  "posted_at": "2026-10-01T23:31+09:00",
+  "media_id": "18090187292202527",
+  "permalink": "https://www.instagram.com/p/Dd9IRTljzJp/",
+  "caption_ok": true
 }
