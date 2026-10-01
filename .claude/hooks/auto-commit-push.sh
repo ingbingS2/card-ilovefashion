@@ -10,11 +10,18 @@ cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 # git 저장소가 아니면 종료
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 
-# 모든 변경 사항 스테이징
-git add -A
+# 모든 변경 사항 스테이징 — 단, 기계별 승인 기록(settings.local.json)은 비밀이 섞일 수 있어 제외
+git add -A -- . ':!.claude/settings.local.json'
 
 # 스테이징된 변경이 없으면 조용히 종료
 git diff --cached --quiet && exit 0
+
+# 비밀 검사: 인스타 토큰(IGAA…)·일반 토큰 패턴이 스테이징에 있으면 커밋하지 않는다(공개 저장소)
+if git diff --cached -U0 | grep -E '^\+' | grep -Eq 'IGAA[A-Za-z0-9_-]{40,}|access_token=[A-Za-z0-9_-]{40,}|sk-ant-[A-Za-z0-9_-]{20,}'; then
+  echo "auto-commit 중단: 스테이징된 변경에 토큰으로 보이는 문자열이 있습니다." >&2
+  git reset -q
+  exit 0
+fi
 
 msg="chore: auto-commit by Claude Code ($(date '+%Y-%m-%d %H:%M:%S'))"
 git commit -m "$msg" >/dev/null 2>&1

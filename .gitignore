@@ -57,3 +57,6 @@ crawler/out/
 
 # oh-my-claudecode 세션 상태 (로컬 전용)
 .omc/
+
+# per-machine Claude permissions (approval history can contain secrets)
+.claude/settings.local.json
