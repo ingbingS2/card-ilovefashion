@@ -30,7 +30,27 @@ class MallError(RuntimeError):
     pass
 
 
+_blocked_hosts: set[str] = set()   # requests가 403(Cloudflare)을 받은 호스트 — 이후엔 바로 브라우저 경유
+
+
+def _browser_fallback(url: str, params: dict | None, headers: dict | None) -> dict | None:
+    """Cloudflare 403을 받았을 때 Playwright 페이지 안에서 같은 요청을 한 번 더 — 실패하면 None."""
+    from . import browser
+    full = url if not params else requests.Request("GET", url, params=params).prepare().url
+    try:
+        return browser.fetch_json(full, headers)
+    except browser.BrowserUnavailable:
+        return None
+    except RuntimeError as e:
+        raise MallError(f"GET {full} 실패(브라우저 경유): {str(e)[:160]}") from None
+
+
 def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict | None = None) -> dict:
+    host = url.split("/")[2]
+    if host in _blocked_hosts:
+        data = _browser_fallback(url, params, headers)
+        if data is not None:
+            return data
     last = ""
     for attempt in range(retries):
         time.sleep(DELAY_SEC)
@@ -39,6 +59,11 @@ def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict |
             if r.ok:
                 return r.json()
             last = f"HTTP {r.status_code}: {r.text[:200]}"
+            if r.status_code == 403 and ("Attention Required" in r.text or "cf-" in r.text[:3000]):
+                _blocked_hosts.add(host)   # 데이터센터 IP 차단 — 브라우저 경유로 전환(FINDINGS 10-01)
+                data = _browser_fallback(url, params, headers)
+                if data is not None:
+                    return data
             if r.status_code in (403, 404, 429):
                 break  # 차단·없음 — 재시도로 우회하지 않는다
         except requests.exceptions.RequestException as e:

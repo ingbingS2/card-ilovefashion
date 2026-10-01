@@ -296,3 +296,37 @@ def test_tag_blocked_handle_is_skipped_next_time(episode, cands, handles):
     saved = {b["handle"]: b for b in state.load_handles()["brands"]}
     assert saved["verdnt_official"]["photo_tag"] is False and saved["we_are_urago"].get("photo_tag", True)
     assert 3 not in publish.photo_tags(episode["folder"])          # 버던트(3번 사진) 태그 건너뜀
+
+
+def test_approve_records_fingerprint_and_gate_accepts_recorded_approval(episode, cands):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    now = config.now_kst().replace(hour=12)
+    state.save_history([])
+    fp = _built(folder, now, verified_at=now.isoformat(), verified_fingerprint=None)
+    with pytest.raises(SystemExit):           # error가 남아 있으면 승인 불가
+        state.save_status(folder, {**state.load_status(folder), "issues": [["error", "x"]]})
+        publish.approve(folder)
+    _built(folder, now)
+    st = publish.approve(folder)
+    assert st["stage"] == "approved" and st["approved_fingerprint"] == fp
+    # 기록된 승인 + 지금 파일 기준 재검증이 있으면 --user-approved 없이도 통과
+    st.update(verified_at=now.isoformat(), verified_fingerprint=fp)
+    state.save_status(folder, st)
+    assert publish.gate(folder, approved=False, now=now) == []
+    # 승인 뒤 파일이 바뀌면 거부
+    (config.episode_dir(folder) / "caption.txt").write_text("바뀜", encoding="utf-8")
+    assert any("승인 뒤에 파일이 바뀜" in p or "파일이 바뀜" in p for p in publish.gate(folder, approved=False, now=now))
+
+
+def test_risky_changes_and_pending_list(episode, cands):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    fresh = {"100": {"sale_price": 49900, "normal_price": 129900, "discount": 0, "review_count": 50, "rating": 4.9, "sold_out": False},
+             "101": {"sale_price": 70000, "normal_price": 129900, "discount": 46, "review_count": 43, "rating": 4.9, "sold_out": False},
+             "102": {"sale_price": 51000, "normal_price": 129900, "discount": 60, "review_count": 43, "rating": 4.9, "sold_out": False}}
+    risky = publish.risky_changes(folder, fresh)
+    assert len(risky) == 2 and any("할인이 사라짐" in r for r in risky) and any("20% 초과" in r for r in risky)
+    assert publish.pending_episodes() == []
+    state.save_status(folder, {"stage": "approved", "approved_at": "2026-10-02T09:00:00+09:00"})
+    assert publish.pending_episodes() == [folder]

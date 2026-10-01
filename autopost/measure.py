@@ -97,9 +97,21 @@ def refresh_token(token: str) -> dict:
 
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description="+72h 측정·토큰 연장")
-    ap.add_argument("--token", action="store_true")
+    ap.add_argument("--token", action="store_true", help="토큰 연장")
+    ap.add_argument("--check", action="store_true", help="토큰 유효성만 확인(값은 출력하지 않음)")
     args = ap.parse_args(argv)
     from_env = bool(os.environ.get("IG_ACCESS_TOKEN"))
+    if args.check:
+        if not from_env and not os.path.exists(post_ig.TOKEN_FILE):
+            print("missing — IG_ACCESS_TOKEN 환경변수도 토큰 파일도 없음")
+            return
+        token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
+        try:
+            me = api("GET", "me", token, fields="username")
+            print(f"ok @{me.get('username')} ({'env' if from_env else 'file'})")
+        except RuntimeError as e:
+            print(f"invalid — {str(e)[:160]}")
+        return
     token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
     if args.token:
         data = refresh_token(token)
