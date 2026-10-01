@@ -1,5 +1,8 @@
 # crawler/FINDINGS — 무신사·29CM API 실측 (크롤러·재검증에 쓰는 엔드포인트)
 
+> 🚨 **2026-10-01: 무신사가 데이터센터 IP를 Cloudflare로 막는다.** GitHub Actions(매시간 크롤러 — 후기 API 403으로 30회+ 연속 실패)와 Claude 클라우드 세션 모두 `api.musinsa.com`(검색)·`goods-detail.musinsa.com`(상세)·`goods.musinsa.com`(후기)이 403 "Attention Required". **랭킹 `client.musinsa.com`만 열린다.** 가정용 IP(사용자 PC)에서는 `requests`로 전부 200. → 매일 자동 제작(autopost)은 사용자 PC 예약 작업에서 돈다.
+> **29CM 상세 `bff-api.29cm.co.kr/api/v5/product-detail/{no}`는 `Origin/Referer: https://product.29cm.co.kr` 헤더가 있어야 200**(없으면 403 — 아래 09-05 "403" 기록의 원인). 그래도 0.4초 간격 연속 호출은 6건 중 5건 403 → 세션 쿠키 + 1.5~2초 간격이면 10건 중 8건 200. 검색·후기 API는 헤더 없이도 200.
+
 > 2026-07-19 실측, 이후 정정 반영(가격 필드 08-06, 검색 API 08-25, 상세 API 08-11, Playwright 경로 09-05). 크롤러 고칠 때·게시 전 가격 재확인할 때 여기부터.
 > 크롤러(GitHub Actions 러너)에서는 `requests`만으로 전부 200 — Referer·쿠키·인증 불필요. **내 PC에서 `www.musinsa.com` 페이지는 Cloudflare 403**(API는 열린다).
 

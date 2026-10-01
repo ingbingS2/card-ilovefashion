@@ -37,9 +37,10 @@ python verify.py                                        # 29CM·무신사 가격
 python ../../scripts/post_ig.py "20260908 가을 스커트" --dry-run
 ```
 
-매일 자동 제작(autopost) — 보통은 클라우드 루틴이 돌리고, 절차는 `.claude/skills/daily-feed/SKILL.md`:
+매일 자동 제작(autopost) — 이 PC의 Claude 앱 예약 작업(매일 07:00)이 돌리고, 절차는 `.claude/skills/daily-feed/SKILL.md`. 무신사·29CM 두 몰. 무신사가 데이터센터 IP를 막아 클라우드에서는 못 돈다(crawler/FINDINGS):
 ```bash
-pip install -r autopost/requirements.txt && python -m playwright install chromium
+python -m venv .venv && ./.venv/Scripts/python.exe -m pip install -r autopost/requirements.txt   # 아래 python = ./.venv/Scripts/python.exe
+export CHROME_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe"                       # 렌더는 설치된 Chrome
 python -m autopost.collect signals                                         # 날씨·랭킹·최근 성과
 python -m autopost.collect candidates --folder "20261002 가을 니트" -q "가을 니트" --gf F
 python -m autopost.build "20261002 가을 니트"                               # episode.json → 검사 → 1~7.jpg·caption.txt

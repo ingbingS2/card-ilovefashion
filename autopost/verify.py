@@ -13,7 +13,7 @@ import argparse
 import json
 import sys
 
-from . import config, malls
+from . import config, malls, malls29
 from .state import fingerprint, load_status, save_status
 
 FIELDS = ("sale_price", "normal_price", "discount", "review_count", "rating")
@@ -49,12 +49,17 @@ def check(folder: str) -> tuple[list[str], list[str], list[str], dict]:
     for i, p in enumerate(ep["products"], 1):
         c = by_no[str(p["goodsNo"])]
         tag = f"{i}번 {c['brand']}({c['goodsNo']})"
+        is29 = c.get("mall") == malls29.MALL
         try:
-            d = malls.detail(c["goodsNo"])
+            if is29:
+                d = malls29.detail(c["goodsNo"])
+                new = {**malls29.price_facts(d), **malls29.review_summary(d), "sold_out": malls29.sold_out(d)}
+            else:
+                d = malls.detail(c["goodsNo"])
+                new = {**malls.price_facts(d), **malls.review_summary(d), "sold_out": bool(d.get("isOutOfStock"))}
         except malls.MallError as e:
             failed.append(f"{tag}: 상세 조회 실패 {e}")
             continue
-        new = {**malls.price_facts(d), **malls.review_summary(d), "sold_out": bool(d.get("isOutOfStock"))}
         fresh[str(c["goodsNo"])] = new
         if new["sold_out"]:
             blocks.append(f"{tag}: 품절")
@@ -64,13 +69,14 @@ def check(folder: str) -> tuple[list[str], list[str], list[str], dict]:
         if p.get("quote_no") is not None:
             q = next((q for q in c["quotes"] if str(q["no"]) == str(p["quote_no"])), None)
             try:
-                r = find_review(c["goodsNo"], p["quote_no"])
+                finder = malls29.find_review if is29 else find_review
+                r = finder(c["goodsNo"], p["quote_no"])
             except malls.MallError as e:
                 failed.append(f"{tag}: 후기 조회 실패 {e}")
                 continue
             if not r:
                 blocks.append(f"{tag}: 인용 후기({p['quote_no']})를 찾을 수 없음 — 삭제됐을 수 있음")
-            elif q and _squash(q["text"]) not in _squash(r.get("content")):
+            elif q and _squash(q["text"]) not in _squash(r.get("contents" if is29 else "content")):
                 blocks.append(f"{tag}: 인용 후기 원문이 바뀜")
     return blocks, changes, failed, fresh
 

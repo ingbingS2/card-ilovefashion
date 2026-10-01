@@ -30,12 +30,12 @@ class MallError(RuntimeError):
     pass
 
 
-def _get(url: str, params: dict | None = None, retries: int = 3) -> dict:
+def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict | None = None) -> dict:
     last = ""
     for attempt in range(retries):
         time.sleep(DELAY_SEC)
         try:
-            r = requests.get(url, params=params, headers=HEADERS, timeout=30)
+            r = requests.get(url, params=params, headers=headers or HEADERS, timeout=30)
             if r.ok:
                 return r.json()
             last = f"HTTP {r.status_code}: {r.text[:200]}"

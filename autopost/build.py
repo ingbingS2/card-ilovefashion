@@ -16,7 +16,7 @@ import sys
 
 import requests
 
-from . import config, malls, rules
+from . import config, malls, malls29, rules
 from .state import fingerprint, load_handles, load_history, load_status, save_status
 
 _TAG_TOKENS = {"&lt;em&gt;": "<em>", "&lt;/em&gt;": "</em>", "&lt;br&gt;": "<br>"}
@@ -44,7 +44,7 @@ def latest_zzal():
 def download(url: str, path) -> None:
     if path.exists() and path.stat().st_size > 0:
         return
-    r = requests.get(url, headers=malls.HEADERS, timeout=60)
+    r = requests.get(url, headers=malls29.HEADERS if "29cm" in url else malls.HEADERS, timeout=60)
     r.raise_for_status()
     path.write_bytes(r.content)
 
@@ -90,7 +90,7 @@ def card_dicts(ep: dict, prods: list[dict], cover_cand: dict, zzal_rel: str) -> 
             "kind": "item", "img": "assets/" + asset_name(f"{i:02d}", p["goodsNo"], p["image"]),
             "pos": p.get("pos", "50% 18%"),
             "prod": f"{html.escape(p['brand'])} · <b>{name}</b>{(' ' + color) if color else ''}",
-            "title": rich(p["headline"]), "mall": "무신사",
+            "title": rich(p["headline"]), "mall": html.escape(p.get("mall", "무신사")),
             "normal": won(p["normal_price"]), "sale": won(p["sale_price"]),
             "off": f"{p['discount']}%" if p["discount"] else "", "proof": proof, "sp": sp})
     cta = ep["cta"]
@@ -123,7 +123,7 @@ li.error{{color:#ff6b81}}li.warn{{color:#ffd166}}</style></head><body>
 
 def result_md(ep: dict, prods: list[dict], issues: list, skipped: list[str]) -> str:
     rows = "\n".join(
-        f"| {i} | {p['brand']} | {p.get('display_name') or p['name']} ({p['goodsNo']}) | {p['sale_price']:,} | "
+        f"| {i} | {p['brand']} | [{p.get('mall', '무신사')}] {p.get('display_name') or p['name']} ({p['goodsNo']}) | {p['sale_price']:,} | "
         f"{p['normal_price']:,} | {p['discount']}% | {p['review_count']} | {p.get('rating') or '—'} | "
         f"{p['release_date']} {p.get('season', '')} | {'인용' if p.get('quote_text') else '스펙'} | "
         f"{('@' + p['handle']) if p.get('handle') else '(태그 안 함)'}{' ★로스터' if p.get('roster') else ''} |"
@@ -131,7 +131,7 @@ def result_md(ep: dict, prods: list[dict], issues: list, skipped: list[str]) -> 
     warns = "\n".join(f"- [{lvl}] {msg}" for lvl, msg in issues) or "- 없음"
     return f"""# 실험 로그 — {ep['folder']}
 
-> 자동 제작(claude/autopost-data · autopost). 양식: RESULT-TEMPLATE.md. 숫자는 무신사 상세 API 기준(쿠폰 미적용가).
+> 자동 제작(claude/autopost-data · autopost). 양식: RESULT-TEMPLATE.md. 숫자는 각 몰 상세 API 기준(쿠폰 미적용가 — 무신사 salePrice · 29CM sellPrice).
 
 ## 1. 실험 설계 (게시 전)
 - **실험 번호**: #5 (브랜드 반응·공유)

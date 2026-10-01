@@ -150,6 +150,10 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
         entry = find_handle(handles, c["brand"], c.get("brand_en", ""), c.get("brand_id", ""))
         if entry and entry.get("roster"):
             roster_count += 1
+        alt = c.get("cheaper_elsewhere")
+        if alt:
+            warn(f"{tag}: 같은 상품이 {alt['mall']}에서 {alt['sale_price']:,}원으로 더 쌈 — 가격·이미지 출처는 "
+                 f"저렴한 몰(§2). {alt['mall']} 후보({alt['goodsNo']})로 바꾸는 것을 검토")
         if any(b in c["brand"] for b in config.BIG_ACCOUNTS):
             warn(f"{tag}: {c['brand']}는 대형 계정 — 브랜드 반응 기대치 낮음")
 

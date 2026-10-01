@@ -28,7 +28,7 @@ def data_dir(tmp_path, monkeypatch):
 
 def make_candidate(no: int, brand: str, **kw) -> dict:
     c = {
-        "goodsNo": no, "url": f"https://www.musinsa.com/products/{no}", "brand": brand, "brand_en": "",
+        "mall": "무신사", "goodsNo": no, "url": f"https://www.musinsa.com/products/{no}", "brand": brand, "brand_en": "",
         "brand_id": "", "name": f"{brand} 상품 {no}", "genders": ["W"], "category": "아우터 > 재킷",
         "sale_price": 49900, "normal_price": 129900, "discount": 62, "review_count": 43, "rating": 4.9,
         "sold_out": False, "release_date": "2026-08-01", "season": "2026 F/W", "style_no": "",
