@@ -228,7 +228,9 @@
       ],
       "handle": "costumeoclock",
       "verified": true,
-      "roster": false
+      "roster": false,
+      "photo_tag": false,
+      "photo_tag_note": "2026-10-01 사진 태그 거부(Invalid user id) — 계정의 태그 허용 설정으로 추정"
     },
     {
       "name": "아워데이즈",
