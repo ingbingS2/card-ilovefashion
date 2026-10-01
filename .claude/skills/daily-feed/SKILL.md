@@ -30,8 +30,7 @@ description: @i_s2_fashion 매일 자동 카드뉴스 — 키워드 선정부터
 set -e
 cd /d/fashion-cardnews
 export CHROME_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe" PYTHONIOENCODING=utf-8
-PY=./.venv/Scripts/python.exe
-$PY -c "import requests, PIL, playwright" 2>/dev/null || $PY -m pip install -q -r autopost/requirements.txt
+./.venv/Scripts/python.exe -c "import requests, PIL, playwright" || ./.venv/Scripts/python.exe -m pip install -q -r autopost/requirements.txt
 git pull -q --ff-only origin main || true
 git worktree prune
 if [ ! -d autopost-data ]; then
