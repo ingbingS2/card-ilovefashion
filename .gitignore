@@ -54,3 +54,6 @@ crawler/.venv/
 crawler/samples/
 crawler/__pycache__/
 crawler/out/
+
+# oh-my-claudecode 세션 상태 (로컬 전용)
+.omc/
