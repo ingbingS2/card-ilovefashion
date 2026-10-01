@@ -1,63 +1,542 @@
 {
   "_note": "검증된 브랜드 인스타 핸들. 과거 캡션에 실제로 태그했던 것(게시 전 3중 검증 통과)과 BRAND-ROSTER 기준. roster=true는 반응 이력이 있는 브랜드. 데이터 브랜치의 handles.json이 이 파일보다 우선한다. 새 브랜드는 세션이 공식몰·웹검색 등 2곳 이상에서 확인했을 때만 verified=true로 추가하고 sources를 남긴다.",
   "brands": [
-    {"name": "미치코런던 코시노", "aliases": ["미치코런던", "MICHIKO LONDON"], "handle": "michiko_london_kr", "verified": true, "roster": true},
-    {"name": "핀카", "aliases": ["FINCA"], "handle": "finca_planet", "verified": true, "roster": true},
-    {"name": "에트오소메", "aliases": ["ETRE AU SOMMET"], "handle": "etre_au_sommet", "verified": true, "roster": true},
-    {"name": "링서울", "aliases": ["LING SEOUL"], "handle": "lingseoul_official", "verified": true, "roster": true},
-    {"name": "오베르", "aliases": ["AUBER"], "handle": "auber_kr", "verified": true, "roster": true},
-    {"name": "큐피도", "aliases": ["쿠피도", "KUPIDO"], "handle": "kupido_official", "verified": true, "roster": true},
-    {"name": "앤니즈", "aliases": ["ANDNEEDS"], "handle": "andneeds", "verified": true, "roster": true},
-    {"name": "파르티멘토 우먼", "aliases": ["PARTIMENTO WOMEN"], "handle": "partimentowomen", "verified": true, "roster": true},
-    {"name": "제너럴아이디어", "aliases": ["GENERAL IDEA", "제너럴아이디어 우먼"], "handle": "generalidea_official", "verified": true, "roster": true},
-    {"name": "샌드뮤지엄", "aliases": ["SAND MUSEUM"], "handle": "sandmuseum", "verified": true, "roster": true},
-    {"name": "컴포트랩", "aliases": ["COMFORTLAB"], "handle": "comfortlab_kr", "verified": true, "roster": true},
-    {"name": "노우드", "aliases": ["NOEUD"], "handle": "noeud_seoul", "verified": true, "roster": true},
-    {"name": "노티아", "aliases": ["NOTIA"], "handle": "notia_official", "verified": true, "roster": true},
-    {"name": "세컨드솔트", "aliases": ["SECOND SALT"], "handle": "secondsalt_official", "verified": true, "roster": true},
-    {"name": "데꼬로소", "aliases": ["DECOROSO"], "handle": "decoroso_official", "verified": true, "roster": true},
-    {"name": "얀13", "aliases": ["YAN13"], "handle": "yan13_official", "verified": true, "roster": true},
-    {"name": "누스", "aliases": ["NUUS"], "handle": "nuus__official", "verified": true, "roster": true},
-    {"name": "하루타", "aliases": ["HARUTA"], "handle": "harutashoes_korea", "verified": true, "roster": true},
-
-    {"name": "기호", "aliases": ["KHIHO"], "handle": "khiho_official", "verified": true, "roster": false},
-    {"name": "엘리자베스 스튜어트", "aliases": ["ELIZABETH STUART"], "handle": "elizabethstuart_official", "verified": true, "roster": false},
-    {"name": "사뿐", "aliases": ["SAPPUN"], "handle": "sappun_korea", "verified": true, "roster": false},
-    {"name": "타크트로이메", "aliases": ["TAGTRAUME"], "handle": "tagtraume_official", "verified": true, "roster": false},
-    {"name": "드로우핏 우먼", "aliases": ["드로우핏", "DRAW FIT"], "handle": "drawfit_women", "verified": true, "roster": false},
-    {"name": "로에일", "aliases": ["LOEIL"], "handle": "loeil_official", "verified": true, "roster": false},
-    {"name": "커스텀어클락", "aliases": ["COSTUME O'CLOCK"], "handle": "costumeoclock", "verified": true, "roster": false},
-    {"name": "아워데이즈", "aliases": ["OURDAYZ"], "handle": "ourdayz_official", "verified": true, "roster": false},
-    {"name": "미레코", "aliases": ["MIRECO"], "handle": "to.mireco", "verified": true, "roster": false},
-    {"name": "낫포너드", "aliases": ["NOT4NERD"], "handle": "not4nerd", "verified": true, "roster": false},
-    {"name": "에잇세컨즈", "aliases": ["8SECONDS"], "handle": "8seconds_official", "verified": true, "roster": false},
-    {"name": "미쏘", "aliases": ["MIXXO"], "handle": "mixxo_korea", "verified": true, "roster": false},
-    {"name": "칙스", "aliases": ["CHICKS"], "handle": "chicks.co.kr", "verified": true, "roster": false},
-    {"name": "아디다스", "aliases": ["ADIDAS"], "handle": "adidaskr", "verified": true, "roster": false},
-    {"name": "튜드먼트", "aliases": ["TTUDEMENT"], "handle": "ttudement", "verified": true, "roster": false},
-    {"name": "오버듀플레어", "aliases": ["OVERDUE FLAIR"], "handle": "overdueflair", "verified": true, "roster": false},
-    {"name": "웬즈데이오아시스", "aliases": ["WEDNESDAY OASIS"], "handle": "wednesdayoasis_women", "verified": true, "roster": false},
-    {"name": "낫띵리튼", "aliases": ["NOTHING WRITTEN"], "handle": "nothingwritten.kr", "verified": true, "roster": false},
-    {"name": "마크모크", "aliases": ["MAC MOC"], "handle": "mac_moc", "verified": true, "roster": false},
-    {"name": "위띠아", "aliases": ["WETTIA"], "handle": "wettia_official", "verified": true, "roster": false},
-    {"name": "후러브스아트", "aliases": ["WHO LOVES ART"], "handle": "wholovesart_official", "verified": true, "roster": false},
-    {"name": "시야쥬", "aliases": ["SIYAZU"], "handle": "siyazu_official", "verified": true, "roster": false},
-    {"name": "몽돌", "aliases": ["MONGDOL"], "handle": "mongdol.official", "verified": true, "roster": false},
-    {"name": "블루브릭", "aliases": ["BLUEBRICK"], "handle": "bluebrick.kr", "verified": true, "roster": false},
-    {"name": "롬버스랩", "aliases": ["RHOMBUS LAB"], "handle": "rhombus_lab", "verified": true, "roster": false},
-    {"name": "호텔파리칠", "aliases": ["HOTEL PARIS CHILL"], "handle": "hotel_827", "verified": true, "roster": false},
-    {"name": "무쿠앤에보니", "aliases": ["MUCU AND EBONY"], "handle": "mucu_ebony", "verified": true, "roster": false},
-    {"name": "레터리", "aliases": ["LETERIE"], "handle": "leterie_kr", "verified": true, "roster": false},
-    {"name": "무신사 스탠다드", "aliases": ["MUSINSA STANDARD", "무신사 스탠다드 우먼"], "handle": "musinsa_standard", "verified": true, "roster": false},
-    {"name": "크랭크", "aliases": ["CRANK"], "handle": "crank_offi", "verified": true, "roster": false},
-    {"name": "디미트리블랙", "aliases": ["DIMITRI BLACK"], "handle": "dimitriblack_official", "verified": true, "roster": false},
-    {"name": "코즈넉", "aliases": ["KOZNOK"], "handle": "koznok", "verified": true, "roster": false},
-    {"name": "라미네즈", "aliases": ["LAMINEZ"], "handle": "laminez_official", "verified": true, "roster": false},
-    {"name": "스컬프터", "aliases": ["SCULPTOR"], "handle": "sculptor_worldwide", "verified": true, "roster": false},
-    {"name": "무드인사이드", "aliases": ["MOOD INSIDE", "무드인사이드 우먼"], "handle": "moodinside_official", "verified": true, "roster": false},
-    {"name": "버던트", "aliases": ["VERDNT"], "handle": "verdnt_official", "verified": true, "roster": false},
-    {"name": "유라고", "aliases": ["URAGO"], "handle": "we_are_urago", "verified": true, "roster": false},
-    {"name": "파르티멘토", "aliases": ["PARTIMENTO"], "handle": "partimento", "verified": true, "roster": false},
-    {"name": "로우클래식", "aliases": ["LOW CLASSIC"], "handle": "lowclassic_seoul", "verified": true, "roster": false}
+    {
+      "name": "미치코런던 코시노",
+      "aliases": [
+        "미치코런던",
+        "MICHIKO LONDON"
+      ],
+      "handle": "michiko_london_kr",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "핀카",
+      "aliases": [
+        "FINCA"
+      ],
+      "handle": "finca_planet",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "에트오소메",
+      "aliases": [
+        "ETRE AU SOMMET"
+      ],
+      "handle": "etre_au_sommet",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "링서울",
+      "aliases": [
+        "LING SEOUL"
+      ],
+      "handle": "lingseoul_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "오베르",
+      "aliases": [
+        "AUBER"
+      ],
+      "handle": "auber_kr",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "큐피도",
+      "aliases": [
+        "쿠피도",
+        "KUPIDO"
+      ],
+      "handle": "kupido_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "앤니즈",
+      "aliases": [
+        "ANDNEEDS"
+      ],
+      "handle": "andneeds",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "파르티멘토 우먼",
+      "aliases": [
+        "PARTIMENTO WOMEN"
+      ],
+      "handle": "partimentowomen",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "제너럴아이디어",
+      "aliases": [
+        "GENERAL IDEA",
+        "제너럴아이디어 우먼"
+      ],
+      "handle": "generalidea_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "샌드뮤지엄",
+      "aliases": [
+        "SAND MUSEUM"
+      ],
+      "handle": "sandmuseum",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "컴포트랩",
+      "aliases": [
+        "COMFORTLAB"
+      ],
+      "handle": "comfortlab_kr",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "노우드",
+      "aliases": [
+        "NOEUD"
+      ],
+      "handle": "noeud_seoul",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "노티아",
+      "aliases": [
+        "NOTIA"
+      ],
+      "handle": "notia_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "세컨드솔트",
+      "aliases": [
+        "SECOND SALT"
+      ],
+      "handle": "secondsalt_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "데꼬로소",
+      "aliases": [
+        "DECOROSO"
+      ],
+      "handle": "decoroso_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "얀13",
+      "aliases": [
+        "YAN13"
+      ],
+      "handle": "yan13_official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "누스",
+      "aliases": [
+        "NUUS"
+      ],
+      "handle": "nuus__official",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "하루타",
+      "aliases": [
+        "HARUTA"
+      ],
+      "handle": "harutashoes_korea",
+      "verified": true,
+      "roster": true
+    },
+    {
+      "name": "기호",
+      "aliases": [
+        "KHIHO"
+      ],
+      "handle": "khiho_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "엘리자베스 스튜어트",
+      "aliases": [
+        "ELIZABETH STUART"
+      ],
+      "handle": "elizabethstuart_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "사뿐",
+      "aliases": [
+        "SAPPUN"
+      ],
+      "handle": "sappun_korea",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "타크트로이메",
+      "aliases": [
+        "TAGTRAUME"
+      ],
+      "handle": "tagtraume_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "드로우핏 우먼",
+      "aliases": [
+        "드로우핏",
+        "DRAW FIT"
+      ],
+      "handle": "drawfit_women",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "로에일",
+      "aliases": [
+        "LOEIL"
+      ],
+      "handle": "loeil_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "커스텀어클락",
+      "aliases": [
+        "COSTUME O'CLOCK"
+      ],
+      "handle": "costumeoclock",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "아워데이즈",
+      "aliases": [
+        "OURDAYZ"
+      ],
+      "handle": "ourdayz_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "미레코",
+      "aliases": [
+        "MIRECO"
+      ],
+      "handle": "to.mireco",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "낫포너드",
+      "aliases": [
+        "NOT4NERD"
+      ],
+      "handle": "not4nerd",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "에잇세컨즈",
+      "aliases": [
+        "8SECONDS"
+      ],
+      "handle": "8seconds_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "미쏘",
+      "aliases": [
+        "MIXXO"
+      ],
+      "handle": "mixxo_korea",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "칙스",
+      "aliases": [
+        "CHICKS"
+      ],
+      "handle": "chicks.co.kr",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "아디다스",
+      "aliases": [
+        "ADIDAS"
+      ],
+      "handle": "adidaskr",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "튜드먼트",
+      "aliases": [
+        "TTUDEMENT"
+      ],
+      "handle": "ttudement",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "오버듀플레어",
+      "aliases": [
+        "OVERDUE FLAIR"
+      ],
+      "handle": "overdueflair",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "웬즈데이오아시스",
+      "aliases": [
+        "WEDNESDAY OASIS"
+      ],
+      "handle": "wednesdayoasis_women",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "낫띵리튼",
+      "aliases": [
+        "NOTHING WRITTEN"
+      ],
+      "handle": "nothingwritten.kr",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "마크모크",
+      "aliases": [
+        "MAC MOC"
+      ],
+      "handle": "mac_moc",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "위띠아",
+      "aliases": [
+        "WETTIA"
+      ],
+      "handle": "wettia_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "후러브스아트",
+      "aliases": [
+        "WHO LOVES ART"
+      ],
+      "handle": "wholovesart_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "시야쥬",
+      "aliases": [
+        "SIYAZU"
+      ],
+      "handle": "siyazu_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "몽돌",
+      "aliases": [
+        "MONGDOL"
+      ],
+      "handle": "mongdol.official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "블루브릭",
+      "aliases": [
+        "BLUEBRICK"
+      ],
+      "handle": "bluebrick.kr",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "롬버스랩",
+      "aliases": [
+        "RHOMBUS LAB"
+      ],
+      "handle": "rhombus_lab",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "호텔파리칠",
+      "aliases": [
+        "HOTEL PARIS CHILL"
+      ],
+      "handle": "hotel_827",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "무쿠앤에보니",
+      "aliases": [
+        "MUCU AND EBONY"
+      ],
+      "handle": "mucu_ebony",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "레터리",
+      "aliases": [
+        "LETERIE"
+      ],
+      "handle": "leterie_kr",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "무신사 스탠다드",
+      "aliases": [
+        "MUSINSA STANDARD",
+        "무신사 스탠다드 우먼"
+      ],
+      "handle": "musinsa_standard",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "크랭크",
+      "aliases": [
+        "CRANK"
+      ],
+      "handle": "crank_offi",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "디미트리블랙",
+      "aliases": [
+        "DIMITRI BLACK"
+      ],
+      "handle": "dimitriblack_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "코즈넉",
+      "aliases": [
+        "KOZNOK"
+      ],
+      "handle": "koznok",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "라미네즈",
+      "aliases": [
+        "LAMINEZ"
+      ],
+      "handle": "laminez_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "스컬프터",
+      "aliases": [
+        "SCULPTOR"
+      ],
+      "handle": "sculptor_worldwide",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "무드인사이드",
+      "aliases": [
+        "MOOD INSIDE",
+        "무드인사이드 우먼"
+      ],
+      "handle": "moodinside_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "버던트",
+      "aliases": [
+        "VERDNT"
+      ],
+      "handle": "verdnt_official",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "유라고",
+      "aliases": [
+        "URAGO"
+      ],
+      "handle": "we_are_urago",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "파르티멘토",
+      "aliases": [
+        "PARTIMENTO"
+      ],
+      "handle": "partimento",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "로우클래식",
+      "aliases": [
+        "LOW CLASSIC"
+      ],
+      "handle": "lowclassic_seoul",
+      "verified": true,
+      "roster": false
+    },
+    {
+      "name": "수아레",
+      "aliases": [
+        "SUARE",
+        "수아레 우먼",
+        "suare"
+      ],
+      "handle": "suarestudio",
+      "verified": true,
+      "roster": false,
+      "sources": [
+        "https://suare.co.kr/ (footer instagram.com/suarestudio)",
+        "https://x.com/suarestudio",
+        "사용자 확인 2026-10-01"
+      ],
+      "verified_at": "2026-10-01",
+      "note": "여성 라인 계정 @suare_women도 있음 — 메인 계정으로 태그"
+    }
   ]
 }

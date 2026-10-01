@@ -1,12 +1,7 @@
 {
   "stage": "built",
-  "built_at": "2026-10-01T22:31:50+09:00",
-  "issues": [
-    [
-      "warn",
-      "핸들 미검증으로 태그에서 뺀 브랜드: 수아레 우먼"
-    ]
-  ],
+  "built_at": "2026-10-01T22:45:24+09:00",
+  "issues": [],
   "shots": [
     {
       "index": 1,
@@ -51,5 +46,7 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "9cac2f83bf61f159b5b172e533a12f34290ffdb9aaa67dce1dd60c7af018ae5d"
+  "fingerprint": "c7ff9f210ea945d929251adca6742c1a8eef4522a122bb15aee21dc9da1fff96",
+  "verified_at": "2026-10-01T22:45:35+09:00",
+  "verified_fingerprint": "c7ff9f210ea945d929251adca6742c1a8eef4522a122bb15aee21dc9da1fff96"
 }
