@@ -64,18 +64,22 @@ def detail(item_no) -> dict:
     return data
 
 
-def reviews(item_no, pages: int = 3, size: int = 20) -> tuple[list[dict], int]:
+def reviews(item_no, pages: int = 3, size: int = 20) -> tuple[list[dict], int, float | None]:
+    """반환: (후기 목록, 총 개수, 평균 별점). 평균은 후기 API의 averagePoint — 상세 reviewAggregation은 0.5 단위로 뭉개져 있다."""
     out: list[dict] = []
     total = 0
+    avg = None
     for page in range(pages):
         data = malls._get(REVIEW_URL, {"itemId": item_no, "page": page, "size": size, "sort": "BEST"},
                           headers=HEADERS).get("data") or {}
         batch = data.get("results") or []
         total = data.get("count") or total
+        if avg is None and data.get("averagePoint") is not None:
+            avg = float(data["averagePoint"])
         out.extend(batch)
         if len(batch) < size:
             break
-    return out, int(total or 0)
+    return out, int(total or 0), avg
 
 
 def find_review(item_no, review_no, pages: int = 15) -> dict | None:

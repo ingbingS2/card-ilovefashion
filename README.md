@@ -37,20 +37,26 @@ python verify.py                                        # 29CM·무신사 가격
 python ../../scripts/post_ig.py "20260908 가을 스커트" --dry-run
 ```
 
-매일 자동 제작(autopost) — 이 PC의 Claude 앱 예약 작업(매일 07:00)이 돌리고, 절차는 `.claude/skills/daily-feed/SKILL.md`. 무신사·29CM 두 몰. 무신사가 데이터센터 IP를 막아 클라우드에서는 못 돈다(crawler/FINDINGS):
+매일 자동 제작(autopost) — **Claude 클라우드 루틴**이 돌린다(PC 꺼져 있어도): 제작 루틴 "매일 피드 제작"(07:00 KST, Opus) → 사용자가 세션에서 '승인' → 게시 루틴 "승인 대기 게시"(11:30·16:30·20:30·23:30 KST, Sonnet, 코드만 실행)가 재검증·간격 규칙 확인 후 게시. 절차는 `.claude/skills/daily-feed/SKILL.md`. 무신사·29CM 두 몰. PC(Windows) 예약 작업은 대체 실행용.
 ```bash
-python -m venv .venv && ./.venv/Scripts/python.exe -m pip install -r autopost/requirements.txt   # 아래 python = ./.venv/Scripts/python.exe
-export CHROME_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe"                       # 렌더는 설치된 Chrome
+python -m venv .venv && ./.venv/Scripts/python.exe -m pip install -r autopost/requirements.txt   # PC: 아래 python = ./.venv/Scripts/python.exe
+export CHROME_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe"                       # PC: 렌더는 설치된 Chrome(클라우드는 Playwright chromium)
 python -m autopost.collect signals                                         # 날씨·랭킹·최근 성과
 python -m autopost.collect candidates --folder "20261002 가을 니트" -q "가을 니트" --gf F
 python -m autopost.build "20261002 가을 니트"                               # episode.json → 검사 → 1~7.jpg·caption.txt
-python -m autopost.verify "20261002 가을 니트"                              # 게시 직전 재검증 (0=통과, 2=숫자 변경, 1=막힘)
-python -m autopost.publish "20261002 가을 니트" --user-approved             # 사용자 승인 후에만
-python -m autopost.measure                                                  # +72h 측정
+python -m autopost.verify "20261002 가을 니트"                              # 게시 직전 재검증 (0=통과, 1=막힘·파일 변경, 3=숫자 변경(--apply로 갱신), 4=몰 조회 실패)
+python -m autopost.publish "20261002 가을 니트" --approve                   # 사용자 승인을 기록(지금 파일의 fingerprint에 묶임)
+python -m autopost.publish "20261002 가을 니트" --user-approved             # 즉시 게시(승인·재검증 60분 이내·간격 규칙 통과 시)
+python -m autopost.publish --pending                                        # 저녁 루틴: 승인된 회차를 재검증 후 게시
+python -m autopost.publish --next                                           # 다음 게시 가능 시각(직전 게시 +20h·다른 날)
+python -m autopost.measure                                                  # +72h 측정 · --check 토큰 확인 · --token 연장
 python -m pytest -q autopost/tests
 ```
-- 데이터는 `claude/autopost-data` 브랜치를 `autopost-data/`에 worktree로 붙여 쓴다(main에 커밋하지 않음). 이력·핸들 시드는 `autopost/seed/`.
-- 클라우드 환경 설정: 네트워크 **Custom** 허용 도메인 — `api.musinsa.com` `goods-detail.musinsa.com` `goods.musinsa.com` `client.musinsa.com` `image.msscdn.net` `graph.instagram.com` `raw.githubusercontent.com` `litterbox.catbox.moe` `uguu.se` `api.open-meteo.com` `cdn.jsdelivr.net` `playwright.azureedge.net` `cdn.playwright.dev` `playwright.download.prss.microsoft.com`. 환경변수 `IG_ACCESS_TOKEN`. 설정 스크립트 `pip install requests pillow playwright pytest && python -m playwright install --with-deps chromium`.
+- 데이터는 `claude/autopost-data` 브랜치를 `autopost-data/`에 worktree로 붙여 쓴다(main에 커밋하지 않음). 이력·핸들 시드는 `autopost/seed/`. 인터넷에서 채택한 CTA 짤도 `autopost-data/zzal/`에 쌓인다.
+- **클라우드 환경(Default) 설정** — 네트워크 **사용자 지정(Custom)** 허용 도메인(한 줄에 하나):
+  `www.musinsa.com` `api.musinsa.com` `goods-detail.musinsa.com` `goods.musinsa.com` `client.musinsa.com` `image.msscdn.net` `www.29cm.co.kr` `product.29cm.co.kr` `search-api.29cm.co.kr` `bff-api.29cm.co.kr` `review-api.29cm.co.kr` `img.29cm.co.kr` `graph.instagram.com` `raw.githubusercontent.com` `github.com` `api.open-meteo.com` `cdn.jsdelivr.net` `www.jjalbang.today` `litterbox.catbox.moe` `uguu.se` `playwright.azureedge.net` `cdn.playwright.dev` `playwright.download.prss.microsoft.com`
+  + "일반적인 패키지 매니저 기본 목록 포함" 체크. 설정 스크립트: `pip install -q requests pillow playwright pytest || true` / `python -m playwright install --with-deps chromium || true` / `apt-get install -y fonts-noto-cjk fonts-noto-color-emoji || true`. 환경변수 `IG_ACCESS_TOKEN=<인스타 장기 토큰>`(값은 환경을 쓰는 모든 세션에 보인다 — 게시 루틴 전용 환경을 따로 두는 것을 권장).
+- 무신사 검색·상세·후기 API는 데이터센터 IP를 Cloudflare 403으로 막는다(랭킹만 열림). 코드가 403을 받으면 Playwright 페이지 안에서 다시 fetch 하고, 그래도 막히면 그 몰 후보는 버리고 29CM로 채운다(crawler/FINDINGS). 우회(프록시·캡차)는 하지 않는다.
 
 크롤러:
 ```bash

@@ -95,15 +95,28 @@ def apply(folder: str, fresh: dict) -> None:
         save_status(folder, st)
 
 
+def _invalidate(folder: str) -> None:
+    """재검증이 통과하지 못했으면 이전 통과 기록을 지운다 — 60분 안의 옛 기록으로 gate가 열리지 않게."""
+    st = load_status(folder)
+    if st.pop("verified_at", None) is not None or st.pop("verified_fingerprint", None) is not None:
+        save_status(folder, st)
+
+
 def run(folder: str, do_apply: bool = False) -> int:
     st = load_status(folder)
-    if st.get("stage") != "built":
-        print(f"[막힘] 회차 상태가 built가 아님(stage={st.get('stage')}) — build를 먼저")
+    if st.get("stage") not in ("built", "approved"):
+        print(f"[막힘] 회차 상태가 built/approved가 아님(stage={st.get('stage')}) — build를 먼저")
         return EXIT_BLOCKED
     if st.get("fingerprint") != fingerprint(folder):
+        _invalidate(folder)
         print("[막힘] 렌더 이후 episode/candidates/caption/이미지가 바뀜 — build를 다시")
         return EXIT_BLOCKED
-    blocks, changes, failed, fresh = check(folder)
+    try:
+        blocks, changes, failed, fresh = check(folder)
+    except Exception as e:  # 몰 모듈의 예상 못 한 예외도 '조회 실패'로 — 트레이스백으로 죽지 않게
+        _invalidate(folder)
+        print(f"[조회 실패] 예외: {type(e).__name__}: {str(e)[:160]}")
+        return EXIT_LOOKUP
     for b in blocks:
         print(f"[막힘] {b}")
     for f in failed:
@@ -111,14 +124,18 @@ def run(folder: str, do_apply: bool = False) -> int:
     for c in changes:
         print(f"[변경] {c}")
     if blocks:
+        _invalidate(folder)
         return EXIT_BLOCKED
     if failed:
+        _invalidate(folder)
         return EXIT_LOOKUP
     if changes:
+        _invalidate(folder)
         if do_apply:
             apply(folder, fresh)
             print("candidates.json 갱신, 회차는 stale — build → 카드 확인 → verify를 다시 실행하세요.")
         return EXIT_CHANGED
+    st = load_status(folder)
     st["verified_at"] = config.now_kst().isoformat(timespec="seconds")
     st["verified_fingerprint"] = st["fingerprint"]
     save_status(folder, st)

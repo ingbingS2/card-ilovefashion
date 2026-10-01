@@ -89,6 +89,18 @@ def mark_tag_blocked(usernames: list[str]) -> None:
     save_handles(handles)
 
 
+def earliest_post_time(now=None) -> datetime | None:
+    """직전 게시 기준으로 다음 게시가 허용되는 가장 이른 시각(KST). 이력이 없으면 None(지금 가능)."""
+    now = now or config.now_kst()
+    lp = last_post(load_history())
+    if not lp:
+        return None
+    prev = parse_dt(lp["posted_at"]).astimezone(config.KST)
+    by_hours = prev + timedelta(hours=config.MIN_HOURS_BETWEEN_POSTS)
+    next_day = (prev + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    return max(by_hours, next_day)
+
+
 def too_soon(prev: datetime, now: datetime) -> bool:
     return (now - prev < timedelta(hours=config.MIN_HOURS_BETWEEN_POSTS)
             or prev.astimezone(config.KST).date() == now.astimezone(config.KST).date())
@@ -150,15 +162,26 @@ def push_data(message: str) -> bool:
     d = str(config.DATA_DIR)
     try:
         subprocess.run(["git", "-C", d, "add", "-A"], check=True)
-        subprocess.run(["git", "-C", d, "commit", "-qm", message], check=False)
-        subprocess.run(["git", "-C", d, "push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}"], check=True)
+        staged = subprocess.run(["git", "-C", d, "diff", "--cached", "--quiet"]).returncode != 0
+        if staged:
+            subprocess.run(["git", "-C", d, "commit", "-qm", message], check=True, capture_output=True)
+        push = ["git", "-C", d, "push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}"]
+        if subprocess.run(push, capture_output=True).returncode != 0:
+            # 다른 세션(아침/저녁 루틴)이 먼저 밀었을 수 있다 — 되감아 올리고 다시(강제 푸시는 하지 않는다)
+            subprocess.run(["git", "-C", d, "pull", "-q", "--rebase", "origin", config.DATA_BRANCH], check=True,
+                           capture_output=True)
+            subprocess.run(push, check=True, capture_output=True)
         return True
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         print(f"⚠️ 데이터 브랜치 푸시 실패: {e} — 반드시 수동으로 푸시할 것(안 하면 다음 회차가 이 게시를 모른다)")
         return False
 
 
-def publish(folder: str) -> dict:
+def publish(folder: str, approved: bool = False) -> dict:
+    """게이트를 안에서 다시 검사한다 — 어떤 경로로 불려도 승인·재검증·간격 없이는 게시되지 않게."""
+    problems = gate(folder, approved)
+    if problems:
+        raise SystemExit("게시 거부: " + "; ".join(problems))
     ep_dir = config.episode_dir(folder)
     images = post_ig.collect_images(str(ep_dir))
     caption = post_ig.load_caption(str(ep_dir))
@@ -178,6 +201,7 @@ def publish(folder: str) -> dict:
     urls = [public_url(folder, Path(p)) for p in images]
     tags = photo_tags(folder)
     tag_result: dict[int, str] = {}
+    tag_blocked: set[str] = set()   # 인스타가 '태그 불가 계정'이라고 답한 것만 — 일시 오류로는 끄지 않는다
     children = []
     for i, url in enumerate(urls, 1):
         extra = {"user_tags": json.dumps(tags[i])} if tags.get(i) else {}
@@ -191,9 +215,12 @@ def publish(folder: str) -> dict:
                 break
             except RuntimeError as e:
                 last = e
-                if extra and attempt >= 1:  # 태그 때문일 수 있다 — 두 번 실패하면 태그를 빼고 다시
+                tag_rejected = "Invalid user id" in str(e) or "2207018" in str(e)
+                if extra and (tag_rejected or attempt >= 1):  # 태그 거부면 바로, 아니면 두 번 실패 뒤 태그를 빼고 다시
                     print(f"⚠️ {i}번 사진 태그 실패 → 태그 없이 다시 시도: {str(e)[:120]}")
                     extra = {}
+                    if tag_rejected:
+                        tag_blocked.update(t["username"] for t in tags.get(i, []))
                 time.sleep(4)
         else:
             raise RuntimeError(f"아이템 컨테이너 생성 실패: {last}")
@@ -209,13 +236,14 @@ def publish(folder: str) -> dict:
     else:
         raise RuntimeError("캐러셀 컨테이너 준비 대기 시간 초과")
 
-    mark_tag_blocked([t["username"] for i, r in tag_result.items() if r != "ok" for t in tags.get(i, [])])
+    mark_tag_blocked(sorted(tag_blocked))
     st = load_status(folder)
     st.update(stage="publishing", carousel_id=carousel, image_urls=urls,
               user_tags={str(i): {"tags": [t["username"] for t in tags.get(i, [])], "result": r}
                          for i, r in tag_result.items()},
               publishing_at=config.now_kst().isoformat(timespec="seconds"))
     save_status(folder, st)
+    push_data(f"autopost: {folder} 게시 시작")   # 컨테이너가 죽어도 '게시 중' 표시가 원격에 남게(중복 게시 방지)
     media_id = api("POST", "me/media_publish", token, creation_id=carousel)["id"]
 
     # 게시는 끝났다 — 이후 단계가 실패해도 기록부터 남긴다(재게시 방지)
@@ -350,7 +378,7 @@ def publish_pending(now=None) -> list[str]:
         if problems:
             lines.append(f"⏳ {folder}: 아직 게시 조건 미충족 — " + "; ".join(problems))
             continue
-        result = publish(folder)
+        result = publish(folder, approved=True)
         extra = f" · 숫자 갱신 {len(changes)}건" if changes else ""
         lines.append(f"✅ {folder}: 게시 완료 {result['posted_at']} → {result.get('permalink')}{extra}")
         break  # 하루 한 건
@@ -366,7 +394,12 @@ def main(argv=None) -> None:
     ap.add_argument("--check", action="store_true", help="게시하지 않고 조건만 확인")
     ap.add_argument("--approve", action="store_true", help="사용자 승인을 기록만 한다(간격 규칙으로 못 올리면 저녁 루틴이 게시)")
     ap.add_argument("--pending", action="store_true", help="저녁 루틴: 승인된 회차를 재검증 후 게시")
+    ap.add_argument("--next", action="store_true", help="다음 게시 가능 시각(KST)만 출력")
     args = ap.parse_args(argv)
+    if args.next:
+        t = earliest_post_time()
+        print("지금 게시 가능" if t is None or t <= config.now_kst() else f"다음 게시 가능 시각: {t:%m-%d %H:%M} KST")
+        return
     if args.pending:
         for line in publish_pending():
             print(line)
@@ -390,7 +423,7 @@ def main(argv=None) -> None:
             print(f"  {i}번 사진 태그: {', '.join('@' + t['username'] for t in tags.get(i, [])) or '없음'}")
         print("게시 조건 충족 (--check: 게시하지 않음)")
         return
-    st = publish(args.folder)
+    st = publish(args.folder, approved=args.user_approved)
     print(f"게시 완료 {st['posted_at']} → {st.get('permalink')}")
     if st.get("caption_ok") is False:
         print("⚠️ 게시된 캡션이 원본과 다릅니다(한글 깨짐 의심) — 인스타 앱에서 확인하세요.")

@@ -47,16 +47,22 @@ BRAND_EXCLUSIONS: dict[str, tuple[date, tuple[str, ...]]] = {
 BIG_ACCOUNTS = ("나이키", "크록스", "휠라", "아디다스", "에잇세컨즈", "미쏘", "무신사 스탠다드", "스컬프터")
 
 # 캡션 금지 문형 (§1·§5) — 대소문자 무시
-CAPTION_BANNED = ("댓글로 알려주세요", "번호 남겨주세요", "진심", "무조건", "못 참지", "...", "…",
-                  "랭킹", "top", "베스트")
-RANKING_WORDS = ("랭킹", "top", "베스트", "1위")
+CAPTION_BANNED = ("댓글로 알려주세요", "번호 남겨주세요", "진심", "무조건", "못 참지", "...", "…")
+# 랭킹 키워드(§1) — '니트 베스트(조끼)' 같은 품목어는 잡지 않도록 랭킹 문맥만 (정규식, 대소문자 무시)
+RANKING_PATTERN = r"랭킹|베스트\s*셀러|베스트\s*\d|top\s*\d|인기\s*순위|\d+\s*위"
+CAPTION_WARN_PATTERNS = {r"[가-힣A-Za-z]+(?:에서|부터)\s.{0,40}까지": "'A부터 B까지' 나열 문형(§5 금지)"}
 
 # episode.json에서 세션이 쓸 수 있는 키 — 사실(가격·후기·인용 원문 등)은 candidates.json에서만 온다
 PRODUCT_KEYS = {"goodsNo", "image", "pos", "display_name", "color", "headline", "quote_no", "spec_line"}
 COVER_KEYS = {"goodsNo", "image", "pos", "kicker", "title", "sub"}
 CTA_KEYS = {"zzal", "title", "sub"}
-ZZAL_INDEX = ZZAL_DIR / "index.json"   # 짤 목록(자막·장면·무드·어울리는 주제·last_used)
+ZZAL_INDEX = ZZAL_DIR / "index.json"   # 저장소에 든 짤 목록(자막·장면·무드·어울리는 주제·last_used)
+ZZAL_WEB_DIR = DATA_DIR / "zzal"       # 인터넷에서 채택한 짤 — 데이터 브랜치에 쌓인다(main 커밋 금지·클라우드 보존)
+ZZAL_WEB_INDEX = ZZAL_WEB_DIR / "index.json"
 ZZAL_COOLDOWN_DAYS = 21                # 같은 짤은 3주 안에 다시 쓰지 않는다
+TOKEN_META_FILE = DATA_DIR / "token-meta.json"   # 토큰 해시·처음 본 날짜(만료 예고용 — 값은 저장하지 않음)
+TOKEN_LIFETIME_DAYS = 60
+TOKEN_WARN_DAYS = 14
 
 # 무신사 랭킹 카테고리 (crawler/FINDINGS.md)
 MUSINSA_CATEGORIES = {"001": "상의", "002": "아우터", "003": "바지", "100": "원피스/스커트",

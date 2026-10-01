@@ -32,6 +32,7 @@ class _Session:
         self._pw = None
         self._browser = None
         self._pages: dict[str, object] = {}
+        self._failed: dict[str, str] = {}   # 한 번 못 연 호스트는 이유를 기억하고 바로 포기(호출마다 브라우저 재시도 방지)
 
     def _ensure(self):
         if self._browser:
@@ -49,17 +50,28 @@ class _Session:
         atexit.register(self.close)
 
     def page_for(self, host_key: str, hint: str | None = None):
-        self._ensure()
+        if host_key in self._failed:
+            raise BrowserUnavailable(self._failed[host_key])
+        try:
+            self._ensure()
+        except Exception as e:  # 설치 안 됨·실행 파일 없음 등
+            self._failed[host_key] = f"브라우저 실행 실패: {str(e)[:120]}"
+            raise BrowserUnavailable(self._failed[host_key]) from None
         if host_key not in self._pages:
-            ctx = self._browser.new_context(user_agent=UA, locale="ko-KR", viewport={"width": 1280, "height": 900})
-            page = ctx.new_page()
             url = HOME_PAGES[host_key].format(hint=hint or DEFAULT_HINT.get(host_key, ""))
-            page.goto(url, timeout=45000, wait_until="domcontentloaded")
-            time.sleep(3)  # Cloudflare 챌린지·사이트 스크립트가 쿠키를 심을 시간
-            html = page.content()
+            try:
+                ctx = self._browser.new_context(user_agent=UA, locale="ko-KR", viewport={"width": 1280, "height": 900})
+                page = ctx.new_page()
+                page.goto(url, timeout=45000, wait_until="domcontentloaded")
+                time.sleep(3)  # 사이트 스크립트가 쿠키를 심을 시간
+                html = page.content()
+            except Exception as e:  # 프록시 차단(ERR_TUNNEL)·타임아웃 등 — 이 호스트는 더 시도하지 않는다
+                self._failed[host_key] = f"{host_key}: 페이지 열기 실패 {type(e).__name__}: {str(e)[:100]}"
+                raise BrowserUnavailable(self._failed[host_key]) from None
             if "Attention Required" in html or "Just a moment" in html:
                 ctx.close()
-                raise BrowserUnavailable(f"{host_key}: 브라우저로도 Cloudflare에 막힘")
+                self._failed[host_key] = f"{host_key}: 브라우저로도 Cloudflare에 막힘 — 더 시도하지 않음"
+                raise BrowserUnavailable(self._failed[host_key])
             self._pages[host_key] = page
         return self._pages[host_key]
 
@@ -92,12 +104,15 @@ def fetch_json(url: str, headers: dict | None = None, hint: str | None = None) -
     if not key:
         raise BrowserUnavailable(f"브라우저 경유 대상이 아님: {url}")
     page = _session.page_for(key, hint)
-    result = page.evaluate(
-        """async ([u, h]) => {
-            const r = await fetch(u, {credentials: 'include', headers: h || {}});
-            const t = await r.text();
-            return {status: r.status, text: t};
-        }""", [url, {k: v for k, v in (headers or {}).items() if k.lower() in ("accept", "accept-language")}])
+    try:
+        result = page.evaluate(
+            """async ([u, h]) => {
+                const r = await fetch(u, {credentials: 'include', headers: h || {}});
+                const t = await r.text();
+                return {status: r.status, text: t};
+            }""", [url, {k: v for k, v in (headers or {}).items() if k.lower() in ("accept", "accept-language")}])
+    except Exception as e:  # 페이지 안 fetch 실패(네트워크·CORS) — 호출자는 MallError로 바꾼다
+        raise RuntimeError(f"페이지 안 fetch 실패 {type(e).__name__}: {str(e)[:120]}") from None
     if not 200 <= int(result["status"]) < 300:
         raise RuntimeError(f"HTTP {result['status']}: {result['text'][:120]}")
     try:

@@ -103,13 +103,24 @@ def zzal_last_used(file: str, zzal_index: dict, history: list[dict]) -> date | N
     return max(dates) if dates else None
 
 
+def zzal_path(name: str):
+    """짤 파일 위치 — 데이터 브랜치(인터넷에서 채택, autopost-data/zzal) 우선, 다음 저장소 CARD/zzal."""
+    if not name or "/" in name or "\\" in name or name.startswith("."):
+        return None
+    for d in (config.ZZAL_WEB_DIR, config.ZZAL_DIR):
+        p = d / name
+        if p.is_file():
+            return p
+    return None
+
+
 def check_zzal(cta: dict, zzal_index: dict, history: list[dict], today: date) -> list[tuple[str, str]]:
     issues = []
     f = cta.get("zzal")
     if not f:
-        return [("error", "CTA 짤(cta.zzal)을 CARD/zzal/index.json에서 골라 적을 것")]
-    if "/" in f or "\\" in f or not (config.ZZAL_DIR / f).is_file():
-        return [("error", f"CTA 짤 파일이 CARD/zzal에 없음: {f}")]
+        return [("error", "CTA 짤(cta.zzal)을 짤 목록에서 골라 적을 것")]
+    if zzal_path(f) is None:
+        return [("error", f"CTA 짤 파일이 CARD/zzal·autopost-data/zzal 어디에도 없음: {f}")]
     if not any(z.get("file") == f for z in zzal_index.get("zzal", [])):
         issues.append(("warn", f"짤 {f}가 index.json 목록에 없음 — 자막·장면을 보고 항목을 추가할 것"))
     last = zzal_last_used(f, zzal_index, history)
@@ -134,10 +145,12 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
         err("season_word·item_word가 비어 있음")
     if season and item and (season not in keyword or item not in keyword):
         err(f"keyword '{keyword}'에 시즌어 '{season}'·품목어 '{item}'가 글자 그대로 없음")
-    if any(w in keyword.lower() for w in config.RANKING_WORDS):
+    if re.search(config.RANKING_PATTERN, keyword, re.I):
         err("랭킹 키워드 금지(§1)")
     if not ep.get("folder", "").endswith(keyword) or not re.match(r"^\d{8} ", ep.get("folder", "")):
         err("folder는 'YYYYMMDD 키워드' 형식이어야 함")
+    elif ep["folder"][:8] != today.strftime("%Y%m%d"):
+        warn(f"folder 날짜({ep['folder'][:8]})가 오늘 KST({today.strftime('%Y%m%d')})가 아님 — 클라우드는 UTC 시계라 날짜를 KST로 잡을 것")
     if any(same_keyword(h.get("keyword", ""), keyword) for h in hist[-10:]):
         err(f"최근 10회차에 같은 키워드 '{keyword}'가 있음")
 
@@ -178,9 +191,13 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
         if entry and entry.get("roster"):
             roster_count += 1
         alt = c.get("cheaper_elsewhere")
-        if alt:
+        if isinstance(alt, dict) and alt.get("unavailable"):
+            warn(f"{tag}: 다른 몰 가격을 비교하지 못함(§2 최저가 확인 불가) — {alt['unavailable']}")
+        elif alt:
             warn(f"{tag}: 같은 상품이 {alt['mall']}에서 {alt['sale_price']:,}원으로 더 쌈 — 가격·이미지 출처는 "
                  f"저렴한 몰(§2). {alt['mall']} 후보({alt['goodsNo']})로 바꾸는 것을 검토")
+        if not str(p.get("display_name", "")).strip():
+            err(f"{tag}: display_name(짧은 상품명)을 적을 것 — 비우면 몰 원본 상품명(상품코드·'[29CM 단독]' 등)이 카드에 찍힘(§3)")
         if any(b in c["brand"] for b in config.BIG_ACCOUNTS):
             warn(f"{tag}: {c['brand']}는 대형 계정 — 브랜드 반응 기대치 낮음")
 
@@ -265,6 +282,12 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
     for w in config.CAPTION_BANNED:
         if w in cap.lower():
             err(f"캡션 금지 표현 '{w}'")
+    if re.search(config.RANKING_PATTERN, cap, re.I):
+        err("캡션에 랭킹 표현(§1·§5)")
+    for pat, why in config.CAPTION_WARN_PATTERNS.items():
+        m = re.search(pat, cap)
+        if m:
+            warn(f"캡션: {why} — '{m.group(0)[:40]}'")
     n = emoji_count(cap)
     if not 3 <= n <= 5:
         warn(f"캡션 이모지 {n}개 (기준 3~5)")

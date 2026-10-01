@@ -5,7 +5,7 @@ from datetime import timedelta
 
 import pytest
 
-from autopost import build, config, measure, publish, state, verify
+from autopost import build, config, measure, publish, rules, state, verify
 from autopost.tests.conftest import write_episode
 
 
@@ -22,7 +22,7 @@ def test_card_dicts_and_caption(episode, cands, handles):
     assert cards[0]["img"] == "assets/cover-103-3.jpg" and cards[1]["img"] == "assets/01-100-0.jpg"
     item = cards[1]
     assert item["sale"] == "49,900원" and item["normal"] == "129,900원" and item["off"] == "62%"
-    assert item["proof"] == "후기 43개 · ⭐ 4.9"
+    assert item["proof"] == '후기 43개 · <b class="star">★</b> 4.9'
     assert "실제&nbsp;후기" in item["sp"] and "색감이 어두워서" in item["sp"]
     caption, skipped = build.caption_text(episode, prods, handles)
     assert caption.endswith("📌 브랜드 계정\n무드인사이드 @moodinside_official\n버던트 @verdnt_official\n"
@@ -216,7 +216,7 @@ def test_measure_parse_and_due():
 def test_zzal_index_lists_real_files():
     idx = build.load_zzal_index()
     files = [z["file"] for z in idx["zzal"]]
-    assert files and all((config.ZZAL_DIR / f).is_file() for f in files)
+    assert files and all(rules.zzal_path(f).is_file() for f in files)   # 저장소 CARD/zzal + 데이터 브랜치 zzal/
 
 
 def test_zzal_rules(episode):
@@ -253,7 +253,9 @@ def test_publish_sends_user_tags_and_falls_back(episode, cands, handles, monkeyp
         (d / f"{i}.jpg").write_bytes(b"x")
     (d / "caption.txt").write_text("본문", encoding="utf-8")
     (d / "result.md").write_text("- (게시 후 publish가 채운다)\n", encoding="utf-8")
-    state.save_status(folder, {"stage": "built"})
+    now = config.now_kst()
+    fp = _built(folder, now)
+    _built(folder, now, verified_at=now.isoformat(), verified_fingerprint=fp)
     calls = []
 
     def fake_api(method, endpoint, token, **data):
@@ -264,7 +266,7 @@ def test_publish_sends_user_tags_and_falls_back(episode, cands, handles, monkeyp
             return {"data": []}
         if endpoint == "me/media" and data.get("is_carousel_item"):
             if "verdnt" in data.get("user_tags", ""):
-                raise RuntimeError("invalid user tag")
+                raise RuntimeError('Graph API 오류 400: {"error":{"message":"Invalid user id","code":110,"error_subcode":2207018}}')
             return {"id": f"c{len(calls)}"}
         if endpoint == "me/media":
             return {"id": "CAR"}
@@ -279,7 +281,9 @@ def test_publish_sends_user_tags_and_falls_back(episode, cands, handles, monkeyp
     monkeypatch.setattr(publish, "push_data", lambda m: True)
     monkeypatch.setattr(publish.time, "sleep", lambda s: None)
     monkeypatch.setenv("IG_ACCESS_TOKEN", "T")
-    st = publish.publish(folder)
+    with pytest.raises(SystemExit):           # 내부 게이트: 승인 없이 호출하면 거부
+        publish.publish(folder)
+    st = publish.publish(folder, approved=True)
     sent = [json.loads(dt["user_tags"])[0]["username"] for ep_, dt in calls
             if ep_ == "me/media" and dt.get("user_tags")]
     assert "moodinside_official" in sent and "generalidea_official" in sent

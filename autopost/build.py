@@ -35,7 +35,12 @@ def won(n: int) -> str:
 
 
 def load_zzal_index() -> dict:
-    return json.loads(config.ZZAL_INDEX.read_text(encoding="utf-8")) if config.ZZAL_INDEX.exists() else {"zzal": []}
+    """저장소 짤 목록 + 데이터 브랜치(인터넷에서 채택) 짤 목록을 합친다."""
+    merged = {"zzal": []}
+    for path in (config.ZZAL_INDEX, config.ZZAL_WEB_INDEX):
+        if path.exists():
+            merged["zzal"].extend(json.loads(path.read_text(encoding="utf-8")).get("zzal", []))
+    return merged
 
 
 def download(url: str, path) -> None:
@@ -46,14 +51,21 @@ def download(url: str, path) -> None:
     path.write_bytes(r.content)
 
 
-def enrich(ep: dict, cands: dict) -> list[dict]:
-    """후보 사실 + 세션 선택. 세션 쪽은 허용 키만 섞는다 — 가격·인용 원문을 덮어쓰지 못하게."""
+def enrich(ep: dict, cands: dict, handles: dict | None = None) -> list[dict]:
+    """후보 사실 + 세션 선택. 세션 쪽은 허용 키만 섞는다 — 가격·인용 원문을 덮어쓰지 못하게.
+
+    핸들·로스터는 수집 시점 스냅샷이 아니라 지금 handles.json 기준(수집 뒤 등록된 핸들을 반영)."""
+    from .state import find_handle
     by_no = {str(c["goodsNo"]): c for c in cands["candidates"]}
     rows = []
     for p in ep["products"]:
         c = by_no[str(p["goodsNo"])]
         row = {**c, **{k: v for k, v in p.items() if k in config.PRODUCT_KEYS}}
         row.pop("quote_text", None)
+        if handles is not None:
+            entry = find_handle(handles, c["brand"], c.get("brand_en", ""), c.get("brand_id", ""))
+            row["roster"] = bool(entry and entry.get("roster"))
+            row["handle"] = entry.get("handle") if entry and entry.get("verified") else None
         if p.get("quote_no") is not None:
             q = next(q for q in c["quotes"] if str(q["no"]) == str(p["quote_no"]))
             row["quote_text"] = q["text"]
@@ -74,7 +86,8 @@ def card_dicts(ep: dict, prods: list[dict], cover_cand: dict, zzal_rel: str) -> 
               "title": rich(cover["title"]), "sub": rich(cover.get("sub", ""))}]
     for i, p in enumerate(prods, 1):
         if p["review_count"] and p.get("rating"):
-            proof = f"후기 {p['review_count']:,}개 · ⭐ {p['rating']}"
+            # ★는 글꼴 독립적(이모지 ⭐는 Linux 렌더에서 글꼴이 없어 깨진다)
+            proof = f"후기 {p['review_count']:,}개 · <b class=\"star\">★</b> {p['rating']}"
         else:
             proof = f"후기 {p['review_count']:,}개" + (f" · {p['season']}" if p.get("season") else "")
         if p.get("quote_text"):
@@ -177,7 +190,7 @@ def build(folder: str) -> dict:
         save_status(folder, status)
         return report
 
-    prods = enrich(ep, cands)
+    prods = enrich(ep, cands, handles)
     by_no = {str(c["goodsNo"]): c for c in cands["candidates"]}
     cover_cand = by_no[str(ep["cover"]["goodsNo"])]
     assets = ep_dir / "assets"
@@ -186,7 +199,7 @@ def build(folder: str) -> dict:
              assets / asset_name("cover", cover_cand["goodsNo"], ep["cover"]["image"]))
     for i, p in enumerate(prods, 1):
         download(p["images"][p["image"]], assets / asset_name(f"{i:02d}", p["goodsNo"], p["image"]))
-    zz = config.ZZAL_DIR / ep["cta"]["zzal"]
+    zz = rules.zzal_path(ep["cta"]["zzal"])
     for old in assets.glob("zzal.*"):
         old.unlink()
     shutil.copyfile(zz, assets / f"zzal{zz.suffix.lower()}")

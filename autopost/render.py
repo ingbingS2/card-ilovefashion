@@ -23,10 +23,11 @@ def render(cards: list[dict], base_dir: Path, out_dir: Path) -> list[dict]:
     try:
         with sync_playwright() as pw:
             launch = {"headless": True}
-            chrome = os.environ.get("CHROME_PATH") or next(
+            env_chrome = os.environ.get("CHROME_PATH")
+            chrome = env_chrome if env_chrome and os.path.exists(env_chrome) else next(
                 (p for p in (r"C:\Program Files\Google\Chrome\Application\chrome.exe",
                              r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-                 if os.path.exists(p)), None)  # 이 PC는 Playwright 번들 Chromium 대신 설치된 Chrome
+                 if os.path.exists(p)), None)  # 없으면 Playwright 번들 Chromium(클라우드)
             if chrome:
                 launch["executable_path"] = chrome
             browser = pw.chromium.launch(**launch)

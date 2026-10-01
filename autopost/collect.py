@@ -125,7 +125,7 @@ def build_musinsa(goods_no, handles: dict) -> dict:
 
 def build_29cm(item_no, handles: dict) -> dict:
     d = malls29.detail(item_no)
-    revs, total = malls29.reviews(item_no)
+    revs, total, avg = malls29.reviews(item_no)
     fb = d.get("frontBrand") or {}
     brand = fb.get("brandNameKor") or fb.get("brandNameEng") or ""
     quotes = [q for q in (_quote(r.get("itemReviewNo"), r.get("contents", ""), r.get("point"),
@@ -140,6 +140,7 @@ def build_29cm(item_no, handles: dict) -> dict:
         "genders": [str(d.get("genderAttr") or "")],
         "category": "",
         **malls29.price_facts(d), **malls29.review_summary(d),
+        **({"rating": round(avg, 1)} if avg else {}),   # 후기 API 평균(소수점) — 상세의 0.5 단위 값보다 정확
         "review_total_listed": total,
         "sold_out": malls29.sold_out(d),
         "release_date": rd.isoformat() if rd else None,
@@ -210,11 +211,14 @@ def ranking_rows(queries: list[str], gf: str, notes: list[str]) -> list[dict]:
 
 
 def cheaper_elsewhere(c: dict) -> dict | None:
-    """같은 상품을 다른 몰에서 찾아 판매가(쿠폰 미적용)가 더 낮으면 그 정보. 못 찾으면 None."""
+    """같은 상품을 다른 몰에서 찾아 판매가(쿠폰 미적용)가 더 낮으면 그 정보.
+
+    못 찾으면 None, **비교 자체를 못 했으면 {"unavailable": 이유}** — 조용히 '더 싼 곳 없음'이 되지 않게(§2).
+    같은 상품 판정: 같은 브랜드 + 상품명 토큰이 양쪽 기준 모두 60% 이상 겹침(한쪽 기준만 보면 오탐)."""
     want = _tokens(c["name"])
     if not want:
         return None
-    query = f"{c['brand']} {' '.join(sorted(want, key=len, reverse=True)[:3])}"
+    query = f"{c['brand']} {' '.join(sorted(want, key=lambda w: (-len(w), w))[:3])}"
     try:
         if c["mall"] == MUSINSA:
             hits = [(r["itemNo"], r.get("frontBrandNameKor", ""), r.get("itemName", ""))
@@ -222,11 +226,12 @@ def cheaper_elsewhere(c: dict) -> dict | None:
         else:
             hits = [(r["goodsNo"], r.get("brandName", ""), r.get("goodsName", ""))
                     for r in malls.search(query, gf="A", size=10)]
-    except malls.MallError:
-        return None
+    except malls.MallError as e:
+        return {"unavailable": f"다른 몰 검색 실패: {str(e)[:80]}"}
     for no, brand, name in hits:
         got = _tokens(name)
-        if not same_brand(brand, c["brand"]) or len(want & got) / max(len(want), 1) < 0.6:
+        overlap = len(want & got)
+        if not same_brand(brand, c["brand"]) or overlap / max(len(want), 1) < 0.6 or overlap / max(len(got), 1) < 0.6:
             continue
         try:
             if c["mall"] == MUSINSA:
@@ -237,8 +242,8 @@ def cheaper_elsewhere(c: dict) -> dict | None:
                 d = malls.detail(no)
                 price, sold = malls.price_facts(d)["sale_price"], bool(d.get("isOutOfStock"))
                 mall, url = MUSINSA, f"https://www.musinsa.com/products/{no}"
-        except malls.MallError:
-            return None
+        except malls.MallError as e:
+            return {"unavailable": f"다른 몰 상세 조회 실패({no}): {str(e)[:80]}"}
         if price and not sold and price < c["sale_price"]:
             return {"mall": mall, "goodsNo": int(no), "sale_price": price, "url": url}
         return None
@@ -320,6 +325,7 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
     out: list[dict] = []
     seen_nos: set[int] = set()
     per_brand: dict[str, int] = {}
+    dead_malls: set[str] = set()
     calls = 0
     for row in order:
         if len(out) >= limit or calls >= MAX_DETAIL_CALLS:
@@ -329,10 +335,15 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
             drop(f"브랜드당 {MAX_PER_BRAND}개 초과(색상 변형 등)"); continue
         if row["no"] in seen_nos:
             drop("다른 몰과 번호 충돌"); continue
+        if row["mall"] in dead_malls:
+            drop(f"{row['mall']} 차단(403) — 나머지 건너뜀"); continue
         calls += 1
         try:
             c = BUILDERS[row["mall"]](row["no"], handles)
-        except malls.MallError:
+        except malls.MallError as e:
+            if "차단" in str(e) or "403" in str(e):
+                dead_malls.add(row["mall"])   # 데이터센터 IP 차단 — 남은 호출 예산을 다른 몰에 쓴다
+                notes.append(f"{row['mall']} 상세 API 차단(403) — 이 몰 후보는 수집하지 못함: {str(e)[:100]}")
             drop(f"{row['mall']} 상세 조회 실패"); continue
         if c["sold_out"]:
             drop("품절(상세)"); continue
@@ -386,7 +397,7 @@ def main(argv=None) -> None:
     c = sub.add_parser("candidates")
     c.add_argument("--folder", required=True)
     c.add_argument("-q", "--query", action="append", required=True)
-    c.add_argument("--gf", default="A", choices=["A", "F", "M"])
+    c.add_argument("--gf", default="F", choices=["A", "F", "M"], help="F=여성(기본) A=전체 M=남성")
     c.add_argument("--limit", type=int, default=30)
     args = ap.parse_args(argv)
     if args.cmd == "signals":

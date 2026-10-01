@@ -66,7 +66,13 @@ def fingerprint(folder: str) -> str:
     for name in names:
         p = d / name
         h.update(name.encode())
-        h.update(p.read_bytes() if p.exists() else b"<missing>")
+        if not p.exists():
+            h.update(b"<missing>")
+            continue
+        data = p.read_bytes()
+        if name.endswith((".json", ".txt")):
+            data = data.replace(b"\r\n", b"\n")  # Windows(autocrlf) ↔ Linux 체크아웃이 같은 지문을 내게
+        h.update(data)
     return h.hexdigest()
 
 

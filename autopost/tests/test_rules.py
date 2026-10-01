@@ -98,8 +98,8 @@ def test_headline_tags_and_particle_emphasis(episode, cands, handles):
 
 
 def test_ranking_keyword_blocked(episode, cands, handles):
-    episode["keyword"] = "가을 재킷 TOP"
-    episode["folder"] = "20261002 가을 재킷 TOP"
+    episode["keyword"] = "가을 재킷 TOP 10"
+    episode["folder"] = "20261002 가을 재킷 TOP 10"
     assert any("랭킹" in e for e in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
 
 
@@ -154,3 +154,19 @@ def test_keyword_repeat_ignores_spacing_and_brand_prefix(episode, cands, handles
     hist = [{"keyword": "가을재킷", "posted_at": "2026-10-01T09:00+09:00", "brands": ["파르티멘토"]}]
     errs = errors(rules.check_episode(episode, cands, hist, handles, TODAY))
     assert any("같은 키워드" in e for e in errs) and any("직전 회차" in e for e in errs)
+
+
+def test_ranking_pattern_does_not_hit_vest(episode, cands, handles):
+    episode["keyword"] = "가을 니트 베스트"; episode["item_word"] = "니트 베스트"
+    episode["folder"] = "20261002 가을 니트 베스트"
+    episode["cover"]["title"] = "조끼처럼 걸치는<br><em>가을 니트 베스트</em> 다섯"
+    episode["caption"] = "가을 니트 베스트는 겉옷 전에 한 번 더 고민하게 됩니다 🍂\n\n저장해 두세요 🧶 친구에게 보내 주세요 🔖"
+    assert not any("랭킹" in e for e in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+
+
+def test_display_name_required_and_caption_range_warn(episode, cands, handles):
+    episode["products"][0]["display_name"] = ""
+    episode["caption"] = episode["caption"].replace("따뜻한 순서로 놓았습니다 🧵", "브이넥에서 터틀넥까지 놓았습니다 🧵")
+    issues = rules.check_episode(episode, cands, [], handles, TODAY)
+    assert any("display_name" in m for l, m in issues if l == "error")
+    assert any("까지" in m for l, m in issues if l == "warn")

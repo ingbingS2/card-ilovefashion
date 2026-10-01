@@ -31,8 +31,23 @@ UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
 
 
 def _safe_url(url: str) -> bool:
+    """http(s) 공개 호스트만 — 사설·루프백·링크로컬(클라우드 메타데이터 169.254.x)·예약 대역은 DNS를 풀어서 거른다."""
+    import ipaddress
+    import socket
+
     p = urlparse(url)
-    return p.scheme in ("http", "https") and bool(p.netloc) and not p.netloc.startswith(("localhost", "127.", "10.", "192.168."))
+    if p.scheme not in ("http", "https") or not p.hostname:
+        return False
+    host = p.hostname
+    try:
+        infos = socket.getaddrinfo(host, p.port or (443 if p.scheme == "https" else 80), proto=socket.IPPROTO_TCP)
+    except socket.gaierror:
+        return False
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved or ip.is_multicast or ip.is_unspecified:
+            return False
+    return True
 
 
 def fetch(url: str) -> dict:
@@ -40,9 +55,11 @@ def fetch(url: str) -> dict:
     from PIL import Image
 
     if not _safe_url(url):
-        return {"ok": False, "url": url, "reason": "http(s) 외부 주소만"}
+        return {"ok": False, "url": url, "reason": "http(s) 공개 주소만"}
     try:
         r = requests.get(url, headers=UA, timeout=30, stream=True)
+        if any(not _safe_url(h.headers.get("Location", "")) for h in r.history) or not _safe_url(r.url):
+            return {"ok": False, "url": url, "reason": "리다이렉트 목적지가 공개 주소가 아님"}
         r.raise_for_status()
         data = r.raw.read(MAX_BYTES + 1, decode_content=True)
     except requests.exceptions.RequestException as e:
@@ -86,24 +103,27 @@ def page_images(url: str, limit: int = 30) -> list[str]:
 
 
 def adopt(cand: str, source: str, caption: str, scene: str, mood: str, fits: str) -> dict:
-    """후보를 CARD/zzal/web-YYYYMMDD-N.jpg로 옮기고 index.json에 항목 추가."""
+    """후보를 데이터 브랜치 autopost-data/zzal/web-YYYYMMDD-N.jpg로 옮기고 그 index.json에 항목 추가.
+
+    (main 작업 폴더 CARD/zzal이 아니라 데이터 브랜치에 두는 이유: main 커밋 금지 규칙·클라우드 컨테이너 소멸 뒤에도 보존.)"""
     from shutil import copyfile
     from pathlib import Path
 
     src = Path(cand)
     if not src.is_file() or src.parent.resolve() != CAND_DIR.resolve():
         raise SystemExit("후보 폴더(.autopost-work/zzal-candidates)의 파일만 올릴 수 있습니다")
+    config.ZZAL_WEB_DIR.mkdir(parents=True, exist_ok=True)
     today = config.now_kst().strftime("%Y%m%d")
     n = 1
-    while (config.ZZAL_DIR / f"web-{today}-{n}.jpg").exists():
+    while (config.ZZAL_WEB_DIR / f"web-{today}-{n}.jpg").exists() or (config.ZZAL_DIR / f"web-{today}-{n}.jpg").exists():
         n += 1
-    dest = config.ZZAL_DIR / f"web-{today}-{n}.jpg"
+    dest = config.ZZAL_WEB_DIR / f"web-{today}-{n}.jpg"
     copyfile(src, dest)
-    idx = json.loads(config.ZZAL_INDEX.read_text(encoding="utf-8")) if config.ZZAL_INDEX.exists() else {"zzal": []}
+    idx = json.loads(config.ZZAL_WEB_INDEX.read_text(encoding="utf-8")) if config.ZZAL_WEB_INDEX.exists() else {"zzal": []}
     entry = {"file": dest.name, "caption": caption, "scene": scene, "mood": mood, "fits": fits,
              "last_used": "", "source": source}
     idx["zzal"].append(entry)
-    config.ZZAL_INDEX.write_text(json.dumps(idx, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    config.ZZAL_WEB_INDEX.write_text(json.dumps(idx, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return entry
 
 

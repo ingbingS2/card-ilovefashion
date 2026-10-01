@@ -41,8 +41,8 @@ def _browser_fallback(url: str, params: dict | None, headers: dict | None) -> di
         return browser.fetch_json(full, headers)
     except browser.BrowserUnavailable:
         return None
-    except RuntimeError as e:
-        raise MallError(f"GET {full} 실패(브라우저 경유): {str(e)[:160]}") from None
+    except Exception as e:  # RuntimeError(HTTP 상태·JSON 아님) 포함 — Playwright 예외로 수집 전체가 죽지 않게
+        raise MallError(f"GET {full} 실패(브라우저 경유): {type(e).__name__}: {str(e)[:160]}") from None
 
 
 def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict | None = None) -> dict:
@@ -51,6 +51,7 @@ def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict |
         data = _browser_fallback(url, params, headers)
         if data is not None:
             return data
+        raise MallError(f"GET {url} 실패: {host}는 데이터센터 IP 차단(Cloudflare 403)이고 브라우저 경유도 불가")
     last = ""
     for attempt in range(retries):
         time.sleep(DELAY_SEC)

@@ -17,9 +17,11 @@ class FakeRaw(io.BytesIO):
 
 
 class FakeResp:
-    def __init__(self, data: bytes, text: str = ""):
+    def __init__(self, data: bytes, text: str = "", url: str = "https://example.com/x"):
         self.raw = FakeRaw(data)
         self.text = text
+        self.url = url
+        self.history = []
 
     def raise_for_status(self):
         pass
@@ -31,7 +33,18 @@ def _jpg(w: int, h: int) -> bytes:
     return buf.getvalue()
 
 
+def _fake_getaddrinfo(host, port, *a, **k):
+    import ipaddress
+    try:
+        ipaddress.ip_address(host)
+        ip = host
+    except ValueError:
+        ip = "93.184.216.34"   # 공개 주소로 풀린다고 가정
+    return [(2, 1, 6, "", (ip, port))]
+
+
 def test_fetch_validates(monkeypatch, tmp_path):
+    monkeypatch.setattr(zzal.socket if hasattr(zzal, "socket") else __import__("socket"), "getaddrinfo", _fake_getaddrinfo)
     monkeypatch.setattr(zzal, "CAND_DIR", tmp_path / "cand")
     monkeypatch.setattr(zzal.requests, "get", lambda *a, **k: FakeResp(_jpg(600, 360)))
     ok = zzal.fetch("https://example.com/a.webp")
@@ -42,6 +55,10 @@ def test_fetch_validates(monkeypatch, tmp_path):
     assert zzal.fetch("https://example.com/c.jpg")["reason"] == "이미지가 아님"
     assert not zzal.fetch("file:///etc/passwd")["ok"]
     assert not zzal.fetch("http://127.0.0.1/x.jpg")["ok"]
+    assert not zzal.fetch("http://169.254.169.254/latest/meta-data")["ok"]   # 클라우드 메타데이터
+    assert not zzal.fetch("http://10.0.0.5/a.jpg")["ok"]
+    monkeypatch.setattr(zzal.requests, "get", lambda *a, **k: FakeResp(_jpg(600, 360), url="http://192.168.0.1/a.jpg"))
+    assert "리다이렉트" in zzal.fetch("https://example.com/redir.jpg")["reason"]
 
 
 def test_page_images_filters_icons(monkeypatch):
@@ -59,8 +76,9 @@ def test_adopt_copies_and_indexes(monkeypatch, tmp_path):
     zdir.mkdir()
     (zdir / "index.json").write_text('{"zzal": []}', encoding="utf-8")
     monkeypatch.setattr(zzal, "CAND_DIR", cand)
-    monkeypatch.setattr(config, "ZZAL_DIR", zdir)
-    monkeypatch.setattr(config, "ZZAL_INDEX", zdir / "index.json")
+    monkeypatch.setattr(config, "ZZAL_DIR", tmp_path / "repo-zzal")
+    monkeypatch.setattr(config, "ZZAL_WEB_DIR", zdir)
+    monkeypatch.setattr(config, "ZZAL_WEB_INDEX", zdir / "index.json")
     e = zzal.adopt(str(cand / "cand-1.jpg"), "https://src", "자막", "장면", "무드", "주제")
     assert (zdir / e["file"]).is_file() and e["file"].startswith("web-")
     assert json.loads((zdir / "index.json").read_text(encoding="utf-8"))["zzal"][0]["source"] == "https://src"

@@ -84,6 +84,32 @@ def measure(token: str) -> tuple[list[dict], list[str]]:
     return done, errors
 
 
+def token_age_note(token: str) -> str:
+    """토큰 값은 저장하지 않고 해시와 처음 본 날짜만 데이터 브랜치에 남겨, 60일 만료 2주 전부터 경고한다(§8)."""
+    import hashlib
+    import json as _json
+    from datetime import date as _date
+
+    digest = hashlib.sha256(token.encode()).hexdigest()[:16]
+    meta = {}
+    if config.TOKEN_META_FILE.exists():
+        try:
+            meta = _json.loads(config.TOKEN_META_FILE.read_text(encoding="utf-8"))
+        except ValueError:
+            meta = {}
+    today = config.now_kst().date()
+    if meta.get("hash") != digest:
+        meta = {"hash": digest, "first_seen": today.isoformat()}
+        config.TOKEN_META_FILE.parent.mkdir(parents=True, exist_ok=True)
+        config.TOKEN_META_FILE.write_text(_json.dumps(meta) + "\n", encoding="utf-8")
+    first = _date.fromisoformat(meta["first_seen"])
+    left = config.TOKEN_LIFETIME_DAYS - (today - first).days
+    note = f" · 처음 확인 {first.isoformat()}, 만료까지 약 {left}일 이하"
+    if left <= config.TOKEN_WARN_DAYS:
+        note += " ⚠️ 2주 안에 만료 — Meta 앱에서 새 토큰을 발급해 IG_ACCESS_TOKEN(클라우드)·토큰 파일(PC)을 바꿀 것"
+    return note
+
+
 def refresh_token(token: str) -> dict:
     try:
         r = requests.get("https://graph.instagram.com/refresh_access_token",
@@ -108,9 +134,10 @@ def main(argv=None) -> None:
         token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
         try:
             me = api("GET", "me", token, fields="username")
-            print(f"ok @{me.get('username')} ({'env' if from_env else 'file'})")
         except RuntimeError as e:
             print(f"invalid — {str(e)[:160]}")
+            return
+        print(f"ok @{me.get('username')} ({'env' if from_env else 'file'})" + token_age_note(token))
         return
     token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
     if args.token:
@@ -127,6 +154,9 @@ def main(argv=None) -> None:
                 print(f"새 토큰을 {post_ig.TOKEN_FILE}에 저장했습니다(값은 출력하지 않음).")
         return
     done, errors = measure(token)
+    if done:
+        from .publish import push_data
+        push_data("autopost: +72h 측정 기록")   # 클라우드 컨테이너가 사라져도 측정값이 남게
     for h in done:
         m = h["metrics"]
         print(f"{h['folder']}: 도달 {m.get('reach')} · 공유 {m.get('shares')} · 저장 {m.get('saved')} → {h['verdict']}")
