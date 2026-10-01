@@ -7,7 +7,7 @@
 
 ## 절대 규칙
 - 카드뉴스 키워드·문구·디자인·검증·게시는 KEYWORD-POLICY.md를 따른다. 랭킹 키워드 금지, 항상 시즌성.
-- **실제 인스타 게시는 사용자 승인 후에만.** 되돌릴 수 없다. 매일 자동 제작(`autopost/`, 클라우드 루틴)도 같다 — 루틴은 미리보기까지만 만들고, 사용자가 그 세션에서 '승인'이라고 답한 뒤에만 `autopost.publish --user-approved`를 실행한다(`.claude/skills/daily-feed/SKILL.md`).
+- **실제 인스타 게시는 사용자 승인 후에만.** 되돌릴 수 없다. 매일 자동 제작(`autopost/`, 클라우드 루틴)도 같다 — 제작 루틴은 미리보기까지만 만들고, 사용자가 그 세션에서 '승인'이라고 답한 뒤에만 `publish --approve --quote "<원문>"`로 승인을 기록한다. 게시는 `publish --pending`(게시·측정 루틴과 같은 코드)이 재검증·간격·잠금을 거쳐 한다(`.claude/skills/daily-feed/SKILL.md`).
 - 사용자 노출 UI 텍스트는 한국어(코드 식별자·주석은 영어 허용).
 - 실제 외부 호출·비밀키·배포 금지: 테스트는 Claude API·Firestore 목 처리, `firebase deploy/login` 금지, 키는 `.env.example`로만 문서화.
 - 셸 명령은 Bash 툴. npm/vite/python 명령 앞에 반드시:

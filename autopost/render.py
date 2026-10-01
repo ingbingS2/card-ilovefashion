@@ -39,7 +39,9 @@ def render(cards: list[dict], base_dir: Path, out_dir: Path) -> list[dict]:
             page.wait_for_function(
                 "Array.from(document.images).every(i => i.complete && i.naturalWidth > 0)",
                 timeout=30000)
-            font_ok = page.evaluate("document.fonts.check('800 26px \"Pretendard Variable\"')")
+            # check()는 '불러올 글꼴이 없음'에도 true라 쓸모없다 — Pretendard가 실제로 loaded인지 본다
+            font_ok = page.evaluate("[...document.fonts].some(f => f.family.replace(/\"/g, '').startsWith('Pretendard')"
+                                    " && f.status === 'loaded')")
             for i in range(len(cards)):
                 el = page.locator(f"#card{i}")
                 out = out_dir / f"{i + 1}.jpg"

@@ -52,27 +52,84 @@ def test_history_falls_back_to_seed():
     assert len(state.load_history()) == 1
 
 
-def test_cloudflare_403_switches_to_browser(monkeypatch):
-    from autopost import browser
+class _Resp:
+    def __init__(self, status: int, text: str = "", payload: dict | None = None):
+        self.status_code, self.text, self._payload = status, text, payload
+        self.ok = 200 <= status < 300
 
-    class R:
-        ok, status_code = False, 403
-        text = "<html><title>Attention Required! | Cloudflare</title>"
-    calls = {"req": 0, "browser": []}
+    def json(self):
+        return self._payload
 
-    def fake_get(*a, **k):
-        calls["req"] += 1
-        return R()
+
+def test_cloudflare_403_blocks_host_without_bypass(monkeypatch):
+    calls = []
+
+    def fake_get(url, params=None, headers=None, timeout=None):
+        calls.append(url)
+        if "client.musinsa.com" in url:
+            return _Resp(200, payload={"data": {"ok": 1}})
+        return _Resp(403, "<html><title>Attention Required! | Cloudflare</title>")
     monkeypatch.setattr(malls.requests, "get", fake_get)
     monkeypatch.setattr(malls.time, "sleep", lambda s: None)
-    monkeypatch.setattr(browser, "fetch_json", lambda url, headers=None, hint=None: calls["browser"].append(url) or {"data": {"ok": 1}})
-    malls._blocked_hosts.clear()
-    assert malls._get("https://goods-detail.musinsa.com/api2/goods/1") == {"data": {"ok": 1}}
-    assert malls._get("https://goods-detail.musinsa.com/api2/goods/2") == {"data": {"ok": 1}}
-    assert calls["req"] == 1 and len(calls["browser"]) == 2   # 두 번째부터는 requests를 건너뜀
-    # 브라우저도 못 쓰면 원래 403 오류
-    monkeypatch.setattr(browser, "fetch_json", lambda *a, **k: (_ for _ in ()).throw(browser.BrowserUnavailable("x")))
-    malls._blocked_hosts.clear()
-    with pytest.raises(malls.MallError):
-        malls._get("https://goods-detail.musinsa.com/api2/goods/3")
-    malls._blocked_hosts.clear()
+    monkeypatch.setattr(malls, "_blocked_hosts", set())
+    with pytest.raises(malls.MallError, match="무신사 차단.*우회하지 않음"):
+        malls._get("https://goods-detail.musinsa.com/api2/goods/1")
+    assert len(calls) == 1                                  # 재시도·브라우저 경유 없음
+    with pytest.raises(malls.MallError, match="차단"):
+        malls._get("https://goods-detail.musinsa.com/api2/goods/2")
+    assert len(calls) == 1                                  # 같은 호스트는 네트워크 없이 바로 실패
+    assert malls._get(malls.RANKING_URL) == {"data": {"ok": 1}}   # 다른 호스트(랭킹)는 그대로
+    assert not hasattr(malls, "_browser_fallback")
+    assert "Mozilla" not in malls.HEADERS["User-Agent"]    # 브라우저로 위장하지 않는다
+
+
+def test_plain_403_is_not_retried_or_remembered(monkeypatch):
+    calls = []
+    monkeypatch.setattr(malls.requests, "get", lambda url, **k: calls.append(url) or _Resp(403, "forbidden"))
+    monkeypatch.setattr(malls.time, "sleep", lambda s: None)
+    monkeypatch.setattr(malls, "_blocked_hosts", set())
+    with pytest.raises(malls.MallError, match="HTTP 403"):
+        malls._get("https://goods.musinsa.com/api2/review/v1/view/list")
+    assert len(calls) == 1 and not malls._blocked_hosts
+
+
+def test_29cm_detail_circuit_breaker(monkeypatch):
+    from autopost import malls29
+
+    class Session:
+        def __init__(self):
+            self.statuses: list[int] = []
+            self.calls = 0
+
+        def get(self, url, timeout=None):
+            self.calls += 1
+            st = self.statuses.pop(0)
+            return _Resp(st, payload={"data": {"itemNo": 1}})
+    s = Session()
+    monkeypatch.setattr(malls29, "_session", s)
+    monkeypatch.setattr(malls29, "_bff_403_streak", 0)
+    monkeypatch.setattr(malls29.time, "sleep", lambda sec: None)
+
+    # 403 두 번(각각 재시도 포함) → 성공으로 초기화 → 다시 403 두 번은 아직 차단 아님
+    s.statuses = [403, 403, 403, 403, 200, 403, 403, 403, 403]
+    for _ in range(2):
+        with pytest.raises(malls.MallError, match="HTTP 403"):
+            malls29.detail(1)
+    assert malls29.detail(1) == {"itemNo": 1} and malls29._bff_403_streak == 0
+    for _ in range(2):
+        with pytest.raises(malls.MallError, match="HTTP 403"):
+            malls29.detail(1)
+    # 세 번째 연속 403(재시도 후) → 차단, 그 뒤로는 호출 없이 바로 실패
+    s.statuses = [403, 403]
+    with pytest.raises(malls.MallError, match="29CM 상세 차단 — 이번 실행 중단"):
+        malls29.detail(1)
+    before = s.calls
+    with pytest.raises(malls.MallError, match="29CM 상세 차단 — 이번 실행 중단"):
+        malls29.detail(2)
+    assert s.calls == before
+    # 404 같은 다른 실패는 연속 횟수에 넣지 않는다(재시도도 없음)
+    monkeypatch.setattr(malls29, "_bff_403_streak", 2)
+    s.statuses = [404]
+    with pytest.raises(malls.MallError, match="HTTP 404"):
+        malls29.detail(3)
+    assert malls29._bff_403_streak == 2

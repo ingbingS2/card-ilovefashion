@@ -23,6 +23,10 @@ def data_dir(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "HISTORY_FILE", tmp_path / "history.json")
     monkeypatch.setattr(config, "HANDLES_FILE", tmp_path / "handles.json")
     monkeypatch.setattr(config, "WORK_DIR", tmp_path / "work")
+    # DATA_DIR에서 import 때 계산된 경로들도 — 안 바꾸면 테스트가 실제 autopost-data/에 쓴다(10-02 zzal/ 잔해)
+    monkeypatch.setattr(config, "ZZAL_WEB_DIR", tmp_path / "zzal")
+    monkeypatch.setattr(config, "ZZAL_WEB_INDEX", tmp_path / "zzal" / "index.json")
+    monkeypatch.setattr(config, "TOKEN_META_FILE", tmp_path / "token-meta.json")
     return tmp_path
 
 

@@ -1,14 +1,17 @@
 """인스타 캐러셀 게시 — 되돌릴 수 없다.
 
-    python -m autopost.publish "20261002 가을 니트" --user-approved
-    python -m autopost.publish "20261002 가을 니트" --check        # 조건만 확인
+    python -m autopost.publish "20261002 가을 니트" --approve --quote "<사용자 승인 메시지 원문>"
+    python -m autopost.publish --pending      # 승인 기록된 회차를 재검증 → (안전한) 숫자 갱신 → 게시, 하루 한 건
+    python -m autopost.publish "20261002 가을 니트" --check          # 조건만 확인
+    python -m autopost.publish "20261002 가을 니트" --user-approved  # PC 수동 즉시 게시(권한 확인 창을 거친다)
 
 게시 조건(하나라도 어기면 거부):
-  1) --user-approved — 세션은 사용자가 그 세션에서 '승인'이라고 답한 뒤에만 이 플래그를 붙인다.
-  2) status.json stage=built, 지금 파일들의 fingerprint == 렌더 시점 == 재검증 시점, 재검증 60분 이내.
-  3) 직전 게시와 다른 날(KST) + 20시간 이상 — history.json과 인스타 실제 최근 게시물 둘 다 확인.
-media_publish 직전에 stage=publishing을 기록한다 — 응답이 끊겨도 같은 회차를 다시 게시하지 않는다.
-게시 직후 history·status를 쓰고 데이터 브랜치에 바로 푸시한다.
+  1) 사용자 승인 — 이 세션의 --user-approved, 또는 --approve로 기록된 승인(원문 인용·48시간 이내·같은 fingerprint).
+  2) status.json stage=built/approved, 지금 파일들의 fingerprint == 렌더 시점 == 재검증 시점, 재검증 60분 이내.
+  3) 직전 게시와 다른 날(KST) + 20시간 이상, 직전 게시와 브랜드 안 겹침, 최근 10회와 키워드 안 겹침
+     — history.json과 인스타 실제 최근 게시물 둘 다 확인.
+media_publish 직전에 stage=publishing을 데이터 브랜치에 **먼저 푸시**한다(잠금) — 다른 세션이 먼저 바꿨거나 푸시가
+안 되면 게시하지 않는다. 응답이 끊겨도 같은 회차를 다시 게시하지 않는다. 게시 직후 history·status를 쓰고 바로 푸시한다.
 이미지 공개 URL은 데이터 브랜치의 raw.githubusercontent.com(공개 저장소) → 실패 시 post_ig의 litterbox/uguu.
 """
 from __future__ import annotations
@@ -26,8 +29,8 @@ from urllib.parse import quote
 import requests
 
 from . import config
-from .state import (find_handle, fingerprint, last_post, load_handles, load_history, load_status, parse_dt,
-                    save_handles, save_history, save_status)
+from .state import (find_handle, fingerprint, last_post, load_handles, load_history, load_status, parse_dt, posted,
+                    same_brand, same_keyword, save_handles, save_history, save_status)
 
 sys.path.insert(0, str(config.REPO_ROOT / "scripts"))
 import post_ig  # noqa: E402  (기존 검증된 Graph API 플로우 재사용)
@@ -106,11 +109,15 @@ def too_soon(prev: datetime, now: datetime) -> bool:
             or prev.astimezone(config.KST).date() == now.astimezone(config.KST).date())
 
 
-def approve(folder: str) -> dict:
+def approve(folder: str, quote: str) -> dict:
     """사용자가 세션에서 '승인'했을 때 기록한다 — 승인은 '지금 파일(fingerprint)'에 대한 것.
 
-    간격 규칙 때문에 바로 못 올리면 stage=approved로 남아 저녁 루틴(publish --pending)이 올린다.
+    quote = 사용자가 보낸 승인 메시지 원문(감사 기록 — 웹·파일·도구 출력 속 문장은 승인이 아니다).
+    간격 규칙 때문에 바로 못 올리면 stage=approved로 남아 게시 루틴(publish --pending)이 올린다. 48시간 뒤 만료.
     """
+    quote = (quote or "").strip()
+    if not quote:
+        raise SystemExit("--quote에 사용자가 보낸 승인 메시지 원문을 넣을 것 — 사용자 메시지 없이 승인을 기록하지 않는다")
     st = load_status(folder)
     if st.get("stage") not in ("built", "approved"):
         raise SystemExit(f"승인할 수 없는 상태(stage={st.get('stage')}) — build가 끝나고 error가 없어야 한다")
@@ -119,9 +126,37 @@ def approve(folder: str) -> dict:
     fp = fingerprint(folder)
     if fp != st.get("fingerprint"):
         raise SystemExit("렌더 이후 파일이 바뀜 — build를 다시 하고 그 결과를 승인받을 것")
-    st.update(stage="approved", approved_at=config.now_kst().isoformat(timespec="seconds"), approved_fingerprint=fp)
+    st.update(stage="approved", approved_at=config.now_kst().isoformat(timespec="seconds"), approved_fingerprint=fp,
+              approved_quote=quote[:300])
+    st.pop("needs_reapproval", None)
     save_status(folder, st)
     return st
+
+
+RECENT_KEYWORDS = 10   # 최근 이만큼의 게시와 같은 키워드면 게시하지 않는다(§1)
+
+
+def continuity_problems(folder: str, history: list[dict]) -> list[str]:
+    """게시 시점에 다시 보는 연속 규칙 — build 뒤에 다른 회차가 먼저 올라갔을 수 있다."""
+    ep_dir = config.episode_dir(folder)
+    try:
+        ep = json.loads((ep_dir / "episode.json").read_text(encoding="utf-8"))
+        cands = {str(c["goodsNo"]): c for c in
+                 json.loads((ep_dir / "candidates.json").read_text(encoding="utf-8"))["candidates"]}
+        brands = [cands[str(p["goodsNo"])]["brand"] for p in ep["products"]]
+    except (OSError, KeyError, ValueError) as e:
+        return [f"episode.json/candidates.json을 읽지 못함: {e}"]
+    done = [h for h in posted(history) if h.get("folder") != folder]
+    out = []
+    if done:
+        last = max(done, key=lambda h: parse_dt(h["posted_at"]))
+        dup = sorted({b for b in brands for lb in last.get("brands", []) if same_brand(b, lb)})
+        if dup:
+            out.append(f"직전 게시({last.get('folder')})와 브랜드가 겹침: {', '.join(dup)}")
+    recent = sorted(done, key=lambda h: parse_dt(h["posted_at"]))[-RECENT_KEYWORDS:]
+    if any(same_keyword(ep.get("keyword", ""), h.get("keyword", "")) for h in recent):
+        out.append(f"최근 {RECENT_KEYWORDS}회 안에 같은 키워드 '{ep.get('keyword')}'가 게시됨")
+    return out
 
 
 def gate(folder: str, approved: bool, now=None) -> list[str]:
@@ -129,9 +164,12 @@ def gate(folder: str, approved: bool, now=None) -> list[str]:
     problems = []
     st = load_status(folder)
     stage = st.get("stage")
-    recorded = stage == "approved" and st.get("approved_fingerprint") == st.get("fingerprint")
+    recorded = (stage == "approved" and st.get("approved_fingerprint") == st.get("fingerprint")
+                and bool(st.get("approved_quote")) and bool(st.get("approved_at")))
+    if recorded and now - parse_dt(st["approved_at"]) > timedelta(hours=config.APPROVAL_TTL_HOURS):
+        problems.append(f"승인 후 {config.APPROVAL_TTL_HOURS}시간이 지남 — 새로 확인한 카드로 다시 승인받을 것")
     if not approved and not recorded:
-        problems.append("--user-approved 없음 — 사용자가 이 세션에서 승인한 뒤에만 게시한다")
+        problems.append("사용자 승인 없음 — 사용자가 세션에서 '승인'한 뒤에만 게시한다(--approve --quote 또는 --user-approved)")
     if stage == "posted":
         problems.append(f"이미 게시됨: {st.get('permalink')}")
     elif stage == "publishing":
@@ -152,29 +190,57 @@ def gate(folder: str, approved: bool, now=None) -> list[str]:
             problems.append("지금 파일 기준의 게시 직전 재검증(verify) 기록 없음")
         elif now - parse_dt(v) > timedelta(minutes=config.VERIFY_FRESH_MINUTES):
             problems.append(f"재검증이 {config.VERIFY_FRESH_MINUTES}분보다 오래됨 — verify 다시")
-    lp = last_post(load_history())
+    history = load_history()
+    lp = last_post(history)
     if lp and too_soon(parse_dt(lp["posted_at"]), now):
         problems.append(f"직전 게시({lp['posted_at']})와 같은 날이거나 {config.MIN_HOURS_BETWEEN_POSTS}시간 미만")
+    if stage in ("built", "approved"):
+        problems += continuity_problems(folder, history)
     return problems
 
 
+def _git(*args: str, check: bool = True) -> subprocess.CompletedProcess:
+    return subprocess.run(["git", "-C", str(config.DATA_DIR), *args], check=check, capture_output=True, text=True)
+
+
 def push_data(message: str) -> bool:
-    d = str(config.DATA_DIR)
+    """데이터 브랜치에 커밋·푸시. 다른 세션이 먼저 밀었으면 rebase 후 다시(강제 푸시 없음). 실패하면 False."""
     try:
-        subprocess.run(["git", "-C", d, "add", "-A"], check=True)
-        staged = subprocess.run(["git", "-C", d, "diff", "--cached", "--quiet"]).returncode != 0
-        if staged:
-            subprocess.run(["git", "-C", d, "commit", "-qm", message], check=True, capture_output=True)
-        push = ["git", "-C", d, "push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}"]
-        if subprocess.run(push, capture_output=True).returncode != 0:
-            # 다른 세션(아침/저녁 루틴)이 먼저 밀었을 수 있다 — 되감아 올리고 다시(강제 푸시는 하지 않는다)
-            subprocess.run(["git", "-C", d, "pull", "-q", "--rebase", "origin", config.DATA_BRANCH], check=True,
-                           capture_output=True)
-            subprocess.run(push, check=True, capture_output=True)
+        _git("add", "-A")
+        if _git("diff", "--cached", "--quiet", check=False).returncode != 0:
+            _git("commit", "-qm", message)
+        push = ("push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}")
+        if _git(*push, check=False).returncode != 0:
+            if _git("pull", "-q", "--rebase", "origin", config.DATA_BRANCH, check=False).returncode != 0:
+                _git("rebase", "--abort", check=False)     # 충돌 — 작업 트리를 rebase 도중 상태로 남기지 않는다
+                raise subprocess.CalledProcessError(1, "git pull --rebase (충돌)")
+            _git(*push)
         return True
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         print(f"⚠️ 데이터 브랜치 푸시 실패: {e} — 반드시 수동으로 푸시할 것(안 하면 다음 회차가 이 게시를 모른다)")
         return False
+
+
+def claim(folder: str, st: dict, approved: bool = False) -> None:
+    """게시 잠금: stage=publishing을 원격에 먼저 올린다. 그 사이 다른 세션이 데이터 브랜치를 바꿨으면 포기한다.
+
+    git push는 원격이 내가 본 상태 그대로일 때만 성공한다(fast-forward) — 그래서 이 푸시가 compare-and-swap이다.
+    """
+    if not push_data(f"autopost: {folder} 게시 전 동기화"):
+        raise SystemExit("게시 거부: 데이터 브랜치 동기화 실패 — 다른 세션의 게시 기록을 확인할 수 없어 게시하지 않음")
+    problems = gate(folder, approved=approved)      # 동기화로 들어온 다른 세션의 기록까지 반영해 다시
+    if problems:
+        raise SystemExit("게시 거부(동기화 후): " + "; ".join(problems))
+    before = load_status(folder)
+    save_status(folder, st)
+    _git("add", "-A")
+    _git("commit", "-qm", f"autopost: {folder} 게시 시작(잠금)")
+    if _git("push", "-q", "origin", f"HEAD:{config.DATA_BRANCH}", check=False).returncode != 0:
+        _git("reset", "-q", "--hard", "HEAD~1", check=False)   # 방금 만든 잠금 커밋만 되돌린다(앞에서 전부 푸시해 둠)
+        if load_status(folder) != before:                       # reset이 안 됐어도 로컬에 '게시 중'을 남기지 않는다
+            save_status(folder, before)
+        _git("pull", "-q", "--ff-only", "origin", config.DATA_BRANCH, check=False)
+        raise SystemExit("게시 거부: 게시 직전 다른 세션이 데이터 브랜치를 바꿈(동시 게시 방지) — 다음 실행에서 다시 판단")
 
 
 def publish(folder: str, approved: bool = False) -> dict:
@@ -192,11 +258,15 @@ def publish(folder: str, approved: bool = False) -> dict:
     me = api("GET", "me", token, fields="user_id,username")
     if me.get("username") != config.ACCOUNT.lstrip("@"):
         raise SystemExit(f"토큰 계정이 다릅니다: @{me.get('username')}")
-    recent = api("GET", "me/media", token, fields="timestamp", limit=1).get("data") or []
+    recent = api("GET", "me/media", token, fields="timestamp,caption", limit=10).get("data") or []
     if recent:
         ts = datetime.strptime(recent[0]["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
         if too_soon(ts, config.now_kst()):
             raise SystemExit(f"인스타 최근 게시물({ts.astimezone(config.KST):%m-%d %H:%M})과 너무 가깝습니다 — 게시 중단")
+    first = caption.strip().split("\n", 1)[0].strip()
+    for m in recent:     # 데이터 브랜치 기록이 유실돼도 같은 회차를 두 번 올리지 않게 — 인스타 실제 게시물 기준
+        if post_ig.captions_match(caption, m.get("caption", "")) or (first and (m.get("caption") or "").strip().startswith(first)):
+            raise SystemExit(f"같은 캡션의 게시물이 이미 인스타에 있음({m.get('timestamp')}) — 중복 게시 거부")
 
     urls = [public_url(folder, Path(p)) for p in images]
     tags = photo_tags(folder)
@@ -236,20 +306,22 @@ def publish(folder: str, approved: bool = False) -> dict:
     else:
         raise RuntimeError("캐러셀 컨테이너 준비 대기 시간 초과")
 
-    mark_tag_blocked(sorted(tag_blocked))
     st = load_status(folder)
     st.update(stage="publishing", carousel_id=carousel, image_urls=urls,
               user_tags={str(i): {"tags": [t["username"] for t in tags.get(i, [])], "result": r}
                          for i, r in tag_result.items()},
               publishing_at=config.now_kst().isoformat(timespec="seconds"))
-    save_status(folder, st)
-    push_data(f"autopost: {folder} 게시 시작")   # 컨테이너가 죽어도 '게시 중' 표시가 원격에 남게(중복 게시 방지)
+    claim(folder, st, approved)   # '게시 중' 표시를 원격에 먼저 — 못 올리면 게시하지 않는다(중복·동시 게시 방지)
+    mark_tag_blocked(sorted(tag_blocked))
     media_id = api("POST", "me/media_publish", token, creation_id=carousel)["id"]
 
     # 게시는 끝났다 — 이후 단계가 실패해도 기록부터 남긴다(재게시 방지)
     st.update(stage="posted", posted_at=config.now_kst().isoformat(timespec="minutes"), media_id=media_id)
     save_status(folder, st)
-    record(folder, st)
+    try:
+        record(folder, st)
+    finally:             # permalink 조회보다 먼저 원격에 — 컨테이너가 여기서 끝나도 다음 실행이 게시 사실을 안다
+        push_data(f"autopost: {folder} 게시 기록")
     try:
         info = api("GET", media_id, token, fields="permalink,caption")
         st["permalink"] = info.get("permalink", "")
@@ -258,7 +330,7 @@ def publish(folder: str, approved: bool = False) -> dict:
         record(folder, st)
     except RuntimeError as e:
         print(f"⚠️ 게시는 완료, permalink 조회 실패: {e}")
-    push_data(f"autopost: {folder} 게시")
+    st["pushed"] = push_data(f"autopost: {folder} 게시")
     return st
 
 
@@ -306,7 +378,7 @@ PRICE_UP_LIMIT = 1.2   # 승인 뒤 가격이 20% 넘게 오르거나 할인이 
 
 
 def pending_episodes() -> list[str]:
-    """stage=approved인 회차 폴더명(오래된 승인부터)."""
+    """stage=approved인 회차 폴더명 — 최근 승인부터(어제 밀린 회차가 오늘 회차의 자리를 먹지 않게)."""
     out = []
     if not config.EPISODES_DIR.exists():
         return out
@@ -314,7 +386,7 @@ def pending_episodes() -> list[str]:
         st = load_status(d.name) if (d / "status.json").exists() else {}
         if st.get("stage") == "approved":
             out.append((st.get("approved_at", ""), d.name))
-    return [name for _, name in sorted(out)]
+    return [name for _, name in sorted(out, reverse=True)]
 
 
 def risky_changes(folder: str, fresh: dict) -> list[str]:
@@ -332,59 +404,79 @@ def risky_changes(folder: str, fresh: dict) -> list[str]:
     return risky
 
 
+def has_token() -> bool:
+    return bool(os.environ.get("IG_ACCESS_TOKEN")) or os.path.exists(post_ig.TOKEN_FILE)
+
+
 def publish_pending(now=None) -> list[str]:
-    """저녁 루틴용: 승인된 회차를 재검증하고 간격 규칙이 허용하면 게시한다. 보고 줄 목록을 돌려준다."""
+    """승인 기록된 회차를 재검증하고 간격 규칙이 허용하면 게시한다(게시 루틴·승인 직후 세션 공용). 보고 줄 목록."""
     from . import verify as verify_mod
     from .build import build as build_episode
 
+    folders = pending_episodes()
+    if not folders:
+        return ["승인 대기 회차 없음"]
+    if not has_token():
+        return [f"🔑 이 세션에 인스타 토큰 없음 — 승인 대기 {len(folders)}건은 게시 루틴이 처리: " + ", ".join(folders)]
     lines = []
-    for folder in pending_episodes():
-        st = load_status(folder)
-        blocks, changes, failed, fresh = verify_mod.check(folder)
-        if blocks:
-            st.update(stage="blocked", blocked_reason=blocks)
-            save_status(folder, st)
-            lines.append(f"⛔ {folder}: 게시 불가 — " + "; ".join(blocks) + " (상품 교체 후 다시 승인 필요)")
-            continue
-        if failed:
-            lines.append(f"⚠️ {folder}: 몰 조회 실패 — 다음 실행에 다시 시도: " + "; ".join(failed))
-            continue
-        if changes:
-            risky = risky_changes(folder, fresh)
-            if risky:
-                st.update(stage="built", approved_at=None, approved_fingerprint=None, needs_reapproval=risky)
-                save_status(folder, st)
-                lines.append(f"⚠️ {folder}: 승인 뒤 숫자가 크게 바뀜 — 다시 보여주고 승인받아야 함: " + "; ".join(risky))
-                continue
-            verify_mod.apply(folder, fresh)          # 숫자 갱신 → stage=stale
-            rep = build_episode(folder)              # 같은 선택으로 다시 렌더
-            if not rep["rendered"] or any(l == "error" for l, _ in rep["issues"]):
-                lines.append(f"⚠️ {folder}: 숫자 갱신 후 렌더 실패 — " + "; ".join(m for l, m in rep["issues"] if l == "error"))
-                continue
-            st = load_status(folder)
-            st.update(stage="approved", approved_at=st.get("approved_at") or config.now_kst().isoformat(timespec="seconds"),
-                      approved_fingerprint=st["fingerprint"], refreshed_numbers=changes)
-            save_status(folder, st)
-            rc = verify_mod.run(folder)
-            if rc != verify_mod.EXIT_OK:
-                lines.append(f"⚠️ {folder}: 갱신 후 재검증 실패(exit {rc}) — 다음 실행에 다시")
-                continue
-        else:
-            rc = verify_mod.run(folder)
-            if rc != verify_mod.EXIT_OK:
-                lines.append(f"⚠️ {folder}: 재검증 실패(exit {rc}) — 다음 실행에 다시")
-                continue
-        problems = gate(folder, approved=True, now=now)
-        if problems:
-            lines.append(f"⏳ {folder}: 아직 게시 조건 미충족 — " + "; ".join(problems))
-            continue
-        result = publish(folder, approved=True)
-        extra = f" · 숫자 갱신 {len(changes)}건" if changes else ""
-        lines.append(f"✅ {folder}: 게시 완료 {result['posted_at']} → {result.get('permalink')}{extra}")
-        break  # 하루 한 건
-    if not lines:
-        lines.append("승인 대기 회차 없음")
+    for folder in folders:
+        try:
+            line, done = _publish_one(folder, now, verify_mod, build_episode)
+        except SystemExit as e:           # 게이트·잠금 거부
+            line, done = f"⏳ {folder}: {e}", False
+        except Exception as e:            # 한 회차의 예외가 뒤 회차·푸시·보고를 끊지 않게
+            line, done = f"⚠️ {folder}: 처리 중 오류 — {type(e).__name__}: {str(e)[:200]}", False
+        lines.append(line)
+        if done:
+            break  # 하루 한 건
     return lines
+
+
+def _publish_one(folder: str, now, verify_mod, build_episode) -> tuple[str, bool]:
+    st = load_status(folder)
+    problems = [p for p in gate(folder, approved=False, now=now) if "재검증" not in p]
+    if any("시간이 지남" in p for p in problems):
+        st.update(stage="expired", expired_reason=problems)
+        save_status(folder, st)
+        return f"⌛ {folder}: 승인 만료({config.APPROVAL_TTL_HOURS}시간) — 게시하지 않음, 필요하면 다시 승인받을 것", False
+    if problems:                          # 몰을 부르기 전에 싼 검사부터(간격·연속)
+        return f"⏳ {folder}: 아직 게시 조건 미충족 — " + "; ".join(problems), False
+    approval = {k: st.get(k) for k in ("approved_at", "approved_quote")}
+    blocks, changes, failed, fresh = verify_mod.check(folder)
+    if blocks or failed or changes:      # 이전 '재검증 통과' 기록이 남아 게이트를 통과시키지 않게
+        st.pop("verified_at", None)
+        st.pop("verified_fingerprint", None)
+        save_status(folder, st)
+    if blocks:
+        st.update(stage="blocked", blocked_reason=blocks)
+        save_status(folder, st)
+        return f"⛔ {folder}: 게시 불가 — " + "; ".join(blocks) + " (상품 교체 후 다시 승인 필요)", False
+    if failed:
+        return f"⚠️ {folder}: 몰 조회 실패 — 다음 실행에 다시 시도: " + "; ".join(failed), False
+    if changes:
+        risky = risky_changes(folder, fresh)
+        if risky:
+            st.update(stage="built", approved_at=None, approved_fingerprint=None, approved_quote=None,
+                      needs_reapproval=risky)
+            save_status(folder, st)
+            return f"⚠️ {folder}: 승인 뒤 숫자가 크게 바뀜 — 다시 보여주고 승인받아야 함: " + "; ".join(risky), False
+        verify_mod.apply(folder, fresh)          # 숫자 갱신 → stage=stale
+        rep = build_episode(folder)              # 같은 선택으로 다시 렌더
+        if not rep["rendered"] or any(l == "error" for l, _ in rep["issues"]):
+            return (f"⚠️ {folder}: 숫자 갱신 후 렌더 실패 — "
+                    + "; ".join(m for l, m in rep["issues"] if l == "error"), False)
+        st = load_status(folder)                 # 가격·할인·후기 수 갱신은 승인 범위 안(SKILL 8단계) — 원래 승인 유지
+        st.update(stage="approved", approved_fingerprint=st["fingerprint"], refreshed_numbers=changes, **approval)
+        save_status(folder, st)
+    rc = verify_mod.run(folder)
+    if rc != verify_mod.EXIT_OK:
+        return f"⚠️ {folder}: 재검증 실패(exit {rc}) — 다음 실행에 다시", False
+    problems = gate(folder, approved=False, now=now)
+    if problems:
+        return f"⏳ {folder}: 아직 게시 조건 미충족 — " + "; ".join(problems), False
+    result = publish(folder)
+    extra = f" · 숫자 갱신 {len(changes)}건" if changes else ""
+    return f"✅ {folder}: 게시 완료 {result['posted_at']} → {result.get('permalink')}{extra}", True
 
 
 def main(argv=None) -> None:
@@ -392,8 +484,9 @@ def main(argv=None) -> None:
     ap.add_argument("folder", nargs="?")
     ap.add_argument("--user-approved", action="store_true")
     ap.add_argument("--check", action="store_true", help="게시하지 않고 조건만 확인")
-    ap.add_argument("--approve", action="store_true", help="사용자 승인을 기록만 한다(간격 규칙으로 못 올리면 저녁 루틴이 게시)")
-    ap.add_argument("--pending", action="store_true", help="저녁 루틴: 승인된 회차를 재검증 후 게시")
+    ap.add_argument("--approve", action="store_true", help="사용자 승인을 기록하고 데이터 브랜치에 푸시(게시는 --pending)")
+    ap.add_argument("--quote", default="", help="--approve와 함께: 사용자가 보낸 승인 메시지 원문")
+    ap.add_argument("--pending", action="store_true", help="승인 기록된 회차를 재검증 후 게시(하루 한 건)")
     ap.add_argument("--next", action="store_true", help="다음 게시 가능 시각(KST)만 출력")
     args = ap.parse_args(argv)
     if args.next:
@@ -403,14 +496,17 @@ def main(argv=None) -> None:
     if args.pending:
         for line in publish_pending():
             print(line)
-        push_data("autopost: 승인 대기 회차 처리")
+        if not push_data("autopost: 승인 대기 회차 처리"):
+            sys.exit(2)
         return
     if not args.folder:
         ap.error("folder가 필요합니다")
     if args.approve:
-        st = approve(args.folder)
+        st = approve(args.folder, args.quote)
         print(f"승인 기록 {st['approved_at']} (fingerprint {st['approved_fingerprint'][:12]}…)")
-        push_data(f"autopost: {args.folder} 승인")
+        if not push_data(f"autopost: {args.folder} 승인"):
+            print("⚠️ 승인 기록을 푸시하지 못함 — 게시 루틴이 이 승인을 볼 수 없다. 푸시를 다시 할 것")
+            sys.exit(2)
         return
     problems = gate(args.folder, args.user_approved or args.check)
     for p in problems:
@@ -427,6 +523,8 @@ def main(argv=None) -> None:
     print(f"게시 완료 {st['posted_at']} → {st.get('permalink')}")
     if st.get("caption_ok") is False:
         print("⚠️ 게시된 캡션이 원본과 다릅니다(한글 깨짐 의심) — 인스타 앱에서 확인하세요.")
+    if not st.get("pushed"):
+        sys.exit(2)   # 게시는 됐다 — 다시 게시하지 말고 데이터 브랜치 푸시만 다시
 
 
 if __name__ == "__main__":

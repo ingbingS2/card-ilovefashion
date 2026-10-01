@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from datetime import timedelta
 
 import pytest
@@ -64,6 +65,10 @@ def test_build_refuses_posted(episode, cands):
     state.save_status(episode["folder"], {"stage": "posted"})
     with pytest.raises(SystemExit):
         build.build(episode["folder"])
+
+
+def _ok_git(*args, check=True):
+    return subprocess.CompletedProcess(args, 0, "", "")
 
 
 def _built(folder, now, **extra):
@@ -279,10 +284,12 @@ def test_publish_sends_user_tags_and_falls_back(episode, cands, handles, monkeyp
     monkeypatch.setattr(publish, "api", fake_api)
     monkeypatch.setattr(publish, "public_url", lambda f, p: f"https://img/{p.name}")
     monkeypatch.setattr(publish, "push_data", lambda m: True)
+    monkeypatch.setattr(publish, "_git", _ok_git)
     monkeypatch.setattr(publish.time, "sleep", lambda s: None)
     monkeypatch.setenv("IG_ACCESS_TOKEN", "T")
-    with pytest.raises(SystemExit):           # 내부 게이트: 승인 없이 호출하면 거부
+    with pytest.raises(SystemExit):           # 내부 게이트: 승인 없이 호출하면 거부 — 인스타 호출 0회
         publish.publish(folder)
+    assert calls == []
     st = publish.publish(folder, approved=True)
     sent = [json.loads(dt["user_tags"])[0]["username"] for ep_, dt in calls
             if ep_ == "me/media" and dt.get("user_tags")]
@@ -310,10 +317,12 @@ def test_approve_records_fingerprint_and_gate_accepts_recorded_approval(episode,
     fp = _built(folder, now, verified_at=now.isoformat(), verified_fingerprint=None)
     with pytest.raises(SystemExit):           # error가 남아 있으면 승인 불가
         state.save_status(folder, {**state.load_status(folder), "issues": [["error", "x"]]})
-        publish.approve(folder)
+        publish.approve(folder, "승인")
     _built(folder, now)
-    st = publish.approve(folder)
-    assert st["stage"] == "approved" and st["approved_fingerprint"] == fp
+    with pytest.raises(SystemExit):           # 사용자 메시지 원문 없이는 승인 기록 불가
+        publish.approve(folder, "  ")
+    st = publish.approve(folder, "승인")
+    assert st["stage"] == "approved" and st["approved_fingerprint"] == fp and st["approved_quote"] == "승인"
     # 기록된 승인 + 지금 파일 기준 재검증이 있으면 --user-approved 없이도 통과
     st.update(verified_at=now.isoformat(), verified_fingerprint=fp)
     state.save_status(folder, st)
@@ -334,3 +343,122 @@ def test_risky_changes_and_pending_list(episode, cands):
     assert publish.pending_episodes() == []
     state.save_status(folder, {"stage": "approved", "approved_at": "2026-10-02T09:00:00+09:00"})
     assert publish.pending_episodes() == [folder]
+
+
+def _approved(folder, now, hours_ago=1):
+    fp = _built(folder, now, verified_at=now.isoformat())
+    st = state.load_status(folder)
+    st.update(stage="approved", approved_fingerprint=fp, verified_fingerprint=fp, approved_quote="승인",
+              approved_at=(now - timedelta(hours=hours_ago)).isoformat())
+    state.save_status(folder, st)
+    return fp
+
+
+def test_recorded_approval_needs_quote_and_expires(episode, cands):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    now = config.now_kst().replace(hour=12)
+    state.save_history([])
+    _approved(folder, now)
+    assert publish.gate(folder, approved=False, now=now) == []
+    st = state.load_status(folder)
+    st.pop("approved_quote")
+    state.save_status(folder, st)
+    assert any("사용자 승인 없음" in p for p in publish.gate(folder, approved=False, now=now))
+    _approved(folder, now, hours_ago=config.APPROVAL_TTL_HOURS + 1)
+    assert any("시간이 지남" in p for p in publish.gate(folder, approved=False, now=now))
+    line, done = publish._publish_one(folder, now, verify, None)     # 만료는 몰 조회 전에 걸러져 expired
+    assert not done and "만료" in line and state.load_status(folder)["stage"] == "expired"
+    assert publish.pending_episodes() == []
+
+
+def test_gate_rechecks_brand_and_keyword_continuity(episode, cands):
+    folder = episode["folder"]
+    write_episode(folder, episode, cands)
+    now = config.now_kst().replace(hour=12)
+    fp = _built(folder, now, verified_at=now.isoformat())
+    _built(folder, now, verified_at=now.isoformat(), verified_fingerprint=fp)
+    old = (now - timedelta(days=2)).isoformat()
+    state.save_history([{"folder": "x", "keyword": "겨울 코트", "posted_at": old, "brands": ["버던트"]}])
+    assert any("브랜드가 겹침" in p and "버던트" in p for p in publish.gate(folder, True, now))
+    state.save_history([{"folder": "y", "keyword": episode["keyword"], "posted_at": old, "brands": ["딴브랜드"]},
+                        {"folder": "z", "keyword": "겨울 코트", "posted_at": (now - timedelta(days=1, hours=1)).isoformat(),
+                         "brands": ["딴브랜드2"]}])
+    assert any("같은 키워드" in p for p in publish.gate(folder, True, now))
+
+
+def test_publish_aborts_when_lock_push_is_rejected(episode, cands, handles, monkeypatch):
+    folder = episode["folder"]
+    d = write_episode(folder, episode, cands)
+    state.save_handles(handles)
+    state.save_history([])
+    for i in range(1, 8):
+        (d / f"{i}.jpg").write_bytes(b"x")
+    (d / "caption.txt").write_text("본문", encoding="utf-8")
+    now = config.now_kst()
+    _approved(folder, now)
+    calls = []
+
+    def fake_api(method, endpoint, token, **data):
+        calls.append(endpoint)
+        if endpoint == "me":
+            return {"username": "i_s2_fashion"}
+        if endpoint == "me/media" and method == "GET":
+            return {"data": []}
+        if endpoint == "me/media":
+            return {"id": "C"}
+        return {"status_code": "FINISHED"}
+
+    def racing_git(*args, check=True):     # 잠금 커밋 푸시만 거부(다른 세션이 먼저 밀었음)
+        rc = 1 if args[0] == "push" else 0
+        return subprocess.CompletedProcess(args, rc, "", "")
+
+    monkeypatch.setattr(publish, "api", fake_api)
+    monkeypatch.setattr(publish, "public_url", lambda f, p: f"https://img/{p.name}")
+    monkeypatch.setattr(publish, "push_data", lambda m: True)
+    monkeypatch.setattr(publish, "_git", racing_git)
+    monkeypatch.setattr(publish.time, "sleep", lambda s: None)
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "T")
+    with pytest.raises(SystemExit, match="동시 게시"):
+        publish.publish(folder)
+    assert "me/media_publish" not in calls
+    # 동기화 자체가 실패해도 게시하지 않는다
+    monkeypatch.setattr(publish, "push_data", lambda m: False)
+    with pytest.raises(SystemExit, match="동기화 실패"):
+        publish.publish(folder)
+    assert "me/media_publish" not in calls
+
+
+def test_push_data_aborts_rebase_on_conflict(monkeypatch):
+    seen = []
+
+    def fake_git(*args, check=True):
+        seen.append(args[0] if args[0] != "rebase" else "rebase " + args[1])
+        rc = {"diff": 1, "push": 1, "pull": 1}.get(args[0], 0)
+        if check and rc:
+            raise subprocess.CalledProcessError(rc, args)
+        return subprocess.CompletedProcess(args, rc, "", "")
+
+    monkeypatch.setattr(publish, "_git", fake_git)
+    assert publish.push_data("m") is False
+    assert "rebase --abort" in seen
+
+
+def test_pending_newest_first_token_check_and_isolation(episode, cands, monkeypatch, tmp_path):
+    for i, day in enumerate(("01", "02")):
+        state.save_status(f"202610{day} 키워드{i}", {"stage": "approved", "approved_at": f"2026-10-{day}T09:00:00+09:00"})
+    assert publish.pending_episodes() == ["20261002 키워드1", "20261001 키워드0"]
+    monkeypatch.delenv("IG_ACCESS_TOKEN", raising=False)
+    monkeypatch.setattr(publish.post_ig, "TOKEN_FILE", str(tmp_path / "없음.txt"))
+    out = publish.publish_pending()
+    assert len(out) == 1 and "토큰 없음" in out[0]
+    monkeypatch.setenv("IG_ACCESS_TOKEN", "T")
+
+    def one(folder, now, v, b):
+        if folder.endswith("키워드1"):
+            raise KeyError("boom")
+        return f"✅ {folder}", True
+
+    monkeypatch.setattr(publish, "_publish_one", one)
+    out = publish.publish_pending()
+    assert out[0].startswith("⚠️ 20261002") and "KeyError" in out[0] and out[1] == "✅ 20261001 키워드0"

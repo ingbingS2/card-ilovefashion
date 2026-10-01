@@ -19,6 +19,21 @@ _BR = re.compile(r"<br\s*/?>", re.I)
 _ALLOWED_TAGS = re.compile(r"</?em>|<br>")
 _POS = re.compile(r"^\d{1,3}% \d{1,3}%$")
 _SPEC_TOKEN = re.compile(r"(\d+(?:\.\d+)?)\s*(cm|mm|kg|g|%|인치)?", re.I)
+# 캡션 소재·세탁 표현(§2 '소재·스펙은 상세 페이지에서 확인한 것만'). 긴 표현을 앞에 둬 '울 세탁'이 '울'·'세탁'으로
+# 쪼개지지 않게. '면'·'울'은 앞뒤가 한글이 아닐 때만(앞면·측면·화면·면접·입으면·겨울·서울·어울리는 제외).
+_FACT_TERM = re.compile(
+    r"드라이\s*[클크]리닝|울\s*세탁|손세탁|세탁|캐시미어|알파카|모헤어|폴리|나일론|레이온|아크릴|린넨|리넨|혼용|코튼"
+    r"|(?<![가-힣])면(?:(?![가-힣])|(?=소재|혼방|혼용|원단))"
+    r"|(?<![가-힣])울(?:(?![가-힣])|(?=소재|혼방|혼용|원단|니트|로|이|과|은|의|을|처럼))")
+_FACT_SYNONYMS = {
+    "면": ("면", "코튼", "cotton"), "코튼": ("면", "코튼", "cotton"),
+    "울": ("울", "wool", "양모"), "캐시미어": ("캐시미어", "cashmere"), "알파카": ("알파카", "alpaca"),
+    "모헤어": ("모헤어", "mohair"), "폴리": ("폴리", "polyester"), "나일론": ("나일론", "nylon", "폴리아미드"),
+    "레이온": ("레이온", "rayon", "viscose", "비스코스"), "아크릴": ("아크릴", "acrylic"),
+    "린넨": ("린넨", "리넨", "linen"), "리넨": ("린넨", "리넨", "linen"),
+    "드라이클리닝": ("드라이클리닝", "드라이크리닝", "dryclean"), "드라이크리닝": ("드라이클리닝", "드라이크리닝", "dryclean"),
+}
+_CHEAPER_CLAIM = re.compile(r"저렴한\s*쪽|더\s*저렴|최저가|싼\s*쪽|더\s*싼")
 
 
 # ---------- 후기 인용 (§3) ----------
@@ -86,6 +101,39 @@ def spec_missing(spec_line: str, source: str) -> list[str]:
             pat += rf"\s*{re.escape(unit)}"
         if not re.search(pat, source or "", re.I):
             missing.append(num + (unit or ""))
+    return missing
+
+
+def detail_text(c: dict, fields: tuple[str, ...] = ("spec_text", "material", "name")) -> str:
+    """후보의 상세 원문을 한 문자열로 — material이 목록이든 문자열이든, spec_text가 None이든 숫자 대조가 깨지지 않게."""
+    parts = []
+    for k in fields:
+        v = c.get(k)
+        if isinstance(v, (list, tuple)):
+            parts.extend(str(x) for x in v if x)
+        elif v:
+            parts.append(str(v))
+    return " ".join(parts)
+
+
+def fact_terms_missing(caption: str, source: str) -> list[str]:
+    """캡션의 소재·세탁 표현 중 상세 원문에 없는 것. 동의어(면=코튼=cotton)·띄어쓰기 차이는 같은 것으로 본다."""
+    flat = re.sub(r"\s", "", source or "").lower()
+    missing: list[str] = []
+    for m in _FACT_TERM.finditer(caption or ""):
+        term = re.sub(r"\s", "", m.group(0))
+        if term in missing:
+            continue
+        found = False
+        for s in _FACT_SYNONYMS.get(term, (term,)):
+            if s in ("면", "울"):   # 원문에서도 '정면'·'겨울' 같은 단어 속 글자는 치지 않는다
+                found = bool(re.search(rf"(?<![가-힣]){s}", source or ""))
+            else:
+                found = s.lower() in flat
+            if found:
+                break
+        if not found:
+            missing.append(term)
     return missing
 
 
@@ -231,10 +279,14 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
         if has_quote and not any(str(q["no"]) == str(p["quote_no"]) for q in c.get("quotes", [])):
             err(f"{tag}: quote_no {p['quote_no']}가 인용 가능 후기 목록에 없음")
         if has_spec:
-            source = " ".join([c.get("spec_text", ""), " ".join(c.get("material", [])), c.get("name", "")])
-            missing = spec_missing(p["spec_line"], source)
-            if missing:
+            missing = spec_missing(p["spec_line"], detail_text(c))
+            if missing and not detail_text(c, ("spec_text", "material")).strip():
+                err(f"{tag}: 상세 원문(spec_text·material)이 비어 spec_line의 {missing}를 확인할 수 없음 — "
+                    f"숫자를 빼거나 인용 후기로(추측 금지 §3)")
+            elif missing:
                 err(f"{tag}: spec_line의 {missing}가 상세 페이지 텍스트에 없음(추측 금지 §3)")
+            if not re.search(r"\d", str(p["spec_line"])):
+                warn(f"{tag}: 숫자 없는 스펙 주장 — 상세 원문에 있는 사실인지 확인: '{str(p['spec_line'])[:40]}'")
             if c.get("quotes"):
                 warn(f"{tag}: 인용 가능한 후기가 있는데 스펙으로 대체함")
 
@@ -295,6 +347,24 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
         warn("캡션 첫 문장이 최근 회차와 같은 패턴으로 시작")
     if ep.get("mood") and hist and hist[-1].get("mood") == ep.get("mood"):
         warn(f"캡션 무드 '{ep['mood']}'가 직전 회차와 같음(§5 연속 금지)")
+    chosen = [by_no[n] for n in nos if n in by_no]
+    cap_body = cap
+    for c in chosen:   # 브랜드명 속 글자('코튼○○')는 소재 주장이 아니다
+        if c.get("brand"):
+            cap_body = cap_body.replace(c["brand"], " ")
+    source = " ".join(detail_text(c) for c in chosen)
+    for term in fact_terms_missing(cap_body, source):
+        warn(f"캡션 소재·세탁 표현 '{term}'이 고른 상품의 상세 원문(spec_text·material·상품명)에 없음 — "
+             f"상세 페이지에서 확인한 사실만(§2)")
+    claim = _CHEAPER_CLAIM.search(cap)
+    if claim:
+        alts = [c for c in chosen if c.get("cheaper_elsewhere")]
+        neutral = f"'가격은 각 몰 판매가 기준({str(cands.get('collected_at', ''))[5:10] or 'MM-DD'})'처럼 중립 표현으로"
+        if any(not (isinstance(c["cheaper_elsewhere"], dict) and c["cheaper_elsewhere"].get("unavailable"))
+               for c in alts):
+            err(f"캡션 '{claim.group(0)}' 주장이 사실과 다름 — 다른 몰이 더 싼 상품이 있음. {neutral}")
+        elif alts:
+            warn(f"캡션 '{claim.group(0)}' 주장을 확인할 수 없음 — 다른 몰 가격 비교에 실패한 상품이 있음. {neutral}")
 
     cta = ep.get("cta") or {}
     if set(cta) - config.CTA_KEYS:

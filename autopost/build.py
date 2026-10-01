@@ -131,12 +131,20 @@ li.error{{color:#ff6b81}}li.warn{{color:#ffd166}}</style></head><body>
 </body></html>"""
 
 
+def _recorded(v) -> str:
+    """episode.json의 선택 기록 값(문자열 또는 목록) — 비었으면 '기록 없음'."""
+    if isinstance(v, (list, tuple)):
+        v = " · ".join(str(x) for x in v if str(x).strip())
+    return str(v).strip() if v else "기록 없음"
+
+
 def result_md(ep: dict, prods: list[dict], issues: list, skipped: list[str]) -> str:
+    """prods는 build 시점 handles.json으로 enrich한 것 — 핸들 열이 수집 시점 스냅샷이 아니라 캡션·태그와 같은 값."""
     rows = "\n".join(
         f"| {i} | {p['brand']} | [{p.get('mall', '무신사')}] {p.get('display_name') or p['name']} ({p['goodsNo']}) | {p['sale_price']:,} | "
         f"{p['normal_price']:,} | {p['discount']}% | {p['review_count']} | {p.get('rating') or '—'} | "
         f"{p['release_date']} {p.get('season', '')} | {'인용' if p.get('quote_text') else '스펙'} | "
-        f"{('@' + p['handle']) if p.get('handle') else '(태그 안 함)'}{' ★로스터' if p.get('roster') else ''} |"
+        f"{('@' + p['handle'].lstrip('@')) if p.get('handle') else '(태그 안 함)'}{' ★로스터' if p.get('roster') else ''} |"
         for i, p in enumerate(prods, 1))
     warns = "\n".join(f"- [{lvl}] {msg}" for lvl, msg in issues) or "- 없음"
     return f"""# 실험 로그 — {ep['folder']}
@@ -153,6 +161,8 @@ def result_md(ep: dict, prods: list[dict], issues: list, skipped: list[str]) -> 
 - **대조군**: {ep.get('control', '')}
 - **판정 기준**: +72h 도달 200 이상 + 공유 1건 이상 · 유입 '기타' 비중 참고
 - **캡션 무드**: {ep.get('mood', '')}
+- **표지 유형**: {_recorded(ep.get('cover_type'))}
+- **변수 오염·주의**: {_recorded(ep.get('confounds'))}
 
 ## 2. 게시 전 검증
 - 자동 검사 결과:
@@ -211,7 +221,8 @@ def build(folder: str) -> dict:
         if s["text_ratio"] is not None and s["text_ratio"] > config.TEXT_BLOCK_MAX_RATIO:
             issues.append(("error", f"{s['index']}번 카드 텍스트 블록이 {s['text_ratio']:.0%} — 35% 이하로 줄일 것(§4)"))
     if shots and not shots[0]["font_ok"]:
-        issues.append(("warn", "Pretendard 폰트 로드 확인 실패 — 렌더 이미지 글꼴을 눈으로 확인"))
+        issues.append(("error", "Pretendard 폰트가 로드되지 않음(CDN 차단·네트워크) — 대체 글꼴로 렌더돼 쓸 수 없다. "
+                                 "cdn.jsdelivr.net 접근을 확인하고 다시 build"))
 
     caption, skipped = caption_text(ep, prods, handles)
     if skipped:

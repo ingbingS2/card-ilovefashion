@@ -53,7 +53,12 @@ def check(folder: str) -> tuple[list[str], list[str], list[str], dict]:
         try:
             if is29:
                 d = malls29.detail(c["goodsNo"])
-                new = {**malls29.price_facts(d), **malls29.review_summary(d), "sold_out": malls29.sold_out(d)}
+                try:   # 평점은 collect와 같은 출처(후기 API 평균) — 상세의 0.5 단위 값과 비교하면 매번 '변경'이 된다
+                    avg = malls29.reviews(c["goodsNo"], pages=1)[2]
+                except malls.MallError:
+                    avg = None   # 후기 API 실패 → 상세 reviewAggregation 값으로
+                new = {**malls29.price_facts(d), **malls29.card_review_numbers(d, avg),
+                       "sold_out": malls29.sold_out(d)}
             else:
                 d = malls.detail(c["goodsNo"])
                 new = {**malls.price_facts(d), **malls.review_summary(d), "sold_out": bool(d.get("isOutOfStock"))}

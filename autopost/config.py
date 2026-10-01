@@ -32,6 +32,7 @@ TEXT_BLOCK_MAX_RATIO = 0.35    # 하단 텍스트 블록 ≤ 카드 높이 35% (
 MIN_HOURS_BETWEEN_POSTS = 20
 MEASURE_AFTER_HOURS = 72       # +72h 측정 (§8)
 VERIFY_FRESH_MINUTES = 60      # 게시 직전 재검증 유효 시간
+APPROVAL_TTL_HOURS = 48        # 기록된 승인의 유효 시간 — 지나면 새 카드로 다시 승인받는다
 
 # 인용 후기 기준 (§3)
 QUOTE_MIN_LEN = 40
@@ -60,7 +61,7 @@ ZZAL_INDEX = ZZAL_DIR / "index.json"   # 저장소에 든 짤 목록(자막·장
 ZZAL_WEB_DIR = DATA_DIR / "zzal"       # 인터넷에서 채택한 짤 — 데이터 브랜치에 쌓인다(main 커밋 금지·클라우드 보존)
 ZZAL_WEB_INDEX = ZZAL_WEB_DIR / "index.json"
 ZZAL_COOLDOWN_DAYS = 21                # 같은 짤은 3주 안에 다시 쓰지 않는다
-TOKEN_META_FILE = DATA_DIR / "token-meta.json"   # 토큰 해시·처음 본 날짜(만료 예고용 — 값은 저장하지 않음)
+TOKEN_META_FILE = DATA_DIR / "token-meta.json"   # 토큰별(sha256 앞 12자) 처음 본 날·연장 시각·만료일 — 토큰 값은 저장하지 않음
 TOKEN_LIFETIME_DAYS = 60
 TOKEN_WARN_DAYS = 14
 

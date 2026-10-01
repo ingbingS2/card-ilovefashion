@@ -170,3 +170,63 @@ def test_display_name_required_and_caption_range_warn(episode, cands, handles):
     issues = rules.check_episode(episode, cands, [], handles, TODAY)
     assert any("display_name" in m for l, m in issues if l == "error")
     assert any("까지" in m for l, m in issues if l == "warn")
+
+
+def warns(issues):
+    return [m for lvl, m in issues if lvl == "warn"]
+
+
+def _fact_warns(episode, cands, handles):
+    return [w for w in warns(rules.check_episode(episode, cands, [], handles, TODAY)) if "캡션 소재·세탁 표현" in w]
+
+
+def test_caption_material_term_must_be_in_detail_text(episode, cands, handles):
+    episode["caption"] += "\n\n울 100%라 가볍고 드라이 클리닝만 됩니다"
+    got = _fact_warns(episode, cands, handles)
+    assert any("'울'" in w for w in got) and any("'드라이클리닝'" in w for w in got)
+    cands["candidates"][2]["spec_text"] += " 소재 울 100% 세탁방법 드라이크리닝 권장"   # 원문 표기 '크리닝'도 같은 것
+    assert _fact_warns(episode, cands, handles) == []
+
+
+def test_caption_material_check_ignores_unrelated_words(episode, cands, handles):
+    episode["caption"] += "\n\n앞면과 측면, 정면 화면이 면접처럼 깔끔해서 입으면 겨울 서울에도 어울리는 그런 면에서 좋습니다"
+    assert _fact_warns(episode, cands, handles) == []
+
+
+def test_caption_material_synonyms_and_brand_names(episode, cands, handles):
+    cands["candidates"][0]["material"] = ["소재: 면 100%"]
+    cands["candidates"][1]["brand"] = "코튼하우스"
+    episode["caption"] += "\n\n코튼 100%라 부드럽고 코튼하우스 셔츠는 가볍습니다"
+    assert _fact_warns(episode, cands, handles) == []   # 코튼=면, 브랜드명 속 '코튼'은 주장이 아님
+
+
+def test_spec_line_without_digits_warns(episode, cands, handles):
+    p = episode["products"][2]
+    p.pop("quote_no")
+    p["spec_line"] = "안감 기모 · 발볼 넓은 라스트"
+    issues = rules.check_episode(episode, cands, [], handles, TODAY)
+    assert errors(issues) == []
+    assert any("숫자 없는 스펙 주장" in w for w in warns(issues))
+
+
+def test_spec_line_checks_material_when_spec_text_empty(episode, cands, handles):
+    c = cands["candidates"][2]
+    c["spec_text"] = None
+    c["material"] = "겉감: 면 100% · 총장 70cm"     # 목록이 아니라 문자열이어도 숫자가 쪼개지지 않게
+    p = episode["products"][2]
+    p.pop("quote_no")
+    p["spec_line"] = "총장 70cm · 면 100%"
+    assert errors(rules.check_episode(episode, cands, [], handles, TODAY)) == []
+    c["material"] = []
+    errs = errors(rules.check_episode(episode, cands, [], handles, TODAY))
+    assert any("비어" in e and "70cm" in e for e in errs)
+
+
+def test_cheaper_mall_claim_needs_successful_comparison(episode, cands, handles):
+    episode["caption"] += "\n\n두 몰 중 더 저렴한 쪽 가격으로 적었습니다"
+    assert not any("저렴" in m for _, m in rules.check_episode(episode, cands, [], handles, TODAY))
+    cands["candidates"][0]["cheaper_elsewhere"] = {"unavailable": "다른 몰 검색 실패"}
+    assert any("확인할 수 없음" in w for w in warns(rules.check_episode(episode, cands, [], handles, TODAY)))
+    cands["candidates"][1]["cheaper_elsewhere"] = {"mall": "29CM", "goodsNo": 1, "sale_price": 1000, "url": "u"}
+    errs = errors(rules.check_episode(episode, cands, [], handles, TODAY))
+    assert any("사실과 다름" in e and "각 몰 판매가 기준" in e for e in errs)

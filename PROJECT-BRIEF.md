@@ -60,8 +60,9 @@ export PYTHONIOENCODING=utf-8
 
 ## 6. 현재 상태 (2026-09-11)
 - **2026-10-01 매일 자동 제작 시스템(autopost) 구축** — Claude 구독 사용량으로 돈다(API 비용 0). **무신사 + 29CM 두 몰**에서 후보를 모으고, 같은 상품이 다른 몰에서 더 싸면 표시한다. 신규 브랜드 핸들은 2곳 이상 확인될 때만 태그. 절차·승인 규칙은 `.claude/skills/daily-feed/SKILL.md`.
-  - **10-02 실행 위치 = Claude 클라우드 루틴**(사용자 지시 "PC 안 켜도 매일"): 제작 `trig_01Makuzx6T1CTzXLsQ19WEZ4`(07:00 KST, Opus) + 게시 `trig_01NLWt3pcfZF8gx7PPgvDg3e`(11:30·16:30·20:30·23:30 KST, Sonnet, `publish --pending`). 승인은 세션에서 '승인' → `publish --approve`(fingerprint에 묶임) → 게시 루틴이 간격 규칙 통과 시 게시. PC 예약 작업은 대체용(오늘 폴더가 있으면 건너뜀).
-  - 무신사 API는 데이터센터 IP를 Cloudflare로 막는다(crawler/FINDINGS 맨 위) → 코드가 Playwright 페이지 안 fetch로 재시도, 그래도 막히면 29CM 후보로 채운다. **첫 회차 `20261001 가을 니트` 게시 완료 10-01 23:31** → https://www.instagram.com/p/Dd9IRTljzJp/ (무신사 3 + 29CM 2, 사진 태그 4/5 — 커스텀어클락은 태그 불가 계정). +72h 측정 10-04 23:31 이후.
+  - **10-02 실행 위치 = Claude 클라우드 루틴**(사용자 지시 "PC 안 켜도 매일"): 제작 `trig_01Makuzx6T1CTzXLsQ19WEZ4`(07:00 KST, Opus — **사용자가 클라우드 환경 허용 도메인·폰트를 넣을 때까지 꺼 둠**) + 게시·측정 `trig_01NLWt3pcfZF8gx7PPgvDg3e`(11:30·16:30·20:30·23:30 KST, Sonnet: `measure --check` → `measure` → 월요일 `--token` → `publish --pending`). 승인은 세션에서 '승인' → `publish --approve --quote "<원문>"`(fingerprint에 묶임, 48h 만료, 데이터 브랜치에 푸시) → `publish --pending`. 게시 직전 '게시 중'을 데이터 브랜치에 먼저 푸시하는 잠금(fast-forward 푸시 = compare-and-swap)으로 세션·루틴 동시 게시를 막는다. PC 예약 작업은 대체용(오늘 폴더가 있으면 건너뜀) — 클라우드 제작 루틴을 켜면 PC 예약은 끈다.
+  - autopost 명령은 `sh autopost/ap.sh <모듈>`(Bash 호출마다 셸 변수가 사라져서 `$PY` 방식은 깨졌다).
+  - 무신사 API는 데이터센터 IP를 Cloudflare로 막는다(crawler/FINDINGS 맨 위) → 코드는 그 실행 동안 무신사를 건너뛰고 29CM 후보로 채운다. **10-02부터 브라우저 위장(Playwright 페이지 안 fetch·자동화 탐지 회피 플래그)으로 뚫지 않는다** — 봇 차단 우회 금지. 클라우드 회차는 29CM 위주, PC 회차는 두 몰. **첫 회차 `20261001 가을 니트` 게시 완료 10-01 23:31** → https://www.instagram.com/p/Dd9IRTljzJp/ (무신사 3 + 29CM 2, 사진 태그 4/5 — 커스텀어클락은 태그 불가 계정). +72h 측정 10-04 23:31 이후.
   - ⛔ **매시간 크롤러(crawl.yml)도 같은 이유로 09월 말부터 실패 중** — Actions IP에서 무신사 후기 API 403.
   - 10-01 토큰 갱신 완료(만료 ~11-30). 클라우드는 환경변수 `IG_ACCESS_TOKEN`, PC는 `D:\카드뉴스\ig_api_token.txt`. 만료 2주 전부터 `measure --check`가 경고.
 - **`20260908 가을 스커트` 게시 완료 2026-09-11 11:57** → https://www.instagram.com/p/DdIZA3wE6J8/ · **+72h 측정 09-14 11:57 이후**(`result.md` §5). 산출물 `카드뉴스\20260908 가을 스커트\`. 5종 전부 29CM(드로우핏·노티아·로에일·커스텀어클락·노우드), 로스터 1(노우드)+신규 4. 회차 폴더 `card-drafts/early-autumn-skirt/`(README 참고). 09-11 변경: 하단 그라데이션 완화(텍스트 상단 이동안은 기각), 3번 틸아이다이→노티아(밝은 베이지) 교체, 피드백 수정. **새 회차는 이 폴더를 복제한다.** **미치코런던은 10-05까지 상품·태그 제외**(사용자 지시).
@@ -79,7 +80,7 @@ export PYTHONIOENCODING=utf-8
 - 미완 과제: 전면 이미지형을 `pipeline` 템플릿(`uvparasol-insta.html`)에 이식.
 
 ## 7. 살아있는 함정
-- **무신사는 `requests`로 403.** Chrome 확장 또는 Playwright+실제 Chrome으로 페이지를 열고 페이지 안에서 API fetch. 확장은 `goods-detail.musinsa.com`·`instagram.com` 이동이 막혀 있고, Playwright 경로는 막히지 않는다. 인스타 프로필·공식몰 footer는 WebFetch.
+- **무신사는 데이터센터 IP에서 Cloudflare 403**(PC 가정용 IP의 `requests`는 열린다). 자동화 탐지 회피(Playwright 위장·`AutomationControlled` 끄기·UA 위장)로 뚫지 않는다(10-02 — autopost는 그 몰을 건너뛴다). 수동 확인은 사람이 쓰는 브라우저(claude-in-chrome)로. 인스타 프로필·공식몰 footer는 WebFetch.
 - **29CM은 쿠폰가 함정이 더 크다(09-08 발견)**: 상품 페이지 대표가·랭킹 `displayPrice`·검색 `totalSellPrice` 전부 쿠폰 반영가다. 카드에 쓸 정상가는 `bff-api.29cm.co.kr/api/v5/product-detail/{no}` 의 **`sellPrice`**. 무신사 랭킹 API `info.finalPrice`도 쿠폰가.
 - 무신사 페이지가 크게 보여주는 가격은 쿠폰가일 수 있다. 카드는 `goodsPrice.salePrice`. 29CM은 `displayPrice`(08-06 이전 크롤 스냅샷은 `sellPrice`가 담겨 실제보다 높다 — 소급 보정 안 됨).
 - 가격·품절은 하루 사이에도 바뀐다. **게시 직전 재검증 필수**, 구매하기 버튼까지 본다.

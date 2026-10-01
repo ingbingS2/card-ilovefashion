@@ -66,7 +66,7 @@
 4. **핸들 3중 독립 검증**: ① 웹검색(계정명·팔로워) ② 공식몰 footer 인스타 링크 ③ 인스타 프로필 직접 확인(표시명 일치) ④ 공식 X/Threads. 세 곳 미만이면 캡션에서 빼고 사용자에게 알린다. 가짜 계정 사고 방지.
 
 **게시 직전 재검증은 별도로 한 번 더 한다**(가격은 하루 사이에도 바뀐다 — 09-04 미쏘 25→24%, 09-05 낫포너드 40→30%). 항목: 가격·할인율·후기 수·평점·**구매하기 버튼 존재**(09-04 캘빈클라인은 가격 정상인데 품절이었다)·인용문 존재.
-무신사 접근: `requests`는 Cloudflare 403. Chrome 확장(claude-in-chrome) 또는 **Playwright+실제 Chrome 헤드리스**로 `www.musinsa.com/products/{no}`를 열고 페이지 안에서 `goods-detail.musinsa.com/api2/goods/{no}`(가격 `goodsPrice.salePrice/normalPrice/discountRate`), `goods.musinsa.com/api2/review/v1/goods/{no}/reviews/summary`, 후기 list API를 fetch. 동작하는 스크립트: `card-drafts/early-autumn-denim/verify.py`. 상세 엔드포인트는 [crawler/FINDINGS.md](crawler/FINDINGS.md).
+무신사 접근: 가정용 IP(PC)에서는 `requests`로 API가 열린다. 데이터센터 IP(클라우드·Actions)는 Cloudflare 403 — **자동화 탐지 회피(브라우저 위장·`AutomationControlled` 끄기·UA 위장)로 뚫지 않는다**(10-02, autopost는 그 몰을 건너뛴다). 수동 확인이 필요하면 사람이 쓰는 브라우저(claude-in-chrome)로 `www.musinsa.com/products/{no}`를 열고 페이지 안에서 `goods-detail.musinsa.com/api2/goods/{no}`(가격 `goodsPrice.salePrice/normalPrice/discountRate`), `goods.musinsa.com/api2/review/v1/goods/{no}/reviews/summary`, 후기 list API를 fetch. 동작하는 스크립트: `card-drafts/early-autumn-denim/verify.py`. 상세 엔드포인트는 [crawler/FINDINGS.md](crawler/FINDINGS.md).
 
 ## 7. 미리보기·피드백 처리
 - 완성본은 결과 폴더에 `_preview.html`(1~N.jpg + 캡션, `?t=Date.now()` 캐시 우회)을 만들고 **경로만 알린다. 브라우저 창을 직접 띄우지 않는다**(08-06). 수정 시 같은 파일명으로 덮어쓰고 "F5" 안내.
@@ -75,7 +75,7 @@
 
 ## 8. 실험·측정 — 감으로 판단 금지, 게시물 1개 = 실험 1개
 - 게시 전 `result.md`([RESULT-TEMPLATE.md](RESULT-TEMPLATE.md)): 가설·**바꾼 변수 1개**·대조군·숫자 판정 기준·표지 유형. 게시 시각(분)·게시 방식·호스팅 경로 기록.
-- **+72시간 후 인사이트 API로 직접 조회**(48h 금지). `GET graph.instagram.com/v23.0/me/media` → media_id → `/{id}/insights?metric=reach,saved,shares,likes,comments,total_interactions,profile_visits,follows,views`. 토큰 `카드뉴스\ig_api_token.txt`(60일 갱신). **⛔ 2026-09-17 04:34(PDT) 만료됨**(09-23 조회 시 `OAuthException` code 190) — 갱신은 사용자만 할 수 있으니 만료 2주 전에 미리 알린다. 본인 저장·공유는 제외.
+- **+72시간 후 인사이트 API로 직접 조회**(48h 금지). `GET graph.instagram.com/v23.0/me/media` → media_id → `/{id}/insights?metric=reach,saved,shares,likes,comments,total_interactions,profile_visits,follows,views`. 토큰은 PC `카드뉴스\ig_api_token.txt` / 클라우드 환경변수 `IG_ACCESS_TOKEN`(60일, 10-01 재발급). 게시·측정 루틴이 월요일마다 `measure --token`으로 연장하고, 연장으로 기록된 만료일 14일 전부터 `measure --check`가 경고한다(새 토큰 문자열이 나오면 사용자가 환경변수를 바꿔야 한다). 본인 저장·공유는 제외(API로 구분 불가 — 판정 때 감안).
 - **토큰이 없어도 측정할 수 있다(09-23 확립 — 이쪽이 더 낫다).** 소유자 계정으로 로그인된 브라우저에서 `https://www.instagram.com/insights/media/{media_id}/` 를 열면 인사이트 화면이 그대로 뜬다. `media_id`는 `/api/v1/oembed/?url={permalink}` 로 얻는다(로그인 불필요). 화면 텍스트만 읽으면 조회수·도달(**"조회한 사람"**)·저장·공유·좋아요·댓글·프로필 활동·**유입 경로(기타/프로필/홈)**·팔로워 비율이 전부 나온다. **Graph API에는 없는 유입 경로가 여기엔 있다** — §10 재조회에서 가장 중요한 지표였다.
 - ⚠️ 소유자가 아닌 계정으로 로그인된 브라우저에서는 `eligible_insights_entrypoints: NONE`이라 인사이트가 안 보인다. 좋아요 목록(`/api/v1/media/{id}/likers/`)은 아무 계정으로나 보이지만 도달·공유는 안 보인다.
 - ⚠️ 비공개 API를 연속으로 두드리면 recaptcha 체크포인트가 뜬다(09-23 실제 발생). 호출 사이에 텀을 두고, 화면 조회 경로를 우선한다.

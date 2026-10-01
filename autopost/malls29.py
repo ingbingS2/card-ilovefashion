@@ -22,13 +22,22 @@ HEADERS = {**malls.HEADERS, "Origin": "https://product.29cm.co.kr", "Referer": "
 MALL = "29CM"
 DETAIL_DELAY_SEC = 1.5   # 10-01 실측: 0.4초 간격이면 6건 중 5건 403, 세션+2초면 10건 중 8건 200
 RETRY_WAIT_SEC = 8
+BFF_TRIP_AFTER = 3       # 상세가 (재시도 후에도) 403으로 연속 이만큼 실패하면 이번 실행에선 더 부르지 않는다
+# 판매 불가 재고 상태. 실측은 ON_STOCK(판매 중 — card-drafts/early-autumn-skirt/result.md)·SOLD_OUT뿐이고,
+# 나머지는 판매 중지·종료 계열 이름. 모르는 값은 품절로 보지 않는다(isSoldout 플래그는 그대로 본다).
+SOLD_OUT_STATUSES = frozenset({"SOLD_OUT", "OUT_OF_STOCK", "STOP", "STOP_SALE", "SALE_STOP", "SALE_END"})
 
 _session: requests.Session | None = None
+_bff_403_streak = 0
 
 
 def _bff_get(url: str) -> dict:
-    """bff-api 전용 — 세션 쿠키를 한 번 받아 두고, 403이면 잠시 쉬고 한 번만 다시 묻는다(우회가 아니라 속도 조절)."""
-    global _session
+    """bff-api 전용 — 세션 쿠키를 한 번 받아 두고, 403이면 잠시 쉬고 한 번만 다시 묻는다(우회가 아니라 속도 조절).
+
+    재시도 뒤에도 403인 실패가 BFF_TRIP_AFTER번 이어지면 차단으로 보고 이번 실행 동안 바로 실패한다(성공하면 0으로)."""
+    global _session, _bff_403_streak
+    if _bff_403_streak >= BFF_TRIP_AFTER:
+        raise malls.MallError(f"29CM 상세 차단 — 이번 실행 중단(403 연속 {_bff_403_streak}회)")
     if _session is None:
         _session = requests.Session()
         _session.headers.update(HEADERS)
@@ -36,18 +45,25 @@ def _bff_get(url: str) -> dict:
             _session.get("https://product.29cm.co.kr/", timeout=20)
         except requests.exceptions.RequestException:
             pass
-    last = ""
+    last, status = "", None
     for attempt in range(2):
         time.sleep(DETAIL_DELAY_SEC if attempt == 0 else RETRY_WAIT_SEC)
         try:
             r = _session.get(url, timeout=30)
             if r.ok:
-                return r.json()
-            last = f"HTTP {r.status_code}"
-            if r.status_code not in (403, 429):
+                data = r.json()
+                _bff_403_streak = 0
+                return data
+            status = r.status_code
+            last = f"HTTP {status}"
+            if status not in (403, 429):
                 break
         except requests.exceptions.RequestException as e:
-            last = repr(e)
+            status, last = None, repr(e)
+    if status == 403:
+        _bff_403_streak += 1
+        if _bff_403_streak >= BFF_TRIP_AFTER:
+            raise malls.MallError(f"29CM 상세 차단 — 이번 실행 중단(403 연속 {_bff_403_streak}회): {url}")
     raise malls.MallError(f"GET {url} 실패: {last}")
 
 
@@ -135,9 +151,21 @@ def review_summary(d: dict) -> dict:
     return {"review_count": int(agg.get("totalCount") or 0), "rating": round(float(avg), 1) if avg else None}
 
 
+def card_review_numbers(d: dict, avg: float | None) -> dict:
+    """카드의 후기 수·평점 — collect와 verify가 같은 출처를 쓰도록 한곳에서.
+
+    후기 수 = 상세 reviewAggregation.totalCount, 평점 = 후기 API averagePoint(소수점, `reviews()`의 세 번째 값).
+    후기 API 평균이 없으면 상세 값(0.5 단위)."""
+    out = review_summary(d)
+    if avg:
+        out["rating"] = round(float(avg), 1)
+    return out
+
+
 def sold_out(d: dict) -> bool:
-    status = str(d.get("frontItemStockStatus") or d.get("itemStockStatus") or "")
-    return bool(d.get("isSoldout")) or "SOLD" in status.upper()
+    """isSoldout 플래그 또는 재고 상태가 SOLD_OUT_STATUSES 중 하나 — 부분 문자열('SOLD' 포함)로 보지 않는다."""
+    statuses = {str(d.get(k) or "").strip().upper() for k in ("frontItemStockStatus", "itemStockStatus")}
+    return bool(d.get("isSoldout")) or bool(statuses & SOLD_OUT_STATUSES)
 
 
 def spec_text(d: dict) -> str:

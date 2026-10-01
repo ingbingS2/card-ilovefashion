@@ -1,11 +1,13 @@
 """오늘의 신호 요약 + 키워드 후보 상품 수집 (무신사 + 29CM).
 
     python -m autopost.collect signals
-    python -m autopost.collect candidates --folder "20261002 가을 니트" -q "가을 니트" -q "니트 가디건" [--gf F]
+    python -m autopost.collect candidates --folder "20261002 가을 니트" -q "가을 니트" -q "니트 가디건" [--gf F] [--append]
 
 candidates는 두 몰을 검색해 신상·재고·제외 브랜드·직전 회차 브랜드를 거르고 `episodes/<folder>/candidates.json`을 쓴다.
+`--append`면 기존 candidates.json의 후보를 그대로 두고 새 상품(같은 몰+번호가 아닌 것)만 더한다.
 상품마다 사진 번호를 붙인 시트(`.autopost-work/<folder>/sheets/<goodsNo>.jpg`)를 만든다 — 세션이 보고 고른다.
 무신사 검색 API가 막히면(클라우드 IP에서 Cloudflare 403 — 10-01 실측) 무신사 실시간 랭킹을 검색어로 걸러 대신 쓴다.
+상세까지 막히면 우회하지 않고 무신사 후보를 포기한 뒤 29CM 후보만 모은다(notes에 기록).
 같은 상품이 다른 몰에서 더 싸면 `cheaper_elsewhere`에 적는다 — 가격·이미지 출처는 저렴한 몰(§2).
 """
 from __future__ import annotations
@@ -26,6 +28,9 @@ WEATHER_URL = "https://api.open-meteo.com/v1/forecast"
 MAX_PER_BRAND = 2      # 한 브랜드의 색상 변형이 후보를 다 채우지 않게
 MAX_DETAIL_CALLS = 80  # 상세·후기 조회 상한 (몰 API 연속 호출 매너)
 MUSINSA, CM29 = "무신사", malls29.MALL
+# 29CM은 재입고·컬러 추가 때 availableBeginTimestamp가 새로 찍혀 오래된 상품이 신상으로 보인다 — 이런 표기는 거른다
+REORDER_MARKERS = re.compile(r"컬러\s*추가|색상\s*추가|[\[(]\s*\d+\s*차|리오더|재입고", re.I)
+REORDER_DROP = "재입고·컬러추가 표기(판매 개시일 신뢰 불가)"
 
 
 # ---------- signals ----------
@@ -139,8 +144,8 @@ def build_29cm(item_no, handles: dict) -> dict:
         "name": d.get("itemName", ""),
         "genders": [str(d.get("genderAttr") or "")],
         "category": "",
-        **malls29.price_facts(d), **malls29.review_summary(d),
-        **({"rating": round(avg, 1)} if avg else {}),   # 후기 API 평균(소수점) — 상세의 0.5 단위 값보다 정확
+        **malls29.price_facts(d),
+        **malls29.card_review_numbers(d, avg),   # 평점은 후기 API 평균(소수점) — verify도 같은 출처
         "review_total_listed": total,
         "sold_out": malls29.sold_out(d),
         "release_date": rd.isoformat() if rd else None,
@@ -165,7 +170,7 @@ def _tokens(text: str) -> set[str]:
 
 
 def search_rows(queries: list[str], gf: str, notes: list[str]) -> list[dict]:
-    """두 몰 검색 결과를 {mall, no, brand, brand_en, reviews, sold_out, ad, query}로 통일."""
+    """두 몰 검색 결과를 {mall, no, brand, brand_en, reviews, sold_out, ad, query}로 통일(29CM은 name도)."""
     rows: list[dict] = []
     musinsa_blocked = False
     for q in queries:
@@ -184,6 +189,7 @@ def search_rows(queries: list[str], gf: str, notes: list[str]) -> list[dict]:
                 if (gf == "F" and "남성" in large) or (gf == "M" and "여성" in large):
                     continue
                 rows.append({"mall": CM29, "no": int(r["itemNo"]), "brand": r.get("frontBrandNameKor", ""),
+                             "name": r.get("itemName", ""),
                              "brand_en": r.get("frontBrandNameEng", ""), "reviews": r.get("reviewCount") or 0,
                              "sold_out": bool(r.get("isSoldOut")), "ad": False, "query": q})
         except malls.MallError as e:
@@ -287,7 +293,8 @@ def contact_sheet(cand: dict, path) -> None:
 
 # ---------- candidates ----------
 
-def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) -> dict:
+def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30, append: bool = False) -> dict:
+    """append=True이고 candidates.json이 있으면 기존 후보를 그대로 두고 새 (몰, 번호)만 더한다 — 시트도 새 것만."""
     today = config.now_kst().date()
     since = config.new_since(today)
     handles = load_handles()
@@ -295,6 +302,11 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
     last_brands = hist[-1].get("brands", []) if hist else []
     notes: list[str] = []
     dropped: dict[str, int] = {}
+    ep_dir = config.episode_dir(folder)
+    path = ep_dir / "candidates.json"
+    prev = json.loads(path.read_text(encoding="utf-8")) if append and path.exists() else None
+    kept: list[dict] = (prev or {}).get("candidates") or []
+    have = {(c["mall"], int(c["goodsNo"])) for c in kept}
 
     def drop(reason: str):
         dropped[reason] = dropped.get(reason, 0) + 1
@@ -305,8 +317,12 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
 
     pre = []
     for row in pool.values():
+        if (row["mall"], row["no"]) in have:
+            drop("이미 후보에 있음(--append)"); continue
         if row["sold_out"]:
             drop("품절"); continue
+        if row["mall"] == CM29 and REORDER_MARKERS.search(row.get("name") or ""):
+            drop(REORDER_DROP); continue
         if row["ad"]:
             drop("광고"); continue
         if excluded_brand(today, row["brand"], row["brand_en"]):
@@ -323,7 +339,7 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
                 order.append(by_mall[m].pop(0))
 
     out: list[dict] = []
-    seen_nos: set[int] = set()
+    seen_nos: set[int] = {int(c["goodsNo"]) for c in kept}   # 회차는 goodsNo로만 상품을 가리킨다 — 몰 간 번호 충돌 금지
     per_brand: dict[str, int] = {}
     dead_malls: set[str] = set()
     calls = 0
@@ -347,6 +363,8 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
             drop(f"{row['mall']} 상세 조회 실패"); continue
         if c["sold_out"]:
             drop("품절(상세)"); continue
+        if c["mall"] == CM29 and REORDER_MARKERS.search(c.get("name") or ""):
+            drop(REORDER_DROP); continue
         if not c["release_date"] or date.fromisoformat(c["release_date"]) < since:
             drop(f"신상 기준({since.isoformat()}) 미달"); continue
         if len(c["images"]) < 2:
@@ -363,14 +381,22 @@ def candidates(folder: str, queries: list[str], gf: str = "A", limit: int = 30) 
     for c in out:
         c["cheaper_elsewhere"] = cheaper_elsewhere(c)
 
-    result = {"folder": folder, "collected_at": config.now_kst().isoformat(timespec="minutes"),
+    now = config.now_kst().isoformat(timespec="minutes")
+    result = {"folder": folder, "collected_at": now,
               "queries": queries, "gf": gf, "new_since": since.isoformat(),
               "notes": notes, "dropped": dropped, "candidates": out}
-    ep_dir = config.episode_dir(folder)
+    if prev is not None:
+        notes.append(f"--append: 기존 후보 {len(kept)}종 유지, 새로 {len(out)}종 추가")
+        merged_dropped = dict(prev.get("dropped") or {})
+        for k, v in dropped.items():
+            merged_dropped[k] = merged_dropped.get(k, 0) + v
+        result.update(collected_at=prev.get("collected_at", now), appended_at=now,
+                      queries=list(dict.fromkeys((prev.get("queries") or []) + queries)),
+                      notes=list(dict.fromkeys((prev.get("notes") or []) + notes)),
+                      dropped=merged_dropped, candidates=kept + out)
     ep_dir.mkdir(parents=True, exist_ok=True)
-    (ep_dir / "candidates.json").write_text(json.dumps(result, ensure_ascii=False, indent=1),
-                                            encoding="utf-8")
-    for c in out:
+    path.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    for c in out:   # 시트는 이번에 새로 들어온 후보만
         contact_sheet(c, config.WORK_DIR / folder / "sheets" / f"{c['goodsNo']}.jpg")
     return result
 
@@ -381,8 +407,14 @@ def summary(result: dict) -> str:
     lines += [f"※ {n}" for n in result.get("notes", [])]
     for c in result["candidates"]:
         flag = "★로스터" if c["roster"] else ("핸들✓" if c["handle"] else "핸들?")
-        alt = c.get("cheaper_elsewhere")
-        alt_s = f" | ⚠️{alt['mall']}이 {alt['sale_price']:,}원으로 더 쌈({alt['goodsNo']})" if alt else ""
+        alt = c.get("cheaper_elsewhere")   # None · {mall, sale_price, goodsNo, url} · {"unavailable": 이유}
+        alt = alt if isinstance(alt, dict) else {}
+        if alt.get("unavailable"):
+            alt_s = " | ⚠️다른 몰 가격 비교 실패"
+        elif alt.get("mall"):
+            alt_s = f" | ⚠️{alt['mall']}이 {alt.get('sale_price') or 0:,}원으로 더 쌈({alt.get('goodsNo')})"
+        else:
+            alt_s = ""
         lines.append(
             f"- [{c['mall']}] {c['goodsNo']} {c['brand']} | {c['name'][:36]} | {c['sale_price']:,}원"
             f"({c['discount']}%) | 후기 {c['review_count']} ⭐{c['rating']} | 개시 {c['release_date']}"
@@ -399,11 +431,13 @@ def main(argv=None) -> None:
     c.add_argument("-q", "--query", action="append", required=True)
     c.add_argument("--gf", default="F", choices=["A", "F", "M"], help="F=여성(기본) A=전체 M=남성")
     c.add_argument("--limit", type=int, default=30)
+    c.add_argument("--append", action="store_true",
+                   help="기존 candidates.json의 후보를 유지하고 새 상품만 추가(같은 몰+번호는 중복)")
     args = ap.parse_args(argv)
     if args.cmd == "signals":
         print(signals())
     else:
-        print(summary(candidates(args.folder, args.query, args.gf, args.limit)))
+        print(summary(candidates(args.folder, args.query, args.gf, args.limit, append=args.append)))
 
 
 if __name__ == "__main__":

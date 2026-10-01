@@ -2,6 +2,9 @@
 
 카드에 쓰는 가격은 상세 `goodsPrice.salePrice`(쿠폰 미적용 표시가)·`normalPrice`·`discountRate`.
 랭킹·검색의 price/finalPrice는 쿠폰가일 수 있어 후보 정렬에만 쓴다.
+
+Cloudflare 403(데이터센터 IP 차단)을 받으면 그 호스트는 이번 실행 동안 차단으로 기억하고 바로 실패한다 —
+브라우저 흉내·우회는 하지 않는다. User-Agent도 브라우저로 위장하지 않고 이 도구임을 밝힌다.
 """
 from __future__ import annotations
 
@@ -11,8 +14,7 @@ from datetime import date
 
 import requests
 
-UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+UA = "i_s2_fashion-autopost/1.0 (card-news bot; python-requests)"
 HEADERS = {"User-Agent": UA, "Accept": "application/json, text/plain, */*",
            "Accept-Language": "ko-KR,ko;q=0.9"}
 IMG_HOST = "https://image.msscdn.net"
@@ -30,28 +32,24 @@ class MallError(RuntimeError):
     pass
 
 
-_blocked_hosts: set[str] = set()   # requests가 403(Cloudflare)을 받은 호스트 — 이후엔 바로 브라우저 경유
+_blocked_hosts: set[str] = set()   # Cloudflare 403을 받은 호스트 — 이번 실행 동안 네트워크 없이 바로 실패
 
 
-def _browser_fallback(url: str, params: dict | None, headers: dict | None) -> dict | None:
-    """Cloudflare 403을 받았을 때 Playwright 페이지 안에서 같은 요청을 한 번 더 — 실패하면 None."""
-    from . import browser
-    full = url if not params else requests.Request("GET", url, params=params).prepare().url
-    try:
-        return browser.fetch_json(full, headers)
-    except browser.BrowserUnavailable:
-        return None
-    except Exception as e:  # RuntimeError(HTTP 상태·JSON 아님) 포함 — Playwright 예외로 수집 전체가 죽지 않게
-        raise MallError(f"GET {full} 실패(브라우저 경유): {type(e).__name__}: {str(e)[:160]}") from None
+def _blocked_error(host: str) -> MallError:
+    mall = "29CM" if "29cm" in host else ("무신사" if "musinsa" in host or "msscdn" in host else host)
+    return MallError(f"{mall} 차단(데이터센터 IP 403) — 우회하지 않음: {host}")
+
+
+def _cloudflare_block(r) -> bool:
+    text = r.text or ""
+    return r.status_code == 403 and ("Attention Required" in text or "Just a moment" in text
+                                     or "cf-" in text[:3000])
 
 
 def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict | None = None) -> dict:
     host = url.split("/")[2]
     if host in _blocked_hosts:
-        data = _browser_fallback(url, params, headers)
-        if data is not None:
-            return data
-        raise MallError(f"GET {url} 실패: {host}는 데이터센터 IP 차단(Cloudflare 403)이고 브라우저 경유도 불가")
+        raise _blocked_error(host)
     last = ""
     for attempt in range(retries):
         time.sleep(DELAY_SEC)
@@ -60,11 +58,9 @@ def _get(url: str, params: dict | None = None, retries: int = 3, headers: dict |
             if r.ok:
                 return r.json()
             last = f"HTTP {r.status_code}: {r.text[:200]}"
-            if r.status_code == 403 and ("Attention Required" in r.text or "cf-" in r.text[:3000]):
-                _blocked_hosts.add(host)   # 데이터센터 IP 차단 — 브라우저 경유로 전환(FINDINGS 10-01)
-                data = _browser_fallback(url, params, headers)
-                if data is not None:
-                    return data
+            if _cloudflare_block(r):
+                _blocked_hosts.add(host)   # 데이터센터 IP 차단(FINDINGS 10-01) — 다시 묻지도, 돌아가지도 않는다
+                raise _blocked_error(host)
             if r.status_code in (403, 404, 429):
                 break  # 차단·없음 — 재시도로 우회하지 않는다
         except requests.exceptions.RequestException as e:
