@@ -1,6 +1,6 @@
 # PROJECT-BRIEF — 새 에이전트는 이것부터 (세션 시작 시 자동 주입됨)
 
-> 마지막 갱신: 2026-09-05. 규칙 원본은 [KEYWORD-POLICY.md](KEYWORD-POLICY.md), 개발 규칙은 [CLAUDE.md](CLAUDE.md). 이 문서는 **지도**다.
+> 마지막 갱신: 2026-09-11. 규칙 원본은 [KEYWORD-POLICY.md](KEYWORD-POLICY.md), 개발 규칙은 [CLAUDE.md](CLAUDE.md). 이 문서는 **지도**다.
 
 ## 1. 30초 요약
 인스타그램 패션 계정 **@i_s2_fashion** 운영 자동화 저장소. 무신사·29CM 랭킹을 매시간 크롤링해 Firestore에 쌓고 → 상품 5종을 고르고 → 후기를 근거로 문구를 써서 1080×1350 카드 7장(표지+상품 5+CTA)을 렌더하고 → 미리보기 승인 후 인스타 캐러셀로 게시하고 → +72시간 뒤 인사이트를 조회해 실험 로그를 갱신한다.
@@ -20,8 +20,10 @@
 crawler/   무신사·29CM 랭킹/후기 수집 → Firestore   (GitHub Actions 매시 7분, 가동 중)
 frontend/  React+Vite 대시보드 https://fashion-cardnews.web.app (랭킹 비교·상품 선택) + 레거시 생성기 탭
 pipeline/  로컬 원클릭 앱 127.0.0.1:8787 (/dashboard) — reader → copywriter → renderer → 미리보기 → publisher
-scripts/   post_ig.py — 인스타 캐러셀 게시 (pipeline이 재사용)
-card-drafts/  카드 디자인. ★ 현행 디자인 = early-autumn-outer/index.html (전면 이미지형). uvparasol-insta.html은 파이프라인용 구 레이아웃
+scripts/   post_ig.py — 인스타 캐러셀 게시 (pipeline·autopost가 재사용)
+autopost/  ★ 매일 자동 제작(2026-10-01~): 클라우드 루틴이 .claude/skills/daily-feed 절차로 키워드→후보(collect)→episode.json→build(검사·렌더)→승인 요청.
+           사용자가 그 세션에서 '승인' → verify → publish. 데이터는 claude/autopost-data 브랜치(worktree autopost-data/). measure로 +72h.
+card-drafts/  카드 디자인. ★ 현행 디자인 = early-autumn-skirt/index.html (전면 이미지형 · 09-11 하단 그라데이션 완화판). uvparasol-insta.html은 파이프라인용 구 레이아웃
 CARD/zzal/    CTA 카드용 무한도전 짤 — 수정일 최신 파일을 쓴다
 backend/      초기 웹앱 API — 사실상 미사용
 ```
@@ -36,7 +38,7 @@ backend/      초기 웹앱 API — 사실상 미사용
 ## 4. 카드뉴스 표준 절차
 1. KEYWORD-POLICY §10 최신 행에서 지정 키워드 확인. 직전 게시물 2~3개 `caption.txt`와 `result.md`를 읽는다.
 2. 상품 5종 선정(축 하나) → 무신사 상세에서 가격·후기·소재·**구매 가능** 확인, 착용컷 `_big` 다운로드.
-3. `card-drafts/early-autumn-denim/`(가장 최근 회차)을 복제 → `cards` 배열·`assets/`·캡션 교체 → `python render.py`.
+3. `card-drafts/early-autumn-skirt/`(가장 최근 회차)을 복제 → `cards` 배열·`assets/`·캡션 교체 → `python render.py`.
 4. 3+1회 검토(맞춤법 / 사실 / 정책 / 핸들 3중) → `result.md` 작성 → 바탕화면 폴더에 복사 → `_preview.html` 경로 보고.
 5. 승인 후 `post_ig.py --dry-run` → 게시 직전 재검증(`verify.py`) → 게시 → result.md에 시각·permalink.
 6. +72h 인사이트 API 조회 → result.md·KEYWORD-POLICY 표·BRAND-ROSTER 갱신.
@@ -49,21 +51,27 @@ export PYTHONIOENCODING=utf-8
 | 목적 | 명령 |
 |---|---|
 | 카드 렌더 (수동 제작) | `cd card-drafts/<회차> && python render.py` |
-| 게시 전 재검증 | `cd card-drafts/early-autumn-denim && python verify.py` (Chrome 확장 불필요) |
+| 게시 전 재검증 | `cd card-drafts/<최신 회차> && python verify.py` (Chrome 확장 불필요, Playwright 필요) |
 | 인스타 게시 | `python scripts/post_ig.py "<폴더명>" --dry-run` → 승인 후 `--dry-run` 없이 |
 | 카드뉴스 앱 | `cd pipeline && ../crawler/.venv/Scripts/python.exe app.py` → http://127.0.0.1:8787/dashboard |
 | 테스트 | pipeline `../crawler/.venv/Scripts/python.exe -m pytest -q` · crawler `./.venv/Scripts/python.exe -m pytest -q` · backend `./.venv/Scripts/python.exe -m pytest -q` |
 | 프론트 빌드 | `cd frontend && npm run build` |
 | 로컬 크롤 | `cd crawler && ./.venv/Scripts/python.exe main.py --store json` |
 
-## 6. 현재 상태 (2026-09-08)
-- **다음 키워드 = `가을 스커트`**(09-08 지정). 축은 실루엣 변주(플리츠·A라인·랩·슬릿 롱·카고), **데님 스커트 제외**(직전 회차 축 중복). 로스터 1곳 = 핀카 `@finca_planet` + 신규 4. 새 회차는 `card-drafts/early-autumn-denim/` 복제. **미치코런던은 10-05까지 상품·태그 제외**(사용자 지시).
+## 6. 현재 상태 (2026-09-11)
+- **2026-10-01 매일 자동 제작 시스템(autopost) 구축** — Claude 구독 사용량으로 도는 클라우드 루틴(API 비용 0, 사용자 선택). 무신사 단일 몰 기준(29CM 정상가 API `bff-api` 403 — 몰 간 최저가 비교는 아직 안 함). 신규 브랜드 핸들은 2곳 이상 확인될 때만 태그. 절차·승인 규칙은 `.claude/skills/daily-feed/SKILL.md`.
+- **`20260908 가을 스커트` 게시 완료 2026-09-11 11:57** → https://www.instagram.com/p/DdIZA3wE6J8/ · **+72h 측정 09-14 11:57 이후**(`result.md` §5). 산출물 `카드뉴스\20260908 가을 스커트\`. 5종 전부 29CM(드로우핏·노티아·로에일·커스텀어클락·노우드), 로스터 1(노우드)+신규 4. 회차 폴더 `card-drafts/early-autumn-skirt/`(README 참고). 09-11 변경: 하단 그라데이션 완화(텍스트 상단 이동안은 기각), 3번 틸아이다이→노티아(밝은 베이지) 교체, 피드백 수정. **새 회차는 이 폴더를 복제한다.** **미치코런던은 10-05까지 상품·태그 제외**(사용자 지시).
 - **측정 완료**: `20260831 초가을 아우터` → 09-08 조회 도달 **119**·공유 0 → 판정 기준(200+·공유 1+) **미달**, result.md §5~§8 작성 완료. 로스터 0곳으로 짠 유일한 회차였다.
-- **`20260908 가을 스커트` 제작 완료 · 게시 승인 대기** — `카드뉴스60908 가을 스커트\_preview.html`. 5종 전부 29CM, 로스터 1(노우드)+신규 4. 새 회차 폴더는 `card-drafts/early-autumn-skirt/`.
-- **측정 대기 1건**: `20260904 초가을 데님`(09-05 21:24 게시 → **09-08 21:24 이후**). 09-08 15시 잠정값 도달 293·공유 2로 이미 기준 통과 — 정식 값으로 `result.md` §5 를 채운다.
+- **09-16 측정 완료**: 초가을 데님 누적 도달 **373**·공유 2(통과) · 가을 스커트 +5일 도달 **57**·공유 0(기각). 두 result.md §5~§8 작성. 스냅샷 `카드뉴스\_insights-20260916.json`. 브랜드 반응(§7)은 사용자 앱 확인 대기.
+- **`20260917 가을 부츠` 게시 완료 2026-09-17 11:42** → https://www.instagram.com/p/DdX0FHPGNdU/ · **+72h 측정 09-20 11:42 이후** — 회차 폴더 `card-drafts/autumn-boots/`(README 참고, **새 회차는 이 폴더를 복제**), 산출물 `카드뉴스\20260917 가을 부츠\`. 무신사 2 + 29CM 3, 신규 5곳. 09-17 신상 범위를 '전년도 1월 1일 이후'로 확대(KEYWORD-POLICY §2). 09-17 디자인 변경: `이미지 출처`를 정가 줄 오른쪽으로 옮기고 상품명·정가 줄에 글자 그림자 추가(텍스트 블록 전부 35% 이하).
 - 인사이트 전수 재조회 스냅샷: `카드뉴스\_insights-20260908.json`(20건). **KEYWORD-POLICY §10 표의 도달 값은 측정 시점이 섞여 있으니 축 비교는 §10 맨 아래 재조회 줄을 본다** — 특히 비키니는 표에 15로 적혀 있으나 누적 1,260(계정 최고)이다.
 - 진행 중 실험 #5 브랜드 반응·공유. 반응 브랜드 9곳(BRAND-ROSTER). 게시 실적·도달은 KEYWORD-POLICY §10.
-- 인스타 토큰 만료 ~09-17 — 갱신 필요 시 사용자에게.
+- **🏆 `20260917 가을 부츠`가 계정 최고 기록 — 09-23 측정 도달 1,718 · 조회수 2,077 · 공유 1 · 저장 2 · 댓글 1(에트오소메) → 판정 통과.** 종전 최고는 비키니 1,328. result.md §5~§8 작성 완료.
+- **⛔ 인스타 Graph 토큰 만료 — 2026-09-17 04:34(PDT)**(`OAuthException` 190). 갱신은 사용자만 가능. **다만 측정은 막히지 않는다**: 소유자 계정으로 로그인된 브라우저에서 `https://www.instagram.com/insights/media/{media_id}/` 를 열면 된다(`media_id`는 `/api/v1/oembed/?url={permalink}`). 토큰보다 정보가 많다 — **유입 경로(기타/프로필/홈)** 가 나온다. KEYWORD-POLICY §8.
+- **09-23 전수 재조회 11건** (`카드뉴스\_insights-20260923.json`) → KEYWORD-POLICY §10 맨 아래 표. **핵심: 도달을 가르는 건 좋아요가 아니라 유입 '기타'(알고리즘 노출)이고, 그 문을 여는 건 공유·저장·댓글이다.** 공유 0인 회차는 한 번도 도달 420을 넘지 못했다. 좋아요는 부츠 7·데님 10·아우터 8로 같은데 도달은 1,718/419/147이다.
+- **09-23 지정 키워드 = `가을 재킷`**(KEYWORD-POLICY §10 맨 위 행). 축 = 보온 정도 순서, 트렌치코트·패딩 제외, 품목어는 '아우터'가 아니라 '재킷'. 아직 미제작 — 새 회차는 `card-drafts/autumn-boots/`를 복제한다.
+- **09-23 브랜드 반응 전수 확인 — 게시물 22개 전부**(BRAND-ROSTER): 로스터 9곳 → **18곳**. 신규 = 에트오소메·노티아·세컨드솔트·데꼬로소·얀13·누스·하루타·오베르·쿠피도·앤니즈. 컴포트랩 핸들은 `@comfortlab_kr`로 정정. **비키니는 태그한 5곳이 전부 반응(5/5)한 유일한 회차**다. 대형 계정(아디다스·에잇세컨즈·미쏘·무신사 스탠다드·스컬프터)은 한 곳도 반응하지 않았다.
+- ⚠️ **09-23 중간에 낸 오류**: 로스터에 이미 적힌 핸들 목록과 대조하는 바람에 아우터·아가일·로퍼가 "브랜드 반응 0곳"으로 잘못 나왔다. 실제로는 셋 다 반응이 있었다(데꼬로소·얀13·누스+하루타). **대조 기준은 그 게시물 캡션의 `@멘션`이어야 한다** — BRAND-ROSTER §확인 방법.
 - 미완 과제: 전면 이미지형을 `pipeline` 템플릿(`uvparasol-insta.html`)에 이식.
 
 ## 7. 살아있는 함정
@@ -76,7 +84,12 @@ export PYTHONIOENCODING=utf-8
 - `.claude/hooks/auto-commit-push.sh`가 턴마다 `git add -A` 후 main 푸시 → `deploy.yml` 자동 배포.
 - Firebase 웹 API 키가 `frontend/src/firestore.ts`, `frontend/public/rankings.html`, `pipeline/reader.py` 3곳에 하드코딩(공개 키, Firestore 규칙으로 보호하는 구조). 모델 ID `claude-sonnet-5`가 backend/pipeline 4곳에 분산.
 - 템플릿 `uvparasol-insta.html`의 `var IMAGES = {` / `var META   = {` / `var CARDS  = [` 표기(공백 포함)를 바꾸면 렌더러가 앵커를 못 찾는다.
-- BRAND-ROSTER의 좋아요 목록은 API로 못 받는다 — 사용자가 앱에서 확인해 알려준 것만.
+- ~~BRAND-ROSTER의 좋아요 목록은 API로 못 받는다~~ → **09-23 해결.** 인스타에 로그인된 브라우저(소유자 아니어도 됨)에서 게시물을 열고 페이지 안에서 `/api/v1/media/{media_id}/likers/` 를 fetch 한다. 헤더 `x-ig-app-id: 936619743392459` · `x-csrftoken`(쿠키 `csrftoken`에서) · `x-requested-with: XMLHttpRequest`, `credentials:'include'`. 개인 계정까지 긁으면 PII로 차단되니 **태그한 브랜드 핸들만 대조**한다. 방법 전문은 BRAND-ROSTER 상단.
+- **claude-in-chrome은 다른 PC의 Chrome에 붙어 있을 수 있다(09-23 실제 발생).** `list_connected_browsers`로 확인하고 `select_browser`로 이 PC 것을 고른다 — 브라우저마다 로그인된 인스타 계정이 달라서, 소유자 계정이 아닌 쪽에서는 인사이트가 안 보인다. `instagram.com` 이동 자체는 이제 막히지 않는다(옛 함정 해제).
+- **USB(D:) 저장소는 git이 "dubious ownership"으로 거부한다(09-11 확인)** — 자동 커밋·푸시 훅이 오류를 삼켜 조용히 실패하고, 09-08 이후 커밋이 origin에 올라가지 않았다. 읽기만 할 땐 `git -c safe.directory=D:/fashion-cardnews …`, 고치려면 사용자 승인 후 `git config --global --add safe.directory D:/fashion-cardnews`.
+- **09-17 D: 작업 PC에는 `requests`·PIL도 없다.** 게시는 스크래치 폴더에 표준 라이브러리로 만든 `requests` 대체 모듈(GET/POST·multipart만)을 `PYTHONPATH`로 얹어 `post_ig.py`를 실행했고, JPG 변환은 PowerShell `System.Drawing`으로 했다. 패키지를 새로 내려받으려면 사용자 확인.
+- **Playwright가 없는 PC(09-11 D: 작업 PC, Python 3.14)** 에선 `render.py`·`verify.py`가 안 돈다. 렌더는 실제 Chrome 헤드리스 CLI(`--screenshot --force-device-scale-factor=2 --window-size=540,675`, 카드를 `position:fixed;transform:none!important`로 고정), 검증은 앱 브라우저로 29CM·무신사 페이지를 열고 같은 API를 페이지 안에서 fetch 했다. `crawler/.venv`는 다른 PC의 Python을 가리켜 깨져 있다.
+- 셸 문자열에 `카드뉴스\20260908` 같은 경로를 쓰면 `\202`가 8진 이스케이프로 먹혀 제어문자(`\x82`)가 된다(KEYWORD-POLICY §10·PROJECT-BRIEF §6에서 실제 발생). 문서 수정은 Edit 도구로 하거나 `chr(92)`로 백슬래시를 만든다.
 
 ## 8. 작업 유형별 시작점
 | 요청 | 먼저 읽을 것 | 건드릴 곳 |

@@ -4,6 +4,9 @@
 
 cd "${CLAUDE_PROJECT_DIR:-.}" 2>/dev/null || exit 0
 
+# 클라우드 루틴(autopost)에서는 쓰지 않는다 — 결과물은 claude/autopost-data 브랜치에 세션이 직접 푸시한다
+[ "${CLAUDE_CODE_REMOTE:-}" = "true" ] && exit 0
+
 # git 저장소가 아니면 종료
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 

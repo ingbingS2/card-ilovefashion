@@ -13,7 +13,8 @@
 | `crawler/` | 무신사·29CM 랭킹/후기 → Firestore. `.github/workflows/crawl.yml` 매시 7분 | 가동 중 |
 | `frontend/` | React+Vite+TS. 랭킹 대시보드(https://fashion-cardnews.web.app) + 레거시 생성기 탭 | 대시보드 사용 |
 | `pipeline/` | 로컬 FastAPI(127.0.0.1:8787, UI `/dashboard`): 상품 선택 → 문구 → 렌더 → 미리보기 → 게시 | 템플릿이 구 레이아웃 |
-| `card-drafts/` | 카드 디자인 원본. 회차 폴더(`early-autumn-*`)를 복제해 수동 제작 | ★ 주력 |
+| `autopost/` + `.claude/skills/daily-feed/` | **매일 자동 제작**: 클라우드 루틴(07:00 KST)이 키워드 선정 → 무신사 후보 수집 → 7장 렌더·검사 → 승인 요청. 사용자가 그 세션에서 '승인'하면 재검증 후 게시. 결과물은 `claude/autopost-data` 브랜치 | ★ 신규 |
+| `card-drafts/` | 카드 디자인 원본. 회차 폴더(`early-autumn-*`)를 복제해 수동 제작 | 수동 제작용 |
 | `scripts/post_ig.py` | 인스타 캐러셀 게시 (litterbox/uguu 임시 호스팅 → Graph API) | 가동 |
 | `backend/` | 초기 웹앱 API(FastAPI + Claude) | 사실상 미사용 |
 | `CARD/zzal/` | CTA 카드용 짤 (수정일 최신 파일 사용) | |
@@ -30,11 +31,25 @@ export PYTHONIOENCODING=utf-8
 
 카드뉴스 수동 제작·게시:
 ```bash
-cd card-drafts/early-autumn-denim
-python render.py                                        # index.html cards → 1~7.jpg
-python verify.py                                        # 무신사 가격·후기·품절 재검증
-python ../../scripts/post_ig.py "20260904 초가을 데님" --dry-run
+cd card-drafts/early-autumn-skirt                       # 최신 회차 (새 회차는 이 폴더를 복제)
+python render.py                                        # index.html cards → 1~7.jpg (Playwright 필요)
+python verify.py                                        # 29CM·무신사 가격·후기·품절·인용문 재검증
+python ../../scripts/post_ig.py "20260908 가을 스커트" --dry-run
 ```
+
+매일 자동 제작(autopost) — 보통은 클라우드 루틴이 돌리고, 절차는 `.claude/skills/daily-feed/SKILL.md`:
+```bash
+pip install -r autopost/requirements.txt && python -m playwright install chromium
+python -m autopost.collect signals                                         # 날씨·랭킹·최근 성과
+python -m autopost.collect candidates --folder "20261002 가을 니트" -q "가을 니트" --gf F
+python -m autopost.build "20261002 가을 니트"                               # episode.json → 검사 → 1~7.jpg·caption.txt
+python -m autopost.verify "20261002 가을 니트"                              # 게시 직전 재검증 (0=통과, 2=숫자 변경, 1=막힘)
+python -m autopost.publish "20261002 가을 니트" --user-approved             # 사용자 승인 후에만
+python -m autopost.measure                                                  # +72h 측정
+python -m pytest -q autopost/tests
+```
+- 데이터는 `claude/autopost-data` 브랜치를 `autopost-data/`에 worktree로 붙여 쓴다(main에 커밋하지 않음). 이력·핸들 시드는 `autopost/seed/`.
+- 클라우드 환경 설정: 네트워크 **Custom** 허용 도메인 — `api.musinsa.com` `goods-detail.musinsa.com` `goods.musinsa.com` `client.musinsa.com` `image.msscdn.net` `graph.instagram.com` `raw.githubusercontent.com` `litterbox.catbox.moe` `uguu.se` `api.open-meteo.com` `cdn.jsdelivr.net` `playwright.azureedge.net` `cdn.playwright.dev` `playwright.download.prss.microsoft.com`. 환경변수 `IG_ACCESS_TOKEN`. 설정 스크립트 `pip install requests pillow playwright pytest && python -m playwright install --with-deps chromium`.
 
 크롤러:
 ```bash
@@ -53,7 +68,7 @@ cd backend && python -m venv .venv && source .venv/Scripts/activate && pip insta
 ## 환경변수·비밀 (커밋 금지)
 - `backend/.env.example` — `ANTHROPIC_API_KEY`, `STORAGE_BACKEND=memory|firestore`
 - `frontend/.env.example` — `VITE_API_BASE`, `VITE_PIPELINE_URL`
-- 인스타 토큰 `카드뉴스\ig_api_token.txt`, Firebase 서비스 계정 `C:\Users\yepdo\.firebase-keys\`
+- 인스타 토큰 `카드뉴스\ig_api_token.txt`(로컬) · 클라우드 루틴은 환경변수 `IG_ACCESS_TOKEN`, Firebase 서비스 계정 `C:\Users\yepdo\.firebase-keys\`
 
 ## CI/CD (GitHub Actions)
 - `ci.yml` 빌드·테스트 / `deploy.yml` main push 시 Firebase Hosting 배포 / `crawl.yml` 매시간 크롤.
