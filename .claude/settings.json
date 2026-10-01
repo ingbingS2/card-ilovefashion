@@ -1,4 +1,24 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(./.venv/Scripts/python.exe -m autopost.collect:*)",
+      "Bash(./.venv/Scripts/python.exe -m autopost.build:*)",
+      "Bash(./.venv/Scripts/python.exe -m autopost.verify:*)",
+      "Bash(./.venv/Scripts/python.exe -m autopost.measure:*)",
+      "Bash(./.venv/Scripts/python.exe -m autopost.publish * --check)",
+      "Bash(./.venv/Scripts/python.exe -m pytest:*)",
+      "Bash(git -C autopost-data:*)",
+      "Bash(git worktree:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git ls-remote:*)",
+      "Read(//d/fashion-cardnews/**)",
+      "Read(//d/카드뉴스/**)",
+      "Edit(//d/fashion-cardnews/autopost-data/**)",
+      "Write(//d/fashion-cardnews/autopost-data/**)",
+      "Write(//d/카드뉴스/**)"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {

@@ -20,7 +20,7 @@ description: @i_s2_fashion 매일 자동 카드뉴스 — 키워드 선정부터
 
 ## 실행 위치 — 이 PC(D:\fashion-cardnews)의 예약 작업
 **무신사는 데이터센터 IP(Claude 클라우드·GitHub Actions)를 Cloudflare로 막는다**(10-01 실측: 검색·상세·후기 403, 랭킹만 열림). 그래서 이 절차는 사용자 PC의 Claude 앱 예약 작업("@i_s2_fashion 매일 피드", 매일 07:00)에서 돈다. 클라우드 루틴은 꺼 두었다.
-- 셸은 Git Bash. 파이썬은 프로젝트 가상환경: `PY=./.venv/Scripts/python.exe` (없으면 `python -m venv .venv && ./.venv/Scripts/python.exe -m pip install -r autopost/requirements.txt`). 아래 명령의 `python`은 전부 `$PY`로 읽는다.
+- 셸은 Git Bash, 작업 폴더 `/d/fashion-cardnews`. 파이썬은 프로젝트 가상환경 `./.venv/Scripts/python.exe` (없으면 `python -m venv .venv && ./.venv/Scripts/python.exe -m pip install -r autopost/requirements.txt`). **아래 명령의 `python`은 전부 `./.venv/Scripts/python.exe`로 글자 그대로 바꿔 쓴다** — 변수(`$PY`)로 쓰면 `.claude/settings.json`의 허용 목록에 걸리지 않아 무인 실행이 권한 확인에서 멈춘다. 데이터 브랜치 git은 `git -C autopost-data …` 형태로.
 - 렌더는 설치된 Chrome을 쓴다: `export CHROME_PATH="C:/Program Files/Google/Chrome/Application/chrome.exe" PYTHONIOENCODING=utf-8`
 - 인스타 토큰: 환경변수 `IG_ACCESS_TOKEN`이 없으면 `D:\카드뉴스\ig_api_token.txt`(post_ig 기본 경로).
 - 29CM 상세(bff-api)는 빠르게 부르면 403 — 코드가 1.5초 간격·403 시 1회 재시도로 조절한다. 그래도 실패한 후보는 버려진다(우회 금지).
