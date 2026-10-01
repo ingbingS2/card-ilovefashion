@@ -7,6 +7,7 @@
 | 경로 | 역할 |
 |---|---|
 | `early-autumn-skirt/` | **최신 회차(09-08 제작, 게시 대기).** 새 회차는 이 폴더를 복제한다. `verify.py` 는 29CM `sellPrice`(쿠폰 미적용) 기준으로 비교한다. |
+| `early-autumn-skirt/` | **최신 회차**(09-08 제작 · 게시 승인 대기). 09-11 하단 그라데이션 완화 CSS의 원본 — **새 회차는 이 폴더를 복제**. `verify.py`는 29CM 기준 + 무신사 동일 상품 비교. |
 | `early-autumn-denim/` | 09-05 게시 회차. `verify.py`(무신사·29CM 재검증 + 몰 간 최저가) 포함. |
 | `early-autumn-outer/` | 전면 이미지형 **첫 적용·확정 회차**(09-04 게시). 디자인 원본. |
 | `uvparasol-insta.html` | `pipeline/renderer.py`가 읽는 파이프라인 템플릿 — **구 레이아웃**(사진 프레임형). 전면 이미지형 이식은 미완. `uvparasol-insta.backup-20260819.html`은 폰트 축소 전 백업. |
@@ -14,7 +15,7 @@
 ## 새 회차 만드는 순서
 ```bash
 export PATH="/c/Users/yepdo/AppData/Local/Programs/Python/Python312:$PATH" PYTHONIOENCODING=utf-8
-cd card-drafts && cp -r early-autumn-denim <new-slug> && cd <new-slug>
+cd card-drafts && cp -r early-autumn-skirt <new-slug> && cd <new-slug>
 rm -rf _old assets/cand/* ; # 사진은 무신사 _big 원본을 assets/cand/{goodsNo}/ 에 받아 고른다
 # index.html: <title>·.head 문구·const cards=[…] 만 교체. CSS·JS는 건드리지 않는다.
 # verify.py: CARDS 딕셔너리를 새 5종으로 교체.
@@ -37,18 +38,18 @@ Playwright는 시스템 Python 3.12에 설치돼 있고 `C:\Program Files\Google
 ```
 `pos`는 `object-position`(세로 착용컷 1500×1800은 4:5 카드에 거의 안 잘려 보통 `50% 50%`). `badge`는 판매가 옆 `31%↓` 노란 타이포로 렌더된다. `&nbsp;`로 "실제 후기"가 줄 끝에서 고아가 되지 않게 한다.
 
-## 전면 이미지형 스펙 (2026-09-04 사용자 확정 · CSS 원문은 `early-autumn-outer/index.html`의 마지막 `<style>` 블록)
+## 전면 이미지형 스펙 (2026-09-04 사용자 확정 · CSS 원문은 최신 회차 `early-autumn-skirt/index.html`의 마지막 `<style>` 블록 — outer·denim 회차는 09-08·09-11 조정 이전 값)
 
 | 요소 | 값 |
 |---|---|
 | 카드 | 540×675 (×2 = 1080×1350). 표지·상품 공통, CTA만 예외 |
 | 사진 | `position:absolute; inset:0; object-fit:cover; object-position:var(--pos)` |
-| 그라데이션 | `linear-gradient(to top, rgba(10,10,12,.9) 0%, .62 20%, .18 38%, 0 52%)` **(09-08 완화 — 하단이 실루엣을 가려서)** |
-| 텍스트 블록 | `left/right:32px; bottom:20px; color:#fff` · 전체 높이 카드의 **35%**(09-08 이전 43%) |
-| 상품명 줄 | 11px 흰 78% — `브랜드 · <b>상품명</b>` |
+| 그라데이션 | `linear-gradient(to top, rgba(10,10,12,.6) 0%, .38 20%, .1 38%, 0 50%)` **(09-11 밝게 — "글자 적힌 하단이 어둡다". 09-08은 .9/.62/.18/52%)** |
+| 텍스트 블록 | `left/right:32px; bottom:20px; color:#fff` · 전체 높이 카드의 **35%**(09-08 이전 43%) · 그라데이션이 옅어진 대신 `text-shadow:0 1px 3px rgba(0,0,0,.38), 0 0 14px rgba(0,0,0,.28)`(후기 칩만 그림자 없음) |
+| 상품명 줄 | 11px 흰 90%(09-11, 옅어진 그라데이션 위 가독성) — `브랜드 · <b>상품명</b>` |
 | 헤드라인 | 상품 **26px**/1.28/-.3px · 표지 42px/1.22/-.5px. `<em>`은 **노란 글자 #ffe14d**(밑줄 아님) |
-| 가격 블록 | `29CM ~~정가~~` 12px 62% → 판매가 **21px 굵게** + `31%↓` 17px #ffe14d. 후기 칩(반투명 흰, 12px)은 같은 줄 오른쪽 끝 |
-| 출처 | `이미지 출처 : 무신사` 8px 흰 50% |
+| 가격 블록 | `29CM ~~정가~~` 12px 흰 80% → 판매가 **21px 굵게** + `31%↓` 17px #ffe14d. 후기 칩(반투명 흰, 12px)은 같은 줄 오른쪽 끝 |
+| 출처 | `이미지 출처: 무신사` 8px 흰 70% (쌍점은 앞말에 붙인다 — 09-11) |
 | 인용문 | 11.5px/1.55, 위에 1px 흰 22% 구분선, 끝에 `— 실제 후기` |
 | 마지막 줄 | 왼쪽 `옆으로 넘기기 →`, 오른쪽 `@i_s2_fashion` 11.5px. **페이지 번호·상단 계정명 줄 없음** |
 | 표지 추가 | 키커 13px #ff5c85 자간 .14em · 서브 15px 흰 85% |

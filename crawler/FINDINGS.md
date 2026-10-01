@@ -32,7 +32,7 @@
 - `data.list[]`: `grade`(1~5 문자열) · `content` · `createDate` · `likeCount` · `images[].imageUrl`. pageSize 50은 빈 목록 → 20으로 페이징.
 - 요약 `GET …/review/v1/goods/{no}/reviews/summary` → `data.totalCount` · `satisfactionScore`(5점)
 
-**검색(goodsNo 찾기)** `https://www.musinsa.com/search/goods?keyword=…&gf=A` HTML의 `__NEXT_DATA__` 또는 페이지 내 `a[href*="/products/"]`. (`api.musinsa.com` 검색 API는 400.)
+**검색(goodsNo 찾기)** `GET https://api.musinsa.com/api2/dp/v1/plp/goods?gf=A&keyword=…&sortCode=POPULAR&page=1&size=60&caller=SEARCH` — 무신사 페이지 안에서 fetch하면 200(09-17 확인). `data.list[]`: `goodsNo`·`brandName`·`goodsName`·`normalPrice`·`price`(쿠폰가일 수 있음 — 비교는 상세 `salePrice`)·`reviewCount`. 검색 페이지 HTML 파싱은 추천 상품만 잡혀 쓸모없었다.
 
 **내 PC에서 페이지 접근**: Playwright + 실제 Chrome(`executable_path=C:\Program Files\Google\Chrome\Application\chrome.exe`, `headless=True`, `--disable-blink-features=AutomationControlled`, 일반 UA, `locale=ko-KR`)로 `www.musinsa.com/products/{no}`를 열면 통과. 그 페이지 안에서 `page.evaluate("fetch(...)")`로 위 API 전부 동작. 구매 영역은 늦게 렌더되므로 `wait_for_function`으로 `구매하기|재입고 알림` 텍스트를 최대 20초 기다린다(없고 `재입고 알림 신청`만 있으면 품절). 동작 스크립트: `card-drafts/early-autumn-denim/verify.py`.
 
@@ -59,3 +59,23 @@
 ## 운영 확인
 - 크롤러는 GitHub Actions 매시 7분(`crawl.yml`)에서 두 몰 모두 실데이터 수집 확인(봇 차단 없음). 13 랭킹/650 상품/0 오류 수준.
 - 몰 간 최저가 비교는 `salePrice`(무신사) vs `totalSellPrice`/`displayPrice`(29CM) — 쿠폰가끼리 비교하면 무신사가 부당하게 싸 보인다(08-25 위띠아 121,130 vs 쿠폰가 96,910).
+
+## 상품 나이(신상 판별) — 2026-09-13 실측
+
+| 몰 | 쓸 필드 | 비고 |
+|---|---|---|
+| 29CM | `bff-api…/api/v5/product-detail/{no}` → **`availableBeginTimestamp`** | 판매 개시일. 같은 응답의 `visibleBeginTimestamp`는 **재진열일**이라 오래된 상품이 최신으로 보인다(노티아 3007788: avail 2025-01-16 / visible 2025-12-01) |
+| 무신사 | 상세 응답 `goodsImages[].imageUrl`의 **`/prd_img/{yyyymmdd}/`** | `sellStartDate`·`saleStartDate`는 null, `seasonYear`는 `"0000"`, `isFirst`/`isDrop`는 false 고정이라 못 쓴다 |
+
+두 몰 교차 대조 5건(가을 스커트 회차): 드로우핏 2024-01-09/2024-01-23 · 노티아 2025-01-06/2025-01-16 · 로에일 2022-10-25/2022-10-25 · 커스텀어클락 2025-08-26/2025-09-05 · 노우드 2026-02-05/2026-01-26 → **2주 이내 일치**. 신상 기준은 [KEYWORD-POLICY.md](../KEYWORD-POLICY.md) §2.
+
+부가 필드: 29CM `soldQty`·`heartCount`·`reviewAggregation` · 무신사 `labels[]`(무신사단독 등)·`goodsSaleType`.
+
+## ⚠️ 29CM API 연속 호출 차단 (2026-09-13)
+
+`bff-api.29cm.co.kr` 상세를 **수백 건 빠르게 치면 차단**된다. 차단되면 CORS 헤더 없는 응답이 와서 브라우저에는 `TypeError: Failed to fetch`로 보인다(HTTP 상태를 못 읽으니 CORS 문제로 오해하기 쉽다). 한동안 같은 오리진에서 전부 실패한다.
+- 대응: 상세 조회는 **동시 1건, 간격 300ms 이상**, 한 번에 40건 이하로 끊는다. 검색 API(`search-api`)는 이때도 살아 있었다.
+- 브라우저 안에서 오래 도는 스크립트는 도구 타임아웃(45초)에 걸린다 — 후보 목록을 `window.__cand`에 두고 호출을 여러 번 나눠 처리한다.
+
+**보조 신호 — 무신사 `styleNo`**: 제조사 품번이 그대로 온다(신발 상품코드 규칙에 쓰는 값, KEYWORD-POLICY §3). 브랜드에 따라 시즌이 박혀 있어 신상 교차 확인에 쓸 수 있다 — 에트오소메 `ET26FWASO42BR` · 블랙퍼플 `BP26FWSH01_BK` · 기호 `K26-SH045 BR` · 엘리자베스 스튜어트 `EBAL165523`(시즌 없음). 규칙이 브랜드마다 달라 단독 근거로는 쓰지 않는다.
+⚠️ `goodsMaterial`은 문자열이 아니라 `{maxLowCount, materials[]}` 객체다(`.slice()` 하면 TypeError). 신발은 `materials`가 비어 있는 경우가 많고, 채워질 땐 `굽 높이` 같은 항목이 `items[].isSelected`로 온다 — 소재는 상세 페이지에서 확인한다.

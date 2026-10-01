@@ -18,22 +18,23 @@ CARDS = [
     dict(brand="드로우핏 우먼", mall="29cm", no="2427640", price=49500, normal=55000, rate=10, reviews=86, score=5.0,
          kw="드로우핏 플리츠 스커트", name="스티치 플리츠 미니 스커트 [BEIGE]",
          quote="계단 올라갈 때도 괜찮습니다", other=("musinsa", "3783636")),
-    dict(brand="틸아이다이", mall="29cm", no="331445", price=91020, normal=111000, rate=18, reviews=358, score=4.5,
-         kw="틸아이다이 랩 스커트", name="Gold belt wrap black skirt",
-         quote="앞에 트임이 있어서 포인트됩니다", other=None),
-    dict(brand="로에일", mall="29cm", no="1794854", price=58000, normal=72500, rate=20, reviews=155, score=4.5,
+    dict(brand="노티아", mall="29cm", no="3007788", price=104500, normal=110000, rate=5, reviews=163, score=5.0,
+         kw="노티아 스탠다드 핏 롱 스커트", name="STANDARD FIT LONG SKIRT_BEIGE",
+         quote="출근할때 너무 편해서 회색이랑 번갈아", other=("musinsa", "4701033")),
+    dict(brand="로에일", mall="29cm", no="1794854", price=58000, normal=72500, rate=20, reviews=156, score=4.5,
          kw="로에일 코듀로이 핀턱", name="마일드 코듀로이 핀턱 스커트 - 카키 베이지",
          quote="차르르 떨어져 다림질 필요 없네요", other=("musinsa", "2890244")),
-    dict(brand="커스텀어클락 우먼", mall="29cm", no="3462638", price=49600, normal=62000, rate=20, reviews=545, score=5.0,
+    dict(brand="커스텀어클락 우먼", mall="29cm", no="3462638", price=49600, normal=62000, rate=20, reviews=555, score=5.0,
          kw="커스텀어클락 H라인 맥시 스커트", name="[듀닝 PICK] 포멀 슬릿 H라인 맥시 스커트 차콜 COWSK002CHARCOAL",
-         quote="허리끈도 뺏다꼈다 할 수 있어서", other=("musinsa", "5366191")),
-    dict(brand="노우드", mall="29cm", no="3736187", price=56000, normal=56000, rate=0, reviews=557, score=5.0,
+         quote="앉을때나 움직일깨 편안해요", other=("musinsa", "5366191")),
+    dict(brand="노우드", mall="29cm", no="3736187", price=56000, normal=56000, rate=0, reviews=560, score=5.0,
          kw="노우드 Soft Ease Skirt", name="Soft Ease Skirt (Black)",
          quote="슬릿없는스커트 찾고있었는데 딱이에요", other=("musinsa", "5984932"),
-         # 무신사가 2,800원 싸지만(53,200/5%) 후기가 3개뿐이라 근거가 무너진다. 29CM 은 쿠폰 적용 시
-         # 실구매가 42,840 으로 무신사보다 싸므로 "팔로워를 비싼 몰로 보내지 않는다"는 규칙의 목적에도 맞다.
+         # 09-11 무신사도 56,000 동가(09-08엔 53,200/5%로 2,800원 쌌다). 다시 무신사가 싸지더라도
+         # 무신사 후기는 3개뿐이라 근거가 무너지고, 29CM 은 쿠폰 적용 시 실구매가 42,840 이라
+         # "팔로워를 비싼 몰로 보내지 않는다"는 규칙의 목적에도 맞으므로 29CM 을 유지한다.
          # 카드에는 쿠폰 미적용 정상가 56,000 을 적는다(할인 배지 없음).
-         allow_pricier="29CM 후기 557 vs 무신사 3 · 29CM 실구매가(쿠폰) 42,840 < 무신사 53,200"),
+         allow_pricier="29CM 후기 560 vs 무신사 3 · 29CM 실구매가(쿠폰) 42,840"),
 ]
 
 
