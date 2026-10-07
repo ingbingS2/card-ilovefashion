@@ -11,23 +11,28 @@
   "아라비안 팬츠",
   "드롭 크로치 팬츠",
   "배기 조거 팬츠",
-  "하렘 와이드"
+  "하렘 와이드",
+  "등산 하렘팬츠",
+  "트레킹 하렘 팬츠",
+  "아웃도어 하렘팬츠",
+  "하이킹 조거 팬츠"
  ],
  "gf": "F",
  "new_since": "2025-01-01",
  "notes": [
   "29CM 상세 API 차단 — 이 몰 후보는 수집하지 못함: 29CM 상세 차단 — 이번 실행 중단(403 연속 3회): https://bff-api.29cm.co.kr/api/v5/product-detail/2377052",
   "--append: 기존 후보 30종 유지, 새로 13종 추가",
-  "--append: 기존 후보 43종 유지, 새로 25종 추가"
+  "--append: 기존 후보 43종 유지, 새로 25종 추가",
+  "--append: 기존 후보 68종 유지, 새로 14종 추가"
  ],
  "dropped": {
   "재입고·컬러추가 표기(판매 개시일 신뢰 불가)": 13,
-  "품절": 10,
-  "신상 기준(2025-01-01) 미달": 132,
+  "품절": 11,
+  "신상 기준(2025-01-01) 미달": 158,
   "29CM 상세 조회 실패": 3,
   "29CM 차단(403) — 나머지 건너뜀": 85,
-  "사진 부족": 36,
-  "브랜드당 2개 초과(색상 변형 등)": 30,
+  "사진 부족": 58,
+  "브랜드당 2개 초과(색상 변형 등)": 52,
   "이미 후보에 있음(--append)": 35,
   "직전 회차 브랜드": 1
  },
@@ -4591,7 +4596,976 @@
    "handle": null,
    "query": "하렘팬츠",
    "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5335142,
+   "url": "https://www.musinsa.com/products/5335142",
+   "brand": "산로",
+   "brand_en": "SANRO",
+   "brand_id": "sanro",
+   "name": "[UNISEX] 와이드 스트링 하이킹팬츠  - 블랙",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 36700,
+   "normal_price": 59000,
+   "discount": 38,
+   "review_count": 918,
+   "rating": 4.9,
+   "review_total_listed": 918,
+   "sold_out": false,
+   "release_date": "2025-08-19",
+   "season": "",
+   "style_no": "hikingpants-black",
+   "material": [
+    "핏: 루즈",
+    "촉감: 부드러움",
+    "신축성: 없음, 거의 없음",
+    "비침: 없음",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을, 겨울"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250819/5335142/detail_5335142_17555690003955_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5335142/detail_5335142_17555691633570_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5335142/detail_5335142_17555691668654_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81468135,
+     "text": "소재 좋고 부드러워서 너무 마음에 들어요 남편 입으려고 샀는데 핏이 예뻐서 같이 입으려고요ㅎㅎ",
+     "grade": 5,
+     "likes": 10,
+     "date": "2026-01-05"
+    },
+    {
+     "no": 80373308,
+     "text": "소재가 좋은것같아요 비닐스럽지도 않고 부드럽고 정전기도 안나고 살에 안달라붙어서 좋았어요 지금은 단독으로 입기에 좀 추울것같지만 안에 내의 하나 입고 입으면 될것같아요",
+     "grade": 5,
+     "likes": 7,
+     "date": "2025-11-26"
+    },
+    {
+     "no": 87467999,
+     "text": "너무 크지도 작지도 않게 핏 너무 좋고 편하게 입을 수 있어서 좋습니당 날이 조금 추워져서 안에 레깅스 입고 입었는데 그냥 하이킹팬츠만 입었어도 될 것 같았구 더 추워져도 계속 입을 수 있을것 같아요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-09-13"
+    },
+    {
+     "no": 87576400,
+     "text": "동생 선물해주려고 구매했어요. 시티레저룩으로 입기도 좋고~ 그냥 편하게 트레이닝으로도 좋고~ 휘뚜류마뚜루 편하게 입우면서도 스타일 챙길 수 았어서 좋네요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-19"
+    },
+    {
+     "no": 87947245,
+     "text": "바지 너무편하고 시원합니다 지금 계절에 입기에 딱이네요 일상복으로도 자연스럽게 떨어지는 핏으로 손이자주갑니다 조금 추워지면 레깅스 입고도 착용 가능 할 듯 합니다!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-04"
+    },
+    {
+     "no": 87916728,
+     "text": "통이 큰데 그 덕분에 편하네요 스트링이 길지만 잘라서 길이 조절할수 있네요 사이즈 잘 맞아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-03"
+    },
+    {
+     "no": 87904406,
+     "text": "중학생 아이 입으려고 샀는데 오버사이즈를 아직 어색해 하지만 스트링으로 허리 밑단 조절할 수 있어서 좋아요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-10-02"
+    },
+    {
+     "no": 87841956,
+     "text": "정말 가볍고 편하고 예쁘고 빠지는게 하나없는 팬츠.. 드디어 와이프도 입성시겼어요..산행도 캠핑도 힙한 나들이도 모두 잘어울려요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5335440,
+   "url": "https://www.musinsa.com/products/5335440",
+   "brand": "산로",
+   "brand_en": "SANRO",
+   "brand_id": "sanro",
+   "name": "[UNISEX] 와이드 스트링 하이킹팬츠  - 라이트그레이",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 41820,
+   "normal_price": 59000,
+   "discount": 29,
+   "review_count": 382,
+   "rating": 4.9,
+   "review_total_listed": 382,
+   "sold_out": false,
+   "release_date": "2025-08-19",
+   "season": "",
+   "style_no": "hikingpants-l/g",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250819/5335440/detail_5335440_17555703112735_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5335440/detail_5335440_17555703121840_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5335440/detail_5335440_17555703153948_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 84111211,
+     "text": "넘 맘에 들어욥 ! 등산할 때도 딱 좋고 편하게 입기도 좋습니다 170 여자 길이 넉넉해욤",
+     "grade": 5,
+     "likes": 3,
+     "date": "2026-05-01"
+    },
+    {
+     "no": 86419578,
+     "text": "어디든 잘 어울려요 두께감이 있어서 여름엔 좀 더운데 이뻐서 그냥 입고 다녀요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-07-21"
+    },
+    {
+     "no": 86785686,
+     "text": "기장 핏이 멋진 바지라 입어보고 또 구매하고 싶네요 통은 좀 큰듯 합니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-08-07"
+    },
+    {
+     "no": 86419572,
+     "text": "어디든 잘 어울려요 두께감이 있어서 여름엔 좀 더운데 이뻐서 그냥 입고 다녀요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-21"
+    },
+    {
+     "no": 87849900,
+     "text": "가볍고 아주 심플하니 딱 찾던 녀석이라 깔별로 가져왔습니당 너무 편하고 예뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-01"
+    },
+    {
+     "no": 86556771,
+     "text": "긴바지지만 얇아서 여름에도 입기 좋아요! 그리고 밑단에 스트링이 있어서 기장이 길어도 조여서입을수있어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-27"
+    },
+    {
+     "no": 87597194,
+     "text": "등산복 붙는거 싢고 배기핏은 통풍이 안되고 이제품은 스트링이 있어 스타일도 가능 통풍도 좋고 아주 편합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-20"
+    },
+    {
+     "no": 87413400,
+     "text": "기장은 조금 길지만 편해보이고 디자인 너무 마음에들어요 등산할때 입으려고 구매 했어요~~^^",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-10"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3241989,
+   "url": "https://product.29cm.co.kr/catalog/3241989",
+   "brand": "시에라디자인",
+   "brand_en": "SIERRA DESIGNS",
+   "brand_id": "20333",
+   "name": "W) 벤투라(VENTURA) 하드쉘 하이킹 조거 팬츠 (세미와이드핏) BLACK",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 151200,
+   "normal_price": 189000,
+   "discount": 20,
+   "review_count": 2,
+   "rating": 5.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2025-04-29",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 나일론 100% 101102 색상 BLACK 101103 치수 XS,S,M 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 ㈜주노무역 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 베트남 101106 세탁방법 및 취급시 주의사항 상세설명참조 101107 YYYYMM ex)201109 제조연월 202412 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련 법 및 소비자 분쟁해결 기준에 따름. 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 ㈜하이라이트브랜즈",
+   "images": [
+    "https://img.29cm.co.kr/next-product/2025/04/24/7cc60041e46b4b3a8ec1ec0485c8e259_20250424155907.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/ffd1ab3392c0490bb93a0a2e1d428d0d_20250424155909.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/e8945d561f0547d989c0b724976edac4_20250424155913.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/f5b502d8a4e94d05b73afb8adc98fb42_20250424155914.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/c4ec788c84a448e79070cd38078a1873_20250424155916.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/c909e16b4b594af98a2e6ae8bd6cdced_20250424155918.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/3ba9a46c8c384947989cde52063eff58_20250424155919.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/e941c958c0d44e279d4cac5e755147f3_20250424155920.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/3a4e0e8dec034ebe8ae639abf865ee98_20250424155922.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/d489880d0a7546dfb8fcff6f46f5f13c_20250424155923.jpg",
+    "https://img.29cm.co.kr/next-product/2025/04/24/2528461c91fd4d44ba3377dffb1e3e7f_20250424155924.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 16703885,
+     "text": "얇고 앉아 있어도 편하고 사이즈도 잘 맞고 좋아요~ 바스락 거리는 소리가 거슬리기는 한데 적응 되면 괜찮을듯요~등산이나 레져용으로 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-04-07"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 4918643,
+    "sale_price": 113400,
+    "url": "https://www.musinsa.com/products/4918643"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6501150,
+   "url": "https://www.musinsa.com/products/6501150",
+   "brand": "무신사 스탠다드 우먼",
+   "brand_en": "MUSINSA STANDARD WOMAN",
+   "brand_id": "musinsastandardwoman",
+   "name": "[시티 레저] 우먼즈 나일론 벨티드 파라슈트 팬츠 [블랙]",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 62900,
+   "normal_price": 69900,
+   "discount": 10,
+   "review_count": 59,
+   "rating": 4.9,
+   "review_total_listed": 59,
+   "sold_out": false,
+   "release_date": "2026-05-18",
+   "season": "2026 F/W",
+   "style_no": "MWFPC8A19-BK",
+   "material": [
+    "핏: 루즈",
+    "촉감: 보통",
+    "신축성: 약간 있음",
+    "비침: 없음",
+    "두께: 약간 두꺼움",
+    "계절: 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376259862_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376266052_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376272125_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376278291_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376285402_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376291582_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376298305_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376304784_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501150/detail_6501150_17889376310496_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87961326,
+     "text": "제가 사고 엄마가 사고 엄마 친구분도 샀슴니다 이런 가격에 이런 질에 이런 핏 진짜 말도 안돼 일단 슽체형이면 무조건 사세요 스판도 너무너무 좋슴니다… 안 살 이유가 없는 바지",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-05"
+    },
+    {
+     "no": 87870381,
+     "text": "진짜! 모델핏만큼은 아니지만 진짜 핏예쁜 바지에요. 다음주 등산때 입고가려고 구매한건데 완전 맘에들어요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-01"
+    },
+    {
+     "no": 87695228,
+     "text": "통풍이 잘돼서 일교차 심한 지금같은 날씨에 입기 좋은 옷이에요 코디하기도 쉬워서 만족합니다 사진은 막 세탁기 돌린 사진이라 옷이 구겨저보이지만 금방 마르고 구김이 펴져서 세탁도 편해요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-25"
+    },
+    {
+     "no": 87671797,
+     "text": "26사이즈 딱입니다 허리 조절도 되니깐 입기 편하네요 단추 아니고 똑딱이라 일할때 입기 딱입니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-23"
+    },
+    {
+     "no": 87646288,
+     "text": "오프라인에서 입어보고 핏이며 재질이 너어어무 이뻐서 바로 구매함요 온라인이 더싸서 매우매우매우 만족 다른컬러도 구입예정",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-22"
+    },
+    {
+     "no": 87513831,
+     "text": "가을용 바지로 두께도 적당하고 핏도 맘에 쏙듭니다 여러모로 활용도도 좋은 팬츠네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-15"
+    },
+    {
+     "no": 87755258,
+     "text": "힙하고 키링도 달 수 있고 한겨울 아니면 사계절 내내 입을 수 있을 것 같아서 아쥬 맘에 듭니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-28"
+    },
+    {
+     "no": 87747790,
+     "text": "오프라인에서 입어봤는데 핏이 너무 에뻐서 구매했어요 평소 27정도 입는데 얘는 좀 크게 나온 것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-28"
+    }
+   ],
+   "roster": false,
+   "handle": "musinsa_standard",
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5080660,
+   "url": "https://www.musinsa.com/products/5080660",
+   "brand": "레이지비",
+   "brand_en": "LAZYBEE",
+   "brand_id": "lazybee",
+   "name": "캠프 우븐 바람막이 후드 집업 아노락 자켓 셋업 + 러닝 조거팬츠 세트 W (3컬러)",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 상하의세트",
+   "sale_price": 55500,
+   "normal_price": 82000,
+   "discount": 32,
+   "review_count": 39,
+   "rating": 4.8,
+   "review_total_listed": 39,
+   "sold_out": false,
+   "release_date": "2025-04-30",
+   "season": "",
+   "style_no": "LIR0USZ100O2SET",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909051603_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909061575_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909072289_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909084841_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909096831_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909108839_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909118903_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909127800_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909135414_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909143545_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17725152101189_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909162380_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17790909152309_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17725152116109_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17725152122925_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17725152108960_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250430/5080660/detail_5080660_17725152130198_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 79903974,
+     "text": "사이즈가 살짝 크긴 한데 옷자체가 바스락거리지 않고 바람 잘 막아줘서 좋습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-17"
+    },
+    {
+     "no": 78955895,
+     "text": "운동할때 입으려고 샀어요^^ 이쁘용~ 남편이랑 같이 샀는데 잘 입겠습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-10-13"
+    },
+    {
+     "no": 83867720,
+     "text": "운동할때 입으려 주문하였는데 가격대비 괜찮은 퀄리티의 운동복입니다 ㅎㅎ 바스락거리는 재질이라 봄 가을에 입고 운동하기 너무 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-04-22"
+    },
+    {
+     "no": 82981043,
+     "text": "러닝용으로 구매했는데 만족합니다~ 디자인, 색상, 소재 다 마음에 드네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-15"
+    },
+    {
+     "no": 82981019,
+     "text": "러닝용으로 구매했는데 만족합니다~ 디자인, 색상, 소재 다 마음에 드네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-15"
+    },
+    {
+     "no": 79644922,
+     "text": "얇아요. 지금 계절은 춥네요.... 하지만 러닝할때 입기는 딱 좋아요ㅋㅋ스타일은 좋아요. 상의는 너무 조금 길고 크네요. 하의는 딱 좋아요ㅋㅋ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-06"
+    },
+    {
+     "no": 82495301,
+     "text": "가볍고 편해요! 운동할때 입으려고 샀는데 잘 산 것 같아요 상품이 저렴하고 괜찮아서 같은 브랜드로 다른제품도 구매했어요:)",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-23"
+    },
+    {
+     "no": 82558427,
+     "text": "치수가 좀 큰것 같아요 천은 아주 나이스 해요 색감도 좋고 봄에 입기 딱 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-25"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6501151,
+   "url": "https://www.musinsa.com/products/6501151",
+   "brand": "무신사 스탠다드 우먼",
+   "brand_en": "MUSINSA STANDARD WOMAN",
+   "brand_id": "musinsastandardwoman",
+   "name": "[시티 레저] 우먼즈 나일론 벨티드 파라슈트 팬츠 [그레이쉬 베이지]",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 62900,
+   "normal_price": 69900,
+   "discount": 10,
+   "review_count": 30,
+   "rating": 4.9,
+   "review_total_listed": 30,
+   "sold_out": false,
+   "release_date": "2026-05-18",
+   "season": "2026 F/W",
+   "style_no": "MWFPC8A19-GI",
+   "material": [
+    "핏: 루즈",
+    "촉감: 보통",
+    "신축성: 약간 있음",
+    "비침: 없음",
+    "두께: 약간 두꺼움",
+    "계절: 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375939826_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375948815_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375956909_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375963921_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375971273_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375978222_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375986140_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375992751_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6501151/detail_6501151_17889375998653_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87438453,
+     "text": "허리가 밴딩이라 편합니다. Fw라 조금 두꺼울줄 알았는데 생각보다 얇습니다. 발목에 스트링 있어서 살짝 조여입으면 좋습니다. 등산갈때 입으려고 샀는데 평상시에도 케쥬얼하게 입을 수 있을 것 같아요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-11"
+    },
+    {
+     "no": 87645478,
+     "text": "얇아서 여름에 입어도 될 정도에요. 소재 탄탄하고 핏도 색감도 예쁘고 무릎에 살짝 잡힌 셔링 디테일도 맘에 들어요. 잘 입어질듯요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-22"
+    },
+    {
+     "no": 87615557,
+     "text": "다른색도 살꺼에요 너무 맘에들어요 한겨울은 안에 타이즈 입으면 낫겠지만 활동하는데 너무 편해요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-21"
+    },
+    {
+     "no": 87517624,
+     "text": "모델과 같은 스펙에 같은 사이즈 아주 좋네요 매우 편해요 시티러닝 롱슬리브와 함께 착용해보니 찰떡이에요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-16"
+    },
+    {
+     "no": 87512295,
+     "text": "바지 밑단에 고리가 있어서 자전거 타거나 신발 얕아서 끌릴 때 묶을 수 있어서 좋아요. 하체 비만인데 편하게 입을 수 있네요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-15"
+    },
+    {
+     "no": 87872717,
+     "text": "키가 작은데 길이가 딱 맞아서 좋아요! 등산갈때 입으면 좋을 것 같아요~~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-01"
+    },
+    {
+     "no": 88005759,
+     "text": "무신사 오프라인에서 입어보고 등산복으로 입으려고 온라인으로 주문했어요. 키가 작아서 길이는 좀 길지만 밑단에 스트링으로 조절할수있어서 괜찮아요. 여러가지 색상 나오면 좋겠어요.",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 88000840,
+     "text": "매장에서 입어보고 샀어요. 정사이즈 딱 좋아요. 키 큰 편인데 기장도 만족합니다. 좀 더 두꺼운 버전도 나왔으면 좋겠어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    }
+   ],
+   "roster": false,
+   "handle": "musinsa_standard",
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5516813,
+   "url": "https://www.musinsa.com/products/5516813",
+   "brand": "레이지비",
+   "brand_en": "LAZYBEE",
+   "brand_id": "lazybee",
+   "name": "스트레치 4포켓 카고 조거 팬츠 데일리 등산 운동 스포츠 바지 M 블랙",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 19900,
+   "normal_price": 52900,
+   "discount": 62,
+   "review_count": 19,
+   "rating": 4.9,
+   "review_total_listed": 19,
+   "sold_out": false,
+   "release_date": "2025-09-23",
+   "season": "",
+   "style_no": "LJF0UDP102BK_M",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17603333129706_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17603333147717_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17603333165479_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732114979228_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732115029208_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732115022826_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732114985547_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732114991734_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732114998047_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732115007180_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250923/5516813/detail_5516813_17732115014851_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81615605,
+     "text": "바스락 재질에 잘 늘어나고 좋아요 굿 헬스하거나 등산할때 입기 너무 좋음",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-13"
+    },
+    {
+     "no": 86096834,
+     "text": "가볍고 움직이기 편하고 좋아요 조거팬츠는 기장 짧은게 많아서 걱정했는데 굿!! 👍🏻👍🏻",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-06"
+    },
+    {
+     "no": 84630634,
+     "text": "잘 늘어나서 편해요 m사이즈랑 l사이즈 왔다갔다 하면서 입는데 이건 m이 맞네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-05-21"
+    },
+    {
+     "no": 86667000,
+     "text": "한여름만 피해요. 땀이 마르기에는 한계가 있네요.ㅠ 그거빼고는 디자인이나 제품 아주 좋습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-01"
+    },
+    {
+     "no": 86276871,
+     "text": "재질은 바스락 거리는거고 허리사이즈는 괜찮은데 다리 품은 살짝 큰거같아요. 길이도 살짝 긴거 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-14"
+    },
+    {
+     "no": 86053100,
+     "text": "편안해서 하나더 구입합니다 사이즈가 변경된건가요? L가없어서 사이지 수치보고 M구입했는데 괜찮은것 같습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-05"
+    },
+    {
+     "no": 81619688,
+     "text": "입어보니 가볍고 좋아요. 저는 실내 작업복으로 구매해서 두껍지 않은 게 좋은데 딱입니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-13"
+    },
+    {
+     "no": 79730322,
+     "text": "신랑작업복으로 세번째구매했어요  일상복 고프코어느낌좋습니다 재질도 까슬까슬하니 좋구요  세탁해도 그대로",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-10"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3152547,
+   "url": "https://product.29cm.co.kr/catalog/3152547",
+   "brand": "아이더",
+   "brand_en": "EIDER",
+   "brand_id": "25637",
+   "name": "ON THE ROCK S (온더락 쉐도우) 여성 카고 조거 팬츠_CREAM BEIGE_DWM25301W9",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 79000,
+   "normal_price": 159000,
+   "discount": 50,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2025-03-20",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "상품특징 여름 온더락 쉐도우 카고 조거 팬츠- 냉감 PCM 가공에 햇빛 반사 가공을 더하여 강화된 온더락 팬츠- 접촉냉감성이 우수한 아이스 밴드를 허리, 발목에 적용- 여름 시즌에 맞는 화사한 컬러군 구성\n사이즈 바지기장 바지부리 앞밑위 엉덩이둘레 허리둘레 허벅지둘레 26(67) 95 11.5/16 26 93 67/81 28.8 27(70) 96 12/16.5 26.5 96 70/84 29.5 28(73) 97 12.5/17 27 99 73/87 30.2 29(76) 98 13/17.5 27.5 102 76/90 30.9 30(79) 99 13.5/18 28 105 79/93 31.6\n101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 겉감:나일론 86% 폴리우레탄 14% / 안감:폴리에스터 100% 101102 색상 CREAM BEIGE 101103 치수 26(67),27(70),28(73),29(76),30(79) 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)아이더 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 베트남 101106 세탁방법 및 취급시 주의사항 - 단시간(10분미만) 단독으로 손(물) 세탁만 가능합니다. (일부상품 제외)- 뜨거운 물에 세탁하지 마세요. (소재 및 부자재 손산 가능)- 표백제 및 섬유유연제 사용불가능 하며 비벼 빨지 마세요.- 건조기 사용이 불가능하며, 그늘에서 건조하세요.- 땀이나 물에 탈색이 될 수 있으니 바로 세탁해 주세요.- 해당 용도 외에는 절대 사용하지 마세요.- 화학제품이므로 알러지 등 이상현상이 발생할 수 있습니다.- 열이나 불꽃에 가까이 가면 녹거나 화재의 위험이 있습니다. 101107 YYYYMM ex)201109 제조연월 2025년 02월 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁 해결 규정에 따름 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 본사 고객상담실 / 1533-1631",
+   "images": [
+    "https://img.29cm.co.kr/item/202504/11f01b5ded651b58b1315727b853268c.jpg",
+    "https://img.29cm.co.kr/item/202503/11f003bf495f3b49b9e68f6543cb4171.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 4247410,
+   "url": "https://product.29cm.co.kr/catalog/4247410",
+   "brand": "아이더",
+   "brand_en": "EIDER",
+   "brand_id": "25637",
+   "name": "LIVE TECH (라이브 테크) 여성 하이킹 조거 팬츠_Black_DWU26312Z1",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 144000,
+   "normal_price": 159000,
+   "discount": 9,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-09-21",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "상품특징 [라이브 테크 하이킹 팬츠]-무릎 입체 패턴 및 절개를 적용하여 활동성을 강화한 여성 테크 팬츠-밑단 조거 형태를 적용한 마운틴 조거 팬츠-신축성이 우수하며 가벼운 프라임플렉스 소재 적용-허리 뒤 라이크라 밴드를 적용하여 착용감 강화-힙과 허벅지는 여유롭고 밑단이 좁아지는 테이퍼드 핏 적용\n사이즈 허벅지둘레 바지기장 바지부리 앞밑위 엉덩이둘레 허리둘레 26(67) 30.3 91 12.5/14.5 23.5 95 68/80 27(70) 31 92 13/15 24 98 71/83 28(73) 31.7 93 13.5/15.5 24.5 101 74/86 29(76) 32.4 94 14/16 25 104 77/89 31(79) 33.1 95 14.5/16.5 25.5 107 80/92\n101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 겉감:폴리에스터 100% / 안감:폴리에스터 100% 101102 색상 Black 101103 치수 26(67),27(70),28(73),29(76),31(79) 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)아이더 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 베트남 101106 세탁방법 및 취급시 주의사항 - 단시간(10분미만) 단독으로 손(물) 세탁만 가능합니다. (일부상품 제외)- 뜨거운 물에 세탁하지 마세요. (소재 및 부자재 손산 가능)- 표백제 및 섬유유연제 사용불가능 하며 비벼 빨지 마세요.- 건조기 사용이 불가능하며, 그늘에서 건조하세요.- 땀이나 물에 탈색이 될 수 있으니 바로 세탁해 주세요.- 해당 용도 외에는 절대 사용하지 마세요.- 화학제품이므로 알러지 등 이상현상이 발생할 수 있습니다.- 열이나 불꽃에 가까이 가면 녹거나 화재의 위험이 있습니다. 101107 YYYYMM ex)201109 제조연월 2026년 08월 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁 해결 규정에 따름 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 본사 고객상담실 / 1533-1631",
+   "images": [
+    "https://img.29cm.co.kr/next-product/2026/09/18/15cd5ac792a840e4bb1cddc42ac387a5_20260918162001.jpg",
+    "https://img.29cm.co.kr/next-product/2026/09/18/3c947e07e7a14d63aa33d8bef5ac5cf8_20260918162002.jpg",
+    "https://img.29cm.co.kr/next-product/2026/09/18/fdee6761e15a40cfa86e77d876307b8b_20260918162003.jpg",
+    "https://img.29cm.co.kr/next-product/2026/09/18/cedfd163b0574fce9941a138c528cc6b_20260918162004.jpg",
+    "https://img.29cm.co.kr/next-product/2026/09/18/0594af9238b84096a248712fa8129197_20260918162005.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7231048,
+   "url": "https://www.musinsa.com/products/7231048",
+   "brand": "나이키",
+   "brand_en": "NIKE",
+   "brand_id": "nike",
+   "name": "ACG 하이 스테이크 루즈 핏 하이킹 팬츠 W - 타투:블랙:서밋 화이트 / IM4295-502",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 165000,
+   "normal_price": 165000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-09-02",
+   "season": "",
+   "style_no": "IM4295-502",
+   "material": [],
+   "spec_text": "93% 나일론/7% 폴리우레탄",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260902/7231048/detail_7231048_17888483575164_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260902/7231048/detail_7231048_17888483581742_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260902/7231048/detail_7231048_17888483588544_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260902/7231048/detail_7231048_17888483594395_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260902/7231048/detail_7231048_17888483600942_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6686258,
+   "url": "https://www.musinsa.com/products/6686258",
+   "brand": "나이키",
+   "brand_en": "NIKE",
+   "brand_id": "nike",
+   "name": "ACG 하이 스테이크 루즈 핏 하이킹 팬츠 W - 크림 II:서밋 화이트 / IM4295-236",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 165000,
+   "normal_price": 165000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-06-17",
+   "season": "",
+   "style_no": "IM4295-236",
+   "material": [],
+   "spec_text": "93% 나일론/7% 폴리우레탄",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260617/6686258/detail_6686258_17820966945755_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6686258/detail_6686258_17820966951855_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6686258/detail_6686258_17820966958016_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6686258/detail_6686258_17820966964080_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6686258/detail_6686258_17820966972933_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6374981,
+   "url": "https://www.musinsa.com/products/6374981",
+   "brand": "제이엑스피",
+   "brand_en": "JXP",
+   "brand_id": "jxp",
+   "name": "Garment-Dyed Training Pants (JR1TSU972DG)",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 149000,
+   "normal_price": 149000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-04-24",
+   "season": "2026 S/S",
+   "style_no": "JR1TSU972DG",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260424/6374981/detail_6374981_17772632564576_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260424/6374981/detail_6374981_17772632583604_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260424/6374981/detail_6374981_17772632602551_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260424/6374981/detail_6374981_17772632620549_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260424/6374981/detail_6374981_17772632640634_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6761794,
+   "url": "https://www.musinsa.com/products/6761794",
+   "brand": "미나수",
+   "brand_en": "MENASOO",
+   "brand_id": "menasoo",
+   "name": "Gradient Convertible Hiking Pants_Red",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 168000,
+   "normal_price": 210000,
+   "discount": 20,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-07-01",
+   "season": "2026 S/S",
+   "style_no": "MNS-GCHP-RD",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884851929_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884859567_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884868344_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884875906_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884883183_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884890389_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884898030_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884905869_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884912979_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884920009_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884926637_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884933952_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884941669_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884949693_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828884956949_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885195584_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885201994_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885208962_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885216790_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885225370_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885234212_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885242850_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885251967_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885260170_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885268371_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885277118_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885285498_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885293409_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885300148_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761794/detail_6761794_17828885307492_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6761796,
+   "url": "https://www.musinsa.com/products/6761796",
+   "brand": "미나수",
+   "brand_en": "MENASOO",
+   "brand_id": "menasoo",
+   "name": "Gradient Convertible Hiking Pants_Black",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 168000,
+   "normal_price": 210000,
+   "discount": 20,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-07-01",
+   "season": "2026 S/S",
+   "style_no": "MNS-GCHP-BK",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892332007_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892342901_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892357256_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892368982_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892380947_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892393072_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892406435_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892438344_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892448928_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892473263_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892513700_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892523783_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892531902_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892540030_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892555426_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828892562732_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893213434_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893221521_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893228321_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893236806_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893248059_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893257611_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893265640_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893273802_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893280814_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260701/6761796/detail_6761796_17828893288065_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하이킹 조거 팬츠",
+   "cheaper_elsewhere": null
   }
  ],
- "appended_at": "2026-10-07T11:15+09:00"
+ "appended_at": "2026-10-07T11:27+09:00"
 }
