@@ -1,6 +1,6 @@
 {
-  "stage": "invalid",
-  "built_at": "2026-10-07T11:35:03+09:00",
+  "stage": "built",
+  "built_at": "2026-10-07T11:35:24+09:00",
   "issues": [
     [
       "warn",
@@ -9,10 +9,6 @@
     [
       "warn",
       "5번(5971890): 다른 몰 가격을 비교하지 못함(§2 최저가 확인 불가) — 다른 몰 상세 조회 실패(3241294): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
-    ],
-    [
-      "error",
-      "6번 카드 텍스트 블록이 36% — 35% 이하로 줄일 것(§4)"
     ],
     [
       "warn",
@@ -53,7 +49,7 @@
     {
       "index": 6,
       "file": "6.jpg",
-      "text_ratio": 0.36291666666666667,
+      "text_ratio": 0.33652777777777776,
       "font_ok": true
     },
     {
@@ -63,5 +59,5 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "17f1425237f80c88da6c7e2acd22c9d6de0eb9039eae93c08448b96f40cc7c9a"
+  "fingerprint": "54fb6043ed51dbb7d25dc4f5911920a92eb61e6e039ce5de2bc0d61208bdefe3"
 }
