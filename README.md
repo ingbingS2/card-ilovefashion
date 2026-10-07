@@ -37,10 +37,10 @@ python verify.py                                        # 29CM·무신사 가격
 python ../../scripts/post_ig.py "20260908 가을 스커트" --dry-run
 ```
 
-매일 자동 제작(autopost) — **Claude 클라우드 루틴**이 돌린다(PC 꺼져 있어도):
-1. 제작 루틴 "매일 피드 제작"(07:00 KST, Opus) — 키워드 → 후보 → 7장 렌더·검사 → 폰으로 승인 요청. 게시하지 않는다.
+매일 자동 제작(autopost):
+1. 제작 — **PC 예약 작업**(07:05 KST, Claude 앱). 키워드 → 후보 → 7장 렌더·검사 → 승인 요청. 게시하지 않는다. 클라우드(데이터센터 IP)는 무신사·29CM가 모두 403이라 제작할 수 없다(10-07 실측, 우회 금지) — 클라우드 제작 루틴은 꺼 둔다.
 2. 사용자가 그 세션에서 '승인' → `publish --approve --quote "<원문>"`(승인 기록, 48시간 유효) → `publish --pending`.
-3. 게시·측정 루틴(11:30·16:30·20:30·23:30 KST, Sonnet) — 승인된 회차를 재검증 → 간격·연속 규칙 → 게시(데이터 브랜치에 '게시 중'을 먼저 푸시하는 잠금으로 동시 게시 방지), +72h 측정, 월요일 토큰 연장.
+3. 게시·측정 루틴(클라우드 환경 `autopost-publish`, 11:30·16:30·20:30·23:30 KST, Sonnet — PC가 꺼져 있어도 돈다) — 승인된 회차를 재검증 → 간격·연속 규칙 → 게시(데이터 브랜치에 '게시 중'을 먼저 푸시하는 잠금으로 동시 게시 방지), +72h 측정, 월요일 토큰 연장.
 절차는 `.claude/skills/daily-feed/SKILL.md`. 무신사·29CM 두 몰. PC(Windows) 예약 작업은 대체 실행용.
 ```bash
 python -m venv .venv && ./.venv/Scripts/python.exe -m pip install -r autopost/requirements.txt   # PC 한 번
@@ -58,7 +58,7 @@ sh autopost/ap.sh measure                                                  # +72
 - **클라우드 환경 설정**(claude.ai → Code → 환경) — 네트워크 **사용자 지정(Custom)** 허용 도메인(한 줄에 하나):
   `www.musinsa.com` `api.musinsa.com` `goods-detail.musinsa.com` `goods.musinsa.com` `client.musinsa.com` `image.msscdn.net` `www.29cm.co.kr` `product.29cm.co.kr` `search-api.29cm.co.kr` `bff-api.29cm.co.kr` `review-api.29cm.co.kr` `img.29cm.co.kr` `graph.instagram.com` `raw.githubusercontent.com` `github.com` `api.open-meteo.com` `cdn.jsdelivr.net` `www.jjalbang.today` `litterbox.catbox.moe` `uguu.se` `playwright.azureedge.net` `cdn.playwright.dev` `playwright.download.prss.microsoft.com`
   + "일반적인 패키지 매니저 기본 목록 포함" 체크. 설정 스크립트: `pip install -q requests pillow playwright pytest || true` / `python -m playwright install --with-deps chromium || true` / `apt-get install -y fonts-noto-cjk fonts-noto-color-emoji || true`.
-- **토큰은 게시 루틴 전용 환경에만**: 환경을 하나 더 만들어(예: "autopost-publish", 같은 도메인·설정 스크립트) 거기에만 `IG_ACCESS_TOKEN=<인스타 장기 토큰>`을 넣고 게시·측정 루틴을 그 환경으로 돌린다. 웹 글·후기를 읽는 제작 세션에는 토큰이 없어서 인젝션으로 토큰이 새거나 직접 게시될 수 없다(승인 기록만 하고 게시는 루틴이 한다). 환경변수 값은 그 환경을 쓰는 모든 세션에 보인다.
+- **토큰은 게시 루틴 전용 환경 `autopost-publish`의 네트워크 시크릿에만**: 이름 `Instagram Graph API`, 허용 웹사이트 `graph.instagram.com`, 헤더 `Authorization`/`Bearer`/<토큰>, 환경 변수 `IG_TOKEN_VIA_PROXY=1`. 세션은 토큰 값을 볼 수 없다. 토큰을 바꾸면 시크릿을 지우고 다시 넣은 뒤 `sh autopost/ap.sh measure --cloud-token-set`. 웹 글·후기를 읽는 제작 세션에는 토큰이 없어서 인젝션으로 토큰이 새거나 직접 게시될 수 없다(승인 기록만 하고 게시는 루틴이 한다). 환경변수 값은 그 환경을 쓰는 모든 세션에 보인다.
 - 무신사 검색·상세·후기 API는 데이터센터 IP를 Cloudflare 403으로 막는다(랭킹만 열림). 코드는 차단을 받으면 그 실행 동안 무신사를 건너뛰고 29CM로 채운다 — 헤드리스 브라우저 위장·프록시·캡차 같은 우회는 하지 않는다(crawler/FINDINGS). PC(가정용 회선)에서 돌면 두 몰 다 된다.
 
 크롤러:
