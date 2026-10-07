@@ -36,6 +36,24 @@ sys.path.insert(0, str(config.REPO_ROOT / "scripts"))
 import post_ig  # noqa: E402  (기존 검증된 Graph API 플로우 재사용)
 
 
+def ig_token() -> str:
+    """환경변수 IG_ACCESS_TOKEN → 프록시 자격 증명(IG_TOKEN_VIA_PROXY=1) → PC 토큰 파일 순서."""
+    if os.environ.get("IG_ACCESS_TOKEN"):
+        return os.environ["IG_ACCESS_TOKEN"]
+    if os.environ.get("IG_TOKEN_VIA_PROXY") == "1":
+        return post_ig.PROXY_TOKEN
+    return post_ig.load_token()
+
+
+def token_source() -> str | None:
+    """토큰을 어디서 얻는지(값은 보지 않음). 없으면 None."""
+    if os.environ.get("IG_ACCESS_TOKEN"):
+        return "env"
+    if os.environ.get("IG_TOKEN_VIA_PROXY") == "1":
+        return "proxy"
+    return "file" if os.path.exists(post_ig.TOKEN_FILE) else None
+
+
 def api(method: str, endpoint: str, token: str, **data):
     """post_ig.api + 토큰이 예외 메시지(요청 URL)에 실려 로그로 새지 않게 가린다."""
     try:
@@ -333,7 +351,7 @@ def publish(folder: str, approved: bool = False) -> dict:
     caption = post_ig.load_caption(str(ep_dir))
     if len(images) != 7 or not caption:
         raise SystemExit(f"이미지 7장·캡션이 필요합니다 (이미지 {len(images)}장)")
-    token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
+    token = ig_token()
 
     me = api("GET", "me", token, fields="user_id,username")
     if me.get("username") != config.ACCOUNT.lstrip("@"):
@@ -485,7 +503,7 @@ def risky_changes(folder: str, fresh: dict) -> list[str]:
 
 
 def has_token() -> bool:
-    return bool(os.environ.get("IG_ACCESS_TOKEN")) or os.path.exists(post_ig.TOKEN_FILE)
+    return token_source() is not None
 
 
 def publish_pending(now=None) -> list[str]:

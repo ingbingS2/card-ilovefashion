@@ -47,6 +47,9 @@ def _default_base_dir() -> str:
 
 BASE_DIR = _default_base_dir()
 TOKEN_FILE = os.path.join(BASE_DIR, "ig_api_token.txt")
+# 클라우드 환경의 "API 자격 증명"(네트워크 시크릿): 프록시가 graph.instagram.com 요청에 Authorization: Bearer를
+# 붙여 준다 — 세션은 토큰을 보지 못하고, 코드는 access_token 파라미터를 보내지 않는다(IG_TOKEN_VIA_PROXY=1).
+PROXY_TOKEN = "@proxy"
 
 
 def resolve_folder(arg: str, base_dir: str = BASE_DIR) -> str:
@@ -118,7 +121,8 @@ def api(method: str, endpoint: str, token: str, **data):
 
     한글 캡션 등은 반드시 POST 본문(data)으로 전달된다 (셸 인자·URL 금지, CP949 깨짐 방지).
     """
-    data["access_token"] = token
+    if token != PROXY_TOKEN:
+        data["access_token"] = token
     kwargs = {"params": data} if method == "GET" else {"data": data}
     r = requests.request(method, f"{GRAPH}/{endpoint}", timeout=60, **kwargs)
     if not r.ok:

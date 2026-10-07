@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 import requests
 
 from . import config
-from .publish import api
+from .publish import api, ig_token, token_source
 from .state import load_history, load_status, parse_dt, save_history
 
 sys.path.insert(0, str(config.REPO_ROOT / "scripts"))
@@ -183,11 +183,24 @@ def record_token_refresh(token: str, expires_in) -> dict:
     return entry
 
 
+CLOUD_KEY = "cloud-proxy"   # 클라우드 프록시 자격 증명 — 세션이 값을 못 보니 '넣은 날'로만 추적한다
+
+
+def record_cloud_token_set(days: int = config.TOKEN_LIFETIME_DAYS) -> dict:
+    """사용자가 클라우드 환경의 인스타 자격 증명을 새로 넣었을 때 기록(measure --cloud-token-set)."""
+    now = config.now_kst()
+    meta = load_token_meta()
+    meta["tokens"][CLOUD_KEY] = {"first_seen": now.date().isoformat(), "refreshed_at": now.isoformat(timespec="minutes"),
+                                 "expires_at": (now + timedelta(days=days)).isoformat(timespec="minutes")}
+    save_token_meta(meta)
+    return meta["tokens"][CLOUD_KEY]
+
+
 def token_age_note(token: str) -> str:
     """만료 예고(§8). 연장 기록(expires_at)이 있으면 그것을, 없으면 처음 본 날짜 + 60일로 추정한다."""
     now = config.now_kst()
     meta = load_token_meta()
-    key = token_key(token)
+    key = CLOUD_KEY if token == post_ig.PROXY_TOKEN else token_key(token)
     if key not in meta["tokens"]:
         meta["tokens"][key] = {"first_seen": now.date().isoformat()}
         save_token_meta(meta)
@@ -218,22 +231,35 @@ def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description="+72h 측정·토큰 연장")
     ap.add_argument("--token", action="store_true", help="토큰 연장")
     ap.add_argument("--check", action="store_true", help="토큰 유효성만 확인(값은 출력하지 않음)")
+    ap.add_argument("--cloud-token-set", action="store_true",
+                    help="사용자가 클라우드 자격 증명에 토큰을 새로 넣었음을 기록(만료 예고용)")
     args = ap.parse_args(argv)
-    from_env = bool(os.environ.get("IG_ACCESS_TOKEN"))
+    source = token_source()
+    from_env = source == "env"
+    if args.cloud_token_set:
+        e = record_cloud_token_set()
+        from .publish import push_data
+        push_data("autopost: 클라우드 인스타 자격 증명 갱신 기록")
+        print(f"클라우드 토큰 기록 — 만료 예정 {e['expires_at'][:10]}(넣은 날 + 60일)")
+        return
     if args.check:
-        if not from_env and not os.path.exists(post_ig.TOKEN_FILE):
-            print("missing — IG_ACCESS_TOKEN 환경변수도 토큰 파일도 없음")
+        if source is None:
+            print("missing — IG_ACCESS_TOKEN 환경변수·클라우드 자격 증명·토큰 파일 모두 없음")
             return
-        token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
+        token = ig_token()
         try:
             me = api("GET", "me", token, fields="username")
         except RuntimeError as e:
-            print(f"invalid — {str(e)[:160]}")
+            print(f"invalid ({source}) — {str(e)[:160]}")
             return
-        print(f"ok @{me.get('username')} ({'env' if from_env else 'file'})" + token_age_note(token))
+        print(f"ok @{me.get('username')} ({source})" + token_age_note(token))
         return
-    token = os.environ.get("IG_ACCESS_TOKEN") or post_ig.load_token()
+    token = ig_token()
     if args.token:
+        if source == "proxy":
+            print("토큰 연장 건너뜀 — 클라우드 자격 증명은 세션이 값을 못 봐서 연장할 수 없다. PC가 연장한 토큰을 "
+                  "만료 전에 자격 증명에 다시 넣고 `measure --cloud-token-set`으로 기록할 것")
+            return
         last = load_token_meta()["tokens"].get(token_key(token), {}).get("refreshed_at")
         if last and config.now_kst() - parse_dt(last) < timedelta(hours=24):
             print(f"토큰 연장 건너뜀 — {last[:16]}에 이미 연장함(인스타는 24시간 안 재연장을 거부할 수 있다)")

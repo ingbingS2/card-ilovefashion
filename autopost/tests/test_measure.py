@@ -175,3 +175,31 @@ def test_token_refresh_skipped_within_24h(monkeypatch, capsys):
     monkeypatch.setattr(measure, "refresh_token", lambda t: called.append(t) or {})
     measure.main(["--token"])
     assert called == [] and "건너뜀" in capsys.readouterr().out
+
+
+def test_proxy_credential_mode_sends_no_token_and_skips_refresh(monkeypatch, capsys, tmp_path):
+    """클라우드 API 자격 증명: 프록시가 Bearer 헤더를 붙이므로 코드는 access_token을 보내지 않는다."""
+    from autopost import publish
+    monkeypatch.delenv("IG_ACCESS_TOKEN", raising=False)
+    monkeypatch.setenv("IG_TOKEN_VIA_PROXY", "1")
+    monkeypatch.setattr(measure.post_ig, "TOKEN_FILE", str(tmp_path / "없음.txt"))
+    assert publish.token_source() == "proxy" and publish.has_token()
+    sent = []
+
+    class R:
+        ok = True
+
+        def json(self):
+            return {"username": "i_s2_fashion"}
+
+    monkeypatch.setattr(measure.post_ig.requests, "request", lambda m, url, **kw: sent.append(kw) or R())
+    measure.main(["--check"])
+    out = capsys.readouterr().out
+    assert out.startswith("ok @i_s2_fashion (proxy)")
+    assert "access_token" not in sent[0]["params"]
+    measure.record_cloud_token_set()
+    measure.main(["--check"])
+    assert "만료 약" in capsys.readouterr().out
+    monkeypatch.setattr(measure, "refresh_token", lambda t: (_ for _ in ()).throw(AssertionError("연장 호출 금지")))
+    measure.main(["--token"])
+    assert "건너뜀" in capsys.readouterr().out
