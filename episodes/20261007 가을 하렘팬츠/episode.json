@@ -24,7 +24,22 @@
     "sub": "색도 핏도 다른 다섯 벌",
     "collage": [
       {
+        "goodsNo": 4118279,
+        "image": 1,
+        "pos": "50% 22%"
+      },
+      {
         "goodsNo": 6394335,
+        "image": 1,
+        "pos": "50% 30%"
+      },
+      {
+        "goodsNo": 6503202,
+        "image": 7,
+        "pos": "42% 30%"
+      },
+      {
+        "goodsNo": 3345770,
         "image": 1,
         "pos": "50% 30%"
       },
@@ -32,21 +47,6 @@
         "goodsNo": 5971890,
         "image": 1,
         "pos": "47% 30%"
-      },
-      {
-        "goodsNo": 4118279,
-        "image": 1,
-        "pos": "50% 22%"
-      },
-      {
-        "goodsNo": 3345770,
-        "image": 4,
-        "pos": "36% 50%"
-      },
-      {
-        "goodsNo": 6503202,
-        "image": 7,
-        "pos": "42% 30%"
       }
     ]
   },
@@ -79,8 +79,8 @@
     },
     {
       "goodsNo": 3345770,
-      "image": 1,
-      "pos": "50% 30%",
+      "image": 3,
+      "pos": "68% 45%",
       "display_name": "Posa 와이드 하렘 팬츠",
       "headline": "수련복이자<br><em>일상복이 되는 와이드</em>",
       "quote_no": 16916587
