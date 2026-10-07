@@ -31,9 +31,9 @@
 
 ## 3. 게시 정보
 <!-- publish -->
-- 게시 2026-10-07T11:47+09:00 (KST) · (permalink 미확인) · media_id 18096868430393924
+- 게시 2026-10-07T11:47+09:00 (KST) · https://www.instagram.com/p/DeLUblNk6jk/ · media_id 18096868430393924
 - 게시 방식: autopost.publish (Graph API) · 호스팅: raw.githubusercontent.com
-- 캡션 재조회 일치: None
+- 캡션 재조회 일치: True
 - 사진 태그(user_tags): 2번 @lovlovseoul, 3번 @partimentowomen, 4번 @asuraofficial_, 5번 @happyyogis_official, 6번 @sohamsoham_
 - 측정 예정: +72h
 <!-- /publish -->
