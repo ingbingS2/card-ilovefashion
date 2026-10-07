@@ -1,5 +1,5 @@
 {
-  "stage": "approved",
+  "stage": "publishing",
   "built_at": "2026-10-07T11:42:25+09:00",
   "issues": [
     [
@@ -60,5 +60,48 @@
   "verified_fingerprint": "d46eecb3b7c6de127d54dc96edbbfe900a9a2675b74c36692cfa5bf4b8ff83b3",
   "approved_at": "2026-10-07T11:45:41+09:00",
   "approved_fingerprint": "d46eecb3b7c6de127d54dc96edbbfe900a9a2675b74c36692cfa5bf4b8ff83b3",
-  "approved_quote": "승인"
+  "approved_quote": "승인",
+  "carousel_id": "18063141131615793",
+  "image_urls": [
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/1.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/2.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/3.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/4.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/5.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/6.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261007%20%EA%B0%80%EC%9D%84%20%EB%93%B1%EC%82%B0%20%ED%95%98%EB%A0%98%ED%8C%AC%EC%B8%A0/7.jpg"
+  ],
+  "user_tags": {
+    "2": {
+      "tags": [
+        "lovlovseoul"
+      ],
+      "result": "ok"
+    },
+    "3": {
+      "tags": [
+        "partimentowomen"
+      ],
+      "result": "ok"
+    },
+    "4": {
+      "tags": [
+        "asuraofficial_"
+      ],
+      "result": "ok"
+    },
+    "5": {
+      "tags": [
+        "happyyogis_official"
+      ],
+      "result": "ok"
+    },
+    "6": {
+      "tags": [
+        "sohamsoham_"
+      ],
+      "result": "ok"
+    }
+  },
+  "publishing_at": "2026-10-07T11:46:49+09:00"
 }
