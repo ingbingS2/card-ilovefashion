@@ -539,6 +539,69 @@
       ],
       "verified_at": "2026-10-01",
       "note": "여성 라인 계정 @suare_women도 있음 — 메인 계정으로 태그"
+    },
+    {
+      "name": "소함소함",
+      "aliases": [
+        "SOHAMSOHAM",
+        "Soham Soham"
+      ],
+      "handle": "sohamsoham_",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-07",
+      "sources": [
+        "https://www.instagram.com/sohamsoham_/ (쇼핑몰, 1.4만, linktr.ee/sohamsoham_ → sohamsoham.com·29cm 브랜드)",
+        "https://www.sohamsoham.com/ footer 인스타 링크",
+        "https://linktr.ee/sohamsoham_"
+      ]
+    },
+    {
+      "name": "아수라",
+      "aliases": [
+        "ASURA"
+      ],
+      "handle": "asuraofficial_",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-07",
+      "sources": [
+        "https://www.instagram.com/asuraofficial_/ (의류 브랜드, 8.6만, 이태원 주소, www.s2asuras2.com)",
+        "https://www.s2asuras2.com/ = 아수라 공식몰(검색 결과 s2asuras2-en.imweb.me, asuraofficials2@gmail.com)",
+        "인스타 계정 검색 '아수라' 1위"
+      ]
+    },
+    {
+      "name": "해피요기즈",
+      "aliases": [
+        "HAPPY YOGIS",
+        "happyyogis"
+      ],
+      "handle": "happyyogis_official",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-07",
+      "sources": [
+        "https://www.instagram.com/happyyogis_official/ (HAPPY YOGIS 해피요기즈, 1.1만, happyyogis.co.kr)",
+        "https://www.happyyogis.co.kr/ footer 인스타 링크",
+        "인스타 계정 검색 '해피요기즈' 1위"
+      ]
+    },
+    {
+      "name": "로브로브",
+      "aliases": [
+        "LOVLOV",
+        "lovlovseoul"
+      ],
+      "handle": "lovlovseoul",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-07",
+      "sources": [
+        "https://www.instagram.com/lovlovseoul/ (의류 브랜드, 4.4만, lovlovseoul.com)",
+        "https://lovlovseoul.com/ footer 인스타 링크",
+        "인스타 계정 검색 '로브로브' 1위"
+      ]
     }
   ]
 }
