@@ -1,0 +1,55 @@
+{
+  "stage": "built",
+  "built_at": "2026-10-07T10:04:34+09:00",
+  "issues": [
+    [
+      "warn",
+      "핸들 미검증으로 태그에서 뺀 브랜드: 지오다노, 투엘라, 코드그라피, 제로플래닛"
+    ]
+  ],
+  "shots": [
+    {
+      "index": 1,
+      "file": "1.jpg",
+      "text_ratio": 0.28476851851851853,
+      "font_ok": true
+    },
+    {
+      "index": 2,
+      "file": "2.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 3,
+      "file": "3.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 4,
+      "file": "4.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 5,
+      "file": "5.jpg",
+      "text_ratio": 0.3101388888888889,
+      "font_ok": true
+    },
+    {
+      "index": 6,
+      "file": "6.jpg",
+      "text_ratio": 0.2938425925925926,
+      "font_ok": true
+    },
+    {
+      "index": 7,
+      "file": "7.jpg",
+      "text_ratio": null,
+      "font_ok": true
+    }
+  ],
+  "fingerprint": "94711e35b23877598d7105773f7444553e3655e218eb4a7e3c2ee512eaccfeef"
+}
