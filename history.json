@@ -282,5 +282,38 @@
     "verdict": "미달",
     "brand_comments": [],
     "comment_count": 0
+  },
+  {
+    "folder": "20261007 가을 등산 하렘팬츠",
+    "keyword": "가을 등산 하렘팬츠",
+    "axis": "산길 강도 순서 — 둘레길·나들이용(도톰한 벌룬) → 오르막용(잘 늘어나는 요가 조거). 후기에 적힌 쓰임 기준",
+    "mood": "공감·일기형",
+    "posted_at": "2026-10-07T11:47+09:00",
+    "media_id": "18096868430393924",
+    "brands": [
+      "로브로브",
+      "파르티멘토 우먼",
+      "아수라",
+      "해피요기즈",
+      "소함소함"
+    ],
+    "mentions": [
+      "lovlovseoul",
+      "partimentowomen",
+      "asuraofficial_",
+      "happyyogis_official",
+      "sohamsoham_"
+    ],
+    "goods": [
+      4118279,
+      6394335,
+      6503202,
+      3345770,
+      5971890
+    ],
+    "zzal": "web-20261007-2.jpg",
+    "caption_first": "가을 하렘팬츠를 입고 등산한 지인은 정상에서도 핏이 그대로였고, 저는 꼴이 말이 아니었습니다 🍂",
+    "auto": true,
+    "permalink": ""
   }
 ]
