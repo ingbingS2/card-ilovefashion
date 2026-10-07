@@ -265,6 +265,22 @@
     "zzal": "web-20261001-1.jpg",
     "caption_first": "가을 니트는 목선 하나 때문에 한 번 입고 서랍에 들어가는 일이 생깁니다 🍂",
     "auto": true,
-    "permalink": "https://www.instagram.com/p/Dd9IRTljzJp/"
+    "permalink": "https://www.instagram.com/p/Dd9IRTljzJp/",
+    "metrics": {
+      "reach": 19,
+      "saved": 0,
+      "shares": 0,
+      "likes": 3,
+      "comments": 0,
+      "total_interactions": 3,
+      "profile_visits": 0,
+      "follows": 0,
+      "views": 36
+    },
+    "measured_at": "2026-10-07T09:38+09:00",
+    "measured_hours": 130.1,
+    "verdict": "미달",
+    "brand_comments": [],
+    "comment_count": 0
   }
 ]
