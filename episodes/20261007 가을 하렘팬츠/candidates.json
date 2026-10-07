@@ -1,0 +1,2830 @@
+{
+ "folder": "20261007 가을 하렘팬츠",
+ "collected_at": "2026-10-07T10:39+09:00",
+ "queries": [
+  "하렘팬츠",
+  "하렘 팬츠",
+  "하렘 조거",
+  "배기 하렘",
+  "하렘 와이드 팬츠",
+  "하렘",
+  "아라비안 팬츠",
+  "드롭 크로치 팬츠",
+  "배기 조거 팬츠"
+ ],
+ "gf": "F",
+ "new_since": "2025-01-01",
+ "notes": [
+  "29CM 상세 API 차단 — 이 몰 후보는 수집하지 못함: 29CM 상세 차단 — 이번 실행 중단(403 연속 3회): https://bff-api.29cm.co.kr/api/v5/product-detail/2377052",
+  "--append: 기존 후보 30종 유지, 새로 13종 추가"
+ ],
+ "dropped": {
+  "재입고·컬러추가 표기(판매 개시일 신뢰 불가)": 9,
+  "품절": 6,
+  "신상 기준(2025-01-01) 미달": 87,
+  "29CM 상세 조회 실패": 3,
+  "29CM 차단(403) — 나머지 건너뜀": 85,
+  "사진 부족": 26,
+  "브랜드당 2개 초과(색상 변형 등)": 22,
+  "이미 후보에 있음(--append)": 5,
+  "직전 회차 브랜드": 1
+ },
+ "candidates": [
+  {
+   "mall": "무신사",
+   "goodsNo": 7012028,
+   "url": "https://www.musinsa.com/products/7012028",
+   "brand": "무신사 스탠다드 우먼",
+   "brand_en": "MUSINSA STANDARD WOMAN",
+   "brand_id": "musinsastandardwoman",
+   "name": "우먼즈 저지 벌룬 조거 팬츠 [퍼플]",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 53910,
+   "normal_price": 59900,
+   "discount": 10,
+   "review_count": 42,
+   "rating": 4.8,
+   "review_total_listed": 42,
+   "sold_out": false,
+   "release_date": "2026-08-06",
+   "season": "2026 F/W",
+   "style_no": "MWFPC8B70-PP",
+   "material": [
+    "핏: 루즈",
+    "촉감: 약간 부드러움",
+    "신축성: 있음",
+    "비침: 없음",
+    "두께: 보통",
+    "계절: 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260806/7012028/detail_7012028_17876262050796_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012028/detail_7012028_17876505708269_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012028/detail_7012028_17876262067897_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012028/detail_7012028_17876262076699_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012028/detail_7012028_17876262083731_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012028/detail_7012028_17876262090146_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87863244,
+     "text": "보들보들하고 옷 자체가 너무 편해요!!!! 보라색도 색감이 넘 진하지 않고 가을에 입기 넘 예뻐요 ㅎㅎ !! 다른색깔도 구매할생각입니다!!!!!",
+     "grade": 5,
+     "likes": 4,
+     "date": "2026-10-01"
+    },
+    {
+     "no": 87527748,
+     "text": "조금 크게 입으려고 M사이즈를 샀는데요, 진짜 너무 편하고 예쁩니다! 고무줄 바짝 조여서 입으면 항아리바지 느낌나요! 위에 재킷입으면 또 다른 느낌으로 착용가능!! 만족합니다!!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-09-16"
+    },
+    {
+     "no": 88001266,
+     "text": "퍼플 색감이 진짜 예뻐요💜 벌룬핏이라 편하면서도 핏이 멋스럽고, 데일리룩에 포인트 주기 딱 좋아요! 편한데 스타일도 살아서 만족합니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 87975522,
+     "text": "원단이  엄청  보들보들 합니다 면인데 면이 아닌 느낌이랄까? 찰랑찰 랑 해요 입고걸을때마다 길이는 제가 짧은편인데도 수선따윈 필요없을정도 입니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-05"
+    },
+    {
+     "no": 87899660,
+     "text": "저만 입고싶어요! 색상 진짜 매력적이네요~ 전혀 촌스럽지 않고 색상 이쁘구요. 재질또한 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-03"
+    },
+    {
+     "no": 87827247,
+     "text": "조금 크지만 발목에 시보리 있어서 수선 안해도 돼요 매장에서 입어보규 사써요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 87811979,
+     "text": "살생각없었는데 매장가서 보고 반해서 바로 구매했어요..근데 깔별로 쟁여야할거같애요 부들부들하고 재질 핏 터치감 너무 좋네요 거의 만삭임산부인데도 조임없이 잘맞아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 87811975,
+     "text": "살생각없었는데 매장가서 보고 반해서 바로 구매했어요..근데 깔별로 쟁여야할거같애요 부들부들하고 재질 핏 터치감 너무 좋네요 거의 만삭임산부인데도 조임없이 잘맞아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    }
+   ],
+   "roster": false,
+   "handle": "musinsa_standard",
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5971890,
+   "url": "https://www.musinsa.com/products/5971890",
+   "brand": "소함소함",
+   "brand_en": "SOHAMSOHAM",
+   "brand_id": "sohamsoham",
+   "name": "Setu harem pants_6colors",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 48450,
+   "normal_price": 51000,
+   "discount": 5,
+   "review_count": 38,
+   "rating": 4.9,
+   "review_total_listed": 38,
+   "sold_out": false,
+   "release_date": "2026-02-03",
+   "season": "",
+   "style_no": "so124Lpt-so133",
+   "material": [
+    "핏: 루즈, 오버 사이즈",
+    "촉감: 보통",
+    "신축성: 있음",
+    "비침: 보통",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을, 겨울"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260203/5971890/detail_5971890_17700856360376_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260203/5971890/detail_5971890_17700856372301_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 86307150,
+     "text": "일단 키가작은데 기장선택할수있어서좋았습니다 요가를하고있는데여름이너무더워서 재질을중요하게생각해서걱정했는데 부드럽고좋아요~~ 다른색더살까고민중입니다",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-07-15"
+    },
+    {
+     "no": 87681593,
+     "text": "착용감이 정말 편하고 신축성이 좋아 요가할 때 움직임이 너무 편해요. 몸에 자연스럽게 핏되면서도 부담스럽지 않고, 원단도 부드러워 운동할 때는 물론 일상에서도 손이 자주 가는 바지예요. 핏까지 예뻐서 만족합니다!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-24"
+    },
+    {
+     "no": 87681640,
+     "text": "착용감이 정말 편하고 신축성이 좋아 요가할 때 움직임이 너무 편해요. 몸에 자연스럽게 핏되면서도 부담스럽지 않고, 원단도 부드러워 운동할 때는 물론 일상에서도 손이 자주 가는 바지예요. 핏까지 예뻐서 만족합니다!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-24"
+    },
+    {
+     "no": 85018857,
+     "text": "색감 너무 예쁘고 촉감도 후들후들 너무 편해요! 소함소함 처음 입어보는데 너무 만족합니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-08"
+    },
+    {
+     "no": 84880079,
+     "text": "키큰버전으로 구매하길 잘한거같아요! 안그랬으면 짧았을거같은... 컬러랑 소재 핏 다 마음에 들고 받자마자 바로 입고 요가하러 갔는데 활동성도 좋고 편했습니다 세일하면 추가구매하고싶어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-01"
+    },
+    {
+     "no": 83425552,
+     "text": "요기나 가벼운 스트레칭할때 입으려고 구매 깔끔하고 색감도 이쁜 브라운이라 만족해요 착용감 편하고 길이감도 좋아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-04-03"
+    },
+    {
+     "no": 87117623,
+     "text": "땀 흡수가 잘 되고 소재가 부드럽고 활동시 잘 늘어나 불편함이 없어요. 다른색도 구매하고 싶어요.",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-08-24"
+    },
+    {
+     "no": 86141384,
+     "text": "장점:소재가 부드럽고 바지통이 넓어 여름에 입어도 덥지 않아요. 단점:마감이 깔끔하지 않아 조금 더 신경써야겠어요.",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-08-24"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3241294): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6394335,
+   "url": "https://www.musinsa.com/products/6394335",
+   "brand": "파르티멘토 우먼",
+   "brand_en": "PARTIMENTO WOMEN",
+   "brand_id": "partimentowomen",
+   "name": "PWC 코튼 더블 웨이스트 하렘 팬츠_10컬러",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 코튼 팬츠",
+   "sale_price": 44800,
+   "normal_price": 56000,
+   "discount": 20,
+   "review_count": 28,
+   "rating": 4.8,
+   "review_total_listed": 28,
+   "sold_out": false,
+   "release_date": "2026-04-28",
+   "season": "",
+   "style_no": "PWC-2627",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780523762468_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780523845839_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780523930588_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780524050769_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780524057369_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780524217737_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780524291573_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260428/6394335/detail_6394335_17780524578964_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 85476936,
+     "text": "바스락거리는 소재에 얇아서 무척 시원해요 입는순간 쾌척하달까?.. 근데 너무 아라비안나이트같아요 짧다는 후기가있어서 라지샀는데 길이는 맞지만 너무 커요 전 웃기고 맘에들긴 한데 남자친구가보면 놀릴거같아요..",
+     "grade": 5,
+     "likes": 5,
+     "date": "2026-06-20"
+    },
+    {
+     "no": 86794700,
+     "text": "너무 아방방할까봐 걱정했는데 위에 붙는티입고 신발 작게 신으니까 넘 귀여워요 굳굳",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-08-07"
+    },
+    {
+     "no": 86636266,
+     "text": "발목 시보리부분이 조금더 쪼였으면 좋았을듯해요;; 발끝까지 내려오네용ㅜㅜ  통은 맘에드는데 그부분이 아쉬워요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-07-30"
+    },
+    {
+     "no": 85476893,
+     "text": "바스락거리는 소재에 얇아서 무척 시원해요 입는순간 쾌척하달까?.. 근데 너무 아라비안나이트같아요 짧다는 후기가있어서 라지샀는데 길이는 맞지만 너무 커요 전 웃기고 맘에들긴 한데 남자친구가보면 놀릴거같아요..",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-20"
+    },
+    {
+     "no": 85459682,
+     "text": "우와~~~~ 넘 만족합니다~~ 착한 가격, 품질, 디자인 다 굿입니다👍🏻👍🏻 파르티멘토 넘 좋아요~~ 한달 사이에 11벌 산듯요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-20"
+    },
+    {
+     "no": 87603699,
+     "text": "좋아여 노랑이사고 보라도삿는데 구ㅏ여움 근데 노랑이 원단이 더 얇은듯 보라색은 원하는 핏이 안나오는데 노랑이는 나옴 원픽은 노랑이 잿든 좋아옹",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-21"
+    },
+    {
+     "no": 87180386,
+     "text": "색상이 진짜 예쁜 것 같아요 집앞에서 편하게 입기도 괜찮고 여행 가서 입기에도 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-28"
+    },
+    {
+     "no": 86465418,
+     "text": "생각했던 재질은 아니었으나, 편하게 입으려고 합니다. 허리 조절하는 끈은 좀 저렴이 느낌입니다 ㅠ",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-07-22"
+    }
+   ],
+   "roster": true,
+   "handle": "partimentowomen",
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6049173,
+   "url": "https://www.musinsa.com/products/6049173",
+   "brand": "소함소함",
+   "brand_en": "SOHAMSOHAM",
+   "brand_id": "sohamsoham",
+   "name": "Nata harem pants_4colors",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 38950,
+   "normal_price": 41000,
+   "discount": 5,
+   "review_count": 26,
+   "rating": 4.8,
+   "review_total_listed": 26,
+   "sold_out": false,
+   "release_date": "2026-02-24",
+   "season": "",
+   "style_no": "so124Lpt-so140",
+   "material": [
+    "핏: 루즈",
+    "촉감: 보통",
+    "신축성: 있음",
+    "비침: 약간 있음",
+    "두께: 약간 얇음",
+    "계절: 봄, 여름, 가을, 겨울"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260224/6049173/detail_6049173_17719857255013_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260224/6049173/detail_6049173_17719857264237_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 86810030,
+     "text": "냉장고 바지 같은 재질인데 색깔도 예뻐서 안 저렴해보이고 좋아요! 조거로 발목 조절할 수 있어서 마음에 듭니다. 165인데 긴 시장 해도 좋았을 듯. 요가 동작하면 좀 짧을 때 있어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-08-08"
+    },
+    {
+     "no": 85866547,
+     "text": "진짜 안 이쁜거같이 편하네요. 요가 할 때 자주 입어요. 저렴한 옷에 상품이 너무 좋은데요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-28"
+    },
+    {
+     "no": 85678806,
+     "text": "24주 임산부인데 잘맞고, 상의랑 같이 하의도 샀는데 요가하기 편하고 색감도 이뻐요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-24"
+    },
+    {
+     "no": 85445314,
+     "text": "후들후들하고 아주 좋습니다! 164인데 길이 긴걸로 구매했더니 딱 복숭아뼈 바로 위로 떨어져요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-20"
+    },
+    {
+     "no": 84762683,
+     "text": "원단 가볍고 수련하기 편해요! 금방 잘 말라서 세탁하기도 편하답니다. 여름까지도 입을 수 있을거 같아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-05-27"
+    },
+    {
+     "no": 85872145,
+     "text": "진짜 편하고 예뻐서 평상시에도 쭉 입고싶음 요가할때 너무 좋음 두컬러 구매함",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-28"
+    },
+    {
+     "no": 87211858,
+     "text": "키작녀에게 너무 딱! 맞는 바지 기장이라 마음에 들었는데 재질도 보드라워서 .. 진짜 안 입은 것 같은 편안함 ..🪽너무 트레이닝조거 같아보이진 않고 싶었는데 실물 디자인이 훨씬 예뻐요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-30"
+    },
+    {
+     "no": 86491928,
+     "text": "소함소함 유명한거 알았는데 처음 사봤어요 정말 가볍고 안입은느낌이에요 키작녀이지만 기본기장 사도 딱 예쁜기장이였슺니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-23"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(2376917): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5301107,
+   "url": "https://www.musinsa.com/products/5301107",
+   "brand": "모어아웃",
+   "brand_en": "MOREOUT",
+   "brand_id": "moreout",
+   "name": "여성요가복 에어 무브 팬츠 5PP5588",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 45000,
+   "normal_price": 58000,
+   "discount": 22,
+   "review_count": 25,
+   "rating": 4.8,
+   "review_total_listed": 25,
+   "sold_out": false,
+   "release_date": "2025-08-07",
+   "season": "2025 S/S",
+   "style_no": "5PP5588",
+   "material": [
+    "핏: 루즈",
+    "촉감: 보통",
+    "신축성: 보통",
+    "비침: 보통",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250807/5301107/detail_5301107_17545487293042_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250807/5301107/detail_5301107_17545487299284_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250807/5301107/detail_5301107_17545487304836_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 78433225,
+     "text": "옷들이 전체적으로 핏이 이뻐요 우븐인줄 모르고  샀는데   이계절에 운동복으로  딱입니다",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-09-20"
+    },
+    {
+     "no": 83085160,
+     "text": "레이오버랑 같이 구매해서 비교할 수 있게 힘께 사진찍었어요 부두럽고 얇고 쫀쫀하고 다 좋은데 제 키에는 조금 큰 편인갓 같아요 그치만 컬러기 너무 맘에 들어서 안살수가 없었네욘",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-19"
+    },
+    {
+     "no": 85154344,
+     "text": "시원함이 느껴지는 원단이네요. 늘 붙는 레깅스만 입고 운동해봤는데, 통 넓은 바지입으니 엄텅 편합니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-14"
+    },
+    {
+     "no": 85154318,
+     "text": "시원함이 느껴지는 원단이네요. 늘 붙는 레깅스만 입고 운동해봤는데, 통 넓은 바지입으니 엄텅 편합니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-14"
+    },
+    {
+     "no": 87588165,
+     "text": "야들야들! 시원한 천. 받자마자 확신의 핏이 들었습니다. 헬스장에서 운동도 일상에서 입기에도 좋을 듯요. 검은 것도 사야겠어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-20"
+    },
+    {
+     "no": 83085231,
+     "text": "생각했던것 보다 조금 컸지만 그래도 편안하게 잘 입을것 같아요 자주색 바지 갖고싶었는데 컬러가 진짜 완전 맘에 쏙 들어요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-19"
+    },
+    {
+     "no": 86684423,
+     "text": "진짜 너무 편하고 최고에요 핏이 너무 좋습니다 요가할때 매번 입고 있어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-01"
+    },
+    {
+     "no": 78071716,
+     "text": "친구한테 추천받고 구매했어요 :) 정말 맘에들고 다른색상도 추가주문하려구요 기장도 길고 품도 좋습니당!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-09-06"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3410995): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6503204,
+   "url": "https://www.musinsa.com/products/6503204",
+   "brand": "아수라",
+   "brand_en": "ASURA",
+   "brand_id": "asura",
+   "name": "FOLD HAREM PANTS (MELANGE GREY)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 80100,
+   "normal_price": 89000,
+   "discount": 10,
+   "review_count": 18,
+   "rating": 4.9,
+   "review_total_listed": 18,
+   "sold_out": false,
+   "release_date": "2026-05-18",
+   "season": "",
+   "style_no": "A26SSPT146MG0F",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17833137561305_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17833137568732_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17833137575860_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17833137583197_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17833137591505_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17833137385236_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17799990829731_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17799990835935_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17799990841620_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503204/detail_6503204_17799990847305_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87090633,
+     "text": "후들후들하고 얇고 시원한 재질이라 넘 맘에들어요 배 커버업도 되고 주름지는 느낌도 맘에듭니당",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-23"
+    },
+    {
+     "no": 87014430,
+     "text": "타 사이트에서 눈여겨보고 있던 건게 무신사가 더 싸서 무신사에서 샀어요. 되게 흐물흐물에서 좀 당황했는데 입어 보니 가볍고 넘 이쁘고 편합니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-19"
+    },
+    {
+     "no": 86676201,
+     "text": "유들유들 후들후들하니 감촉이 너무 부드럽고 좋아요 차콜색 가지고있는데  너무 잘 입어지고 편해서 그레이도 샀어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-01"
+    },
+    {
+     "no": 86676124,
+     "text": "유들유들 후들후들하니 감촉이 너무 부드럽고 좋아요 차콜색 가지고있는데  너무 잘 입어지고 편해서 그레이도 샀어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-01"
+    },
+    {
+     "no": 86373360,
+     "text": "이런 디자인으로 여기저기 고민하다가 구매 했는데 잘 산거 같아요! 제일 안우스운 핏 같아여 편하고 예뻐요~~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-19"
+    },
+    {
+     "no": 86504115,
+     "text": "진짜진짜 편해요 생각보다 어느 옷이나 다 잘 어울려서 코디 하기 쉽고 다른 색으로 더 구매하려구요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-24"
+    },
+    {
+     "no": 87028067,
+     "text": "마치 안입은 것 처럼 편하고 길이도 매우 적당하고 딱 제가 찾던 핏이예요 굿굿 너무 좋습니다 ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-20"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4003163): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5366887,
+   "url": "https://www.musinsa.com/products/5366887",
+   "brand": "파르티멘토 우먼",
+   "brand_en": "PARTIMENTO WOMEN",
+   "brand_id": "partimentowomen",
+   "name": "PWC 레이어드 올인원 하렘 팬츠_8컬러",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 34400,
+   "normal_price": 43000,
+   "discount": 20,
+   "review_count": 14,
+   "rating": 4.8,
+   "review_total_listed": 14,
+   "sold_out": false,
+   "release_date": "2025-08-26",
+   "season": "",
+   "style_no": "PWC-2559",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574749693052_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574749320978_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574749542034_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574749591342_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574749831912_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574750140428_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250826/5366887/detail_5366887_17574750319748_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 84014162,
+     "text": "운동할 때 입기 정말 편하고 활동하기에도 부담이 없어요. 디자인도 깔끔하고 예뻐요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-04-28"
+    },
+    {
+     "no": 85866367,
+     "text": "신축성도 너무 좋고 원단은 말할 것도 없네요. 옷이 다 예뻐요. 편하고 데일리로 요가 할 때 너무 좋겠어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-28"
+    }
+   ],
+   "roster": true,
+   "handle": "partimentowomen",
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7012029,
+   "url": "https://www.musinsa.com/products/7012029",
+   "brand": "무신사 스탠다드 우먼",
+   "brand_en": "MUSINSA STANDARD WOMAN",
+   "brand_id": "musinsastandardwoman",
+   "name": "우먼즈 저지 벌룬 조거 팬츠 [버터]",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 53910,
+   "normal_price": 59900,
+   "discount": 10,
+   "review_count": 14,
+   "rating": 4.9,
+   "review_total_listed": 14,
+   "sold_out": false,
+   "release_date": "2026-08-06",
+   "season": "2026 F/W",
+   "style_no": "MWFPC8B70-BU",
+   "material": [
+    "핏: 루즈",
+    "촉감: 약간 부드러움",
+    "신축성: 있음",
+    "비침: 없음",
+    "두께: 보통",
+    "계절: 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260806/7012029/detail_7012029_17876261262415_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012029/detail_7012029_17876505494513_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012029/detail_7012029_17876261277498_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012029/detail_7012029_17876261283221_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012029/detail_7012029_17876261289299_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260806/7012029/detail_7012029_17876261295472_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87594809,
+     "text": "재질 너무 부드럽고 짱 편해요. 색깔도 딱 버터 색이고 귀여워요. 고무줄 쪼이지 않아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-20"
+    },
+    {
+     "no": 87558960,
+     "text": "예뻐요!!!좋아요!!!!재구매의사100%에요 최고무신사^^~~~~~!!!!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-18"
+    },
+    {
+     "no": 87912577,
+     "text": "무신사스탠다드 우먼 옷으로 한벌했어요. 기장감 보시고 핏감 보세요. 야들야들진짜 좋아요! 크림색도 구매할참입니다~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-03"
+    },
+    {
+     "no": 87828759,
+     "text": "색도 예쁘고 재질도 부들해서 다조은데 좀얇아서 자칫하면 속옷선이 비치겠어요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 87683004,
+     "text": "일단 색이 너무 예쁘고 재질이 부드러워서 넘 좋아요!! 가을에 휘뚜루마뚜루 입기 딱 좋을거같아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-24"
+    },
+    {
+     "no": 87560914,
+     "text": "색감 너무 이쁘고 … 입었을때 느낌 너무 좋아요ㅡㅡ 보자마자 피팅하고 샀어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-18"
+    }
+   ],
+   "roster": false,
+   "handle": "musinsa_standard",
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6503202,
+   "url": "https://www.musinsa.com/products/6503202",
+   "brand": "아수라",
+   "brand_en": "ASURA",
+   "brand_id": "asura",
+   "name": "FOLD HAREM PANTS (CHARCOAL)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 80100,
+   "normal_price": 89000,
+   "discount": 10,
+   "review_count": 11,
+   "rating": 5.0,
+   "review_total_listed": 11,
+   "sold_out": false,
+   "release_date": "2026-05-18",
+   "season": "",
+   "style_no": "A26SSPT147CC0F",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17833138103478_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17833138111174_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17833138119459_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17833138127013_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17833138096053_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17833138358759_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17799985202439_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17799985185165_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17799985190902_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260518/6503202/detail_6503202_17799985196522_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87605343,
+     "text": "수련용으로도 좋고 여행용으로도 넘 좋아요 스타일리쉬하고 편하고 최고입니다 내년 여름에 또 살거같아요 ㅎㅎ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-21"
+    },
+    {
+     "no": 87080449,
+     "text": "너무 편하고 이쁘고 다 합니다 진짜 !! 얼마 안 남은 여름에 자주 입고 다녀야겠어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-08-22"
+    },
+    {
+     "no": 87764136,
+     "text": "진짜 편하고 접히는 부분도 예쁘게 접혀요. 종아리쪽도 적당히 잡아줘서 좋았어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-28"
+    },
+    {
+     "no": 87431681,
+     "text": "요번 여름 아수라에 이쁜게 너무 많아서 좋으네요 ㅋ 요 팬츠 진짜 착용감과 스타일과 편함 다 갖추었어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-11"
+    },
+    {
+     "no": 87307751,
+     "text": "엄청편하지만 부들거리는소재여서 관리 안 해주면 금방 보풀일어날 거 같아서 관리 잘 해줘야할 거 같아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-04"
+    },
+    {
+     "no": 86971946,
+     "text": "요즘 폴드랑 하렘팬츠가 예뻐보여서 눈독들이다 할인하길래 삿어여 핏도 색도 넘 맘에듭니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-17"
+    },
+    {
+     "no": 85380405,
+     "text": "엄청 얇고 찰랑거려서 더운 여름에 시원하게 입을 수 있을것같아요. 폴딩디테일이 마음에 들고 기장감도 딱 좋았어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-19"
+    },
+    {
+     "no": 87183489,
+     "text": "너무너무너무 편해서 조아요.. 사이즈도 저한테 클 줄 알았는데 딱 예쁜 사이즈예용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-28"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4003163): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5247975,
+   "url": "https://www.musinsa.com/products/5247975",
+   "brand": "모어아웃",
+   "brand_en": "MOREOUT",
+   "brand_id": "moreout",
+   "name": "여성요가복 레이오버 팬츠 5PP5587",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 49000,
+   "normal_price": 60000,
+   "discount": 18,
+   "review_count": 8,
+   "rating": 4.9,
+   "review_total_listed": 8,
+   "sold_out": false,
+   "release_date": "2025-07-15",
+   "season": "2025 S/S",
+   "style_no": "5PP5587",
+   "material": [
+    "핏: 루즈",
+    "촉감: 부드러움",
+    "신축성: 있음",
+    "비침: 거의 없음",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250715/5247975/detail_5247975_17525572778671_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250715/5247975/detail_5247975_17525572784764_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250715/5247975/detail_5247975_17525572790292_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250715/5247975/detail_5247975_17525572796883_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 83085287,
+     "text": "함께 구매란 에어무브 팬츠와 비교를 위해 같이 찍었어요 좀더 길이가 짧은데 제 키에는 요 바지가 좀 더 예쁜 핏으로 입어지더라구요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-19"
+    },
+    {
+     "no": 78345666,
+     "text": "색상 예뻐요. 통이 커서 편합니다 옆라인안에 주머니가 숨겨져 있어서. 재밌네요.무게감은 조금 있고.한 여름에는 조금 더운거 같아요 예뻐서 추천합니다",
+     "grade": 4,
+     "likes": 1,
+     "date": "2025-09-16"
+    },
+    {
+     "no": 83085325,
+     "text": "길이가 완전 딱 좋아서 다른컬러도 구매하고 싶을 지경이에요 화사한 형광핑크 컬러가 넘 예뻐요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-19"
+    },
+    {
+     "no": 79386457,
+     "text": "모어아웃 접하고 요가복은 모어아웃에서만 구입하고 있어요 고무줄밴딩이 편하고 말리지 않아 수련할때 편하고 땀이 금방 마르는 소재라 좋아요 항아리핏 디자인이 예쁘네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-10-28"
+    },
+    {
+     "no": 79386309,
+     "text": "모어아웃 접하고 요가복은 모어아웃에서만 구입하고 있어요 고무줄밴딩이 편하고 말리지 않아 수련할때 편하고 땀이 금방 마르는 소재라 좋아요 항아리핏 디자인이 예쁘네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-10-28"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 조거",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6651278,
+   "url": "https://www.musinsa.com/products/6651278",
+   "brand": "플레어업",
+   "brand_en": "FLAREUP",
+   "brand_id": "flareup",
+   "name": "Wide Capri Pants (FL-270_Dark Gray)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 코튼 팬츠",
+   "sale_price": 78400,
+   "normal_price": 98000,
+   "discount": 20,
+   "review_count": 6,
+   "rating": 5.0,
+   "review_total_listed": 6,
+   "sold_out": false,
+   "release_date": "2026-06-11",
+   "season": "",
+   "style_no": "FL-270_Dark Gray",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17821978508202_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504178426_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504187389_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504196525_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504206999_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504218006_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504226999_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504235653_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504241950_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260611/6651278/detail_6651278_17818504249231_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 86315896,
+     "text": "장마철에 유용할듯 싶어 구매했는데 생각보다 두께감이 있어 여름엔 좀 덥네요.. 후들후들한 소재는 아니에요. 투웨이 되는 점은 너무 만족스럽습니다!! 다만 올렸을때 무릎이 간지러운 건 견디셔야해요 ㅋㅎㅋㅎ",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-07-16"
+    },
+    {
+     "no": 87833492,
+     "text": "한여름만 빼면 운동갈 때 잘 입고다닐 것 같아요! 엄청 날씬해보이고 촉감도 부들부들 신축성 좋아서 너무 맘에 듭니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 86315974,
+     "text": "생각보다 두께감이 있어 여름보단 봄가을에 잘 입겠어요. 보풀 잘 생길듯함 아무튼 투웨이 바지 너무 좋네요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-16"
+    },
+    {
+     "no": 87588094,
+     "text": "신축성, 핏 너무 좋고 휘뚤마뚤 입기 좋아요,, 너무 얇지 않은 훌룰룰루 소재",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-20"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 와이드 팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4051854): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6798899,
+   "url": "https://www.musinsa.com/products/6798899",
+   "brand": "콘치웨어",
+   "brand_en": "CONCHWEAR",
+   "brand_id": "conchwear",
+   "name": "아사나 와이드 요가 팬츠 (4colors)",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 58000,
+   "normal_price": 65000,
+   "discount": 11,
+   "review_count": 4,
+   "rating": 5.0,
+   "review_total_listed": 4,
+   "sold_out": false,
+   "release_date": "2026-07-07",
+   "season": "",
+   "style_no": "아사나 와이드 요가 팬츠",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260707/6798899/detail_6798899_17836450358724_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260707/6798899/detail_6798899_17836450408915_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260707/6798899/detail_6798899_17836450421978_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260707/6798899/detail_6798899_17836450428261_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87163447,
+     "text": "너무예뻐요! 색감도 예쁘고 재질이 진짜 편하고 후들해요 같이산 다른 요가팬츠보다 얘가 압도적!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-27"
+    },
+    {
+     "no": 87272801,
+     "text": "후들후들함.,,,,다른컬로도ㅓ 쟁기려구요 ! 근데 추워지면 못입을거같고 여름에 입 기 좋을거같아용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-02"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 조거",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4079695): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5004037,
+   "url": "https://www.musinsa.com/products/5004037",
+   "brand": "프론투라인",
+   "brand_en": "FRONT2LINE",
+   "brand_id": "front2line",
+   "name": "반다 라이트 라인 조거 팬츠",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 52200,
+   "normal_price": 55000,
+   "discount": 5,
+   "review_count": 4,
+   "rating": 5.0,
+   "review_total_listed": 4,
+   "sold_out": false,
+   "release_date": "2025-04-09",
+   "season": "",
+   "style_no": "5010952794",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17563589690139_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17563589701622_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17563589713075_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17563589733443_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17563589751539_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17563589760226_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17726699112674_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17871292693176_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250409/5004037/detail_5004037_17871292699055_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81898738,
+     "text": "첫 요가복으로 무난하게 주문했는데 성공이욤 편하게 입을수 있을거 같습니당!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-27"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 와이드 팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3202266): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6313736,
+   "url": "https://www.musinsa.com/products/6313736",
+   "brand": "프론투라인",
+   "brand_en": "FRONT2LINE",
+   "brand_id": "front2line",
+   "name": "반다 소프트 듀얼 핀턱 팬츠",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 57600,
+   "normal_price": 64000,
+   "discount": 10,
+   "review_count": 3,
+   "rating": 4.3,
+   "review_total_listed": 3,
+   "sold_out": false,
+   "release_date": "2026-04-15",
+   "season": "2026 S/S",
+   "style_no": "5014150775",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260415/6313736/detail_6313736_17764100654450_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6313736/detail_6313736_17764100662801_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6313736/detail_6313736_17764100670782_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3922903): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7205808,
+   "url": "https://www.musinsa.com/products/7205808",
+   "brand": "플리즈프로젝트",
+   "brand_en": "PLZPROJECT",
+   "brand_id": "plzproject",
+   "name": "TERRY HAREM JOGGER PANTS, OATMEAL",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 65550,
+   "normal_price": 69000,
+   "discount": 5,
+   "review_count": 2,
+   "rating": 3.5,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2026-08-31",
+   "season": "2026 F/W",
+   "style_no": "테리 하렘 조거 팬츠, 오트밀",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260831/7205808/detail_7205808_17881599012740_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260831/7205808/detail_7205808_17881599014288_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260831/7205808/detail_7205808_17881599015925_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260831/7205808/detail_7205808_17881599017476_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260831/7205808/detail_7205808_17881599019037_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87530765,
+     "text": "너무 편해요 아직까지는 낮엔 더워서 못 입을것 같아요 저녁에는 입을만 하네요 허리밴드가 좀 둔한것 빼고는 마음에 듭니다~",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-19"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 조거",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4099084): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6367863,
+   "url": "https://www.musinsa.com/products/6367863",
+   "brand": "녹족",
+   "brand_en": "NOKJOK",
+   "brand_id": "nokjok",
+   "name": "넬리 밴딩 조거팬츠 러닝 요가복 필라테스복",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 17900,
+   "normal_price": 29900,
+   "discount": 40,
+   "review_count": 2,
+   "rating": 5.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2026-04-23",
+   "season": "",
+   "style_no": "109500",
+   "material": [
+    "촉감: 부드러움",
+    "신축성: 약간 있음",
+    "비침: 없음",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260423/6367863/detail_6367863_17769357662321_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260423/6367863/detail_6367863_17769357717952_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260423/6367863/detail_6367863_17769357751913_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 조거",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7092234,
+   "url": "https://www.musinsa.com/products/7092234",
+   "brand": "룰루레몬",
+   "brand_en": "LULULEMON",
+   "brand_id": "lululemon",
+   "name": "그루브 로우라이즈 릴랙스드 신치 팬츠 *아시아 핏  BLK",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 184000,
+   "normal_price": 184000,
+   "discount": 0,
+   "review_count": 2,
+   "rating": 5.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2026-08-18",
+   "season": "2026 F/W",
+   "style_no": "LW5JSUA-0001",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260818/7092234/detail_7092234_17870299390096_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260818/7092234/detail_7092234_17870299391457_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260818/7092234/detail_7092234_17870299392959_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260818/7092234/detail_7092234_17870299394358_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260818/7092234/detail_7092234_17870299395840_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87425084,
+     "text": "룰루레몬 뒤늦게 빠져서 바지가 참 편안해요. 아래 스트링 잡으면 조거느낌 풀으면 일자핏으로 입기 좋구요. S사이즈  블랙은 매장에 없어서 여기서 구입해요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-11"
+    },
+    {
+     "no": 87505667,
+     "text": "상의44~55,하의55인데 여유있는 핏을 찾는다면 S가 제격입니다. 붙는 핏을 원한다면 XS도 안될건 아니구요. 변형없이 오래 갔으면 좋겠네요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-15"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 조거",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5529998,
+   "url": "https://www.musinsa.com/products/5529998",
+   "brand": "댄프",
+   "brand_en": "DANP",
+   "brand_id": "danp",
+   "name": "선 마일드 모션 레이어드 팬츠_4Colors",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 79000,
+   "normal_price": 89000,
+   "discount": 11,
+   "review_count": 2,
+   "rating": 4.5,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2025-09-25",
+   "season": "2025 F/W",
+   "style_no": "DPPT405",
+   "material": [
+    "핏: 루즈",
+    "신축성: 약간 있음",
+    "비침: 보통",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250925/5529998/detail_5529998_17587864159257_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250925/5529998/detail_5529998_17587864175083_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250925/5529998/detail_5529998_17587864187034_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250925/5529998/detail_5529998_17587864196034_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 와이드 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5182281,
+   "url": "https://www.musinsa.com/products/5182281",
+   "brand": "버블라임",
+   "brand_en": "BUBBLELIME",
+   "brand_id": "bubblelime",
+   "name": "하렘팬츠 하이웨스트 와이드 요가바지 H10",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 45000,
+   "normal_price": 45000,
+   "discount": 0,
+   "review_count": 2,
+   "rating": 5.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2025-06-12",
+   "season": "2025 S/S",
+   "style_no": "5007358606",
+   "material": [
+    "핏: 슬림",
+    "촉감: 부드러움",
+    "신축성: 있음",
+    "비침: 없음",
+    "두께: 얇음",
+    "계절: 봄, 여름, 가을"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250612/5182281/detail_5182281_17497353843482_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250612/5182281/detail_5182281_17497353885661_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 82823945,
+     "text": "일단 전체적으로 쫀쫀한데 허리 밴드는 또 널럴해서 편해서 놀랬습니다. 그리고 무릎도 안늘어날거 같아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-09"
+    },
+    {
+     "no": 83127044,
+     "text": "기장 완전 딱이에요!!!! 너무맘에들고 재질도 면이랑 레깅스 중간쯤 쫀득한느낌? 너무맘에들어요. 색상이 다양하면좋겟어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-21"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 와이드 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6707015,
+   "url": "https://www.musinsa.com/products/6707015",
+   "brand": "데비웨어",
+   "brand_en": "DEVIWEAR",
+   "brand_id": "deviwear",
+   "name": "와드에이치 팬츠 DEVI-B0027-그레이",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 27550,
+   "normal_price": 29000,
+   "discount": 5,
+   "review_count": 2,
+   "rating": 5.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2026-06-22",
+   "season": "",
+   "style_no": "5010313015",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260622/6707015/detail_6707015_17820921238789_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6707015/detail_6707015_17820921243695_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6707015/detail_6707015_17820921248570_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6707015/detail_6707015_17820921253826_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 와이드 팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4055126): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7049588,
+   "url": "https://www.musinsa.com/products/7049588",
+   "brand": "미치코런던 코시노",
+   "brand_en": "MICHIKO LONDON KOSHINO",
+   "brand_id": "michikolondon",
+   "name": "레그 워머 하렘 팬츠 차콜",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 64800,
+   "normal_price": 72000,
+   "discount": 10,
+   "review_count": 1,
+   "rating": 5.0,
+   "review_total_listed": 1,
+   "sold_out": false,
+   "release_date": "2026-08-11",
+   "season": "",
+   "style_no": "ML26FB31CH",
+   "material": [
+    "핏: 루즈",
+    "촉감: 부드러움",
+    "신축성: 보통",
+    "비침: 없음",
+    "두께: 보통",
+    "계절: 가을, 겨울"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260811/7049588/detail_7049588_17871033919471_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260811/7049588/detail_7049588_17871033924853_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260811/7049588/detail_7049588_17871033932020_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260811/7049588/detail_7049588_17871033938139_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260811/7049588/detail_7049588_17871033944629_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87498152,
+     "text": "이런디자인 특이하고 예뻐서 입고싶었는데 마침 구입햇네요 키가작아서  모델핏은 힘들지만 귀여위요 조금만 부드러운느낌엿음 좋앗을텐데  약간의 까슬거림은 잇어요 그래도 디자인은 만족합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-15"
+    }
+   ],
+   "roster": true,
+   "handle": "michiko_london_kr",
+   "query": "하렘 조거",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6707010,
+   "url": "https://www.musinsa.com/products/6707010",
+   "brand": "데비웨어",
+   "brand_en": "DEVIWEAR",
+   "brand_id": "deviwear",
+   "name": "와드에이치 팬츠 DEVI-B0027-마젠타",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 27550,
+   "normal_price": 29000,
+   "discount": 5,
+   "review_count": 1,
+   "rating": 5.0,
+   "review_total_listed": 1,
+   "sold_out": false,
+   "release_date": "2026-06-22",
+   "season": "",
+   "style_no": "5010313013",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260622/6707010/detail_6707010_17820919746970_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6707010/detail_6707010_17820919752085_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6707010/detail_6707010_17820919757225_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6707010/detail_6707010_17820919762962_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 86233488,
+     "text": "차랑차랑 너무 예뻐요 살빠질거 생각해서 한 사이즈 작게 샀는데 작진않아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-12"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘 와이드 팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4055126): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6968405,
+   "url": "https://www.musinsa.com/products/6968405",
+   "brand": "로브로브",
+   "brand_en": "LOVLOV",
+   "brand_id": "lovlov",
+   "name": "플로우 하렘 팬츠_(2color)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 82000,
+   "normal_price": 82000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-07-31",
+   "season": "2026 S/S",
+   "style_no": "LE2PT10222",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260731/6968405/detail_6968405_17854787871481_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260731/6968405/detail_6968405_17854787877401_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260731/6968405/detail_6968405_17854787883472_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260731/6968405/detail_6968405_17854787889156_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260731/6968405/detail_6968405_17854787895360_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260731/6968405/detail_6968405_17854787901362_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4118279): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7084972,
+   "url": "https://www.musinsa.com/products/7084972",
+   "brand": "그란데라인",
+   "brand_en": "GRANDE LINE",
+   "brand_id": "grandeline",
+   "name": "소프트 플로우 팬츠",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 75050,
+   "normal_price": 79000,
+   "discount": 5,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-08-14",
+   "season": "",
+   "style_no": "5019058169",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260814/7084972/detail_7084972_17871232026853_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260814/7084972/detail_7084972_17871232068069_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260814/7084972/detail_7084972_17871232094199_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4146657): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6687296,
+   "url": "https://www.musinsa.com/products/6687296",
+   "brand": "먼데이플로우",
+   "brand_en": "MONDAYFLOW",
+   "brand_id": "mondayflow",
+   "name": "시티 하렘 팬츠_화이트",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 199000,
+   "normal_price": 199000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-06-17",
+   "season": "2026 S/S",
+   "style_no": "MF26RWPC001_WT",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260617/6687296/detail_6687296_17816765188369_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6687296/detail_6687296_17816765273168_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6687296/detail_6687296_17816765386721_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6294654,
+   "url": "https://www.musinsa.com/products/6294654",
+   "brand": "위뜨",
+   "brand_en": "HUIT",
+   "brand_id": "huit",
+   "name": "아웃포켓 하렘팬츠 HTWPN3J07T",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 99000,
+   "normal_price": 198000,
+   "discount": 50,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-04-10",
+   "season": "",
+   "style_no": "HTWPN3J07T",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260410/6294654/detail_6294654_17758115249446_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260410/6294654/detail_6294654_17758115251020_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260410/6294654/detail_6294654_17758115252417_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3405007): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6687825,
+   "url": "https://www.musinsa.com/products/6687825",
+   "brand": "먼데이플로우",
+   "brand_en": "MONDAYFLOW",
+   "brand_id": "mondayflow",
+   "name": "시티 하렘 팬츠_토프",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 199000,
+   "normal_price": 199000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-06-17",
+   "season": "2026 S/S",
+   "style_no": "MF26RWPC001M1_DG",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260617/6687825/detail_6687825_17816793785394_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260617/6687825/detail_6687825_17816793888431_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7392600,
+   "url": "https://www.musinsa.com/products/7392600",
+   "brand": "온스카",
+   "brand_en": "ONSKA",
+   "brand_id": "onska",
+   "name": "BELT STRING HAREM PANTS (BLACK)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 128000,
+   "normal_price": 128000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-09-22",
+   "season": "",
+   "style_no": "O263PT1BK",
+   "material": [
+    "핏: 루즈",
+    "촉감: 부드러움"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260922/7392600/detail_7392600_17900625709028_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260922/7392600/detail_7392600_17900625710505_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260922/7392600/detail_7392600_17900625712030_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4260515): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7392599,
+   "url": "https://www.musinsa.com/products/7392599",
+   "brand": "온스카",
+   "brand_en": "ONSKA",
+   "brand_id": "onska",
+   "name": "BELT STRING HAREM PANTS (PURPLE)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 128000,
+   "normal_price": 128000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-09-22",
+   "season": "",
+   "style_no": "O263PT1PU",
+   "material": [
+    "핏: 루즈",
+    "촉감: 부드러움",
+    "비침: 없음"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/goods_img/20260922/7392599/7392599_17900628558204_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260922/7392599/detail_7392599_17900628566253_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260922/7392599/detail_7392599_17900628567969_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(4260515): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6528707,
+   "url": "https://www.musinsa.com/products/6528707",
+   "brand": "와이오와이",
+   "brand_en": "YOYOYOY",
+   "brand_id": "yoyoyoy",
+   "name": "링클 하렘 스트링 팬츠_2colors",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 기타 하의",
+   "sale_price": 144000,
+   "normal_price": 144000,
+   "discount": 0,
+   "review_count": 0,
+   "rating": null,
+   "review_total_listed": 0,
+   "sold_out": false,
+   "release_date": "2026-05-21",
+   "season": "2026 S/S",
+   "style_no": "AK06WNPSL10",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260521/6528707/detail_6528707_17793504353852_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260521/6528707/detail_6528707_17794383017795_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260521/6528707/detail_6528707_17794383075097_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3241294,
+   "url": "https://product.29cm.co.kr/catalog/3241294",
+   "brand": "소함소함",
+   "brand_en": "SOHAMSOHAM",
+   "brand_id": "29394",
+   "name": "Setu Harem Pants_6colors",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 51000,
+   "normal_price": 51000,
+   "discount": 0,
+   "review_count": 665,
+   "rating": 5.0,
+   "review_total_listed": 665,
+   "sold_out": false,
+   "release_date": "2025-04-25",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "세투 하렘 팬츠는 부드럽게 감기고, 유연하게 흐릅니다.\n쫀쫀한 코튼에 스판을 넉넉히 더해 움직임을 따라 편안하게 늘어나고 몸의 리듬을 따라 수련의 숨결 위로 자연스레 스며듭니다.\n셔링을 풍성하게 잡은 디테일로 여유로운 실루엣과 넉넉한 와이드 핏을 연출했습니다.\n허리선을 부드럽게 감싸는 밴드와 발목을 안정감 있게 잡아주는 재원단 밴딩 덕분에 장시간 착용 시에도 편안함이 지속됩니다.\n&#xFEFF\n&#xFEFF\n&#xFEFF\nViolet\n&#xFEFF\n&#xFEFF\nBrown\n&#xFEFF\n&#xFEFF\nApricot\n&#xFEFF\n&#xFEFF\nMint\n&#xFEFF\n&#xFEFF\nSage Ivory\n&#xFEFF\n&#xFEFF\nCharcoal\n&#xFEFF\n&#xFEFF\ncolors\nViolet﻿﻿\nBrown\n&#xFEFF\nApricot\n﻿\nMint\n&#xFEFF\nSage Ivory\n&#xFEFF\nCharcoal\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 Cotton 89, Span 11 101102 색상 Apricot, Mint, Sage Ivory, Charcoal, Violet, Brown 101103 치수 -5cm, 기본기장, 키큰요기니 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 소함소함 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 South Korea 101106 세탁방법 및 취급시 주의사항 찬물에서 중성세제를 사용하여 단독세탁을 추천드립니다. 건조기 x 101107 YYYYMM ex)201109 제조연월 상세 페이지 참조 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 고객에 의해 물건이 훼손되거나 가치가 상실 된 경우, 향수/화장품/담배/섬유탈취제/심한 집 냄새 등의 냄새 등이 남아있는 경우, 택이 훼손되거나 제거 된 경우, 새제품일 경우에도 세탁 및 수선의 경우에는 교환 및 반품이 불가능합니다. 제품의 사이즈는 측정 방법에 따라 약간의 오차가 발생될 수 있으며, 제품의 색상은 사용자의 모니터의 설정과 사양에 따라 차이가 있을 수 있습니다. 나염 제품의 경우 나염의 무늬와 진하기가 다릅니다. 미정리 실밥, 초크 자국(빨간 사인펜같은_지워지는부분), 배송 중 구김, 옷먼지 발생 위 부분은 상품의 하자에 해당되지 않으며 반품의 사유가 되지 않습니다. 세탁 부주의로 인한 제품손상은 교환 및 반품, 환불이 불가능합니다. 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 29CM 고객센터 1644-0560 (발신전용), A/S 문의접수는 MY>1:1문의 이용 843438 0 1 170.0 54.0 키큰요기니 3 772880 0 1 168.0 48.0 기본기장(Violet) 외 키큰요기니 3 0 37.5 11.0 92.5 6513563 -5cm 34.5 26.0 0 38.0 11.0 99.0 6513564 기본기장 34.5 26.0 0 39.0 11.0 105.0 6513565 키큰요기니 34.5 26.0",
+   "images": [
+    "https://img.29cm.co.kr/item/202508/11f07675350e5c8c964ab15067a733ef.jpg",
+    "https://img.29cm.co.kr/item/202508/11f076753815a92e964a7ffb2637a343.jpg",
+    "https://img.29cm.co.kr/item/202508/11f07675381581f08893bf2b6cf55e2c.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 17673796,
+     "text": "안쪽 마감이 별로에요. 얇고 편하게 입을 수 있는 재질이고 필라테스 운동 하는데 움직이는데 편했어요. 살짝 무게감 있고 차콜색인데 먼가 녹색도 섞인거 같기도 하고..;;",
+     "grade": 4,
+     "likes": 3,
+     "date": "2026-06-23"
+    },
+    {
+     "no": 15531814,
+     "text": "소함소함 키크니버전 팬츠 너무 마음에 들어요. 키가 있다보니 항상 바지가 짤막해서 마음에 안들었는데 100프로 마음에 듭니다^^ 잘입을께요~",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-12-08"
+    },
+    {
+     "no": 16635330,
+     "text": "170기준에 길이 딱 적당한것 같아서 좋아요! 근데 진한 브라운은 아니고 물빠진 탁한 흰끼 도는 브라운이에요! 재질은 부드럽진 않고 약간 거친정도입니다 봄여름에 입기 좋을것 같아요",
+     "grade": 4,
+     "likes": 2,
+     "date": "2026-03-31"
+    },
+    {
+     "no": 17209973,
+     "text": "배 조임 없고 색상도 이쁘고 일상복도 가능하겠어요 소재도 맘에 들어서 자주 입을 것 같아요. 여름에 시원하게 잘 입을게요. 무릎나오지만 말길!!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-05-22"
+    },
+    {
+     "no": 14621203,
+     "text": "면 재질이 많이 느껴지는 신축성이 좋은 원단이며 컬러는 보랏빛이 도는 고동색(?)느낌의 브라운입니다. 가을에 맞는 컬러라 맘에 들어요^^",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-09-19"
+    },
+    {
+     "no": 16640768,
+     "text": "요린이? 첫 요가복으로 샀어요. 찾아보다가 가격도 괜찮고 색감도 좋아서 구매했는데 만족해요. 신축성이 좋고 착용감이 진짜 좋네요 부드럽고 조이는 느낌이 없이 몸에 착 맞아요 수련할 때 기대되요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-31"
+    },
+    {
+     "no": 16503120,
+     "text": "키큰사람을 위한 기장이 나와서 너무 좋아요 저는 169입니당 딱 예쁜 기장이에요 예뿐 브라운 컬러고 수련할때 편안합니당 이번에 소함소함에서 바지 세가지 시켜봤는데 세개 다 만족스러워요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-18"
+    },
+    {
+     "no": 16414350,
+     "text": "168기준 발목까지 예쁘게 떨어져서 좋아요 밴딩이 있어서 역자세나 다리를 들어도 다리가 나오지않아서 좋아요 다만 주머니 있는 옷은 어쩔수없는건지 골반아래가 항아리처럼 부해지긴해요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-10"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 5971890,
+    "sale_price": 48450,
+    "url": "https://www.musinsa.com/products/5971890"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6312187,
+   "url": "https://www.musinsa.com/products/6312187",
+   "brand": "스미스테일러",
+   "brand_en": "SMITHTAYLOR",
+   "brand_id": "smithtaylor",
+   "name": "클래식 인견 베기 벌룬 팬츠 (3color)",
+   "genders": [
+    "U"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 18900,
+   "normal_price": 18900,
+   "discount": 0,
+   "review_count": 104,
+   "rating": 4.5,
+   "review_total_listed": 104,
+   "sold_out": false,
+   "release_date": "2026-04-15",
+   "season": "",
+   "style_no": "ST-COOL-9",
+   "material": [],
+   "spec_text": "부드러운 인견 소재와 시원한 느낌의 나일론 소재의 결합된 상품",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175094580_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175133443_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175164804_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175204708_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175329307_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175363545_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175411000_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175445002_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260415/6312187/detail_6312187_17762175501404_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 86575135,
+     "text": "상당히 좋아요. 저는 매우 편해서 항상 입고 다니긴 하는데 출근할 땐 아내가 입지 말라고 하네요 주말에 아이들과 놀때 편하게 입고 있어요 시원해요.",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-07-27"
+    },
+    {
+     "no": 84664679,
+     "text": "정사이즈고 길이 발목위로 적당함 신축성도 적당하고 바람도 잘통해서 시원함 여름 휴가용으로 샀는데 편해서 출근할때 입고 있음 ㅎㅎ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-05-22"
+    },
+    {
+     "no": 87698774,
+     "text": "너무가볍고 시원해요 여름에 시원하게 잘입엇네요 여러벌사서 매일입고 선물도 주고",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-25"
+    },
+    {
+     "no": 87112624,
+     "text": "더운날 편하게 입을 긴바지찾다가 구매해봅니다 가격대비 나쁘지않은 퀄이고요 시원합니다 뱃살두둑한체형이라 허리밴딩이좀타이트한거말고는 전체적으로 맘에드네요 허리밴드좀 널널하게 만들어주세요ㅜㅜ",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-08-24"
+    },
+    {
+     "no": 86019524,
+     "text": "시원하고 편해서 재구매했네요 맘에 들어요, 저희 부모님도 탐내시길래 하나 더 구매하려구요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-03"
+    },
+    {
+     "no": 84867855,
+     "text": "까실거리는 원단이라 여름에 입기에 션할듯. 사진처럼 핏이 나옴. 168.75 하체비만 체형커버 잘됨. 가성비 굿~추천요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-06-23"
+    },
+    {
+     "no": 85350409,
+     "text": "인견이라 엄청 시원하고 신축성도 좋고 매우 맘에 들어서 한개더 구매합니다 ^^",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-18"
+    },
+    {
+     "no": 85301859,
+     "text": "편안하고 저렴하고 시원한 여름바지 잘 구매했습니다. 정말 감사합니다. .",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-17"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5680287,
+   "url": "https://www.musinsa.com/products/5680287",
+   "brand": "플리즈노팔로우",
+   "brand_en": "PLEASENOFOLLOW",
+   "brand_id": "pleasenofollow",
+   "name": "Mami Wide Sweat Jogger (Mocha Mousse)",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 120700,
+   "normal_price": 142000,
+   "discount": 15,
+   "review_count": 12,
+   "rating": 4.8,
+   "review_total_listed": 12,
+   "sold_out": false,
+   "release_date": "2025-11-03",
+   "season": "2025 F/W",
+   "style_no": "PNBEPT003BR",
+   "material": [
+    "핏: 루즈",
+    "촉감: 부드러움",
+    "신축성: 있음",
+    "비침: 없음",
+    "두께: 보통",
+    "계절: 봄, 여름, 가을, 겨울"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251103/5680287/detail_5680287_17630137571963_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251103/5680287/detail_5680287_17630137613161_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251103/5680287/detail_5680287_17630137640479_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81667894,
+     "text": "큰 옷 즐겨입는데도 굉장히 커요 특히 허리가 끈으로 조여도 크고 애초에 많이 조여지지 않음 그래도 자수랑 색감, 핏이 너무 예뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-15"
+    },
+    {
+     "no": 81503019,
+     "text": "색감이랑 자수로고가 넘 예뻐서 할인할 때 구매한 바지입니다 실물이 더 예쁘고 골반에 걸쳐입으니까 핏도 예뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-07"
+    },
+    {
+     "no": 80268007,
+     "text": "사이즈는 지금까지 입었던 플너팔 조거팬츠중에서도 젤  큰편입니다! 넘 이쁘고 색상이완전 핑크? 베이지 색조합 역시 잘하는 플노팔 .. 💏",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-24"
+    },
+    {
+     "no": 81172841,
+     "text": "옷을 한달을 넘게걸려 받긴 첨이네요ㅜㅋㅋ 기존에있던색  잘 입어서 이번에도 샀읍니다 이런색감 흔하지않아서 넘 조아유",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-22"
+    },
+    {
+     "no": 81168767,
+     "text": "이거 블랙도 진짜 잘입고 다녔거든요 ㅎㅎ 뉴컬러 나왔길래 샀는데 너무 예쁘요 ㅠㅠ모카핑크가 진짜 제 취향이구 컬러도 흔하지 않아서 좋아요 !!💓",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-14"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5923152,
+   "url": "https://www.musinsa.com/products/5923152",
+   "brand": "배드블러드",
+   "brand_en": "BADBLOOD",
+   "brand_id": "badblood",
+   "name": "Titan Stroke Baggy Joggers - Black",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 143100,
+   "normal_price": 159000,
+   "discount": 10,
+   "review_count": 11,
+   "rating": 4.9,
+   "review_total_listed": 11,
+   "sold_out": false,
+   "release_date": "2026-01-21",
+   "season": "",
+   "style_no": "w-pts26-001",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260121/5923152/detail_5923152_17689959645087_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260121/5923152/detail_5923152_17689959698616_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260121/5923152/detail_5923152_17689959730802_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 83513203,
+     "text": "바다 손민수했습니다 처음에는 좀 너무 화려한가 싶었는데 계속 보니까 잘 입을듯",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-04-07"
+    },
+    {
+     "no": 82030990,
+     "text": "사이즈가 엄청커요 ㅠㅠ 퀄리티는 정말 좋습니당 가격이 사악해서 그렇지...",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-03"
+    },
+    {
+     "no": 81948307,
+     "text": "퀄리티 정말 좋고 이뻐요 ㅠㅠ 근데 정말많이커요 ㅋㅋ 미디움은 남자도 클거같아여",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-29"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3422755,
+   "url": "https://product.29cm.co.kr/catalog/3422755",
+   "brand": "클램",
+   "brand_en": "Clam",
+   "brand_id": "16336",
+   "name": "Clam coaster (11color)",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 7500,
+   "normal_price": 7500,
+   "discount": 0,
+   "review_count": 139,
+   "rating": 5.0,
+   "review_total_listed": 139,
+   "sold_out": false,
+   "release_date": "2025-08-15",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "컵, 작은 종지 등과 함께 사용할 수 있는 코스터 제품입니다.\n인타록과 오바록 기법으로 원단 끝을 마감하였으며, 각 모서리를 열처리하여 올풀림을 최소화 하였습니다.\n﻿\nSize: 가로 11 x 세로 11cm\n﻿\nFabric\n- 폴리100%: Bohemian blue, Bohemian pink, Dragon fruit, Shooting star black, Shooting star white, Lavender black\n- 울50%, 폴리50%: Cream soda, Raspberry cheese, Cotton candy\n- 울60%, 폴리40%: Tweed mint, Tweed navy\n﻿\n*손으로 제작되는 제품 특성 상 완벽한 정사각형 모양을 이루기 어려우며, 1cm 내외의 사이즈 오차가 발생될 수 있습니다.\n&#xFEFF\n&#xFEFF\n&#xFEFF\nBohemian blue Bohemian pink Dragon fruit\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\nCotton candy\n&#xFEFF\n&#xFEFF\nCream soda Raspberry cheese\n&#xFEFF\n&#xFEFF\nLavender black\n&#xFEFF\n&#xFEFF\n&#xFEFF\nShooting star black Shooting star white\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\nTweed mint Tweed navy﻿\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n&#xFEFF\n﻿\n&#xFEFF\n*** 코스터 기프트 패키지 ***\n코스터 전용 선물 박스입니다. 1개의 박스에 7개까지 한번에 담을 수 있습니다.\n상품명 &lt;선물 포장 박스 (2종류)&gt;로 구매가 가능합니다.\n﻿\n117101 품명 및 모델명 코스터 117102 재질 상세 페이지 참조 117103 구성품 상세 페이지 참조 117104 크기 상세 페이지 참조 117105 YYYYMM ex)201109 동일모델의 출시년월 2025.08. 117106 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 Clam(클램) 117107 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 대한민국 117108 \"수입식품안전관리 특별법에 따른 수입신고를 필함\"의 문구 「수입식품안전관리 특별법」에 따른 수입기구·용기·포장 상세 페이지 참조 117109 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 상세 페이지 참조 117110 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용",
+   "images": [
+    "https://img.29cm.co.kr/item/202508/11f07769479a6f64889371d72e15c189.png",
+    "https://img.29cm.co.kr/item/202508/11f077693c48ca42964a8f7a83eeef81.jpg",
+    "https://img.29cm.co.kr/item/202508/11f077693fdbdc528893516cc54c40fb.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0774dd4c9892c88939702fc4930c4.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0774dd4c9892888938fb834049f7f.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0774dd4c962148893558011294289.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 17849333,
+     "text": "화면에서 보이는 색상과 같아요. 양면은 조금 더 두껍고 탄탄한 느낌이 있어요. 색깔별로 모으고 싶네요. 예뻐요. 기존에 구매하고 세일하길래 두 번째 구매합니다.",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-07-09"
+    },
+    {
+     "no": 18574542,
+     "text": "은은하게 펄감이 섞여있어서 예뻐요!! 색도 연한 옥색? 민트색?인데 어떤 컵에도 다 잘어울려요..! 하다못해 아아 담긴 플라스틱컵에도 어울려요 ㅋㅋㅋㅋ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-18"
+    },
+    {
+     "no": 18438055,
+     "text": "빨간색 처돌이에겐 그저 예쁩니다 ... 테이블 위에 포인트도 확실히 되고 예뻐요! 컬러 조합이 쉽진 않지만 디자인이 예뻐서 그냥 .. 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-06"
+    },
+    {
+     "no": 17668657,
+     "text": "예뻐요! 클램 파우치부터 티코스터까지.. 감성적인 제품들이 많아서 평소 눈여겨보고 있었는데 여름맞이한 기념으로 시원한 색감으로 구매했습니다~🩵 물 흡수도 꽤 되는 편이고, 집들이 선물용으로도 좋을 것 같아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-22"
+    },
+    {
+     "no": 18266963,
+     "text": "가격이 조금 있지나 천이 튼튼하고 무늬가 여태 본 갓중에 제일 예뻐서 차근차근 하나씩 모으려고합니다! 티코스터중 제일 마음에 들어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-20"
+    },
+    {
+     "no": 17844209,
+     "text": "얼음컵에 받쳐서 쓰기 좋아요 컬러 총 세가지 샀는데 다 맘에들어요! 가격만 저렴하면 더 사고 싶은데 참아봅니다 ㅎㅎㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-08"
+    },
+    {
+     "no": 17840321,
+     "text": "컵을 안정감 있게 받쳐주고 물자국을 방지해줘서 실용적이에요. 심플하면서도 감성적인 디자인이라 테이블 분위기를 한층 더 예쁘게 만들어줍니다. 마감도 깔끔하고 활용도가 높아 데일리 아이템으로 만족하며 사용 중입니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-08"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5010655,
+   "url": "https://www.musinsa.com/products/5010655",
+   "brand": "반스",
+   "brand_en": "VANS",
+   "brand_id": "vans",
+   "name": "카고 EX 배기 팬츠 - 오트밀 / VN000NMJ2N11",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 58990,
+   "normal_price": 99000,
+   "discount": 40,
+   "review_count": 9,
+   "rating": 4.7,
+   "review_total_listed": 9,
+   "sold_out": false,
+   "release_date": "2025-04-10",
+   "season": "",
+   "style_no": "VN000NMJ2N11",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250410/5010655/detail_5010655_17449541027205_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250410/5010655/detail_5010655_17449541036683_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250410/5010655/detail_5010655_17449541045010_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250410/5010655/detail_5010655_17449541054592_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81836461,
+     "text": "얇고 세일해서 여름용으로 구매했어요 이 옷은 커서 스몰이 맞네요 허리 있으신 분들은 허리밴드가 신축성이 별로인점 인지하시고 구매하세요 저 한테는 딱 좋습니다",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-01-24"
+    },
+    {
+     "no": 76575115,
+     "text": "클라이밍 용으로 산 옷인데 핏도 이쁘고 무엇보다도 더운 날씨에 입고 다녀도 답답하지 않아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-07-07"
+    },
+    {
+     "no": 75593647,
+     "text": "반스 팬츠는 믿고 구매합니다.허벅지가 짧고 굵어서 다른옷은 못입는데ㅜ반스는 진짜 돟아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-06-19"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3608191,
+   "url": "https://product.29cm.co.kr/catalog/3608191",
+   "brand": "프라크티",
+   "brand_en": "PRAKRTI",
+   "brand_id": "30879",
+   "name": "[25FW]  Nirlamba solid pant(basic line)_3Colors",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 69000,
+   "normal_price": 69000,
+   "discount": 0,
+   "review_count": 113,
+   "rating": 5.0,
+   "review_total_listed": 113,
+   "sold_out": false,
+   "release_date": "2025-02-21",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 COTTON 100% 101102 색상 상세 페이지 참조 101103 치수 상세 페이지 참조 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 prakrti (프라크티) 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 대한민국 101106 세탁방법 및 취급시 주의사항 100% 코튼 원단으로 차가운 물이나 30도 이하의 미지근한 물에 세탁해주세요. 손세탁을 권장드리며 세탁기로 세탁할 시 울세탁 코스로 단독 세탁하시거나, 망에 따로 넣어 세탁해주세요. 제품을 건조기에 돌리거나 , 뜨거운 물, 뜨거운 열을 가하면 제품이 변형 될 수 있으니 꼭 주의 부탁드립니다. *색상이 짙은 제품인 경우 땀 또는 습도로 인하여 염료가 묻어 나올 수 있으니 1~3회 단독 세탁 부탁드립니다. 101107 YYYYMM ex)201109 제조연월 2026/10 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자분쟁해결 기준에 따름 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 상세 페이지 참조 811057 0 1 165.0 51.0 4 3 0 30.0 10.0 64.0 91.0 6784274 2 28.0 29.5 0 33.0 10.0 67.0 94.0 6784275 4 30.0 31.5 0 33.0 10.0 67.0 100.0 6784276 6 30.0 31.5 2626298 2025-02-16 00:00:00 true 0 internal [BEST] 2",
+   "images": [
+    "https://img.29cm.co.kr/item/202607/11f186a31cb040639645cbc77ca951e7.jpg",
+    "https://img.29cm.co.kr/item/202607/11f186a2b268c358814857069ae6b6bb.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fa4a53cf68a918bb456e0d2e54.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fa4fe45eedb27d9f0a9b870be4.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fa556229c7b27d23d56d647466.jpg",
+    "https://img.29cm.co.kr/item/202604/11f12dbeb2689306aaf877381dd35fdf.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fab3cbef59b27d9917eac7feff.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fab7de9071b27d51c3d2fd15bd.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fac45aab9db27d9556c3e33621.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 17648421,
+     "text": "이바지만.다섯개정도 있어요. 더더 깔별로 쟁이고싶어요 파스텔칼라도 예쁘고 가볍고 편해요. 수련할때도 편합니다. 158기준 길이는 좀 짧똥합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-06-21"
+    },
+    {
+     "no": 18577143,
+     "text": "발목쪽 시보리가 짱짱해서 긴사이즈를 사도 불편함 없이 편하게 요가가능합니당 색도 예쁘고 재질은 특별할거없는 얇은 면소재라 휘뚜루잘입고있습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-18"
+    },
+    {
+     "no": 18517793,
+     "text": "엄청얇은재질, 가볍고 벙벙해도 수련할때 거슬림이 없음. 평상복으로도 입고싶었는데 주머니가없어서 조금 불편할수있음 하디만 요가복으로는 강추",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-13"
+    },
+    {
+     "no": 17011693,
+     "text": "핏 진짜 예쁘고 소재 부들해서 착용감 미쳤음🔥 허리도 편하고 핏이 자연스럽게 떨어져서 꾸안꾸 느낌 제대로! 데일리로 계속 손 가는 바지👍",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-05-04"
+    },
+    {
+     "no": 18703662,
+     "text": "요가에 요즘 빠져서 진심요가바지 매일 입어요 여기 브랜드 편하고 마음에 들어요 짱 좋습니다 자주 구매할게요 브랜드 첨 구매인데 좋네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-03"
+    },
+    {
+     "no": 18487554,
+     "text": "아쥬 잘 맞아요 부디랑 비교햇을떼도 가성비로 편하게 입을 수 잇을 것 같아요 바지폭은 큰 편이고, 키가 168인데 딱 잘 이쁘게 떨어져요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-10"
+    },
+    {
+     "no": 18730276,
+     "text": "좋아요, 확실히 일상복으로 입을 수 있는 색이라 손이 자주 갑니다. 키가 작아서 발목 잡아주는 스타일 좋아하는데 딱이에요 굿",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 17864653,
+     "text": "하스타 팬츠 2개 구매하고 진짜 만족스러워서 닐람바도 구매했어요 하렘팬츠는 빵실빵실 볼륨큰게 예쁘다고 생각해서 한사이즈 업했어요 하스타보다 살짝 더 빵실하게 나온거 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-10"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3087056,
+   "url": "https://product.29cm.co.kr/catalog/3087056",
+   "brand": "프라크티",
+   "brand_en": "PRAKRTI",
+   "brand_id": "30879",
+   "name": "Nirlamba solid pants_3 Colors",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 69000,
+   "normal_price": 69000,
+   "discount": 0,
+   "review_count": 104,
+   "rating": 5.0,
+   "review_total_listed": 104,
+   "sold_out": false,
+   "release_date": "2025-02-21",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 COTTON 100% 101102 색상 상세 페이지 참조 101103 치수 상세 페이지 참조 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 prakrti (프라크티) 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 대한민국 101106 세탁방법 및 취급시 주의사항 100% 코튼 원단으로 차가운 물이나 30도 이하의 미지근한 물에 세탁해주세요. 손세탁을 권장드리며 세탁기로 세탁할 시 울세탁 코스로 단독 세탁하시거나, 망에 따로 넣어 세탁해주세요. 제품을 건조기에 돌리거나 , 뜨거운 물, 뜨거운 열을 가하면 제품이 변형 될 수 있으니 꼭 주의 부탁드립니다. *색상이 짙은 제품인 경우 땀 또는 습도로 인하여 염료가 묻어 나올 수 있으니 1~3회 단독 세탁 부탁드립니다. 101107 YYYYMM ex)201109 제조연월 2026/04 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자분쟁해결 기준에 따름 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 상세 페이지 참조 758238 0 1 165.0 51.0 4 3 837245 0 1 170.0 53.0 6 2 0 30.0 10.0 64.0 91.0 6471254 2 28.0 29.5 0 33.0 10.0 67.0 94.0 6471255 4 30.0 31.5 0 33.0 10.0 67.0 100.0 6580967 6 30.0 31.5 2343764 2025-02-16 00:00:00 true 0 internal [NEW COLORS] 2",
+   "images": [
+    "https://img.29cm.co.kr/item/202605/11f15a6524d547b59090edb1adc70626.jpg",
+    "https://img.29cm.co.kr/item/202502/11efee02de59639a8f0a25bcd10d1498.jpg",
+    "https://img.29cm.co.kr/item/202605/11f159b03c8b8aa39f7f9b9efe1b2262.jpg",
+    "https://img.29cm.co.kr/item/202502/11efee02db5683d68f0af7d8855931d3.jpg",
+    "https://img.29cm.co.kr/item/202605/11f15a683352aa2f909005e77d67c736.jpg",
+    "https://img.29cm.co.kr/item/202605/11f15a6835defa639090b3c32947ce6a.jpg",
+    "https://img.29cm.co.kr/item/202605/11f159b04843445b9f7f39ed54ad991b.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 18730257,
+     "text": "약간 체다치즈같은 노랑색입니다 길이도 적당하고 맘에 들어요 주머니 없는 건 조금 불편하지만.. 그래도 주머니 있는 요가 바지들 빨리 안 마르는 것 때문에 짜증났는데 그런건 없어서 좋네요 ㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 18479975,
+     "text": "임산부인데 바지 너무 편하고 좋아요! 색감도 예쁜 레드라 어디에 코디해도 잘 어울리네요 ㅎㅎ 출산 후에도 잘 입을 것 같아 강추합니당",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-10"
+    },
+    {
+     "no": 15368238,
+     "text": "품절됐었는데.29워크할때 재입고 떠서 바로 구매했어요 딱 제가 원하는 핏이고 방방한게 너무 예뿝니다 톤다운된 레드라 더더욱 맘에 들어요 딥그린도 재입고 되면 구매하고싶네요 ^^",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-22"
+    },
+    {
+     "no": 15362211,
+     "text": "몰디브에서 입긴 좀 더웠지만! 너무 예뻐요!!! 쨍한 레드 수련할 때도 불편한 점 없이 편하게 잘 입고 있습니다. 가끔 주머니가 있으면 편하겠다 싶지만 예뻐서 봐줌ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-21"
+    },
+    {
+     "no": 18117309,
+     "text": "색감이 아주 좋아요 바지가 길어서 사이즈도 잘 맞습니다 ㅎㅎ 주머니가 없는 바지라 평소에는 조금 불편하지만 그래도 수련 중에는 착용감이 좋습니다 편안해요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-05"
+    },
+    {
+     "no": 18320509,
+     "text": "레드에 버건디 한방울 떨어진 웜레드로 가을에 입기좋은 색이구요. 길이감 품 두께 좋네요 한겨울빼곤 잘입겠어용.다양한 색상이없어 아쉽네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-25"
+    },
+    {
+     "no": 18418503,
+     "text": "쨍하지않고 그렇다고 탁하고 어둡지않은 딱 이쁜 색상의 레드에용!! 레드 요가바지 고심했는데 마음에 들어여 일상복으로도 입기 이쁩니당",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-04"
+    },
+    {
+     "no": 18386564,
+     "text": "살짝 큰것같은데도 멋스러워서 기분좋아지는바지예요  칼라도 너무 이쁜 쨍한색이라 보기만해도 상쾌해지네요~열심히 요가할께요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-01"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5010656,
+   "url": "https://www.musinsa.com/products/5010656",
+   "brand": "반스",
+   "brand_en": "VANS",
+   "brand_id": "vans",
+   "name": "카고 EX 배기 팬츠 - 아스팔트 / VN000NMJ1O71",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 58990,
+   "normal_price": 99000,
+   "discount": 40,
+   "review_count": 6,
+   "rating": 4.3,
+   "review_total_listed": 6,
+   "sold_out": false,
+   "release_date": "2025-04-10",
+   "season": "",
+   "style_no": "VN000NMJ1O71",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250410/5010656/detail_5010656_17449540737032_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250410/5010656/detail_5010656_17449540746586_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250410/5010656/detail_5010656_17449540755935_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250410/5010656/detail_5010656_17449540764665_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3338083,
+   "url": "https://product.29cm.co.kr/catalog/3338083",
+   "brand": "플레이그라운드",
+   "brand_en": "PLAYGROUND",
+   "brand_id": "61120",
+   "name": "[프리오더 13차] 크렘햇",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 29000,
+   "normal_price": 29000,
+   "discount": 0,
+   "review_count": 55,
+   "rating": 5.0,
+   "review_total_listed": 55,
+   "sold_out": false,
+   "release_date": "2025-06-18",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "플레이그라운드 크렘헷\n﻿\n﻿\n작년 품절대란이었던 크램햇 뉴버전을 소개합니다.\n﻿\n얇고 가벼운 원사를 사용한 니트 보넷으로 한여름에도 착용이 가능합니다.\n﻿\n베이비부터 토들러까지 아이들의 코디에 포인트가 되어줍니다.\n﻿\n보넷 이음선 부분에 니트의 주름지는 부분을 보완하여 더 깔끔한 핏으로 재출시 했습니다.\n﻿\n﻿\n모델들의 착용 사진을 참고해주세요.\n﻿\n(화보 컷은 뉴 버전, 모델 아기들의 착용 사진은 작년 버전 입니다.)\n﻿\n﻿\n신생아 아기부터 키70cm 이하 아가들은 XS사이즈, 키 80cm 이하 아가들은 S 사이즈,\n﻿\nM사이즈는 키 100cm 아가까지 추천 드려요!\n﻿\nS사이즈와 M사이즈는 둘레 1cm 차이입니다.\n﻿\n아가들마다 체형이나 성장속도 두상의 크기 등등이 다 상이하여\n﻿\n참고만 해주시고 더 자세한 사이즈는 실측을 참고 부탁드립니다.\n﻿\n﻿\n﻿\n📢  배송 일정 안내\n﻿\n프리오더 11차 - 9월 1일(화)부터 순차 출고될 예정입니다.﻿\n﻿\n입고되는 대로 순차적으로 발송해 드리겠습니다.\n﻿\n﻿\nmodel size\n﻿\n여아 : 80cm 10kg 80size Ssize(Hat)\n﻿\n﻿\n** 해당 상품은 주문 순서에 따라 순차적으로 발송될 예정입니다.\n﻿\n﻿\n▫  바로배송 상품과 프리오더 상품을 함께 구매하셨을 때는\n﻿\n프리오더 상품 배송일정에 맞게 발송됩니다.\n﻿\n104101 종류 모자 104102 소재 cotton 100% 104103 치수 XS, S, M 104104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능 제조자 Playground 104105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 China 104106 취급시 주의사항 손빨래를 권유드립니다. 104107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 교환/반품 규정 a. 단순 변심으로 인한 교환/반품의 경우 제품 수령 후, 7일 이내 사이트 Q&A 게시판을 통해 교환/반품 접수를 진행해주세요. b. 교환/반품의 경우 택배비는 고객님의 부담으로 이루어집니다. 교환/반품이 불가능한 경우 a. 사용 흔적이 있는 경우 (제품의 훼손, 포장 패키지의 훼손, 수선, 세탁, 향수 등) b. 상품의 구성품이 훼손되거나 누락된 채로 반품된 경우 c. 게시판 접수 없이 상품을 임의적으로 발송한 경우 d. 상품 수령 후 7일 이내의 교환시기가 지난 경우 e. 모니터 해상도에 따른 색상 및 질감 차이의 경우 혹은 상세설명의 기재된 내용을 숙지하지 못한 경우 교환/반품 배송비 - 단순 변심으로 인한 교환/반품의 경우 왕복택배비 부담 - 불량 및 오배송시 브랜드 측에서 배송비 제공 104108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 Playground 070-8064-1004",
+   "images": [
+    "https://img.29cm.co.kr/item/202506/11f04bf68ac0467589097f03fa99e4d8.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf68cc31b57890929fceb982050.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6ac6b5ae18909791a2aec542f.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6b07dfcf389096fb7e6e1dec5.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6b7da72d78909b9e73eb71875.jpeg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6c001b2cd8909931d92048e92.jpeg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6c3f979df89093f19b68e9625.jpeg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6c79d0671afc0eb5834b6d030.jpeg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6ca79998389099708d2a0b1b3.jpeg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6cf8a4aabafc0d3acd7b8a42c.jpeg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6d405246789091b8da29e173a.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6d992a6b1afc0711486644e2d.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6e1bc57afafc03b16682cb126.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6e447e491afc051bf5f05ea13.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf6e6ebdb75afc0ad981862fc8b.jpg",
+    "https://img.29cm.co.kr/item/202506/11f04bf75b40218f89099fcd62559037.png"
+   ],
+   "quotes": [
+    {
+     "no": 18206829,
+     "text": "너무 귀여워요… xs사이즈라 오래는 못쓰겠지만 아기때 귀엽게 쓸 수 있을 것 같아요 ㅎㅎ 선물용으로 구매해도 좋을 듯 해요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-08-13"
+    },
+    {
+     "no": 16719997,
+     "text": "아기 50일 촬영할때 사용하려고 급하게 구매했는데 넘 귀여워요! 사이즈 조금 여유있고 두께도 얇아 여름까지 쓸수있을것같아요 ㅎㅎ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-04-08"
+    },
+    {
+     "no": 18529931,
+     "text": "유일한 단점은 너어무 귀여워져서 미칠 것 같다는 점입니다. 가뜩이나 귀여운 아기가 더 귀여워보여서 주책맞게 하루종일 웃음이 나요. 간절기까지 잘 쓸 수 있을 것 같아요. 마음에 들어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-14"
+    },
+    {
+     "no": 18563031,
+     "text": "선물 주려고 샀는데 아직도 못줬어요ㅠㅠ 그래도 쌀쌀해지면 딱 잘 맞을것 같아 아기 100일 지나면 얼른 만나러 가려고요! 이가격에 이런 귀여운 모자 잘 없죠",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-17"
+    },
+    {
+     "no": 18492115,
+     "text": "이뻐요. 입혀보면 아시겠지만 살짝 돼지토끼 느낌이 들기도 하고 피글렛 같기도 해요. 아기한테 입혀서 외출했는데 편한지 잘 쓰고 있었어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-10"
+    },
+    {
+     "no": 18463076,
+     "text": "모자 니트 재질도 좋고 아기한테 씌워봤더니 너어무 귀여우ㅜ여 ㅜㅜ사진도 엄청 잘나오구요 ! 다들 귀엽다구 난리였답니당 완전 강추추추추",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-08"
+    },
+    {
+     "no": 18436425,
+     "text": "너무 기여워요….얼굴을 귀엽고 이쁘게 핏하게 잡아주고 얼른 날씨가 선선해져서 씌우고 다니구 싶은 ㅋㅋㅋ ㅜㅜ 대만족입니다👍🏻",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-06"
+    },
+    {
+     "no": 18683763,
+     "text": "아이가 쓰면 너무너무너무 사랑스러워져요 ㅋㅋㅋ 모자 엄청 많은데 매일 이것만 쓰고 다닙니다,, 2개월 아가 사이즈 딱이에요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-01"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 4053979,
+   "url": "https://product.29cm.co.kr/catalog/4053979",
+   "brand": "모어아웃",
+   "brand_en": "moreout",
+   "brand_id": "15428",
+   "name": "[5PP6513]하렘 와이드 팬츠",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 46000,
+   "normal_price": 58000,
+   "discount": 21,
+   "review_count": 52,
+   "rating": 5.0,
+   "review_total_listed": 52,
+   "sold_out": false,
+   "release_date": "2026-06-09",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 Polyester 50%, Acrylic 50% 101102 색상 블랙,네이비,소프트라벤더 101103 치수 S,M,L 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 케이앤에이치티 모어아웃 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 101106 세탁방법 및 취급시 주의사항 [1]찬물 또는 30도 이하의 미지근한 물에 세탁하세요. [2]세탁 후 물기를 완전히 제거 후 , 그늘에 뉘어서 건조하세요. [3]중성세제를 사용하고, 섬유유연제와 표백제 및 강력효소를 사용하지 마세요. [4]장시간 물에 담궈 놓거나 운동 후 젖은 상태로 방치할 경우 이염될 수 있으니, 즉시 세탁하세요. [5]이염될 수 있으니 단독세탁 권장합니다. [6]브라패드는 분리 후 별도로 세탁하세요. [7]소재 특성상 원단과 다리미의 직접적인 접촉을 피해주세요. [8]고탄력 운동복의 짙은색과 형광색류는 세탁 시 소량의 물빠짐 현상이 있을 수 있으나, 정상적인 현상입니다. 101107 YYYYMM ex)201109 제조연월 202606 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 본 제품에 이상이 있을 경우 공정거래위원회 고시에 의거보상 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 29CM 고객센터 : 1660-2929(MY>1:1문의) / 모어아웃 고객센터 : 카카오톡 채널 @moreout 841442 0 1 163.0 44.0 S 1 0 35.0 13.5 66.0 96.0 7380899 S 40.0 30.0 0 36.0 14.5 68.0 98.0 7380900 M 41.0 32.0 0 37.0 15.5 70.0 100.0 7380901 L 42.0 34.0",
+   "images": [
+    "https://img.29cm.co.kr/item/202606/11f16ba100785a9bb3575f05e0bc5295.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16ba100785a99b357990eba08b118.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16ba100791d919090f9ae2f444c76.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 17791998,
+     "text": "입어보니 실물이 훨씬 옙븐 색감!!!! 입고보니 브라탑도 커버업도 바지도 모두 모어아웃ㅎㅎ 디자인도 예쁘고 운동할때도 편하고 예쁜 신상 많이 내주세욧..! 사는건 제가 할게요^_ㅠ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-03"
+    },
+    {
+     "no": 18322133,
+     "text": "스몰이랑 고민하다가 미디엄 했는데 넉넉하고, 기장도 160 기준에 아주 적당하게 잘 맞아서 마음에 들어요:) 색상도 넘예..💜",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-25"
+    },
+    {
+     "no": 18439111,
+     "text": "모어아웃 요가복 처음 주문하는데요 다들 하렘 요가바지를 입는지 이해가 가는데 다른데껀 안입어봤지만 운동할때도 평소에도 편하고 좋아요 검정도 재주문하려고요 최고예요✌🏻",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-06"
+    },
+    {
+     "no": 18729521,
+     "text": "네이비를 주문했는데  블랙이와서  확인해보니 제가̆̈ 잘못눌렀네요 ㅠ 검정색은 많은데 ㅠ 제잘못이니 어쩔수없죠 바지핏 편하고이뻐요 좀앏은편이라  좀추워지면 못입겠네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 18436935,
+     "text": "너무 바스락거리지도 않고 너무 후들거리지도 않아서 좋아요. 하렘팬츠 잘못사면 후들겨려서 군살라인 다보이고 해서 몇번 실패했는데 다른색도  사야겠어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-06"
+    },
+    {
+     "no": 18497931,
+     "text": "맨날 색깔 있는 팬츠만 입었는데 블랙 왜 이제 샀나 후회 .. 첫 블랙 요가 팬츠를 모어아웃으로 접하게 되어 영광 흐윽 다른것도 다 구매하거 싶어여 .. 🫧",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-11"
+    },
+    {
+     "no": 18589155,
+     "text": "모어아웃 다른 바지 사고 너무 맘에 들어서 또 구매했어요!!! 핏 너무 예쁘고 착용감 너무 편해요..! 요가 말고 다른 운동 할때도 입으려구요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-19"
+    },
+    {
+     "no": 17881022,
+     "text": "너무 예쁘고 편합니다 재질이 얇고 통기성이 좋아서 여름에 입고 다니기 딱 좋습니드 저는 요가도 안하는데 일상복으로 사서 입고다닙니다... 십자로 크로스 포인트 된것도 유니크하규 핏도 만족스럽습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-12"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "하렘",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6706929,
+   "url": "https://www.musinsa.com/products/6706929",
+   "brand": "데비웨어",
+   "brand_en": "DEVIWEAR",
+   "brand_id": "deviwear",
+   "name": "스트라이프 워머 팬츠 DEVI-B0101-옐로우",
+   "genders": [
+    "W"
+   ],
+   "category": "스포츠/레저 > 하의",
+   "sale_price": 38000,
+   "normal_price": 40000,
+   "discount": 5,
+   "review_count": 2,
+   "rating": 4.5,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2026-06-22",
+   "season": "",
+   "style_no": "5010312936",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260622/6706929/detail_6706929_17820914174696_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6706929/detail_6706929_17820914180108_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6706929/detail_6706929_17820914185211_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260622/6706929/detail_6706929_17820914191030_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "하렘",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7218837,
+   "url": "https://www.musinsa.com/products/7218837",
+   "brand": "타입서비스",
+   "brand_en": "TYPESERVICE",
+   "brand_id": "typeservice",
+   "name": "Lace Trim Hotfix Fleece Pants [Black]",
+   "genders": [
+    "W"
+   ],
+   "category": "바지 > 트레이닝/조거 팬츠",
+   "sale_price": 121500,
+   "normal_price": 135000,
+   "discount": 10,
+   "review_count": 2,
+   "rating": 5.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2026-09-01",
+   "season": "2026 F/W",
+   "style_no": "QATB12BKF",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260901/7218837/detail_7218837_17890916899294_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260901/7218837/detail_7218837_17890916900798_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260901/7218837/detail_7218837_17890916902401_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87844612,
+     "text": "부들부들하고 신축성도 어느 정도 있고 예뻐요. 레이스는 잘 안보이지만 반짝이가 잘 보여서 만족해요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 87844380,
+     "text": "겉은 수건같이 보들보들한 재질이고 안쪽은 얇은 기모가 있어요. 레이스와 반짝이는 견고하게 붙어있어서 잘 떨어지지 않을 것 같아요. 조금 더 두꺼웠으면 좋았을 것 같지만 그래도 너무 예뻐요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "배기 조거 팬츠",
+   "cheaper_elsewhere": null
+  }
+ ],
+ "appended_at": "2026-10-07T10:44+09:00"
+}
