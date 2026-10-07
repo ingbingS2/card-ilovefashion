@@ -1,6 +1,9 @@
 {
   "permissions": {
     "allow": [
+      "WebFetch",
+      "Bash(TZ=KST-9 date:*)",
+      "Bash(sh autopost/prepare.sh)",
       "Bash(sh autopost/ap.sh collect:*)",
       "Bash(sh autopost/ap.sh build:*)",
       "Bash(sh autopost/ap.sh verify:*)",

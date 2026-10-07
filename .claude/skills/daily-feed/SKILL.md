@@ -29,33 +29,9 @@ description: @i_s2_fashion 매일 자동 카드뉴스 — 키워드 선정부터
 
 ## 0. 준비 (매 세션 시작 시, 이어 받은 세션이라도 `autopost-data/`가 없으면 다시)
 ```bash
-set -e
-cd "$(git rev-parse --show-toplevel)"
-if [ -x ./.venv/Scripts/python.exe ]; then PY=./.venv/Scripts/python.exe; elif command -v python >/dev/null; then PY=python; else PY=python3; fi
-$PY -c "import requests, PIL, playwright" || $PY -m pip install -q -r autopost/requirements.txt
-case "$PY" in ./.venv/*) ;; *) $PY -m playwright install chromium >/dev/null 2>&1 || $PY -m playwright install --with-deps chromium ;; esac
-if [ "$(uname -s)" = Linux ] && ! fc-list 2>/dev/null | grep -qi "noto sans cjk"; then echo "⚠️ 한글 시스템 글꼴 없음(fonts-noto-cjk) — 렌더 결과의 한글 깨짐을 꼭 눈으로 확인"; fi
-git fetch -q origin main && git merge -q --ff-only origin/main 2>/dev/null || true
-git worktree prune
-if [ ! -d autopost-data ]; then
-  if git ls-remote --exit-code --heads origin claude/autopost-data >/dev/null; then
-    git fetch -q origin claude/autopost-data
-    git worktree add -f -B claude/autopost-data autopost-data origin/claude/autopost-data
-    git -C autopost-data branch -q -u origin/claude/autopost-data
-  else   # 첫 실행 — 데이터 브랜치를 새로 만든다
-    git worktree add --detach autopost-data
-    git -C autopost-data checkout -q --orphan claude/autopost-data
-    git -C autopost-data rm -rfq .
-    printf 'episodes/*/assets/\nepisodes/*/_render.html\n' > autopost-data/.gitignore
-    cp autopost/seed/history.json autopost/seed/handles.json autopost-data/
-    git -C autopost-data add -A && git -C autopost-data commit -qm "autopost: 데이터 브랜치 시작"
-    git -C autopost-data push -q -u origin HEAD:claude/autopost-data
-  fi
-fi
-git -C autopost-data pull -q --ff-only origin claude/autopost-data
-test -f autopost-data/history.json
-set +e
+sh autopost/prepare.sh
 ```
+(내용: 패키지 확인 → main 최신화 → `autopost-data/` worktree 준비·pull → history.json 확인 → **오늘(KST) 날짜**와 오늘 회차가 이미 있는지 출력.)
 **이 블록이 하나라도 실패하면 더 진행하지 않는다** — 데이터 브랜치 없이 돌리면 지난 게시 이력을 몰라 같은 날 두 번 게시하거나 직전 브랜드를 반복할 수 있다(코드도 history.json이 없으면 멈춘다). 실패 원인을 보고하고 끝낸다.
 토큰 확인: `sh autopost/ap.sh measure --check` — `missing`이면 정상(토큰은 게시·측정 루틴 쪽에만 있다) → 1단계를 건너뛴다. `invalid`(만료 190 등)이거나 ok 줄에 만료 임박 경고가 있으면 마지막 보고 맨 위에 "인스타 토큰 갱신 필요(게시·측정 루틴 환경의 IG_ACCESS_TOKEN)"를 적는다. 토큰 값은 절대 출력하지 않는다.
 
@@ -71,7 +47,7 @@ set +e
    - 직전 회차와 **품목 카테고리가 겹치지 않게**, 최근 10회차와 같은 키워드 금지, 두 카테고리 혼합 금지, 랭킹 키워드 금지.
    - 고관여 아이템(스커트·가방·바지·신발·아우터)이 기본템보다 강하다. 성과 상위 회차(부츠 1,718 · 비키니 1,328 · 긴바지 813)의 공통점은 "게시 시점에 이미 아픈 주제"였다.
 4. 축 하나를 정한다(두께 순·굽 높이 순·핏 변주 등 — 색·워싱 ✗).
-5. 폴더명 `YYYYMMDD 키워드` — 날짜는 **KST** 오늘(`TZ=Asia/Seoul date +%Y%m%d`; 클라우드 기본 시계는 UTC라 07시 전엔 하루 밀린다).
+5. 폴더명 `YYYYMMDD 키워드` — 날짜는 0단계(`prepare.sh`)가 찍어 준 **오늘(KST)**을 쓴다(직접 구하려면 `TZ=KST-9 date +%Y%m%d` — `TZ=Asia/Seoul`은 Windows Git Bash에서 무시돼 UTC가 나온다).
 
 ## 3. 후보 수집
 ```bash
