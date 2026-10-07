@@ -34,7 +34,8 @@
       "Read(//d/카드뉴스/**)",
       "Edit(//d/fashion-cardnews/autopost-data/**)",
       "Write(//d/fashion-cardnews/autopost-data/**)",
-      "Write(//d/카드뉴스/**)"
+      "Write(//d/카드뉴스/**)",
+      "Bash(sh autopost/ap.sh publish --pending)"
     ],
     "deny": [
       "Bash(git push --force:*)",
@@ -44,7 +45,6 @@
     "ask": [
       "Bash(sh autopost/ap.sh publish * --approve *)",
       "Bash(sh autopost/ap.sh publish * --user-approved)",
-      "Bash(sh autopost/ap.sh publish --pending)",
       "Bash(./.venv/Scripts/python.exe -m autopost.publish:*)"
     ]
   },
