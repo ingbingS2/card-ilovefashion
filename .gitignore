@@ -1,2 +1,4 @@
 episodes/*/assets/
 episodes/*/_render.html
+.omc/
+**/.omc/
