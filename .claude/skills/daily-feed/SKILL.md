@@ -127,7 +127,7 @@ git -C autopost-data add -A && git -C autopost-data commit -qm "autopost: <폴�
 마지막 메시지(한국어, 폰에서 읽기 좋게):
 - 맨 위: `📝 오늘의 피드 — <키워드>` + 수요 근거 한 줄
 - 미리보기 링크: `https://github.com/ingbingS2/card-ilovefashion/tree/claude/autopost-data/episodes/<폴더명 URL 인코딩>` (사진 1~7.jpg를 바로 볼 수 있다)
-- PC에서 돌 때만: `D:\카드뉴스\<폴더명>\`에도 1~7.jpg·caption.txt·_preview.html을 복사해 둔다(클라우드에서는 생략)
+- PC에서 돌 때만: `sh autopost/open_preview.sh "<폴더명>"` — `D:\카드뉴스\<폴더명>\`에 1~7.jpg·caption.txt·_preview.html을 복사하고 **Chrome으로 `_preview.html`을 연다**(10-07 사용자 지시: 디자인은 이 경로를 Chrome으로 본다). 보고에 그 경로(`D:\카드뉴스\<폴더명>\_preview.html`)를 적는다. 클라우드에서는 생략. 디자인을 고칠 때마다 다시 실행한다.
 - 5종 표: 브랜드 · 상품 · 판매가(할인) · 후기/평점 · 근거(인용/스펙)
 - 표지 문구, CTA 문구, 캡션 전문
 - build 경고(`[warn]`)와 태그에서 뺀 브랜드

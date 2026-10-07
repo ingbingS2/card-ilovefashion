@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(sh autopost/open_preview.sh:*)",
       "WebFetch",
       "Bash(TZ=KST-9 date:*)",
       "Bash(sh autopost/prepare.sh)",

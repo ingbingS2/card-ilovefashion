@@ -69,7 +69,7 @@
 무신사 접근: 가정용 IP(PC)에서는 `requests`로 API가 열린다. 데이터센터 IP(클라우드·Actions)는 Cloudflare 403 — **자동화 탐지 회피(헤드리스 브라우저 위장·`AutomationControlled` 끄기·헤드리스 UA 숨기기)로 뚫지 않는다**(10-02, autopost는 그 몰을 건너뛴다). 수동 확인이 필요하면 사람이 쓰는 브라우저(claude-in-chrome)로 `www.musinsa.com/products/{no}`를 열고 페이지 안에서 `goods-detail.musinsa.com/api2/goods/{no}`(가격 `goodsPrice.salePrice/normalPrice/discountRate`), `goods.musinsa.com/api2/review/v1/goods/{no}/reviews/summary`, 후기 list API를 fetch. 수동 회차의 `card-drafts/*/verify.py`는 10-02부터 탐지 회피 플래그·헤드리스 UA 숨기기를 뺐다(데이터센터 IP에선 막힐 수 있고, 막히면 그대로 둔다). autopost 회차는 `sh autopost/ap.sh verify`. 상세 엔드포인트는 [crawler/FINDINGS.md](crawler/FINDINGS.md).
 
 ## 7. 미리보기·피드백 처리
-- 완성본은 결과 폴더에 `_preview.html`(1~N.jpg + 캡션, `?t=Date.now()` 캐시 우회)을 만들고 **경로만 알린다. 브라우저 창을 직접 띄우지 않는다**(08-06). 수정 시 같은 파일명으로 덮어쓰고 "F5" 안내.
+- 완성본은 결과 폴더(`D:\카드뉴스\<폴더명>\`)에 `_preview.html`(1~N.jpg + 캡션, `?t=Date.now()` 캐시 우회)을 만들고 경로를 알린다. ~~브라우저 창을 직접 띄우지 않는다(08-06)~~ → **10-07 사용자 지시: Chrome으로 `_preview.html`을 열어 준다**(autopost는 `sh autopost/open_preview.sh "<폴더명>"`). 수정 시 같은 파일명으로 덮어쓰고 다시 연다.
 - **"피드백" 요청 = 검토 + 수정 + 재렌더 + 재검토까지 한 세트**(08-02). 지적만 나열하고 선택지를 되묻지 않는다. 갈래가 있으면 정책에 가장 맞는 안으로 진행하고 무엇을 왜 고쳤는지 보고. 보고 형식: ① 고친 것(before→after) ② 못 고친 것과 이유 ③ 남은 판단 사항.
 - API 키가 없어 자동 카피가 안 나오면 에이전트가 직접 쓴다. 폴백 카피를 그대로 두지 않는다.
 
