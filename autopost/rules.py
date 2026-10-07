@@ -326,6 +326,37 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
             err("표지 image 인덱스가 범위 밖")
         elif cc["images"][ci] in card_images:
             err("표지 사진이 상품 카드 사진과 같은 원본(§4)")
+    collage = cover.get("collage")
+    if collage is not None:
+        if not isinstance(collage, list) or not config.COLLAGE_MIN <= len(collage) <= config.COLLAGE_MAX:
+            err(f"표지 collage는 {config.COLLAGE_MIN}~{config.COLLAGE_MAX}개 목록")
+            collage = []
+        seen = set()
+        for k, part in enumerate(collage, 1):
+            tag = f"표지 콜라주 {k}번"
+            if not isinstance(part, dict) or set(part) - {"goodsNo", "image", "pos"}:
+                err(f"{tag}: goodsNo·image·pos만 쓸 수 있음")
+                continue
+            pc = by_no.get(str(part.get("goodsNo")))
+            if str(part.get("goodsNo")) not in nos or not pc:
+                err(f"{tag}: 5종 중 하나의 사진만 쓸 수 있음(§4)")
+                continue
+            pi = part.get("image")
+            if not isinstance(pi, int) or isinstance(pi, bool) or not 0 <= pi < len(pc.get("images", [])):
+                err(f"{tag}: image 인덱스가 범위 밖")
+                continue
+            url = pc["images"][pi]
+            if url in card_images:
+                err(f"{tag}: 상품 카드 사진과 같은 원본(§4)")
+            if url in seen:
+                err(f"{tag}: 콜라주 안에서 같은 사진이 두 번")
+            seen.add(url)
+            if part.get("pos") is not None and not _POS.match(str(part["pos"])):
+                err(f"{tag}: pos는 '50% 20%' 형식")
+        if collage and cc and isinstance(ci, int) and not any(
+                str(p.get("goodsNo")) == str(cover.get("goodsNo")) and p.get("image") == ci
+                for p in collage if isinstance(p, dict)):
+            err("표지 goodsNo·image(대표 컷)가 collage 안에 없음")
 
     # 캡션 (§5) — 브랜드 목록은 build가 붙인다
     cap = nfc(ep.get("caption", ""))

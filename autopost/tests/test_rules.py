@@ -230,3 +230,22 @@ def test_cheaper_mall_claim_needs_successful_comparison(episode, cands, handles)
     cands["candidates"][1]["cheaper_elsewhere"] = {"mall": "29CM", "goodsNo": 1, "sale_price": 1000, "url": "u"}
     errs = errors(rules.check_episode(episode, cands, [], handles, TODAY))
     assert any("사실과 다름" in e and "각 몰 판매가 기준" in e for e in errs)
+
+
+def test_cover_collage_rules(episode, cands, handles):
+    """표지 콜라주(10-07): 5종의 사진만, 상품 카드와 다른 원본, 대표 컷 포함, 2~5개."""
+    nos = [p["goodsNo"] for p in episode["products"]]
+    used = {p["goodsNo"]: p["image"] for p in episode["products"]}
+    other = lambda no: next(i for i in range(4) if i != used[no])
+    cov = episode["cover"]
+    ok = [{"goodsNo": cov["goodsNo"], "image": cov["image"]}] + [
+        {"goodsNo": no, "image": other(no)} for no in nos if no != cov["goodsNo"]][:3]
+    episode["cover"]["collage"] = ok
+    assert not any("콜라주" in m or "collage" in m for l, m in rules.check_episode(episode, cands, [], handles, TODAY) if l == "error")
+    episode["cover"]["collage"] = ok + [{"goodsNo": nos[0], "image": used[nos[0]]}]        # 상품 카드와 같은 원본
+    assert any("콜라주" in m and "같은 원본" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+    episode["cover"]["collage"] = [{"goodsNo": 999, "image": 0}, ok[1]]                    # 5종 밖
+    errs = errors(rules.check_episode(episode, cands, [], handles, TODAY))
+    assert any("5종 중 하나" in m for m in errs) and any("대표 컷" in m for m in errs)
+    episode["cover"]["collage"] = [ok[0]]                                                    # 1개는 콜라주 아님
+    assert any("collage는" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))

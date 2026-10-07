@@ -55,7 +55,8 @@ CAPTION_WARN_PATTERNS = {r"[가-힣A-Za-z]+(?:에서|부터)\s.{0,40}까지": "'
 
 # episode.json에서 세션이 쓸 수 있는 키 — 사실(가격·후기·인용 원문 등)은 candidates.json에서만 온다
 PRODUCT_KEYS = {"goodsNo", "image", "pos", "display_name", "color", "headline", "quote_no", "spec_line"}
-COVER_KEYS = {"goodsNo", "image", "pos", "kicker", "title", "sub"}
+COVER_KEYS = {"goodsNo", "image", "pos", "kicker", "title", "sub", "collage"}
+COLLAGE_MIN, COLLAGE_MAX = 2, 5   # 표지 콜라주(10-07 사용자 지시: 여러 색을 한 표지에) — 세로 띠 2~5개
 CTA_KEYS = {"zzal", "title", "sub"}
 ZZAL_INDEX = ZZAL_DIR / "index.json"   # 저장소에 든 짤 목록(자막·장면·무드·어울리는 주제·last_used)
 ZZAL_WEB_DIR = DATA_DIR / "zzal"       # 인터넷에서 채택한 짤 — 데이터 브랜치에 쌓인다(main 커밋 금지·클라우드 보존)

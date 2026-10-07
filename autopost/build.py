@@ -84,6 +84,9 @@ def card_dicts(ep: dict, prods: list[dict], cover_cand: dict, zzal_rel: str) -> 
     cards = [{"kind": "cover", "img": "assets/" + asset_name("cover", cover_cand["goodsNo"], cover["image"]),
               "pos": cover.get("pos", "50% 20%"), "kicker": html.escape(cover.get("kicker", "")),
               "title": rich(cover["title"]), "sub": rich(cover.get("sub", ""))}]
+    if cover.get("collage"):   # 여러 상품·색을 세로 띠로 나란히(10-07 사용자 지시)
+        cards[0]["imgs"] = [{"img": "assets/" + asset_name(f"cover{k}", part["goodsNo"], part["image"]),
+                             "pos": part.get("pos", "50% 25%")} for k, part in enumerate(cover["collage"], 1)]
     for i, p in enumerate(prods, 1):
         if p["review_count"] and p.get("rating"):
             # ★는 글꼴 독립적(이모지 ⭐는 Linux 렌더에서 글꼴이 없어 깨진다)
@@ -207,6 +210,9 @@ def build(folder: str) -> dict:
     assets.mkdir(exist_ok=True)
     download(cover_cand["images"][ep["cover"]["image"]],
              assets / asset_name("cover", cover_cand["goodsNo"], ep["cover"]["image"]))
+    for k, part in enumerate(ep["cover"].get("collage") or [], 1):
+        pc = by_no[str(part["goodsNo"])]
+        download(pc["images"][part["image"]], assets / asset_name(f"cover{k}", part["goodsNo"], part["image"]))
     for i, p in enumerate(prods, 1):
         download(p["images"][p["image"]], assets / asset_name(f"{i:02d}", p["goodsNo"], p["image"]))
     zz = rules.zzal_path(ep["cta"]["zzal"])
