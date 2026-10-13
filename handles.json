@@ -648,6 +648,21 @@
         "https://chaakan.co.kr/ footer 인스타 링크 → instagram.com/chaakan_official",
         "웹검색 '착한구두 인스타' 1위 instagram.com/chaakan_official"
       ]
+    },
+    {
+      "name": "하버드 슈즈",
+      "aliases": [
+        "HARVARD SHOES",
+        "하버드슈즈"
+      ],
+      "handle": "harvard_shoes",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-13",
+      "sources": [
+        "https://www.instagram.com/harvard_shoes/ (표시명 하버드슈즈, bio 'Harvard Shoes', 팔로워 35, 마지막 게시 2024-06, 링크 prfl.link/@harvardshoes)",
+        "공식몰·검색·X에서 추가 확인 불가 — 10-13 사용자 지시('@harvard_shoe 이거 사용해')로 추가"
+      ]
     }
   ]
 }
