@@ -602,6 +602,52 @@
         "https://lovlovseoul.com/ footer 인스타 링크",
         "인스타 계정 검색 '로브로브' 1위"
       ]
+    },
+    {
+      "name": "락피쉬웨더웨어",
+      "aliases": [
+        "ROCKFISH WEATHERWEAR",
+        "Rockfish"
+      ],
+      "handle": "rockfish_official",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-13",
+      "sources": [
+        "https://www.instagram.com/rockfish_official/ (표시명 Rockfish Weatherwear, 약 18.8만)",
+        "https://en.rockfish-weatherwear.co.kr/ footer 인스타 링크 → instagram.com/rockfish_official",
+        "웹검색 'rockfish weatherwear instagram' 1위 instagram.com/rockfish_official"
+      ]
+    },
+    {
+      "name": "리끌로우",
+      "aliases": [
+        "RECLOW"
+      ],
+      "handle": "reclow_official",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-13",
+      "sources": [
+        "https://www.instagram.com/reclow_official/ (표시명 리끌로우 reclow)",
+        "https://namu.wiki/w/리끌로우 공식 인스타 링크 instagram.com/reclow_official",
+        "웹검색 '리끌로우 reclow 인스타그램' 1위 + 부계정 @reclow_store 프로필이 본계정으로 @reclow_official 안내 (공식몰 reclow.com footer에는 인스타 링크 없음)"
+      ]
+    },
+    {
+      "name": "착한구두",
+      "aliases": [
+        "CHAAKAN"
+      ],
+      "handle": "chaakan_official",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-13",
+      "sources": [
+        "https://www.instagram.com/chaakan_official/ (표시명 CHAAKAN 착한구두, 약 6.1만)",
+        "https://chaakan.co.kr/ footer 인스타 링크 → instagram.com/chaakan_official",
+        "웹검색 '착한구두 인스타' 1위 instagram.com/chaakan_official"
+      ]
     }
   ]
 }

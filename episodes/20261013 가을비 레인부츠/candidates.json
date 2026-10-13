@@ -1,0 +1,1614 @@
+{
+ "folder": "20261013 가을비 레인부츠",
+ "collected_at": "2026-10-13T10:37+09:00",
+ "queries": [
+  "레인부츠",
+  "장화",
+  "레인 부츠",
+  "첼시 레인부츠",
+  "롱 레인부츠",
+  "레인슈즈"
+ ],
+ "gf": "F",
+ "new_since": "2025-01-01",
+ "notes": [],
+ "dropped": {
+  "재입고·컬러추가 표기(판매 개시일 신뢰 불가)": 5,
+  "직전 회차 브랜드": 1,
+  "신상 기준(2025-01-01) 미달": 64,
+  "브랜드당 2개 초과(색상 변형 등)": 6
+ },
+ "candidates": [
+  {
+   "mall": "무신사",
+   "goodsNo": 4999096,
+   "url": "https://www.musinsa.com/products/4999096",
+   "brand": "락피쉬웨더웨어",
+   "brand_en": "ROCKFISH WEATHERWEAR",
+   "brand_id": "rockfish",
+   "name": "ORIGINAL RAIN BOOTS SHORT - 7 colors",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 73900,
+   "normal_price": 87000,
+   "discount": 15,
+   "review_count": 568,
+   "rating": 4.7,
+   "review_total_listed": 568,
+   "sold_out": false,
+   "release_date": "2025-04-08",
+   "season": "2026 S/S",
+   "style_no": "RF1SHBF1RB009",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17799521004043_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17762314099033_big.png",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306925488_big.png",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306946002_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306965375_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306959498_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755640124319_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638339655_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638329426_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638349453_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638334357_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638344276_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638354163_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755638358489_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306933143_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755637276609_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755637291922_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306951561_big.png",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755637312259_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17756306971935_big.png",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755641051515_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755641056001_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755641060632_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999096/detail_4999096_17755641066974_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 85468261,
+     "text": "생각한것보다 무게가있지만 걷는데 불편함은 없어요. 운동화 235-240 신는데 240-245 사이즈 사니까 딱 적당하게 맞습니다.",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-06-20"
+    },
+    {
+     "no": 85333989,
+     "text": "유명한 종뚱이라 부츠는 생각도 안해봣는데 후기처럼 종아리 넉넉합니다 구두 235신어서 240-245로 시키니 손안대고 신거벗기 편해요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-06-18"
+    },
+    {
+     "no": 85333970,
+     "text": "유명한 종뚱이라 부츠는 생각도 안해봣는데 후기처럼 종아리 넉넉합니다 구두 235신어서 240-245로 시키니 손안대고 신거벗기 편해요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-06-18"
+    },
+    {
+     "no": 84814354,
+     "text": "사이즈가 없어서 정사이즈 했는데 발볼 넓거나 발등 높으신분(모두 다 나) 무조건 반사이즈업 추천드려요 벗기 개힘들어요 ㅠ",
+     "grade": 4,
+     "likes": 2,
+     "date": "2026-05-29"
+    },
+    {
+     "no": 84019329,
+     "text": "실제 색감이 더 이뻐요! 착화감도 매우 편해서 왜 다들 이 브랜드에서 레인부츠 사는지 알게됐어요! 검정도 샀는데 코코아색 실물 너무 이쁩니다",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-04-28"
+    },
+    {
+     "no": 86281189,
+     "text": "장마라서 사고 싶은데 첮 번째 신었을 때 부츠 윗부분이 피부에 마찰되어 피가 나고 매우 아픈 상처가 났습니다. 그런 피부 찰과상을 막으려면 두껍고 긴 양말을 신어야 합니다.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-14"
+    },
+    {
+     "no": 85050694,
+     "text": "바지에 신기고 좋고, 종아리 통도 넉넉해서 신고벗기 편할듯 해요!레인부츠 미리 장만하길 잘 했어요! 이번 장마는 패션도 , 활용도도 너무 좋을것 같아요! 코디에도 부츠가 멋스러워서 스타일리쉬해보여요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-07"
+    },
+    {
+     "no": 86061331,
+     "text": "색감도 이쁘고 사이즈도 잘맞아요 나이키 덩크 230 / 아디다스 삼바 225 / 컨버스 230 신는데 사이즈 잘맞앗어요~ 신고벗는데 큰 어려움도 없고 스타일리쉬 해보여서 좋아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-05"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3455540,
+   "url": "https://product.29cm.co.kr/catalog/3455540",
+   "brand": "누스",
+   "brand_en": "NUUS",
+   "brand_id": "15120",
+   "name": "[FW 뉴컬러] 유디트 리본 핀턱 플랫 [n5292-1]_6color",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 73040,
+   "normal_price": 88000,
+   "discount": 17,
+   "review_count": 851,
+   "rating": 5.0,
+   "review_total_listed": 851,
+   "sold_out": false,
+   "release_date": "2025-09-26",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 Artificial Leather 102102 색상 Black / Cream / Butter / Black (suede) / Beige (suede) / Gray (wool felt) 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 225-250mm 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 누스 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세페이지 참조 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 전자상거래법 준수 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 A/S 문의접수 : MY>1:1문의 이용 / A/S 책임자 : 010-7219-3335",
+   "images": [
+    "https://img.29cm.co.kr/item/202608/11f1a126f9eb430c85e1b39d564bb77f.jpg",
+    "https://img.29cm.co.kr/item/202608/11f19f070f571ad48fdc11692ca6c323.jpg",
+    "https://img.29cm.co.kr/item/202602/11f1033063e76adaa540d587612e2877.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a2ae4654397c85e171b322d310f6.jpg",
+    "https://img.29cm.co.kr/item/202602/11f1033063e71c5ca3c0f19b35053654.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61bd39295e0a3c037648aac99a3.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 16333656,
+     "text": "디자인 너~무 마음에 쏙 들어요 딱 생각했던 디자인이에요 ㅎㅎ 근데 제 발이 220이라 좀 많이 커유.. 깔창 깔아야돼요ㅠㅠ 기회되면 225정도는 제작해주시면 좋갰어요우.. ㅎㅎ ㅠㅠ",
+     "grade": 5,
+     "likes": 20,
+     "date": "2026-03-02"
+    },
+    {
+     "no": 14715685,
+     "text": "화이트톤의 플랫슈즈라 어떤 코디에도 자연스럽게 어울려요🤍 은은한 리본 디테일이랑 앞코 쉐입이 세련돼서 데일리룩에 포인트 주기 좋아요 가운데 쿠션이 있어서 오래 신어도 발도 편안해서 만족🙌🏻",
+     "grade": 5,
+     "likes": 17,
+     "date": "2025-09-28"
+    },
+    {
+     "no": 18621390,
+     "text": "생각보다 더 밝은 회색에 질감이 드러났지만 잘 신고 다닐 거 같아요 ㅎㅎ 무난무난하게 포인트 줄 수 있는 신발인 거 같아요 ~~",
+     "grade": 4,
+     "likes": 2,
+     "date": "2026-09-23"
+    },
+    {
+     "no": 18007219,
+     "text": "일단 말랑말랑하고 편하고 예뻐요~ 첫날 신어본 후기: 발가락 물집 잡힐 것 같아요 근데 늘어나겠죠...? 치마에 신으면 더 예쁠 것 같아요 앞코가 귀엽고 좋습니다~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-24"
+    },
+    {
+     "no": 18420922,
+     "text": "235 칼발 235로 주문했어요 아침에는 딱 적당하게 맞고 발 부으면 쫌 끼는 정도입니다 사이즈 다운은 비추합니닷!! 신발 예쁘고 맘에드러요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-04"
+    },
+    {
+     "no": 17068501,
+     "text": "구두는 반업해서 신는 편인데 후기에서 다들 크다고 하셔서 정사이즈로 구매했어요~! 길이가 남긴 하는데 편하게 잘 신을 수 있을 것 같아욤 ㅎㅎ 디자인 유니크하구 너무 예쁩니당",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-05-10"
+    },
+    {
+     "no": 16928838,
+     "text": "보통 운동화 230 여유있게 맞는 편인데 ^^ 스타킹이랑 양말 신고 225 딱 맞아요 ! 고무 말랑말랑 해서 많이 아프지도 않지만 너무 딱맞아서 그런지 물집은 잡혔어요 ㅠㅍㅠ",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-04-26"
+    },
+    {
+     "no": 17704638,
+     "text": "소재 자체가 말랑말랑하고 부드러워서 발에 잘 감기고 편안해요! 밑창도 부드러운 느낌이에요! 심플하면서 중간 리본이 포인트 되니까 아무때나 신어도 어울려서 좋습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-26"
+    }
+   ],
+   "roster": true,
+   "handle": "nuus__official",
+   "query": "장화",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3428967,
+   "url": "https://product.29cm.co.kr/catalog/3428967",
+   "brand": "기호",
+   "brand_en": "KHIHO",
+   "brand_id": "18373",
+   "name": "Raven Foldable Buckle Boots / Grey",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 146520,
+   "normal_price": 198000,
+   "discount": 26,
+   "review_count": 830,
+   "rating": 5.0,
+   "review_total_listed": 830,
+   "sold_out": false,
+   "release_date": "2025-09-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세 페이지 참고 102102 색상 상세 페이지 참고 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세 페이지 참고 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 주식회사 알와이에이치엠 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세 페이지 참고 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 상세 페이지 참고 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 KHIHO CS 02-499-8226.",
+   "images": [
+    "https://img.29cm.co.kr/item/202509/11f08e3c05bade8494a26768dac76d4b.jpg",
+    "https://img.29cm.co.kr/item/202508/11f086499f354c4fab5dc3ec35c808b7.jpg",
+    "https://img.29cm.co.kr/item/202508/11f086499f4aa83cb69c3199f9c48ca1.jpg",
+    "https://img.29cm.co.kr/item/202508/11f086499f483711ab5db59db170744d.jpg",
+    "https://img.29cm.co.kr/item/202508/11f086499f481028b69c41e93eb1d776.jpg",
+    "https://img.29cm.co.kr/item/202508/11f086499f485e4ab69c5fb8deb40f5a.jpg",
+    "https://img.29cm.co.kr/item/202508/11f08649bdfa2fcbab5d751674e7a8a1.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0d6411b6fb818a3c0eb3621ca51c4.jpg",
+    "https://img.29cm.co.kr/item/202508/11f08649c8e46051ab5da125d03d8fcd.jpg",
+    "https://img.29cm.co.kr/item/202508/11f08649cfdbfa14b69c1150dbe845d5.jpg",
+    "https://img.29cm.co.kr/item/202508/11f08649dce38c56b69cd1a839fc1a6c.jpg",
+    "https://img.29cm.co.kr/item/202605/11f15a459a6ace0f9090070862506273.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 18424281,
+     "text": "밑바닥은 리뷰처럼 딱딱하고 신발에 기본으로 있는 깔창? 이거 절반밖에 없다는 리뷰 있길래 확인해봤는데 진짜임 왜 이렇게 만든건지 잘 모르겠음",
+     "grade": 4,
+     "likes": 5,
+     "date": "2026-09-04"
+    },
+    {
+     "no": 18403255,
+     "text": "발볼 넓어서 한사이즈 업해서 샀는데 잘 맞습니다 다만 종아리가 그닥 엄청 널널하진 않네요ㅎㅎ 접어 신으면 괜찮습니다 색감은 넘 예뻐요 정가로는 안 살 것 같으니까 꼭 세일할때 사세용ㅋㅋ",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-09-03"
+    },
+    {
+     "no": 18641797,
+     "text": "남친한테 한번에 인정 받은 부츠..! 원피스랑 입어도 예쁘고 가을엔 청바지 넣입해주면 진짜 미쳐요…🫠 느좋 그자체🤎 올가을엔 요놈입니다 요놈!!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-27"
+    },
+    {
+     "no": 18629962,
+     "text": "어두우면서도 오묘한 컬러라서 더 분위기 있게 예뻐요! 운동화는 235 구두는 240정도 신는데 240 신으니까 좀 널널히 맞아서 깔창 깔아보려해요 키는 158인데 길이 이정도 옵니다 참고하셔요 ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-25"
+    },
+    {
+     "no": 18693465,
+     "text": "멋있는 부츠예용 색감도 예쁘고 가을에 딱 신기 좋아요 약간? 크다고 느껴지긴 하는데 신는데 문제는 없습니다 내려서 신어도 예쁘고 그냥 신어도 예뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-02"
+    },
+    {
+     "no": 18068026,
+     "text": "흔치않는 그레이 색감에 빈티지함이 어우러져서 맘에 쏙 드네요. 또 접어신을수있다는 점이 정말 강점이네요. 기다렸다 샀더니 최저가로 구매할수있어 더 좋았어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-30"
+    },
+    {
+     "no": 18681697,
+     "text": "1업 했는데도 생각보다 가볍고 발이 커보이지 않더라구요 오래 걸었는데 발도 편했어요 무릎까지 올라오는 기장일거라고 생각했는데 미들 부츠같앗습니당ㅎㅎ다리가 기신분들은 참고하면 즇을거같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-01"
+    },
+    {
+     "no": 18725948,
+     "text": "너어무 예쁩니당!!! 종아리 두꺼운 편인데 잘 들어가고 쓸림 없어요! 평소에 230 신는데 반업했더니 꽤 큽니당,, 깔창 껴도 커요ㅠㅠ 그래도 색도 예쁘고 만 보 정도 걸었을 땐 발 안 아팠습니당",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    }
+   ],
+   "roster": false,
+   "handle": "khiho_official",
+   "query": "장화",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 4999103,
+   "url": "https://www.musinsa.com/products/4999103",
+   "brand": "락피쉬웨더웨어",
+   "brand_en": "ROCKFISH WEATHERWEAR",
+   "brand_id": "rockfish",
+   "name": "ORIGINAL CHELSEA RAIN BOOTS - 6 colors",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 66900,
+   "normal_price": 79000,
+   "discount": 15,
+   "review_count": 363,
+   "rating": 4.7,
+   "review_total_listed": 363,
+   "sold_out": false,
+   "release_date": "2025-04-08",
+   "season": "2026 S/S",
+   "style_no": "RF1SHBF1RB010",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643866384_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643875750_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643856125_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643841500_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755645653042_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755645647782_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17817466713353_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755644702885_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755644716954_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755644707779_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755644721595_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755644726823_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643846730_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643851365_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643861053_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17755643871214_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17756089885189_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17756089889575_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17756089894386_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250408/4999103/detail_4999103_17756089899084_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 74442861,
+     "text": "색깔 고민 많이했는데 베이지 넘 이뻐요 맘에 듭니다 디자인 얄상하니 이쁘고요 투박한 느낌보다 가볍고 스타일리쉬한 느낌이예요 비오는 날 기분전환되겠어요 올여름 장마가 길거라고 하는데 기대되네요",
+     "grade": 5,
+     "likes": 5,
+     "date": "2025-06-03"
+    },
+    {
+     "no": 86119414,
+     "text": "확실히 신으니까 양말이 안젖어서 좋긴 좋네요 다만 사이즈를 넉넉하게 시켰다보니 걸을때 덜그락덜그락 거려서 살짝 질질 끌게 되어요 그치만 신고벗기 편하고 안젖는게 어딘가요",
+     "grade": 4,
+     "likes": 2,
+     "date": "2026-07-07"
+    },
+    {
+     "no": 85650420,
+     "text": "다리가 쓸리지 않는 장화를 찾고 있었는데 하나도 안 쓸려서 그건 좋았어요. 다만 발 볼이 조금 작은지 마지막 발가락이 좀 아프긴 했어요. 하지만 디자인도 예쁘고 이정도면 만족 입니다 :)",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-06-23"
+    },
+    {
+     "no": 86216813,
+     "text": "발사이즈 220인데 많이 안 커서 신을만해요! 살짝 무거워서 오래 걸었을 때 발이 불편하긴하지만 비 올 때도 안 미끄럽고 비 잘 막아져서 좋아요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-12"
+    },
+    {
+     "no": 85314533,
+     "text": "비 오는 날이 기다려 질만큼 이쁘고 완전 정사이즈에 착화감도 너무 좋습니다 ~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-17"
+    },
+    {
+     "no": 85154631,
+     "text": "평소에 235 신는데 딱 좋았고, 길이 딱 좋아요 피부 쓸리는 것도 없고 만족스럽습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-14"
+    },
+    {
+     "no": 84844313,
+     "text": "메이커 믿고 주문했어요 상품질이 확실히 좋아요 사이즈가 240-250이라 발볼이 좀 있는 저는 좀끼는느낌은 있지만 꽉잡아줘서 더좋은것같아요",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-05-30"
+    },
+    {
+     "no": 80846204,
+     "text": "전에 구매했던 장화가 너무 타이트해서 다시구매했어요 사이즈는 한사이즈 업하는게 좋아요 장화다 보니 신축성이 거의없어요 발목부분에 신고벗기좋게 되어있어 그게너무좋네요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-09"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3428958,
+   "url": "https://product.29cm.co.kr/catalog/3428958",
+   "brand": "기호",
+   "brand_en": "KHIHO",
+   "brand_id": "18373",
+   "name": "Raven Foldable Buckle Boots / Black",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 146520,
+   "normal_price": 198000,
+   "discount": 26,
+   "review_count": 779,
+   "rating": 5.0,
+   "review_total_listed": 779,
+   "sold_out": false,
+   "release_date": "2025-09-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세 페이지 참고 102102 색상 상세 페이지 참고 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세 페이지 참고 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 주식회사 알와이에이치엠 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세 페이지 참고 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 상세 페이지 참고 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 KHIHO CS 02-499-8226.",
+   "images": [
+    "https://img.29cm.co.kr/item/202509/11f08e3c1b21b0b694a2853cab89214f.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b22a28279ab5de94792ef68b8.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b22a17158b69c5d18925d9f25.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b22a1bf27ab5ddb6061a3c430.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b22a2827bab5de3c1017bd5e1.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b22a149f5ab5d1fbc82f765e7.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b3ef3cf28b69c95f0fc7aded0.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0d641126bac4ca540a90867207ede.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b49d4b0dcb69ccd069f033fa3.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b4fafdd99ab5dcd0254367dd8.jpg",
+    "https://img.29cm.co.kr/item/202508/11f0864b55cad2cbab5de1ff2279b841.jpg",
+    "https://img.29cm.co.kr/item/202605/11f15a45a0c3de2f9f7f515c8260f924.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 18040010,
+     "text": "220-225 신는데 널널하게 잘 맞아요 기호에서 첫 구매인데 기호 신발 너어무 취향 저격이에요 왜 구매 미뤘는지ㅜㅜ 너무 마음에 들고 이뻐요 투웨이라 옷에 매치하기 좋구 오래 고민했는데 고민한거 이상으로 만족이에요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-28"
+    },
+    {
+     "no": 16836666,
+     "text": "230, 235 고민하다 235로 시켰는데 잘 한 거 같아요. 발도 편하고 어차피 종아리에서 좀 찡겨서 헐떡거리지도 않더라고요. 추천!!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-04-18"
+    },
+    {
+     "no": 16136249,
+     "text": "너무 예뻐서 장바구니 담아두었었는데 마침 좋은 가격으로 구매하게 됐어요! 진짜 너무 예쁩니다,, 핏이며 디자인이며 활용도며! 최고예요 고민하고 계시다면 빨리 구매하시깅 추천드려용",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-02-07"
+    },
+    {
+     "no": 14878845,
+     "text": "평소 230 신는데 부츠라 좀 불편할까봐 반사이즈 업했는데 생각보다 크네요.. 그래도 디자인 이쁘고 장기간 걸어도 발아프지 않아요! 커서 좀 덜그럭 거리지만 깔창끼고 다녀야죠 뭐:)",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-10-18"
+    },
+    {
+     "no": 18632773,
+     "text": "워낙 인기가 많아서 구매했어요. 여기저기 잘 어울리는 디자인입니다. 조금 더 착용해서 자연스러운 주름이 생겨야 더 이쁠거 같아요. 아직은 좀 뻣뻣해서 어색한 감이 있지만 너무 맘에 듭니다. 강력추천해요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-26"
+    },
+    {
+     "no": 18702257,
+     "text": "운동화는 230 구두형식은 235를사요 잘맞고 벗고신기편하고 리뷰대로 신으니까 주름이 자연스럽게 생기면서 살짝 내려간 느낌이 생기네요 주름이 자연스럽게 생기라고 그런듯 부츠가 진짜 편해요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-03"
+    },
+    {
+     "no": 18624888,
+     "text": "착화감 좋고 디테일이 과하지 않으면서 적당히 이쁩니다. 신었을때 올라오는 기장이 다리 라인을 이쁘게 보이게 만들어주는 것 같아요. 유명한데는 이유가 있네요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-24"
+    },
+    {
+     "no": 18742623,
+     "text": "우선 예쁘고 이틀동안 3만보 걸었는데 괜찮았어요 사이즈는 한사이즈 크게 샀는데 널널해서 좋아요! 기호 제품 첫 구맨데 만족스러운 소비에요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-08"
+    }
+   ],
+   "roster": false,
+   "handle": "khiho_official",
+   "query": "장화",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 4988609,
+   "url": "https://www.musinsa.com/products/4988609",
+   "brand": "착한구두",
+   "brand_en": "CHAAKAN",
+   "brand_id": "chaakan",
+   "name": "로자린 방수 레인부츠 (2TYPE) (미들,롱)",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 35900,
+   "normal_price": 35900,
+   "discount": 0,
+   "review_count": 354,
+   "rating": 4.8,
+   "review_total_listed": 354,
+   "sold_out": false,
+   "release_date": "2025-04-04",
+   "season": "",
+   "style_no": "5008277734",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250404/4988609/detail_4988609_17496069420980_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250404/4988609/detail_4988609_17496069865559_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250404/4988609/detail_4988609_17496069981791_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250404/4988609/detail_4988609_17496070018736_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250404/4988609/detail_4988609_17496071703347_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250404/4988609/detail_4988609_17496071737890_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 74579716,
+     "text": "여자친구 선물용으로 구입 여자친구가 아주 만족해서 방수테스트한다고 물에들어가 안나오네요😮‍💨",
+     "grade": 5,
+     "likes": 14,
+     "date": "2025-05-24"
+    },
+    {
+     "no": 76917985,
+     "text": "전반적으로 만족해요!!! 정사이즈로 구매했는데 사이즈는 좀 큰 편이라서 사이즈 다운해서 주문하시는 걸 추천드립니다~~ 색도 무난하니 예쁘고 이제 장화 신으니까 비 오는 날이 기다려져요 ㅋㅋ",
+     "grade": 5,
+     "likes": 6,
+     "date": "2025-07-18"
+    },
+    {
+     "no": 73431313,
+     "text": "레인부츠는 너무 길어도 은근히 불편하던데 미들길이가 편하게 신기는 딱 좋네요 사이즈도 딱 편하고 생각보다 무게도 가벼워요!",
+     "grade": 5,
+     "likes": 5,
+     "date": "2025-04-23"
+    },
+    {
+     "no": 78511618,
+     "text": "이벤트 기간에 구매했습니다!! 엄마께서 비올 때나 고기잡으실 때나 막 쓰신다고 구매했는데 나름 패션 장화로 이쁘네요ㅎ 다만 군데군데 더러운 곳이 있네요 .. 미끄러움은 있으시다고하네요.. 잘 쓰겠습니다ㅎ",
+     "grade": 4,
+     "likes": 3,
+     "date": "2025-09-23"
+    },
+    {
+     "no": 78479146,
+     "text": "종아리 굵은편인데도 무리없이 들어가요. 재질이 말랑해서 오래신어도 쓸리거나 하지는 않는데 습한 날 오래신으면 종아리라인이 짓무를거같은 느낌은 있어서 긴양말과 신거나 짧게 나갈때 신는걸 추천해요",
+     "grade": 4,
+     "likes": 3,
+     "date": "2025-09-22"
+    },
+    {
+     "no": 86092790,
+     "text": "일단 디자인이 심플한데 너무 예뻐요! 생각보다 가볍고 착화감도 너무 좋은것같아요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-06"
+    },
+    {
+     "no": 85916257,
+     "text": "평소에 신발 250 신는데, 245 사이즈 시키니 잘 맞네요! 튼튼하고 가격이 착합니다. 군더더기 없이 디자인도 깔끔하고 저렴해 보이지 않아 좋아요~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-30"
+    },
+    {
+     "no": 84376339,
+     "text": "운동화 240신는데 이건 240~245 사이 사이즈로 나온 거 같아요 편하게 넉넉해요 갑피도 야들야들하고 종아리 쓸림 없을 거 같아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-05-12"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "롱 레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 2567160,
+   "url": "https://product.29cm.co.kr/catalog/2567160",
+   "brand": "몽돌",
+   "brand_en": "MONGDOL",
+   "brand_id": "10654",
+   "name": "[알로하 PICK] 버클 스트랩 레인부츠 미들 MDAC023_4 Colors",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 42000,
+   "normal_price": 70000,
+   "discount": 40,
+   "review_count": 636,
+   "rating": 4.5,
+   "review_total_listed": 636,
+   "sold_out": false,
+   "release_date": "2025-03-24",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세페이지 참조 102102 색상 BLACK, BEIGE, KHAKI, WHITE 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 230 - 높이 19 굽높이 3.5 둘레 33 발볼 9.5 (cm) 240 - 높이 19 굽높이 3.5 둘레 33.5 발볼 9.5 (cm) 250 - 높이 19.5 굽높이 3.5 둘레 34 발볼 9.5 (cm) 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)씨오리퍼블릭 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 단독 손세탁 / 화기 주의 / 표백 금지 / 기계 건조 금지 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁 해결 기준에 따름. 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 씨오리퍼블릭 / 1600-4775 2750484 2026-04-09 00:00:00 true 0 internal [26SS] 2",
+   "images": [
+    "https://img.29cm.co.kr/item/202604/11f142d722f7e873bc921bab205620b4.jpg",
+    "https://img.29cm.co.kr/item/202604/11f142d729063377bc92098ca5c1a230.jpg",
+    "https://img.29cm.co.kr/item/202604/11f142d729060c2485ee3ff536551701.jpg",
+    "https://img.29cm.co.kr/item/202604/11f142d72905e51285eebfa36d9e880a.jpg",
+    "https://img.29cm.co.kr/item/202604/11f142d73408f515bc920f9c64a75262.jpg",
+    "https://img.29cm.co.kr/item/202604/11f142d72e0cf98dbc924750f31339d0.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 17319625,
+     "text": "리뷰보고 크게 나왔다고 해서 240신는데 여유있고 딱 좋아요 하지만 무게는 좀 있는 편이라서 착화감은 좋지 않아요 장거리 걷기로는 피곤할거같지만 가까운거리는 좋아요",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-06-02"
+    },
+    {
+     "no": 18346016,
+     "text": "너무 짧은겅 장화신는 의미가 없을꼬같고, 긴건 손이 안갈꺼같아서 중간기장으로 사봤는데 장떼비만 아니면 비올때 잘 신을것 같아여~",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-08-27"
+    },
+    {
+     "no": 18731345,
+     "text": "장마철에 아주 아주 잘 썼습니다. 저는 강추합니다 가성비 괜찮고 튼튼하고 그래요. 근데 정사이즈 사는 걸 추천 드려요. 살짝 크게 나왔습니다. 물론 저는 괜찮았음.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-07"
+    },
+    {
+     "no": 18273275,
+     "text": "비 많이 올 때 유용하고 예쁩니다. 미들이라 빗물도 안 들어오고  어디든 찰떡이고,, 가격대비 너무나 훌륭한 아이템! 종아리가 진짜 너무 두껍지 않으면 다 신을 수 있을 듯합니다. 하지만 고무니까 긴양말 필수!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-20"
+    },
+    {
+     "no": 18116979,
+     "text": "저는 걍 압박 스타킹에 신었는데 최대 단점 너무 덥다 그래도 저렴한 가격에 장화 갖고 싶었어서 품어요 종아리 굵은 분들에게는 비추 기존에 갖고 있던 다른 부츠와 비교해보니 확실히 굵어보여요 ㅠㅠㅠㅠ",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-08-05"
+    },
+    {
+     "no": 17961972,
+     "text": "평소 235-240신어요 리뷰 껌꼼히보고 크게 나왔다고 해서 230으로 주문했는데 230도 걸을때 달그락 거릴만큼 좀 커요 ㅠㅠ 240 안하길 잘한 것 같아요 레인부츠 티 안나고 넘 맘에들어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-20"
+    },
+    {
+     "no": 17826825,
+     "text": "발목이랑 닿는 부분이 거칠어서 긴양말은 필수구요 냄새도 좀 나요 할인할 때 사세용 정가는 좀 아까운거같아용 가성비로 괜찮습니다!",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-07-07"
+    },
+    {
+     "no": 18012355,
+     "text": "아직 신고 나가보진 못했지만 그래도 할인 할 때 사서 만족해요! 냄새가 좀 나긴 하는데 괜찮습니다! 미들이고 종아리 쓸린다고 해서 긴바지나 긴양말에 신어야 할 것 같아요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-07-25"
+    }
+   ],
+   "roster": false,
+   "handle": "mongdol.official",
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5144720,
+   "url": "https://www.musinsa.com/products/5144720",
+   "brand": "하버드 슈즈",
+   "brand_en": "HARVARD SHOES",
+   "brand_id": "harvardshoes",
+   "name": "실린더 레인부츠 블랙 베이지",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 25800,
+   "normal_price": 29800,
+   "discount": 13,
+   "review_count": 282,
+   "rating": 4.7,
+   "review_total_listed": 282,
+   "sold_out": false,
+   "release_date": "2025-05-26",
+   "season": "",
+   "style_no": "25_cylinder-bkbg",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17814977066398_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17745725918556_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220579680_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220586132_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220653347_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220659575_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220708830_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220714293_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220760843_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250526/5144720/detail_5144720_17482220766040_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 86252098,
+     "text": "평소 235-240 신는데, 사이즈 딱 맞고 좋아요 가벼워서 너무 좋습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-13"
+    },
+    {
+     "no": 85958510,
+     "text": "245 정도 신는데 250 하니까 좀 크긴 했지만 넉넉해서 편했어요 디자인도 예뿌고 무난템 추천!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-01"
+    },
+    {
+     "no": 76860476,
+     "text": "발 실사이즈는 230이고 운동화는 보통 235 신어서 235로 주문했는데 사이즈 낙낙하니 딱 좋아요. 저렴한 가격에 예쁜 부츠 잘산것 같아용 (˶' ᵕ ' 🫶)",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-07-16"
+    },
+    {
+     "no": 87676438,
+     "text": "헌터만 신다가 첨 사봤는데 진짜 가볍네요 오래 걸으면 발바닥이 아프긴해요 가벼운 만큼 밑창이 얇음",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-24"
+    },
+    {
+     "no": 86521662,
+     "text": "240 ,245 정도 신는데 245 시켰더니 괜찮았어용 ! 긴양말은 필수일것같아요 ㅜ 아니면 레인부츠 특성상 쓸려서 아파요 그래두 정말 만족합니다~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-25"
+    },
+    {
+     "no": 86252071,
+     "text": "장화 너무 귀엽고 가벼워서 좋아요 시키고 다음날 와서 바로 신고 다녔어요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-13"
+    },
+    {
+     "no": 86175754,
+     "text": "실린더 레인부츠 블랙  후기대로 가벼우면서 입구도 넉넉해서 좋은것 같아요.  바닦이 조금 얇다고 했는데 깔짱도 허나 깔아주면 좋을것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-10"
+    },
+    {
+     "no": 86175708,
+     "text": "실린더 레인부츠 블랙  초 4학년 아들 사줬는데요. 240신는데 245사이즈로 샀어요.  그랬는데 잘 산것같아요 신발이 가볍고 입구도 적당해서 쏙 잘 들어가요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-10"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 4949149,
+   "url": "https://www.musinsa.com/products/4949149",
+   "brand": "무신사 스탠다드",
+   "brand_en": "MUSINSA STANDARD",
+   "brand_id": "musinsastandard",
+   "name": "시프트 첼시 레인 부츠 [블랙]",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 79900,
+   "normal_price": 79900,
+   "discount": 0,
+   "review_count": 236,
+   "rating": 4.7,
+   "review_total_listed": 236,
+   "sold_out": false,
+   "release_date": "2025-03-26",
+   "season": "2025 S/S",
+   "style_no": "MEEFB6Z82-BK",
+   "material": [
+    "굽 높이: 보통",
+    "쿠션: 보통",
+    "무게: 무거움"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023770792_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023785478_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023809075_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023827063_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023841543_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023860760_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250326/4949149/detail_4949149_17471023879458_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 77674104,
+     "text": "무난무난한 레인부츠라고 생각해요!!! 입문용으로 좋은 것 같습니다 사이즈는 정사이즈로 가면 될 것 같아용",
+     "grade": 4,
+     "likes": 5,
+     "date": "2025-08-16"
+    },
+    {
+     "no": 84662234,
+     "text": "레인부츠들이 투박한 디자인이라 구매를 망설이고 있었는데, 이 제품은 첼시부츠의 형태라 선택하게 되었습니다. 재질의 특성상 무게감이 있지만 비 오는 날 기분 좋게 신을 레인 부츠인 것 같습니다.",
+     "grade": 5,
+     "likes": 4,
+     "date": "2026-05-22"
+    },
+    {
+     "no": 86290636,
+     "text": "우선 가격대가 너무 착하고 출퇴근용으로 구매했는데 괜찮네요:) 사이즈는 평소 260~65 착용하고 있는데 60으로 주문했는데 딱 적당해서 사이즈 비슷하신 분들은 참고하시면 좋을 것 같습니다",
+     "grade": 4,
+     "likes": 3,
+     "date": "2026-07-15"
+    },
+    {
+     "no": 77261169,
+     "text": "정말 무거워요. 평소 275 운동화 신는데 280 구매했더니 크네요. 깔창 하나 까니 그냥저냥 신을만 해요.",
+     "grade": 4,
+     "likes": 3,
+     "date": "2025-07-30"
+    },
+    {
+     "no": 75387719,
+     "text": "조금 무겁긴 하지만 디자인도 예쁘고 부츠지만 바닥도 두껍고 편안하네요^^",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-06-16"
+    },
+    {
+     "no": 86334114,
+     "text": "레인부츠 퀄리티가 좋아서 오래 잘 신을듯 합니다. 다만, 제가 265를 신는데 260을 신어도 공간이 널널합니다",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-07-17"
+    },
+    {
+     "no": 76896386,
+     "text": "가성비 레인부츠로 사기 좋은 제품입니다!! 비 너무 많이오는데 확실히 신으니까 너무 좋아요 ㅎㅎ 에어포스 265기준 널널합니다!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-07-17"
+    },
+    {
+     "no": 86290632,
+     "text": "우선 가격대가 너무 착하고 출퇴근용으로 구매했는데 괜찮네요:) 사이즈는 평소 260~65 착용하고 있는데 60으로 주문했는데 딱 적당해서 사이즈 비슷하신 분들은 참고하시면 좋을 것 같습니다",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-07-15"
+    }
+   ],
+   "roster": false,
+   "handle": "musinsa_standard",
+   "query": "첼시 레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3457199,
+   "url": "https://product.29cm.co.kr/catalog/3457199",
+   "brand": "르바",
+   "brand_en": "LEVAR",
+   "brand_id": "10250",
+   "name": "[10차][기장선택] Relaxed Boots Cut Denim - Stone Navy",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 98100,
+   "normal_price": 109000,
+   "discount": 10,
+   "review_count": 184,
+   "rating": 5.0,
+   "review_total_listed": 184,
+   "sold_out": false,
+   "release_date": "2025-08-31",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n&#xFEFF;\n101101 섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서 제품 소재 상세 페이지 참고 101102 색상 상세 페이지 참고 101103 치수 상세 페이지 참고 101104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 LEVAR 101105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 KOREA 101106 세탁방법 및 취급시 주의사항 상세 페이지 참고 101107 YYYYMM ex)201109 제조연월 2025.08 101108 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 전자상거래법 준수 101109 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 르바 고객센터 : 02-6952-4578",
+   "images": [
+    "https://img.29cm.co.kr/item/202608/11f1a27247c1ca128fdc0318b8c539aa.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a2724947598485e1f7074b863c49.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a2724acfa6548fdc1f3c5dd8a1b7.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15294825,
+     "text": "일단 뮤조건 다리 가늘어보여서 스톤카키도 살까 생각즁 근데 기본 바지 미듐입으시는분들도 뮤조선 스몰로 가셔야 헐 l||l( ºΔº )l||l 허리 사이즈 입니자",
+     "grade": 5,
+     "likes": 5,
+     "date": "2025-11-16"
+    },
+    {
+     "no": 15651704,
+     "text": "같은 라인의 스트레이트팬츠 롱 버전도 있는데 기장이 길어서 숏으로 구매했습니다!! 부츠컷이 확실히 더 날씬해보여요 ㅎㅎ 다른 색도 구매하고싶어요",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-12-19"
+    },
+    {
+     "no": 14716603,
+     "text": "르바 바지는 전부터 사고싶었는데 기장이 다 너무 길어서 못 샀는데, 이번에 숏기장이 나와서 바지 싹 갈았습니다 ㅎㅎ 골반쪽이 좀 작은가 싶은데 불편하진 않고 입다보면 편해질 거 같아요 !",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-09-28"
+    },
+    {
+     "no": 16570092,
+     "text": "ㅠㅠ 진짜 르바 저한테 왜그러세요? 너무 예뻐요 바지ㅠㅠ.. 부츠컷 처음 입는데 너무 만족스러워요.. 오랜만에 타이트한 바지 입어서 이게맞나 싶긴한데 최고네요..",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-24"
+    },
+    {
+     "no": 15881108,
+     "text": "딱 맞게 입기보다는 모델핏처럼 조금 넉넉한 느낌을 원해서 M 사이즈 구매했는데, 원하던 핏으로 딱 예쁩니당 살짝 바랜느낌의 네이비 컬러가 너무 예쁘네요 !",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-12"
+    },
+    {
+     "no": 16217555,
+     "text": "차분한 네이비 색감입니다 휘뚜루마뚜루 일상이나 출근룩으로 입기 무난하니 좋습니다 다릉 색상도 고려해봐야겠엉어오 ㅎㅎ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-02-18"
+    },
+    {
+     "no": 18549809,
+     "text": "뱃살부자라 ^-^.. m사쥬 했는데(s랑 엄청 고민함ㅜㅜ) 조금 크긴 한데 벨트 하면 되고! 전체적인 핏이 예쁘고 편해서 구우유윳ㅐ! 후기대로 핏 예쁘네요... 근데 숏도 엄청 길어요 ㅠㅠ157입니다....🥲🥺",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-15"
+    },
+    {
+     "no": 18654080,
+     "text": "바지 자체는 이쁜데 길어요. 숏 샀는데도 길어요. 그리고 허리도 살짝 큼. 부츠컷이라서 접어 입기 안 이뻐서 살짝 수선 했는데 맘에드네요. 스판기 전혀 없고 와이존 살짝 부각 있어요.",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-29"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "장화",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5104919,
+   "url": "https://www.musinsa.com/products/5104919",
+   "brand": "리끌로우",
+   "brand_en": "RECLOW",
+   "brand_id": "reclow",
+   "name": "RC HOU LONG RAIN BOOTS 레인부츠 5 COLOR",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 54900,
+   "normal_price": 99000,
+   "discount": 45,
+   "review_count": 127,
+   "rating": 4.8,
+   "review_total_listed": 127,
+   "sold_out": false,
+   "release_date": "2025-05-12",
+   "season": "",
+   "style_no": "RC HOU LONG RAIN BOOTS 5 COLOR",
+   "material": [],
+   "spec_text": "[손주연 PICK]",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494441981847_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494441990717_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494441998674_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494442007477_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494442016363_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494468140657_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494468154410_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494468162842_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494468171306_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250512/5104919/detail_5104919_17494468180696_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 84860560,
+     "text": "폭신폭신하고 신고 벗기도 편합니다. 많이 무겁지도 않아요. 다만 여름에 땀찰거 같아요. ㅠ",
+     "grade": 5,
+     "likes": 4,
+     "date": "2026-05-31"
+    },
+    {
+     "no": 85641182,
+     "text": "일단 편해요!!! 레인부츠라서 아무래도 신었을 때 좀 아프고 딱딱할 거라 생각했는데 이게 웬걸 하나도 안 아프고 말랑거리고 좋아요!!  컬러도 생각보다 더 예쁘구, 올해 비 많이 온다는데 야무지게 신고 다녀야지~!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-06-23"
+    },
+    {
+     "no": 86345476,
+     "text": "종아리가 잘 부어서 굵은편인데도 잘 맞고 235 신는데 적당히 사이즈 잘 맞아요 장마 때 유용하게 신었어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-17"
+    },
+    {
+     "no": 85649874,
+     "text": "가격 완전 만족 가성비 이정도로 뽑을 수 있는 제품이 있을까요? 심지어 가볍고 편해요! 마감도 깔끔합니다 다만 무진장때 샀는데 마지막날에 삼천원정도 더 저렴해졌습니다.. 이만원 내외로 구매 추천!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-23"
+    },
+    {
+     "no": 88043938,
+     "text": "디자인이 깔끔하고 예뻐서 다양한 스타일에 잘 어울려요. 착화감이 편안하고 부담이 적어서 데일리로 활용하기 좋습니다. 오래 사용해도 편하고 활용도가 높아서 자주 손이 가는 제품이에요. 전체적으로 만족스럽습니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-08"
+    },
+    {
+     "no": 87566633,
+     "text": "색 자체가 레몬색같아서 좋았고 신고 오래 걸어다녀도 생각보다 안불편해용 사이즈도 정사이즈했는데 잘 맞았어요 ~~~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-18"
+    },
+    {
+     "no": 87317584,
+     "text": "귀엽고 진짜 편해요! 생각보다 무겁지 않고 바닥도 말랑해서 달리기 쌉가능입니다",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-05"
+    },
+    {
+     "no": 87258955,
+     "text": "진짜 가성비 지림 비오는날 무조건 신고가요 이가격에 이 퀄이면 진심 개꿀",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-01"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3423151,
+   "url": "https://product.29cm.co.kr/catalog/3423151",
+   "brand": "에퓨레",
+   "brand_en": "EPURE",
+   "brand_id": "59635",
+   "name": "LEVO Suede Slouch Boots (2color)",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 135000,
+   "normal_price": 135000,
+   "discount": 0,
+   "review_count": 161,
+   "rating": 5.0,
+   "review_total_listed": 161,
+   "sold_out": false,
+   "release_date": "2025-09-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "﻿\n&#xFEFF\n&#xFEFF\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 합성피혁(Artificial Leather) 102102 색상 Black,Dark Beige 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 225-255mm 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 F&S Retail Co.,Ltd./F&S Retail Co.,Ltd. 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 CHINA 102106 취급시 주의사항 세탁이 가능한 제품에 한하여 단독 세탁을 하며 세탁 시에는 중성세제를 사용해 주시기 바랍니다. 신발이 젖은 경우에는 마른 헝겊 등으로 물기를 제거해 주시고 형태 변형 방지를 위하여 신발 안쪽에 종이 또는 헝겊을 넣어 통풍이 잘 되는 그늘에 건조해 주세요. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁해결기준에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 상세페이지 참고",
+   "images": [
+    "https://img.29cm.co.kr/item/202510/11f0a99c9a2036d7b27dadcf6912e01a.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0a99c9b3d661ca91887c050272d91.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0a99c9c8af4bea9182739b05ffcd4.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0a99c9db25dc0a918c76515be9853.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0a99c9ee204a9b27db7dfd6224ef8.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15042739,
+     "text": "발볼이 좀 넓은 편이라 250으로 주문했는데 편하게 잘 맞았어요!! 오래 신고 다녔는데도 발도 안 아프고 편하게 잘 신고있습니다 ㅎㅎ",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-11-02"
+    },
+    {
+     "no": 15129899,
+     "text": "주름 자연스럽게 잘 잡혀있고 발이 너무너무너무 편해요 제가 족저근막염에 새끼발가락옆으로 뼈가 튀어나오는 모양이라 어그부츠처럼 편한거 위주로 즐겨신었는데 오랜만에 완전 대만족스러운 쇼핑이었네요 정사이즈 딱! 좋아요!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-07"
+    },
+    {
+     "no": 15548437,
+     "text": "후기보고 한사이즈 크게 구매했더니 딱이에요! 하루종일 신고 있어도 안불편하고 임산부한테도 편한 신발이에요 :) 넘 맘에 들어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-09"
+    },
+    {
+     "no": 15489773,
+     "text": "후기보고 반업해서 샀는데 딱 좋아요 제가 롱치마를 즐겨입는데 이건 롱치마엔 안어울리는거같아여 딱 붙는 바지나, 짧은 하의용? 근데 이뻐서 일단 품어여 언제 입을 수 있을진 모르지만..",
+     "grade": 4,
+     "likes": 1,
+     "date": "2025-12-04"
+    },
+    {
+     "no": 15368293,
+     "text": "브라운 사고나서 너무 마음에 들어서 블랙도 구매했어용! 오래 잘 신어질거같고 디자인도 너무 마음에 듭니당! 에퓨레 체고!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-22"
+    },
+    {
+     "no": 18718208,
+     "text": "뭔가 까질듯하면서 안까지구요 오래걸어도 걸을만한정도에요 엄청 편한건 아니지만 그렇다고 불편함또한없는 딱좋은 부츠구요 한참 고민했는데 고민이 후회되게 예뻐요~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-05"
+    },
+    {
+     "no": 18628689,
+     "text": "평소 250인데 255로 샀습니다 많이 크게는 느껴지지 않고 바지넣어 입으면 딱 좋은정도? 기본 주름이 멋스럽고 다양한 코디에 어울릴것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-25"
+    },
+    {
+     "no": 18679731,
+     "text": "50신는데 사이즈업했어요 편하거 발볼이 넓은편인데 완전 불편하지도 않아서 종일 신고 다녀도 무리없네요 스타일리쉬해보여요 굳국 강추",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-01"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "장화",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 5329368,
+    "sale_price": 114750,
+    "url": "https://www.musinsa.com/products/5329368"
+   }
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3424799,
+   "url": "https://product.29cm.co.kr/catalog/3424799",
+   "brand": "엘리자베스 스튜어트",
+   "brand_en": "ELIZABETH STUART",
+   "brand_id": "82224",
+   "name": "[바로배송][3-WAY] 베이직 하프 부츠 EBAL157719",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 128400,
+   "normal_price": 199000,
+   "discount": 36,
+   "review_count": 136,
+   "rating": 5.0,
+   "review_total_listed": 136,
+   "sold_out": false,
+   "release_date": "2025-08-13",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세페이지참고 102102 색상 블랙 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 225~250cm 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)슈크리에이션 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 천연가죽 상품의 경우 가죽 특성상 물빠짐등의 이염이 있을 수 있습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자분쟁해결기준에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 엘리자베스 스튜어트 / 010-7251-5304",
+   "images": [
+    "https://img.29cm.co.kr/next-product/2026/08/21/f8368fb508a34a3f93ef84b2bde9acd9_20260821180030.jpg",
+    "https://img.29cm.co.kr/item/202608/11f19f7863292ac48fdcf37b0b9011bf.jpg",
+    "https://img.29cm.co.kr/item/202608/11f19f786328188685e137064624424a.jpg",
+    "https://img.29cm.co.kr/item/202608/11f19f786329c7068fdc6751a9e69bd2.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a04ff1736cea85e1898f0fcf469d.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 14324507,
+     "text": "우선 정사쥬 신어도 될듯?버클 없애면 차분 단정해 보이고 버클 끼면 또 여리 캐주얼해서 너무 좋아요 없앤것도 이쁜데 저는 중간에 끼는게 제일 이쁜거같아요~ 퀄리티 좋고 엄청 편하네요 잘신을게요!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-08-22"
+    },
+    {
+     "no": 16140750,
+     "text": "기본 부츠로 최고! 착화감 괜찮아요 조금 편하게 신으려면 반업하셔도 될 듯해요 어디에나 잘 어울리고 무난해서 부츠없으신분은 요거하나만 장만하셔도될듯",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-02-08"
+    },
+    {
+     "no": 16373907,
+     "text": "부츠라 반업 했더니 편하게 잘 맞아요. 밑창이 안딱딱하고 말랑말랑해서 발에 피로감이 덜하구요. 하프기장도 다리 비율 해치지 않고 딱 좋아여 ~~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-06"
+    },
+    {
+     "no": 18770209,
+     "text": "기존에 신던 미들 부츠가 다 떨어져서 새로 샀는데 바닥이 매우 폭신폭신 하고 좋습니다. 사이즈는 정사이즈로 나온 것 같아요. 활용도가 좋아서 좋습니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-11"
+    },
+    {
+     "no": 15143903,
+     "text": "부츠 처음 신어보는데 착화감도 나쁘지 않고 좋아요 반스 스니커즈화 드 240 신는데 넉넉하게 잘 맞아요 스트랩 여기저기 끼울 수 있는데 맨위에 끼는 게 젤 예쁩니다 ㅎㅎ 바지 넣어입을 수 있을 정도라서 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-08"
+    },
+    {
+     "no": 16849750,
+     "text": "착용감 겁나 편하고 가죽도 말랑말랑하고 쉐입도 라운드코여서 귀여운듯 캐주얼하게 착용가능. 러블리한 무드 좋아하는분들 이거 사세요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-04-19"
+    },
+    {
+     "no": 18709493,
+     "text": "진짜 편하다고 해서 샀는데 진짜 편하고 좋아요 종아리도 생각보다 제가 넓은 편인데 살짝 남는거 같아요 걸을때 편해서 좋습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-04"
+    },
+    {
+     "no": 15467777,
+     "text": "너무조아용 이거 신고 공사현장도 갔는데 튼튼합니다 바지넣러서입으려고 고민많이하고 샀는데 딱조은거같아요 다른색상도 구매하려구요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-02"
+    }
+   ],
+   "roster": false,
+   "handle": "elizabethstuart_official",
+   "query": "장화",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 5267455,
+    "sale_price": 112400,
+    "url": "https://www.musinsa.com/products/5267455"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 4750292,
+   "url": "https://www.musinsa.com/products/4750292",
+   "brand": "낫소",
+   "brand_en": "NASSAU",
+   "brand_id": "nassau",
+   "name": "헤리티지 레인부츠 - 3color",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 9900,
+   "normal_price": 39800,
+   "discount": 75,
+   "review_count": 77,
+   "rating": 4.8,
+   "review_total_listed": 77,
+   "sold_out": false,
+   "release_date": "2025-02-03",
+   "season": "2024 S/S",
+   "style_no": "5014580393",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250203/4750292/detail_4750292_17385564150505_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250203/4750292/detail_4750292_17385564221510_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87347894,
+     "text": "평소 230~240 사이즈 신는데, 이건 230 사이즈 신었더니 편하게 잘 맞네요. 감사합니다!",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-09-06"
+    },
+    {
+     "no": 86295513,
+     "text": "평소에 235,230 신는데 230으로 주문하니 딱 맞네요! 비올 때 바지 입을 때 사려고 기본 블랙으로 구매했고 맘에 들어요 치마에도 잘 어울릴 것 같아요:)",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-15"
+    },
+    {
+     "no": 86221129,
+     "text": "235 신는데, 사이즈 딱 맞았습니다. 신고 벗기 편하고 가벼워서 좋아요. 오래 신으면 발이 좀 아프고 종아리에 계속 쓸리는 부분이 있어서 좀 아픕니다. 밴드 붙이고 신으면 괜찮은것 같아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-12"
+    },
+    {
+     "no": 84801550,
+     "text": "너무 편안하고 색도 예쁘고 좋아요! 올 여름 장마철 출퇴근용으로 주문한건데 이 예쁜걸 저렴하게 구매해서 더 좋아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-05-28"
+    },
+    {
+     "no": 86668326,
+     "text": "실사용은 아직인데 장마가 끝나버려서 언제 신어볼 수 있을 지 모르겠네요 안감이 부드럽고 착화감이 나쁘지 않아서 편할 듯 합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-01"
+    },
+    {
+     "no": 86607482,
+     "text": "첼시스타일의 부츠에요 구입하고 나서 비가 안와서 신지는 못했지만 디자인은 기본 스타일인것 같아요 신발자체가 여유가 있어서 신고벗기는 편해요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-07-29"
+    },
+    {
+     "no": 86329642,
+     "text": "사이즈는 정사이즈보다 살짝 큰 것 같아요.  가격도 착하고 착화감도 좋습니다. 근데 맨살에는 쓸려서 긴 양말 신고 신으시는 게 좋을 것 같습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-16"
+    },
+    {
+     "no": 86149632,
+     "text": "우선 가격이 너무 저렴했어서 만족하고 신기가 편해요! 사이즈는 조금 큰 편입니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-09"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3869496,
+   "url": "https://product.29cm.co.kr/catalog/3869496",
+   "brand": "윤슬",
+   "brand_en": "YOONSEUL",
+   "brand_id": "98281",
+   "name": "[9th reorder] Arch rain boots (black)",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 89250,
+   "normal_price": 105000,
+   "discount": 15,
+   "review_count": 86,
+   "rating": 5.0,
+   "review_total_listed": 86,
+   "sold_out": false,
+   "release_date": "2026-05-28",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "Fabric. 1. synthetic leather\n2. lylex\n﻿\nSize. 36 (225-230) : 총장30 굽높이3.5 입구둘레33\n37 (235-240) : 총장30 굽높이3.5 입구둘레33.5\n38 (245-250) : 총장30 굽높이3.5 입구둘레34\n﻿\nModel info. height164 (76-57-84)\n102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 fabric1. synthetic leather / fabric2. lylex 102102 색상 black 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 size. 36 (225-230) : 총장30 굽높이3.5 입구둘레33 / 37 (235-240) : 총장30 굽높이3.5 입구둘레33.5 / 38 (245-250) : 총장30 굽높이3.5 입구둘레34 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 YOONSEUL 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 korea 102106 취급시 주의사항 상품페이지참조 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁 해결 규정에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 YOONSEUL 010-2320-4346",
+   "images": [
+    "https://img.29cm.co.kr/item/202603/11f1236c38b96418a3c03364a3d15327.jpg",
+    "https://img.29cm.co.kr/item/202606/11f168647a379f9b9090ddca559f0da3.jpg",
+    "https://img.29cm.co.kr/item/202603/11f1236c3d1bad4ea5406d87dc0b7a6f.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16866daeca2259090d9c8ee406e9e.jpg",
+    "https://img.29cm.co.kr/item/202606/11f168641edb4255909001702d69b7cb.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16866b84c5853b3577322386ad6f7.jpg",
+    "https://img.29cm.co.kr/item/202606/11f168648d47b0a5b3574f6501677ddd.JPG",
+    "https://img.29cm.co.kr/item/202606/11f16865785381bbb357df568983676a.jpg",
+    "https://img.29cm.co.kr/item/202606/11f168659f6c8191b357192e5997830a.JPG",
+    "https://img.29cm.co.kr/item/202606/11f16865b1ee83339090cb8f01219574.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16865cf337e7390908ff6e599e36d.JPG",
+    "https://img.29cm.co.kr/item/202606/11f16865eb2e46679090751f31b73b1b.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16865ff2caf01b3575faf2e4deb8f.JPG",
+    "https://img.29cm.co.kr/item/202606/11f168660d2494e3b3572926917d7b8f.JPG",
+    "https://img.29cm.co.kr/item/202606/11f168663c33da95b3571591556c1e30.jpg",
+    "https://img.29cm.co.kr/item/202606/11f168663fe3c339b3575d78ca472238.JPG",
+    "https://img.29cm.co.kr/item/202606/11f1686652d094959090d716360f88ea.JPG",
+    "https://img.29cm.co.kr/item/202606/11f1686451396425b3572956ee2aafab.jpg",
+    "https://img.29cm.co.kr/item/202606/11f16864545a7a49b3579b51bc39c75e.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 17920402,
+     "text": "음...맘에들어요~사이즈는 양말신고 하면 괜찮을거같은대 그래도 크긴하더라구요~그리고 고급져보이지는 않는대 싼티나 보이지도않고 애매해요~~레인부츠처럼안보이는건 맘에듭니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-15"
+    },
+    {
+     "no": 17783978,
+     "text": "발볼 있는 240인데 후기보고 정사이즈로 구매했습니다 발볼은 좀 끼긴 하는데 양말신고도 헐떡거려서 정사이즈나 발볼없는분들은 작은 사이즈 가도 될거 같아요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-03"
+    },
+    {
+     "no": 17974494,
+     "text": "매트한(?) 재질이에요! 고무냄새가 많이 나긴 하는데 몇번 신고 나가면 괜찮아질 것 같아요!ㅎㅎ 안쪽에는 고무가 아니가 폭신한 천재질이라서 살 쓸림도 없을 것 같아요! 만족합니다!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-07-21"
+    },
+    {
+     "no": 18172922,
+     "text": "장화같이 생기지만은 않아서 코디에 활용도가 높을 것 같아 구매했는데 정말 그렇습니다! 부츠 같기도 해서 캐주얼하게 여기저기 코디할 수 있을 것 같아요! 무겁지도 않고 발도 편하네요~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-10"
+    },
+    {
+     "no": 18709047,
+     "text": "완전 레인부츠는 아니고 방수되는 부츠라서 레인부츠 특유의 투박한 느낌이 없어요! 완전 비 많이 오는날에는 신어본 적 없지만 그래도 어느정도 레인부츠의 역할은 많이 해주는 것 같아요! 만족스럽습니다!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-04"
+    },
+    {
+     "no": 18665947,
+     "text": "베이지 먼저 구매하구 만족도가 커서 블랙도 추가 주문했어요! 밑창이 튼튼해서 잘 안닳고 코디가 용이해요 ㅎㅎ 저같은 종아리 통통족들 체형 커버도 잘되는 가성비 좋은 상품입니다, 추천 💗",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 18626563,
+     "text": "신발 자체는 부츠마냥 엄청 예뻐요! 여름 장마때 잘 신었어요 그치만 마감은 조금 실망스러웠습니다.. 본드가 조금씩 나와있어서요 ㅠ 많이 눈에 띄지 않아서 품었어요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-24"
+    },
+    {
+     "no": 18540381,
+     "text": "너무 귀여워요. 나 장화다!!!! 하는 디자인이 아니어서 더 마음에 들어요 :) 종아리쪽에 양쪽끈이 살짝 거슬리고 쓸리긴하지만 그래도 잘산템입니더!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-15"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5269506,
+   "url": "https://www.musinsa.com/products/5269506",
+   "brand": "리끌로우",
+   "brand_en": "RECLOW",
+   "brand_id": "reclow",
+   "name": "RC RE-RAIN SHIRRING 레인부츠 CHOCO",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 39900,
+   "normal_price": 69000,
+   "discount": 42,
+   "review_count": 68,
+   "rating": 4.5,
+   "review_total_listed": 68,
+   "sold_out": false,
+   "release_date": "2025-07-24",
+   "season": "",
+   "style_no": "RC RE-RAIN SHIRRING 레인부츠 CHOCO",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250724/5269506/detail_5269506_17533213282939_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250724/5269506/detail_5269506_17533213290742_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250724/5269506/detail_5269506_17533213297802_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250724/5269506/detail_5269506_17533213305975_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250724/5269506/detail_5269506_17533213314835_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 79046112,
+     "text": "오래 걸어도 발이 편하고 무엇보다 태풍아닌 이상 비오는 날 발이 안젖어 너무 만족스럽습니다",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-10-15"
+    },
+    {
+     "no": 84649631,
+     "text": "장화를 꼭 사야지라고 마음 먹은 순간 착화감이 불편하고 무겁고 덥고 등 걸리는 게 한두개가 아니였는데 이 제품이 모든 걱정을 잠재웠다",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-05-21"
+    },
+    {
+     "no": 80038585,
+     "text": "장화인데 세련되고 사이즈는 딱 맞네요 색상도 예쁘고 비오는 날 잘 신고 다닐것 같아요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 85698029,
+     "text": "255신는데 발끝이 닿아요 할인 받아서 샀기때문에 안고가려 합니다 255이하만 신으시길.. 아주 가볍고 할인된 가격으로 사기 딱입니다!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-24"
+    },
+    {
+     "no": 85316916,
+     "text": "신었을 때 발 부분이 넓고 무게 자체가 가벼워서 장마철에 잘 신고 다녀요.  평소 225-230 신는데 장화는 양말 신는 것 까지 생각해서 36으로 사니 적당해요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-17"
+    },
+    {
+     "no": 83493304,
+     "text": "종아리 부분이 쓸린다는 리뷰를 보긴했는데 양말을 신었을때도 이럴지는 몰랐어요 신발이 넉넉한 사이즈라 불편하진 않은데 걸을때 커서 막 편하다는 생각은 안들었어요",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-04-06"
+    },
+    {
+     "no": 78996680,
+     "text": "둥근신발이 귀여워요~신발도 가볍고 으비안오는날도. 신고 나가고 싶은맘^^ 캐주얼 복장에도 잘어울리고 세미정장도 잘 소화해내는 굿!!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-10-14"
+    },
+    {
+     "no": 86828219,
+     "text": "장화디자인귀엽고색상도맘에들어요 발사이즈가240이라2사이즈를주문했어야되는데품절이라1사이즈주문했는데장화안이아주넉넉하여1사이즈도신을만합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-09"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "레인부츠",
+   "cheaper_elsewhere": null
+  }
+ ]
+}
