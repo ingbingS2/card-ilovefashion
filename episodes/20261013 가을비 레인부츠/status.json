@@ -1,5 +1,5 @@
 {
-  "stage": "approved",
+  "stage": "publishing",
   "built_at": "2026-10-13T10:59:11+09:00",
   "issues": [
     [
@@ -56,5 +56,48 @@
   "approved_fingerprint": "0d7b9d2ccb6bce93216cb6831fc91389edfedf2ae784acb1fa5a0849655a69af",
   "approved_quote": "@harvard_shoe 이거 사용해 자식아",
   "verified_at": "2026-10-13T11:02:29+09:00",
-  "verified_fingerprint": "0d7b9d2ccb6bce93216cb6831fc91389edfedf2ae784acb1fa5a0849655a69af"
+  "verified_fingerprint": "0d7b9d2ccb6bce93216cb6831fc91389edfedf2ae784acb1fa5a0849655a69af",
+  "carousel_id": "18063924887615793",
+  "image_urls": [
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261013%20%EA%B0%80%EC%9D%84%EB%B9%84%20%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/1.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261013%20%EA%B0%80%EC%9D%84%EB%B9%84%20%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/2.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261013%20%EA%B0%80%EC%9D%84%EB%B9%84%20%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/3.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261013%20%EA%B0%80%EC%9D%84%EB%B9%84%20%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/4.jpg",
+    "https://d.uguu.se/EXMuzZKQ.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261013%20%EA%B0%80%EC%9D%84%EB%B9%84%20%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/6.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261013%20%EA%B0%80%EC%9D%84%EB%B9%84%20%EB%A0%88%EC%9D%B8%EB%B6%80%EC%B8%A0/7.jpg"
+  ],
+  "user_tags": {
+    "2": {
+      "tags": [
+        "rockfish_official"
+      ],
+      "result": "ok"
+    },
+    "3": {
+      "tags": [
+        "harvard_shoes"
+      ],
+      "result": "ok"
+    },
+    "4": {
+      "tags": [
+        "mongdol.official"
+      ],
+      "result": "ok"
+    },
+    "5": {
+      "tags": [
+        "chaakan_official"
+      ],
+      "result": "ok"
+    },
+    "6": {
+      "tags": [
+        "reclow_official"
+      ],
+      "result": "ok"
+    }
+  },
+  "publishing_at": "2026-10-13T11:03:08+09:00"
 }
