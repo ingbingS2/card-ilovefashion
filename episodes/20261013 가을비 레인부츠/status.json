@@ -1,5 +1,5 @@
 {
-  "stage": "built",
+  "stage": "approved",
   "built_at": "2026-10-13T10:59:11+09:00",
   "issues": [
     [
@@ -51,5 +51,8 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "0d7b9d2ccb6bce93216cb6831fc91389edfedf2ae784acb1fa5a0849655a69af"
+  "fingerprint": "0d7b9d2ccb6bce93216cb6831fc91389edfedf2ae784acb1fa5a0849655a69af",
+  "approved_at": "2026-10-13T11:00:59+09:00",
+  "approved_fingerprint": "0d7b9d2ccb6bce93216cb6831fc91389edfedf2ae784acb1fa5a0849655a69af",
+  "approved_quote": "@harvard_shoe 이거 사용해 자식아"
 }
