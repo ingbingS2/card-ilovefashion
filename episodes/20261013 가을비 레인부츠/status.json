@@ -1,5 +1,5 @@
 {
-  "stage": "built",
+  "stage": "approved",
   "built_at": "2026-10-13T10:50:16+09:00",
   "issues": [
     [
@@ -55,5 +55,8 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "e74ccb674471ca84ced64b1f7d919968b0638b24655e2cc23e46c802fbffd4d9"
+  "fingerprint": "e74ccb674471ca84ced64b1f7d919968b0638b24655e2cc23e46c802fbffd4d9",
+  "approved_at": "2026-10-13T10:58:35+09:00",
+  "approved_fingerprint": "e74ccb674471ca84ced64b1f7d919968b0638b24655e2cc23e46c802fbffd4d9",
+  "approved_quote": "하버드 슈즈 인스타 계정 찾고 업로드해"
 }
