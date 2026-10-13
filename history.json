@@ -331,5 +331,38 @@
     "verdict": "미달",
     "brand_comments": [],
     "comment_count": 0
+  },
+  {
+    "folder": "20261013 가을비 레인부츠",
+    "keyword": "가을비 레인부츠",
+    "axis": "목 높이 순서 — 발목 첼시 → 짧은 실린더 → 미들(높이 19cm) → 롱 → 조임끈 롱",
+    "mood": "정보·큐레이션형",
+    "posted_at": "2026-10-13T11:03+09:00",
+    "media_id": "17974104219173006",
+    "brands": [
+      "락피쉬웨더웨어",
+      "하버드 슈즈",
+      "몽돌",
+      "착한구두",
+      "리끌로우"
+    ],
+    "mentions": [
+      "rockfish_official",
+      "harvard_shoes",
+      "mongdol.official",
+      "chaakan_official",
+      "reclow_official"
+    ],
+    "goods": [
+      4999103,
+      5144720,
+      2567160,
+      4988609,
+      5104919
+    ],
+    "zzal": "web-20261013-1.jpg",
+    "caption_first": "가을비 레인부츠는 목 높이를 잘못 고르면 양말이 젖거나 종아리가 쓸리는 걸로 끝납니다 ☔",
+    "auto": true,
+    "permalink": ""
   }
 ]

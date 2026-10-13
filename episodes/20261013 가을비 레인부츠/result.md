@@ -29,7 +29,13 @@
 | 5 | 리끌로우 | [무신사] HOU 롱 레인부츠 (5104919) | 54,900 | 99,000 | 45% | 127 | 4.8 | 2025-05-12  | 인용 | @reclow_official |
 
 ## 3. 게시 정보
-- (게시 후 publish가 채운다)
+<!-- publish -->
+- 게시 2026-10-13T11:03+09:00 (KST) · (permalink 미확인) · media_id 17974104219173006
+- 게시 방식: autopost.publish (Graph API) · 호스팅: litterbox/uguu 포함
+- 캡션 재조회 일치: None
+- 사진 태그(user_tags): 2번 @rockfish_official, 3번 @harvard_shoes, 4번 @mongdol.official, 5번 @chaakan_official, 6번 @reclow_official
+- 측정 예정: +72h
+<!-- /publish -->
 
 ## 4. 측정값 — 게시 +72시간
 - (measure가 채운다)
