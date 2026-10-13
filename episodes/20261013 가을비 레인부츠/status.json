@@ -1,6 +1,6 @@
 {
   "stage": "built",
-  "built_at": "2026-10-13T10:47:05+09:00",
+  "built_at": "2026-10-13T10:48:30+09:00",
   "issues": [
     [
       "warn",
@@ -55,5 +55,5 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "721beb05b45db0579e55912aeb335a57e23ca6291b6e007dacace90aef0b4e95"
+  "fingerprint": "58a69183e4e15f97e9a373d37f70a46da976aad6cdaf6bc795c82db4a31e232f"
 }
