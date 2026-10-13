@@ -30,9 +30,9 @@
 
 ## 3. 게시 정보
 <!-- publish -->
-- 게시 2026-10-13T11:03+09:00 (KST) · (permalink 미확인) · media_id 17974104219173006
+- 게시 2026-10-13T11:03+09:00 (KST) · https://www.instagram.com/p/DeasNORmKSi/ · media_id 17974104219173006
 - 게시 방식: autopost.publish (Graph API) · 호스팅: litterbox/uguu 포함
-- 캡션 재조회 일치: None
+- 캡션 재조회 일치: True
 - 사진 태그(user_tags): 2번 @rockfish_official, 3번 @harvard_shoes, 4번 @mongdol.official, 5번 @chaakan_official, 6번 @reclow_official
 - 측정 예정: +72h
 <!-- /publish -->
