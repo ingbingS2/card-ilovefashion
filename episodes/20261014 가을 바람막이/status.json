@@ -1,0 +1,59 @@
+{
+  "stage": "built",
+  "built_at": "2026-10-14T14:50:17+09:00",
+  "issues": [
+    [
+      "warn",
+      "로스터 브랜드가 0곳 — 기준은 로스터 1 + 신규 4 (§2)"
+    ],
+    [
+      "warn",
+      "핸들 미검증으로 태그에서 뺀 브랜드: 썸플레이스"
+    ]
+  ],
+  "shots": [
+    {
+      "index": 1,
+      "file": "1.jpg",
+      "text_ratio": 0.28476851851851853,
+      "font_ok": true
+    },
+    {
+      "index": 2,
+      "file": "2.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 3,
+      "file": "3.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 4,
+      "file": "4.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 5,
+      "file": "5.jpg",
+      "text_ratio": 0.3101388888888889,
+      "font_ok": true
+    },
+    {
+      "index": 6,
+      "file": "6.jpg",
+      "text_ratio": 0.33652777777777776,
+      "font_ok": true
+    },
+    {
+      "index": 7,
+      "file": "7.jpg",
+      "text_ratio": null,
+      "font_ok": true
+    }
+  ],
+  "fingerprint": "b4ee922677422048d98384598c3bcf8a070712fbf2d3edc7f4189b3102bb92ee"
+}

@@ -663,6 +663,52 @@
         "https://www.instagram.com/harvard_shoes/ (표시명 하버드슈즈, bio 'Harvard Shoes', 팔로워 35, 마지막 게시 2024-06, 링크 prfl.link/@harvardshoes)",
         "공식몰·검색·X에서 추가 확인 불가 — 10-13 사용자 지시('@harvard_shoe 이거 사용해')로 추가"
       ]
+    },
+    {
+      "name": "데비웨어",
+      "aliases": [
+        "DEVIWEAR"
+      ],
+      "handle": "deviwear",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-14",
+      "sources": [
+        "https://www.instagram.com/deviwear/ (표시명 데비웨어, 4.6만, www.devi-wear.com)",
+        "https://www.devi-wear.com/ 헤더·footer 인스타 링크 → instagram.com/deviwear",
+        "웹검색 '데비웨어 인스타그램' 1위 instagram.com/deviwear + 구글플레이 앱 페이지 'Instagram: @deviwear'"
+      ]
+    },
+    {
+      "name": "댄프",
+      "aliases": [
+        "DANP"
+      ],
+      "handle": "danp_kr",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-14",
+      "sources": [
+        "https://www.instagram.com/danp_kr/ (표시명 Danp 댄프, 인증 계정, 3.8만)",
+        "https://www.danp.kr/ 소셜 링크 → instagram.com/danp_kr",
+        "웹검색 '댄프 DANP 인스타그램' instagram.com/danp_kr 1위"
+      ]
+    },
+    {
+      "name": "노티카",
+      "aliases": [
+        "NAUTICA",
+        "노티카 코리아"
+      ],
+      "handle": "nautica.kr",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-14",
+      "sources": [
+        "https://www.instagram.com/nautica.kr/ (표시명 NAUTICA KOREA | 노티카 코리아, 1.5만, linktr.ee/nautica.kr → 무신사·29CM 노티카 브랜드관)",
+        "https://www.nautica.co.kr/ footer SNS → instagram.com/nautica.kr",
+        "웹검색 '노티카 코리아 인스타그램' 1위 instagram.com/nautica.kr (NAUTICA KOREA)"
+      ]
     }
   ]
 }
