@@ -709,6 +709,22 @@
         "https://www.nautica.co.kr/ footer SNS → instagram.com/nautica.kr",
         "웹검색 '노티카 코리아 인스타그램' 1위 instagram.com/nautica.kr (NAUTICA KOREA)"
       ]
+    },
+    {
+      "name": "썸플레이스",
+      "aliases": [
+        "SOMEPLACE",
+        "SOME PLACE"
+      ],
+      "handle": "someplace.kr",
+      "verified": true,
+      "roster": false,
+      "verified_at": "2026-10-14",
+      "sources": [
+        "https://www.instagram.com/someplace.kr/ (팔로워 1,408, 프로필 링크 www.some-place.co.kr, '26 SPRING' 게시물)",
+        "https://someplace.co.kr/ footer 인스타 링크 → instagram.com/someplace.kr (함께 걸린 @some._.pl은 10-14 '이용할 수 없는 프로필')",
+        "출처 2곳 — 10-14 사용자 지시('태그하고')로 추가"
+      ]
     }
   ]
 }
