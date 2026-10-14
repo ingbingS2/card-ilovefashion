@@ -21,7 +21,7 @@ def test_render_three_cards(tmp_path):
         {"kind": "item", "img": "assets/p.jpg", "pos": "50% 18%", "prod": "버던트 · <b>워크 자켓</b> 카키",
          "title": build.rich("안에 후드티를 입어도<br><em>남는 워크 자켓</em>"), "mall": "무신사",
          "normal": "86,500원", "sale": "34,600원", "off": "60%", "proof": "후기 56개 · ⭐ 4.9",
-         "sp": "“생각보다 좀 큰 편이라서 안에 후드티를 입어도 됩니다” —&nbsp;실제&nbsp;후기"},
+         "sp": "<span class=\"src\">실제&nbsp;후기</span>“생각보다 좀 큰 편이라서 안에 후드티를 입어도 됩니다”"},
         {"kind": "cta", "img": "assets/z.jpg", "title": "재킷 하나만 잘 골라도<br><em>가을이 편해집니다</em>",
          "sub": "고민이 줄어듭니다"},
     ]

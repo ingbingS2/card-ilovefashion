@@ -94,9 +94,9 @@ def card_dicts(ep: dict, prods: list[dict], cover_cand: dict, zzal_rel: str) -> 
         else:
             proof = f"후기 {p['review_count']:,}개" + (f" · {p['season']}" if p.get("season") else "")
         if p.get("quote_text"):
-            sp = f"“{html.escape(p['quote_text'])}” —&nbsp;실제&nbsp;후기"
+            sp = f"<span class=\"src\">실제&nbsp;후기</span>“{html.escape(p['quote_text'])}”"
         else:
-            sp = f"{html.escape(p['spec_line'])} —&nbsp;상세&nbsp;페이지&nbsp;표기"
+            sp = f"<span class=\"src\">상세&nbsp;페이지&nbsp;표기</span>{html.escape(p['spec_line'])}"
         name = html.escape(p.get("display_name") or p["name"])
         color = html.escape(p.get("color", ""))
         cards.append({
