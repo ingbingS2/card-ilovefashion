@@ -29,7 +29,13 @@
 | 5 | 유라고 | [29CM] 리버 후디드 하프 점퍼 (3037432) | 204,250 | 215,000 | 5% | 254 | 5.0 | 2025-02-10  | 인용 | @we_are_urago |
 
 ## 3. 게시 정보
-- (게시 후 publish가 채운다)
+<!-- publish -->
+- 게시 2026-10-14T15:45+09:00 (KST) · (permalink 미확인) · media_id 17989417094871652
+- 게시 방식: autopost.publish (Graph API) · 호스팅: raw.githubusercontent.com
+- 캡션 재조회 일치: None
+- 사진 태그(user_tags): 2번 @someplace.kr, 3번 @deviwear, 4번 @danp_kr, 5번 @nautica.kr, 6번 @we_are_urago
+- 측정 예정: +72h
+<!-- /publish -->
 
 ## 4. 측정값 — 게시 +72시간
 - (measure가 채운다)
