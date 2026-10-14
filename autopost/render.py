@@ -39,8 +39,8 @@ def render(cards: list[dict], base_dir: Path, out_dir: Path) -> list[dict]:
             page.wait_for_function(
                 "Array.from(document.images).every(i => i.complete && i.naturalWidth > 0)",
                 timeout=30000)
-            # check()는 '불러올 글꼴이 없음'에도 true라 쓸모없다 — 제목 글꼴(SUIT, 10-14 사용자 피드백으로 고딕 비교 후 교체)이 실제로 loaded인지 본다
-            font_ok = page.evaluate("[...document.fonts].some(f => f.family.replace(/\"/g, '').startsWith('SUIT')"
+            # check()는 '불러올 글꼴이 없음'에도 true라 쓸모없다 — 제목 글꼴(Gmarket Sans, 10-14 사용자 피드백 후 8종 비교로 확정)이 실제로 loaded인지 본다
+            font_ok = page.evaluate("[...document.fonts].some(f => f.family.replace(/\"/g, '').startsWith('Gmarket Sans')"
                                     " && f.status === 'loaded')")
             for i in range(len(cards)):
                 el = page.locator(f"#card{i}")
