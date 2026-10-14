@@ -27,12 +27,12 @@
     {
       "goodsNo": 5361270,
       "image": 7,
-      "pos": "42% 45%",
+      "pos": "42% 10%",
       "display_name": "도트 후드 스트링 바람막이 세트",
       "color": "네이비",
       "headline": "생각보다 <em>도톰해서</em><br>비 오고 쌀쌀할 때",
       "quote_no": 85911564,
-      "zoom": 1.04
+      "zoom": 1.08
     },
     {
       "goodsNo": 3063206,
@@ -54,19 +54,21 @@
     {
       "goodsNo": 4763740,
       "image": 19,
-      "pos": "50% 12%",
+      "pos": "55% 0%",
       "display_name": "덱 트랜싯 자켓",
       "headline": "<em>가격 대비 퀄리티</em>가<br>제일 좋은 바람막이",
-      "quote_no": 82951954
+      "quote_no": 82951954,
+      "zoom": 1.06
     },
     {
       "goodsNo": 3037432,
       "image": 2,
-      "pos": "50% 45%",
+      "pos": "50% 25%",
       "display_name": "리버 후디드 하프 점퍼",
       "color": "민트 그레이",
       "headline": "넉넉한 하프 점퍼인데<br><em>가볍고 귀여운</em> 스타일",
-      "quote_no": 16331028
+      "quote_no": 16331028,
+      "zoom": 1.12
     }
   ],
   "cta": {
