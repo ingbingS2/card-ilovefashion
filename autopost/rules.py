@@ -222,6 +222,9 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
         extra = set(p) - config.PRODUCT_KEYS
         if extra:
             err(f"{tag}: episode.json에 쓸 수 없는 키 {sorted(extra)} — 가격·후기·인용 원문은 코드가 채운다")
+        z = p.get("zoom")
+        if z is not None and (isinstance(z, bool) or not isinstance(z, (int, float)) or not 1 <= z <= config.ZOOM_MAX):
+            err(f"{tag}: zoom은 1~{config.ZOOM_MAX} 사이 숫자")
         c = by_no.get(str(p.get("goodsNo")))
         if not c:
             err(f"{tag}: candidates.json에 없는 상품 — collect로 수집한 것만 쓴다")

@@ -102,6 +102,7 @@ def card_dicts(ep: dict, prods: list[dict], cover_cand: dict, zzal_rel: str) -> 
         cards.append({
             "kind": "item", "img": "assets/" + asset_name(f"{i:02d}", p["goodsNo"], p["image"]),
             "pos": p.get("pos", "50% 18%"),
+            "zoom": p.get("zoom", 1),
             "prod": f"{html.escape(p['brand'])} · <b>{name}</b>{(' ' + color) if color else ''}",
             "title": rich(p["headline"]), "mall": html.escape(p.get("mall", "무신사")),
             "normal": won(p["normal_price"]), "sale": won(p["sale_price"]),
