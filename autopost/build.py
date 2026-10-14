@@ -227,7 +227,7 @@ def build(folder: str) -> dict:
         if s["text_ratio"] is not None and s["text_ratio"] > config.TEXT_BLOCK_MAX_RATIO:
             issues.append(("error", f"{s['index']}번 카드 텍스트 블록이 {s['text_ratio']:.0%} — 35% 이하로 줄일 것(§4)"))
     if shots and not shots[0]["font_ok"]:
-        issues.append(("error", "Hahmlet 폰트가 로드되지 않음(CDN 차단·네트워크) — 대체 글꼴로 렌더돼 쓸 수 없다. "
+        issues.append(("error", "SUIT 폰트가 로드되지 않음(CDN 차단·네트워크) — 대체 글꼴로 렌더돼 쓸 수 없다. "
                                  "cdn.jsdelivr.net 접근을 확인하고 다시 build"))
 
     caption, skipped = caption_text(ep, prods, handles)
