@@ -30,9 +30,9 @@
 
 ## 3. 게시 정보
 <!-- publish -->
-- 게시 2026-10-14T15:45+09:00 (KST) · (permalink 미확인) · media_id 17989417094871652
+- 게시 2026-10-14T15:45+09:00 (KST) · https://www.instagram.com/p/DedxQW6FKuM/ · media_id 17989417094871652
 - 게시 방식: autopost.publish (Graph API) · 호스팅: raw.githubusercontent.com
-- 캡션 재조회 일치: None
+- 캡션 재조회 일치: True
 - 사진 태그(user_tags): 2번 @someplace.kr, 3번 @deviwear, 4번 @danp_kr, 5번 @nautica.kr, 6번 @we_are_urago
 - 측정 예정: +72h
 <!-- /publish -->
