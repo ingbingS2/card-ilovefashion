@@ -38,4 +38,21 @@
 <!-- /publish -->
 
 ## 4. 측정값 — 게시 +72시간
-- (measure가 채운다)
+측정 2026-10-16T11:43+09:00 (KST, Graph API) · 측정 시점: 게시 +72.7h
+
+| 지표 | 게시 +72.7h |
+|---|---|
+| reach | 4 |
+| saved | 1 |
+| shares | 0 |
+| likes | 3 |
+| comments | 0 |
+| total_interactions | 4 |
+| profile_visits | 0 |
+| follows | 0 |
+| views | 11 |
+
+**판정: 미달** (기준 도달 200+ · 공유 1+). 유입 '기타' 비중은 `instagram.com/insights/media/17974104219173006/`에서 확인.
+
+- 브랜드 반응(댓글): 없음 (댓글 0개 중)
+- 브랜드의 좋아요·스토리 공유는 Graph API로 볼 수 없음 — 인스타 앱 알림·스토리 멘션에서 확인
