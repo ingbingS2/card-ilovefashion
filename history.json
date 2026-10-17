@@ -412,6 +412,22 @@
     "zzal": "web-20261007-1.jpg",
     "caption_first": "가을 바람막이 다섯 벌 골랐습니다 🍂",
     "auto": true,
-    "permalink": "https://www.instagram.com/p/DedxQW6FKuM/"
+    "permalink": "https://www.instagram.com/p/DedxQW6FKuM/",
+    "metrics": {
+      "reach": 7,
+      "saved": 0,
+      "shares": 0,
+      "likes": 4,
+      "comments": 0,
+      "total_interactions": 4,
+      "profile_visits": 1,
+      "follows": 0,
+      "views": 19
+    },
+    "measured_at": "2026-10-17T16:40+09:00",
+    "measured_hours": 72.9,
+    "verdict": "미달",
+    "brand_comments": [],
+    "comment_count": 0
   }
 ]
