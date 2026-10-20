@@ -1,0 +1,3092 @@
+{
+ "folder": "20261020 늦가을 어그부츠",
+ "collected_at": "2026-10-20T17:25+09:00",
+ "queries": [
+  "어그부츠",
+  "양털부츠",
+  "무스탕 부츠",
+  "시어링 부츠",
+  "어그 미니",
+  "퍼 부츠",
+  "털부츠",
+  "양털 숏부츠",
+  "어그 숏부츠",
+  "방한부츠",
+  "스웨이드 퍼 부츠",
+  "ugg"
+ ],
+ "gf": "F",
+ "new_since": "2025-01-01",
+ "notes": [
+  "29CM 상세 API 차단 — 이 몰 후보는 수집하지 못함: 29CM 상세 차단 — 이번 실행 중단(403 연속 3회): https://bff-api.29cm.co.kr/api/v5/product-detail/2241098",
+  "--append: 기존 후보 17종 유지, 새로 19종 추가"
+ ],
+ "dropped": {
+  "재입고·컬러추가 표기(판매 개시일 신뢰 불가)": 6,
+  "품절": 9,
+  "신상 기준(2025-01-01) 미달": 94,
+  "브랜드당 2개 초과(색상 변형 등)": 121,
+  "29CM 상세 조회 실패": 15,
+  "29CM 차단(403) — 나머지 건너뜀": 82,
+  "사진 부족": 15,
+  "이미 후보에 있음(--append)": 13
+ },
+ "candidates": [
+  {
+   "mall": "29CM",
+   "goodsNo": 2247946,
+   "url": "https://product.29cm.co.kr/catalog/2247946",
+   "brand": "락피쉬웨더웨어",
+   "brand_en": "ROCKFISH WEATHERWEAR",
+   "brand_id": "6326",
+   "name": "ORIGINAL WINTER SLIPPERS - 9 colors",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 55900,
+   "normal_price": 59000,
+   "discount": 5,
+   "review_count": 6481,
+   "rating": 5.0,
+   "review_total_listed": 6481,
+   "sold_out": false,
+   "release_date": "2026-09-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세페이지 참조 102102 색상 CHESTNUT, COCOA, CHOCO, SAND, BLACK, BLUE, KHAKI, WHITE, CREAM 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세페이지 참조 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 ㈜에이유브랜즈/㈜에이유브랜즈 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 취급시 주의사항 - 물 세탁시 소재 변형이 발생 할 수 있습니다. - 염소, 산소계 표백제로 표백할 수 없습니다. - 드라이크리닝은 할 수 있으나 셀프 세탁은 할 수 없고, 전문점에서만 할 수 있습니다. - 세탁 후 건조시, 기계건조를 할 수 없습니다. - 기름기가 있는 장소에서의 사용은 가능한 피해야 합니다. - 불 옆에 놓으면 변화하거나 변형 될 수 있습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 품질보증기간내(6개월) 이후 유상처리됨(수선비+왕복운송비)발생됨 ※ 단,고객과실시엔 품질보증 기간내도 유상처리됨. 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 고객센터/1688-7039",
+   "images": [
+    "https://img.29cm.co.kr/item/202608/11f1a28c4b858a408fdc290ba2f42568.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a7824e239e3ab4a9bd03d34ba18b.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a7824e23c52fb18db1fc1d9a3088.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a7824e234ffdb18d8796546e0b64.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a7826517ed5eb4a9ef80f5fa720b.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a7826517ed5cb4a907816e2f5639.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15540807,
+     "text": "박스포장이 너무 정성스럽네요 뚜껑을 열면 냄새가 좀 나요ㅠ 베란다에 이틀정도 두었다가 신어야할듯 싶어요. 동생에게 선물했는데 예쁘다고 만족해합니다~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-09"
+    },
+    {
+     "no": 7276279,
+     "text": "평소 다른 신발들 230 신는데 240 괜찮아요 맨발로 신어도 발가락이랑 발볼은 딱 맞고 맨 앞까지 바짝 발 넣으면 사진만큼 뒤꿈치쪽 살짝 길이 남아요. 끝까지 발 안 넣고 편하게 신으려면 사이즈 괜찮은 거 같아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2023-11-26"
+    },
+    {
+     "no": 11208903,
+     "text": "슬리퍼 안에 털이 꽉꽉 차 있어서 사이즈는 업해서 신는 것을 추천합니다. 평소 230 착용하는데 이건 240 신어도 괜찮았어요! 너무 귀엽고 따듯한 신발입니다. 검정색이라 휘뚜루마뚜루 착용가능해요!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2024-11-19"
+    },
+    {
+     "no": 11374335,
+     "text": "처음에는 털이 빽빽해서, 한 치수 정도 크게 신어야 예쁠 것 같아요. 나중에 털 숨이 죽으면 어떨지 모르겠지만, 지금은 딱 예쁩니다. 양말 신고도 신으려면 반치수~한치수 크게 신으시는 걸 추천합니다.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2024-12-02"
+    },
+    {
+     "no": 7448428,
+     "text": "일단 정말 따뜻해서 마음에 들었어요 운동화 230 신는데 230으로 했다가 좀 작은 느낌 들어서 240으로 했을껄 하는 아쉬움이 있어요 발볼이 넓은 편도 아닌데 ㅠ 꼭 한 사이즈 크게 구매하세여 꼭!!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2023-12-12"
+    },
+    {
+     "no": 7188509,
+     "text": "가격대비 완전 만족해요!! 불편하거나 아픈거 전혀없는게 젤 만족..!! 다른 색도 사고싶음..ㅎ 평소 230신는데 발볼이 넓은 편이라 240샀는데 괜찮아요 30샀으면 너무딱맞았을듯!!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2023-11-20"
+    },
+    {
+     "no": 15215458,
+     "text": "겨울에 편하게 신으려고 할인할때 샀어요 동생이 작년에 잘 신고다녀서 저도 한번 사봤어요 색도 이쁘고 휘뚜루마두루 잘 신어 질것같아요",
+     "grade": 4,
+     "likes": 1,
+     "date": "2025-11-12"
+    },
+    {
+     "no": 7342729,
+     "text": "SAND 색상으로 구매해서 너무 잘신고다니기 때문에 BLACK으로 재구매했습니다! 진짜 너무편하고 따숩고 물론 뒷꿈치는 좀 시렵지만 그건 극뽁가능입니다!!! 락피쉬 최고👍🏻",
+     "grade": 5,
+     "likes": 1,
+     "date": "2023-12-02"
+    }
+   ],
+   "roster": false,
+   "handle": "rockfish_official",
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 4457252,
+    "sale_price": 53100,
+    "url": "https://www.musinsa.com/products/4457252"
+   }
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 2247953,
+   "url": "https://product.29cm.co.kr/catalog/2247953",
+   "brand": "락피쉬웨더웨어",
+   "brand_en": "ROCKFISH WEATHERWEAR",
+   "brand_id": "6326",
+   "name": "ORIGINAL WINTER BOOTS SHORT(6inch) - 8 colors",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 116800,
+   "normal_price": 123000,
+   "discount": 5,
+   "review_count": 3673,
+   "rating": 5.0,
+   "review_total_listed": 3673,
+   "sold_out": false,
+   "release_date": "2026-09-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세페이지 참조 102102 색상 CHESTNUT, COCOA, CHOCO, SAND, BLACK, BLUE, PINK, WHITE 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세페이지참조 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 ㈜에이유브랜즈/㈜에이유브랜즈 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 취급시 주의사항 - 물 세탁시 소재 변형이 발생 할 수 있습니다. - 염소, 산소계 표백제로 표백할 수 없습니다. - 드라이크리닝은 할 수 있으나 셀프 세탁은 할 수 없고, 전문점에서만 할 수 있습니다. - 세탁 후 건조시, 기계건조를 할 수 없습니다. - 기름기가 있는 장소에서의 사용은 가능한 피해야 합니다. - 불 옆에 놓으면 변화하거나 변형 될 수 있습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 품질보증기간내(6개월) 이후 유상처리됨(수선비+왕복운송비)발생됨 ※ 단,고객과실시엔 품질보증 기간내도 유상처리됨. 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 고객센터/1688-7039",
+   "images": [
+    "https://img.29cm.co.kr/item/202511/11f0c5221a5b0d2fa563dfaeda942d6e.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a29ab980439c85e109b8e0295670.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a78366449162b4a92b45d9f71a89.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a29ab97ff57a85e15da345af2cb9.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a78366446a57b18d6150207b6e16.jpg",
+    "https://img.29cm.co.kr/item/202609/11f1a7837507684bb18df95c0f885b40.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 16069134,
+     "text": "기대한 것보다 디자인이 예뻐서 맘에 들어요:) 근데 발사이즈 240 기준 살짝 커서 헐떡거립니다ㅠㅠ 오래 신으면 발 아플 것 같은 예감이 들어요. 그래도 따뜻하고 예쁘니 깔창넣어서 잘 신어보겠습니다ㅎㅎ",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-01-31"
+    },
+    {
+     "no": 15322180,
+     "text": "락피쉬꺼 뒤에막힌 어그뮬? 원래 잘신고있었어서 고민도안하고 구매했어요 약간 걸을때 뒷굼치 헐떡이는느낌은 어쩔수없는것같아요 정사이즈240이고 작게나온건245사는발인데 락피쉬꺼 다 240신고있어요 충분합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-18"
+    },
+    {
+     "no": 15544010,
+     "text": "조카선물로 구매했어요! 220사이즈가 없어서 230으로 구매했는데,, 칼발이고 발등이 없는 편이어서 수면양말 신고도 조금 크더라구요~ 발 작으신분들 참고하세요^^; 그래도 발이 따뜻하다고 하니 다행이예요 : )",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-09"
+    },
+    {
+     "no": 15553242,
+     "text": "평소 235 신어서 고민했는데 240 크다는 후기들이 있어 230으로 주문했더니 사이즈 너무 좋습니다!! 디자인도 너무 귀엽고 예쁩니다!! 어그 특유의 냄새가 나긴 하지만 밖에 나가서 신으면 금방 빠질 것 같아요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-10"
+    }
+   ],
+   "roster": false,
+   "handle": "rockfish_official",
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 4457252,
+    "sale_price": 53100,
+    "url": "https://www.musinsa.com/products/4457252"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5437430,
+   "url": "https://www.musinsa.com/products/5437430",
+   "brand": "어그",
+   "brand_en": "UGG",
+   "brand_id": "ugg",
+   "name": "[WOMEN] 클래식 미니 II -  체스넛 / 1016222-CHE",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 278000,
+   "normal_price": 278000,
+   "discount": 0,
+   "review_count": 292,
+   "rating": 4.9,
+   "review_total_listed": 292,
+   "sold_out": false,
+   "release_date": "2025-09-10",
+   "season": "",
+   "style_no": "1016222-CHE",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250910/5437430/detail_5437430_17604241158072_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437430/detail_5437430_17604241170356_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437430/detail_5437430_17604241182527_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437430/detail_5437430_17604241192212_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80352766,
+     "text": "어그 두말해서 뭐하나요~  다들 아시는 그 맛이죠 특히나 이번 겨울은 어그 신는 사람들 더 많이 보일거 같아요 매우 가볍고 따듯하고 좋습니다",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-26"
+    },
+    {
+     "no": 79564025,
+     "text": "보통 운동화는 230 신는데, 어그는 240 구매했어요! 사이즈 딱 좋네요~",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-03"
+    },
+    {
+     "no": 82005527,
+     "text": "어그 두말해서 뭐하나요~ 다들 아시는 그 맛이죠 특히나 이번 겨울은 어그 신는 사람들 더 많이 보일거 같아요  매우 가볍고 따듯하고 좋습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-02-01"
+    },
+    {
+     "no": 80310604,
+     "text": "근본컬러 롱밖에 없어서 샀고 230 정사이즈로 구매했습니다 뉴발 아식스 나이키 다 230 신어요~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-25"
+    },
+    {
+     "no": 80077823,
+     "text": "실물 너무 예쁘고 안에 털이 보드라워서 좋습니다 ㅎㅎ 생각보다 털은 좀 빠질 거 같은데 감수해야겠죠.. 길이도 적당하고 잘 신고 다닐 거 같아요! 굿",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-21"
+    },
+    {
+     "no": 87221315,
+     "text": "맨발로 신어보니 넉넉햇어요 겨울에 양말신고 신으면 딱좋을것같아여 ~평소 240 신는데 250구매했어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-30"
+    },
+    {
+     "no": 87807089,
+     "text": "엄마 사줄려고 산 제품인데 생각보다 털이 풍성하고 신으면 가라 앉을것같지만 부들거리네여",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-29"
+    },
+    {
+     "no": 82402461,
+     "text": "일단 발볼러들은 애좀 먹습니다 신을때 벗을때 과롭습니다.. 80이상인분들은 포기하시고 미만인 분들은 사이즈 업해서스보셔요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-20"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "어그부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(1670520): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5437433,
+   "url": "https://www.musinsa.com/products/5437433",
+   "brand": "어그",
+   "brand_en": "UGG",
+   "brand_id": "ugg",
+   "name": "[WOMEN] 클래식 울트라 미니 - 체스넛 / 1116109-CHE",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 258000,
+   "normal_price": 258000,
+   "discount": 0,
+   "review_count": 272,
+   "rating": 4.9,
+   "review_total_listed": 272,
+   "sold_out": false,
+   "release_date": "2025-09-10",
+   "season": "",
+   "style_no": "1116109-CHE",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250910/5437433/detail_5437433_17604242961134_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437433/detail_5437433_17604242971579_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437433/detail_5437433_17604242981926_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437433/detail_5437433_17604242990957_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250910/5437433/detail_5437433_17604243001967_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80044638,
+     "text": "발 들어가는 입구가 조금 타이트 하긴 한데 그래도 쉽게 넣을 순 있었어요. 색깔도 예쁘고 보들보들 양말 안 신고 신발 신어도 너무 촉감이 좋네요. 예쁘게 잘 신을게요. 세일 할 때 구매 해서 좋습니다.",
+     "grade": 4,
+     "likes": 3,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 79458697,
+     "text": "사이즈 딱 맞고 너무 예뿌네요 신고벗기에도 편해서 올겨울 데일리신발로 딱입니다",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-10-30"
+    },
+    {
+     "no": 81712139,
+     "text": "발길이 213, 215인데 울양말 신고 신어도 걸을 때마다 뒤꿈치가 살짝씩 헐떡거려요 그래도 크게 거슬릴 정돈 아니라 잘 신고있어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-17"
+    },
+    {
+     "no": 81285963,
+     "text": "즐겨신지 않는 색상이라 걱정했는데 어떤 옷에도 잘 어울리고, 무엇보다 보온이란 기능에 제일 좋네요! 방수스프레이 뿌리고나니 물기로인한 오염도 걱정없고 만족합니다!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-30"
+    },
+    {
+     "no": 81174500,
+     "text": "신고벗기 편하게 한치수 큰걸로 샀어요. 신발 너무 이쁘고, 따뜻하고 편안합니다.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-22"
+    },
+    {
+     "no": 81174494,
+     "text": "신고벗기 편하게 한치수 큰걸로 샀어요. 신발 너무 이쁘고, 따뜻하고 편안합니다.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-22"
+    },
+    {
+     "no": 80730477,
+     "text": "블프 때 십만원 후반대에 어그를 득템했어요! 신어보자마자 왜 다들 어그 어그 하는지 알겠더라고요. 발이 폭 감싸지는 느낌이라 올겨울 따뜻하게 보낼 수 있을 것 같아요. 이번 쇼핑 중 제일 만족스러운 구매예요 :)",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-05"
+    },
+    {
+     "no": 80056418,
+     "text": "사이즈 고민이 있었는데 평소 신던 운동화 사이즈랑 같게 주문했는데 잘 맞아요. 따뜻해서 좋아요. 신기도 편하네요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-20"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "어그부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(2119405): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5639773,
+   "url": "https://www.musinsa.com/products/5639773",
+   "brand": "엘리자베스 스튜어트",
+   "brand_en": "ELIZABETH STUART",
+   "brand_id": "elizabethstuart",
+   "name": "소가죽 메리제인 버클 퍼 로퍼 EBAL57763+67750",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 99900,
+   "normal_price": 169900,
+   "discount": 41,
+   "review_count": 241,
+   "rating": 4.8,
+   "review_total_listed": 241,
+   "sold_out": false,
+   "release_date": "2025-10-24",
+   "season": "2025 F/W",
+   "style_no": "EBAL57763",
+   "material": [
+    "굽 높이: 보통",
+    "쿠션: 보통",
+    "무게: 보통"
+   ],
+   "spec_text": "[이나 PICK]",
+   "images": [
+    "https://image.msscdn.net/images/goods_img/20251024/5639773/5639773_17917913885107_big.jpg",
+    "https://image.msscdn.net/images/goods_img/20251024/5639773/5639773_17906649794186_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17906649800021_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17917913891493_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17906649801674_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17906649802979_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17906649804449_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17917913893053_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437779903_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437756613_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437738628_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437698615_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437725600_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437712546_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639773/detail_5639773_17615437768403_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 79676170,
+     "text": "굽이 있어서 신발이 무거울줄 알았는데 생각보다 가볍고 너무 폭신해서 좋아요!!! 올 겨울은 이걸로 버틸거에요~!!",
+     "grade": 5,
+     "likes": 6,
+     "date": "2025-11-08"
+    },
+    {
+     "no": 79666972,
+     "text": "엄청 튼튼쓰하면서 또 귀여워용 친구가 보자마자 어디꺼냐며... 넘넘 귀엽구 발도편합니다!!",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-11-07"
+    },
+    {
+     "no": 80957435,
+     "text": "우선 예뻐요!! 겨울 털신인데도 무게감이 크게 느껴지지 않고 가벼워요! 패딩부츠보다 가볍고 좀더 편하게 신을 수 있습니다!!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-12-13"
+    },
+    {
+     "no": 81490991,
+     "text": "예쁘고 편해요 아주 자주 신어영 이번겨울은 이걸로 버팁니당 색도 예쁘고 다 좋아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-06"
+    },
+    {
+     "no": 81090056,
+     "text": "우성 안에 털이 가득해서 발 넣지마자 따뜻함이 확 느껴져요 아주 살짝 무거운 느낌이 있지만 걸을 때 불편하지 않아요 디자인 귀엽고 벨크로가 있어서 사이즈 꽉 조을 수 있어서 좋아용",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-23"
+    },
+    {
+     "no": 84156986,
+     "text": "밑창이 두꺼워서 그런건지 너무 편해요 운동화보다 편해서 자주신는데 사이즈가 좀 커요 반사이즈정도 낮추셔서 구매하셔야할듯",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-05-09"
+    },
+    {
+     "no": 82325576,
+     "text": "신고 너무너무 예뻐서 후기를 안남길수가 없었습니다... 발볼 넓은데 신고벗기에 전혀 불편함 없습니다 근데 넘 예버요..",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-17"
+    },
+    {
+     "no": 83788156,
+     "text": "엄청 따뜻해서 겨울에 잘 신고 다녔어요 디자인도 어디에나 잘 어울리고 특히 색감이 이쁩니다ㅎㅎ 약간 굽이 있다보니 오래 걸으면 종아리가 아프긴 한데 그래도 무난하게 편하게 신을만 해요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-04-18"
+    }
+   ],
+   "roster": false,
+   "handle": "elizabethstuart_official",
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3604691): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5613840,
+   "url": "https://www.musinsa.com/products/5613840",
+   "brand": "디스커버리 익스페디션",
+   "brand_en": "DISCOVERY EXPEDITION",
+   "brand_id": "discoveryexpedition",
+   "name": "스무디 (BLACK)",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 97300,
+   "normal_price": 139000,
+   "discount": 30,
+   "review_count": 74,
+   "rating": 4.9,
+   "review_total_listed": 74,
+   "sold_out": false,
+   "release_date": "2025-10-20",
+   "season": "2025 F/W",
+   "style_no": "DXSH6235N-BKS",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17636887405679_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618782954094_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618782960218_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618782966415_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618782980700_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618782990813_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618782997643_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618783005716_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618783015517_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618783022612_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17624146738731_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5613840/detail_5613840_17618783048461_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81837411,
+     "text": "삿포로 여행가려고 고민고민하다가 디스커버리로 주문 했습니다 여행가기전에 한번 신을때는 무겁나?(어그보다 살짝 무거워요) 걱정했는데 눈에더 안미끄러지고 좋았어요 참고로 어그는 그냥 미끄러져용",
+     "grade": 5,
+     "likes": 3,
+     "date": "2026-01-24"
+    },
+    {
+     "no": 79838806,
+     "text": "삿포로 여행가서 신으려고 기능적으로만 보고 샀는데 왠걸 디자인도 너무 귀여워요 !!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-15"
+    },
+    {
+     "no": 81031776,
+     "text": "고민 많이 했는데 잘산것같아요!! 엄청 따뜻하고 편해서 발이 안아파용 ㅎㅎ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-16"
+    },
+    {
+     "no": 80426330,
+     "text": "부츠 발딱잡아주고해서 좋아요 사이즈 30부터있어서 혹시 클까봐걱정했는데 핏딱맞아요 편할거같아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-27"
+    },
+    {
+     "no": 80867470,
+     "text": "저렴이사려다 큰맘먹고샀는데 무겁고 신기불편해여 ㅜㅜ 걍 이가격에 3개는 살수있는데 그럴껄 그랬어요 걍 이쁘기만 해여 신기도 불평하고",
+     "grade": 4,
+     "likes": 1,
+     "date": "2025-12-09"
+    },
+    {
+     "no": 88224231,
+     "text": "이번 겨울에신을려고 여러제품을찾다가 디스커버리제품이랑 다른상품이랑 고민고민하다 이 상품으로 주문했는데 실물을보니 디자인도 이쁘면서 따뜻해보이고 착용감도 좋습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-15"
+    },
+    {
+     "no": 87803869,
+     "text": "착용감이 편안하긴 한데 발볼이 넓으면 약간 딱 맞게 느껴질 수 있을 것 같아요! 따뜻하고 너무 귀엽습니다~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-29"
+    },
+    {
+     "no": 82074008,
+     "text": "눈 오는 날 미끄럽지도 않고 좋아요! 사이즈 조금 여유있게 주문했더니, 두꺼운 양말 신고도 편하고 따뜻해서 만족합니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-05"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3592829): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5687986,
+   "url": "https://www.musinsa.com/products/5687986",
+   "brand": "오찌",
+   "brand_en": "OTZ",
+   "brand_id": "otz",
+   "name": "[오찌x우무] 3300 벌루니 레이스업 부츠 OZPUGA434I",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 67430,
+   "normal_price": 89900,
+   "discount": 25,
+   "review_count": 17,
+   "rating": 4.8,
+   "review_total_listed": 17,
+   "sold_out": false,
+   "release_date": "2025-11-05",
+   "season": "2025 F/W",
+   "style_no": "OZPUGA434I",
+   "material": [
+    "굽 높이: 보통",
+    "쿠션: 있음",
+    "무게: 보통"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624110605474_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624110613244_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033811905_big.png",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033821177_big.png",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033832142_big.png",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033800867_big.png",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033843079_big.png",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033854780_big.png",
+    "https://image.msscdn.net/images/prd_img/20251105/5687986/detail_5687986_17624033788879_big.png"
+   ],
+   "quotes": [
+    {
+     "no": 81468327,
+     "text": "평소에 225 신고 가아끔 230 맞는데, 안에 털이 있어서 이거 230샀는데 딱 맞어요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-05"
+    },
+    {
+     "no": 80330788,
+     "text": "평소에 240이나 245 신는데 작을까봐 250 샀더니 좀 커용 ㅠㅠ 그래도 너무 귀엽고 편해요!!",
+     "grade": 4,
+     "likes": 1,
+     "date": "2025-11-26"
+    },
+    {
+     "no": 88334541,
+     "text": "아이보리 컬러가 너무 예쁘고 전체적으로 귀여운 느낌이라 마음에 들어요. 레이스업 디자인에 굽도 적당히 있어서 다양한 코디에 매치하기 좋을 것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-20"
+    },
+    {
+     "no": 87995481,
+     "text": "평소 해당 브랜드 제품이 사이즈가 크게 나와서 235 넉넉하게 신고 있었는데 털 생각해서 240 주문했어요! 운동화 기준 240 신어용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 81627131,
+     "text": "제가 잘 못신은건진 모르겟지만 발목을 잡아주기 힘들어서 걸어다닐때 종아리 허벅지 힘 들어가요. 근데 예뻐서 잘 신고다닐거같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-13"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3625056): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7311173,
+   "url": "https://www.musinsa.com/products/7311173",
+   "brand": "착한구두",
+   "brand_en": "CHAAKAN",
+   "brand_id": "chaakan",
+   "name": "페탈 커스텀 멀티웨이 롱부츠 BLLTS4i159WTLTS4i184WTSDS4i187",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 72100,
+   "normal_price": 75900,
+   "discount": 5,
+   "review_count": 14,
+   "rating": 4.7,
+   "review_total_listed": 14,
+   "sold_out": false,
+   "release_date": "2026-09-11",
+   "season": "",
+   "style_no": "BLLTS4i159,WTLTS4i184,WTSDS4i187",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260911/7311173/detail_7311173_17891075393581_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260911/7311173/detail_7311173_17891075394872_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260911/7311173/detail_7311173_17891075396216_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260911/7311173/detail_7311173_17891075397541_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 88015997,
+     "text": "사이즈는 정사이즈 신으시면 될 것 같아요 여러 스타일로 신을 수 있어서 좋습니다!!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-10-07"
+    },
+    {
+     "no": 87901389,
+     "text": "저에게는 아주 사알짝 크게 느껴졌던거같아요 ㅎㅎ 그래도 디자인이 너무 이뻐서 만족스러워요 내 맘대로 커스텀이 가능하니까 유용하게 사용할듯!",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 88104981,
+     "text": "이거 신고 장기간 돌아 다녀도 정말 운동화 신은 것처럼 발이 매우 편했고 신고 벗는것도 매우 편해요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-10"
+    },
+    {
+     "no": 88041543,
+     "text": "디자인이 너무 예뻐요 살짝크긴한데 보완해서 잘 신으면 될 것 같아요~! 첫 부츠인데 만족합니다!! 평구두 39사이즈 딱맞는 사람입니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-08"
+    }
+   ],
+   "roster": false,
+   "handle": "chaakan_official",
+   "query": "양털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5639775,
+   "url": "https://www.musinsa.com/products/5639775",
+   "brand": "엘리자베스 스튜어트",
+   "brand_en": "ELIZABETH STUART",
+   "brand_id": "elizabethstuart",
+   "name": "[2color] 소가죽 모모 보헤미안 어그 부츠 EBAL57748",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 106100,
+   "normal_price": 169900,
+   "discount": 38,
+   "review_count": 12,
+   "rating": 4.9,
+   "review_total_listed": 12,
+   "sold_out": false,
+   "release_date": "2025-10-24",
+   "season": "2025 F/W",
+   "style_no": "EBAL57748",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17615417994790_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273429287_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273453791_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17615418008788_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273524645_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273498341_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273593471_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273402031_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273480126_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273573346_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17628273550144_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17615417970576_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251024/5639775/detail_5639775_17615417982429_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80346009,
+     "text": "포장도 엄청 꼼꼼하게 오고 바닥도 푹신해서 좋았어요! 그리고 엄청 보들보들하고 따뜻해요🤍",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-26"
+    },
+    {
+     "no": 82470331,
+     "text": "귀엽고 이쁜 겨울 신발 겟 했습니다. 너무 이쁘고 좋아서 하나 더 구매할까 고민일정도에요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-22"
+    },
+    {
+     "no": 81649501,
+     "text": "발볼 넓이가 아주 넉넉해서 그런지 옆으로 퍼져보여요 근데 엄청 따뜻해요 진한 브라운이라 떼도 많이 안탈꺼같아서 좋아요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-01-14"
+    },
+    {
+     "no": 80083867,
+     "text": "운동화 보통 235 신어서 240으로 주문했는데 사이즈 좋아요! 겨울에 두꺼운 양말에도 잘 신을 수 있을듯 ჱ̒ ｰ̀֊ｰ́ )",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-21"
+    },
+    {
+     "no": 82592196,
+     "text": "매우 따뜻하고 편해요. 색도 이뻐서 겨울동안 거의 매일 신었어요. 신다가 너무 편해서 엄마도 사드렸어요ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-26"
+    },
+    {
+     "no": 82592072,
+     "text": "매우 따뜻하고 편해요. 색도 이뻐서 겨울동안 거의 매일 신었어요. 신다가 너무 편해서 엄마도 사드렸어요ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-26"
+    },
+    {
+     "no": 81331803,
+     "text": "모양도 귀엽고 따뜻하니 좋아요. 이번 여행때 계속 신고 다녔는데 추위도 훨씬 덜 타고 원피스에 잘 어울려 기분이 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-29"
+    },
+    {
+     "no": 81153449,
+     "text": "신발 자체가 넘 이쁘네요 선물용으로도 좋은거 같아요 겨울 따따이 룩으로 좋네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-21"
+    }
+   ],
+   "roster": false,
+   "handle": "elizabethstuart_official",
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5804743,
+   "url": "https://www.musinsa.com/products/5804743",
+   "brand": "식스핏",
+   "brand_en": "6FT",
+   "brand_id": "6ft",
+   "name": "[+5cm] WINTERFELL - SLIP LOAFER CHOCO BROWN 어그 로퍼",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 49900,
+   "normal_price": 99000,
+   "discount": 50,
+   "review_count": 11,
+   "rating": 3.9,
+   "review_total_listed": 11,
+   "sold_out": false,
+   "release_date": "2025-12-04",
+   "season": "2025 F/W",
+   "style_no": "WINTERFELL",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251204/5804743/detail_5804743_17648345011529_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251204/5804743/detail_5804743_17648345017389_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251204/5804743/detail_5804743_17648345023732_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251204/5804743/detail_5804743_17648345029975_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81675086,
+     "text": "정사이즈보다 큰건지 아니면 그냥 신발자체가 잘 벗겨지는 건지 구분은 안되지만 나름 잘 신고 다니규 있슴다 귀여워용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-15"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3676258): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5630703,
+   "url": "https://www.musinsa.com/products/5630703",
+   "brand": "오찌",
+   "brand_en": "OTZ",
+   "brand_id": "otz",
+   "name": "3300 벌루니 레이스업 부츠 OZPUGA432B",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 72820,
+   "normal_price": 89900,
+   "discount": 19,
+   "review_count": 11,
+   "rating": 4.9,
+   "review_total_listed": 11,
+   "sold_out": false,
+   "release_date": "2025-10-22",
+   "season": "",
+   "style_no": "OZPUGA432B",
+   "material": [
+    "굽 높이: 보통",
+    "쿠션: 있음",
+    "무게: 보통"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611919162524_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611982303338_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611982312546_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611776803692_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611776811557_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611776820202_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611776829447_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611776838044_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251022/5630703/detail_5630703_17611776846579_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81420675,
+     "text": "따듯하고 디자인이 너무 귀여워요 어떤 룩에 잘어울릴거같아요 통굽이라 저처럼 키작으신 분들께 추천드려요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-03"
+    },
+    {
+     "no": 87825993,
+     "text": "오찌 신발에 갑자기 빠져서 샀는데 겨울에 진짜 휘뚤마뚤 잘 신을 각이 나옵니다 귀여운 느낌 겨울 부츠사고 싶었는데 딱이에용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-04"
+    },
+    {
+     "no": 82077105,
+     "text": "저는 겨울에 두꺼운 양말같이 신으려고 한치수 크게샀는데 이미 크게 나온 제품이여서 정사이즈로 구매해두될 제품입니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-05"
+    },
+    {
+     "no": 81868822,
+     "text": "신발 너무 무거움 사이즈 크게 나와서 맞게사면 신발한테 질질끌리는 느낌임 예쁘긴 함",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-25"
+    },
+    {
+     "no": 80831102,
+     "text": "걸을 때 뒷꿈치 부분의 착화감이 좀 어색한 느낌이 있는 거 빼고는 디자인도 예쁘고 따뜻해요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-08"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3604439): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5484522,
+   "url": "https://www.musinsa.com/products/5484522",
+   "brand": "컨버스",
+   "brand_en": "CONVERSE",
+   "brand_id": "converse",
+   "name": "척테일러 올스타 엘리먼츠 부츠 에그렛 A17642C",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 135000,
+   "normal_price": 135000,
+   "discount": 0,
+   "review_count": 9,
+   "rating": 4.9,
+   "review_total_listed": 9,
+   "sold_out": false,
+   "release_date": "2025-09-18",
+   "season": "",
+   "style_no": "A17642C",
+   "material": [],
+   "spec_text": "겉감: 폴리에스터 97%, 면 3%, 안감: 폴리에스터 100%, 아웃솔: 고무 100%",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295831704_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295844582_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295640613_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295682212_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295702259_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295729657_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295779093_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295754952_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295649540_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250918/5484522/detail_5484522_17591295658213_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 79596498,
+     "text": "너무 이뻐요! 색감이 너무 하얀색이라 때 탈까봐 부담스럽긴 하지만 너무 이뻐요. 딱 발길이 250, 252인데 255 사이즈 편하게 맞아요! 발볼도 넓지만 딱 괜찮습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-04"
+    },
+    {
+     "no": 79596479,
+     "text": "너무 이뻐요! 색감이 너무 하얀색이라 때 탈까봐 부담스럽긴 하지만 너무 이뻐요. 딱 발길이 250, 252인데 255 사이즈 편하게 맞아요! 발볼도 넓지만 딱 괜찮습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-04"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5788729,
+   "url": "https://www.musinsa.com/products/5788729",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "[X ODOR] WESTERN FUR BOOTS / BROWN",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 149000,
+   "normal_price": 149000,
+   "discount": 0,
+   "review_count": 8,
+   "rating": 4.6,
+   "review_total_listed": 8,
+   "sold_out": false,
+   "release_date": "2025-11-28",
+   "season": "",
+   "style_no": "BEFWCOIHCBT03BR",
+   "material": [
+    "굽 높이: 보통",
+    "무게: 가벼움"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17651822379732_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17651822400016_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17651822406717_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17651822386711_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17652779838026_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17652779830188_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788729/detail_5788729_17652779847881_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 87972893,
+     "text": "사이즈 잘 맞고 생각했던 핏으로 떨어져서 잘 신고있어요! 엄청편해요 예뻐서 지인 선물해줄려고 하나 더 샀어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-05"
+    },
+    {
+     "no": 81905374,
+     "text": "사이즈가 없어서 넉넉하게 10 사이즈 업해서 주문했는데 양말 두툼한 거 신으니까 딱 좋음 발 커보일까 걱정했는데 생각보다 괜찮음",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-01-27"
+    },
+    {
+     "no": 81905292,
+     "text": "굽이 높아서 눈을 밟아도 쉽게 젖지 않음 다만 미끄러움 ㅠㅠ 그래도 컬러가 진하고 고급스러워서 만족",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-01-27"
+    },
+    {
+     "no": 81582946,
+     "text": "툭 걸쳐도 멋스러운 포인트가 되는 것 같아요! 치마입을때도 좋고, 와이드팬츠도 구겨넣어 입어도 잘 어울려요 🤎",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-11"
+    },
+    {
+     "no": 81662105,
+     "text": "완존 짱짱 예쁩니다 근데 맨발루 신어두 털 때문에 꽉 맞아요!! 근데 완존 예쁩니당 진짜 초초 예쁘고 종아리 널널해서 신고벗기도 진짜 편해용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-15"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "양털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5808574,
+   "url": "https://www.musinsa.com/products/5808574",
+   "brand": "슈펜",
+   "brand_en": "SHOOPEN",
+   "brand_id": "shoopen",
+   "name": "플랫폼 샤크솔 웜 슬립온 HPCV8FFV1Q",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 29900,
+   "normal_price": 39900,
+   "discount": 25,
+   "review_count": 4,
+   "rating": 4.5,
+   "review_total_listed": 4,
+   "sold_out": false,
+   "release_date": "2025-12-05",
+   "season": "2025 F/W",
+   "style_no": "5008168200",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251205/5808574/detail_5808574_17649137868906_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251205/5808574/detail_5808574_17649137871275_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251205/5808574/detail_5808574_17649137872841_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251205/5808574/detail_5808574_17649137874886_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81301762,
+     "text": "우선 퀄리티는 매우 만족스럽지만, 왜 여성용 제품을 남성용으로 표기해 두었는지 모르겠네요. 제가 신지는 못하니 어머님에게 선물로 드렸는데, 사이즈도 맞고 마음에 들어하시네요.",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-28"
+    },
+    {
+     "no": 82150480,
+     "text": "제가 발볼이 좁은 편인데 사이즈는 정사이즈로 나온거 같고 따뜻하고 어디에 신어도 이뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-09"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5442265,
+   "url": "https://www.musinsa.com/products/5442265",
+   "brand": "커버낫 우먼",
+   "brand_en": "COVERNAT WOMAN",
+   "brand_id": "covernatwoman",
+   "name": "우먼 클로버하트 토글 퍼 부츠 Brown",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 59000,
+   "normal_price": 115000,
+   "discount": 49,
+   "review_count": 2,
+   "rating": 4.0,
+   "review_total_listed": 2,
+   "sold_out": false,
+   "release_date": "2025-09-11",
+   "season": "",
+   "style_no": "CO2504SN74BR",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461495954_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461497547_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461499095_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461500744_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461502348_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461503919_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461505394_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461507475_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250911/5442265/detail_5442265_17906461509163_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 88175596,
+     "text": "귀엽고 보글보글하고 신으면 곰돌이 발 같아요 밑창이 튼튼할지 모르겠지만 이뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-13"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "퍼 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3505023): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5741896,
+   "url": "https://www.musinsa.com/products/5741896",
+   "brand": "포기무디",
+   "brand_en": "FOGGY MOODY",
+   "brand_id": "foggymoody",
+   "name": "Mist 0035. Toggle Button Fur Boots - 2colors",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 183000,
+   "normal_price": 183000,
+   "discount": 0,
+   "review_count": 1,
+   "rating": 5.0,
+   "review_total_listed": 1,
+   "sold_out": false,
+   "release_date": "2025-11-17",
+   "season": "",
+   "style_no": "F0035",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602261222_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602306522_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602343934_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602434149_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602464036_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602529742_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602552860_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602600083_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602651586_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602699978_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602746233_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602794441_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602845702_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602864945_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602905627_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602934379_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251117/5741896/detail_5741896_17633602957287_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80922988,
+     "text": "드뎌 예쁜 레더 부츠 찾았어요!!  포기무디라는 브랜드 눈팅만 하다가 구입해봤는데 매력적이네요 적당한 광택감은 블랙레더에 배색되는 안감털, 토글버튼이 조화로와요 착화감도 편하고푹신합니다. 롱과미들 사이의 길이인듯해요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-11"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "시어링 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3616838): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5724208,
+   "url": "https://www.musinsa.com/products/5724208",
+   "brand": "코모레비뮤지엄",
+   "brand_en": "KOMOREBI MUSEUM",
+   "brand_id": "komorebimuseum",
+   "name": "2Colors_램 시어링 알프 트레커 워커 I KM430",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 102000,
+   "normal_price": 136000,
+   "discount": 25,
+   "review_count": 1,
+   "rating": 5.0,
+   "review_total_listed": 1,
+   "sold_out": false,
+   "release_date": "2025-11-12",
+   "season": "",
+   "style_no": "KM430",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251112/5724208/detail_5724208_17629381741445_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251112/5724208/detail_5724208_17629381775501_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251112/5724208/detail_5724208_17629381826783_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251112/5724208/detail_5724208_17629381859458_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251112/5724208/detail_5724208_17629381897162_big.jpg"
+   ],
+   "quotes": [],
+   "roster": false,
+   "handle": null,
+   "query": "시어링 부츠",
+   "cheaper_elsewhere": {
+    "unavailable": "다른 몰 상세 조회 실패(3626903): 29CM 상세 차단 — 이번 실행 중단(403 연속 3회)"
+   }
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3455540,
+   "url": "https://product.29cm.co.kr/catalog/3455540",
+   "brand": "누스",
+   "brand_en": "NUUS",
+   "brand_id": "15120",
+   "name": "[FW 뉴컬러] 유디트 리본 핀턱 플랫 [n5292-1]_6color",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 71280,
+   "normal_price": 88000,
+   "discount": 19,
+   "review_count": 881,
+   "rating": 5.0,
+   "review_total_listed": 881,
+   "sold_out": false,
+   "release_date": "2025-09-26",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 Artificial Leather 102102 색상 Black / Cream / Butter / Black (suede) / Beige (suede) / Gray (wool felt) 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 225-250mm 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 누스 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세페이지 참조 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 전자상거래법 준수 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 A/S 문의접수 : MY>1:1문의 이용 / A/S 책임자 : 010-7219-3335",
+   "images": [
+    "https://img.29cm.co.kr/item/202608/11f1a126f9eb430c85e1b39d564bb77f.jpg",
+    "https://img.29cm.co.kr/item/202608/11f19f070f571ad48fdc11692ca6c323.jpg",
+    "https://img.29cm.co.kr/item/202602/11f1033063e76adaa540d587612e2877.jpg",
+    "https://img.29cm.co.kr/item/202608/11f1a2ae4654397c85e171b322d310f6.jpg",
+    "https://img.29cm.co.kr/item/202602/11f1033063e71c5ca3c0f19b35053654.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61bd39295e0a3c037648aac99a3.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 16333656,
+     "text": "디자인 너~무 마음에 쏙 들어요 딱 생각했던 디자인이에요 ㅎㅎ 근데 제 발이 220이라 좀 많이 커유.. 깔창 깔아야돼요ㅠㅠ 기회되면 225정도는 제작해주시면 좋갰어요우.. ㅎㅎ ㅠㅠ",
+     "grade": 5,
+     "likes": 21,
+     "date": "2026-03-02"
+    },
+    {
+     "no": 14715685,
+     "text": "화이트톤의 플랫슈즈라 어떤 코디에도 자연스럽게 어울려요🤍 은은한 리본 디테일이랑 앞코 쉐입이 세련돼서 데일리룩에 포인트 주기 좋아요 가운데 쿠션이 있어서 오래 신어도 발도 편안해서 만족🙌🏻",
+     "grade": 5,
+     "likes": 17,
+     "date": "2025-09-28"
+    },
+    {
+     "no": 18007219,
+     "text": "일단 말랑말랑하고 편하고 예뻐요~ 첫날 신어본 후기: 발가락 물집 잡힐 것 같아요 근데 늘어나겠죠...? 치마에 신으면 더 예쁠 것 같아요 앞코가 귀엽고 좋습니다~",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-24"
+    },
+    {
+     "no": 18420922,
+     "text": "235 칼발 235로 주문했어요 아침에는 딱 적당하게 맞고 발 부으면 쫌 끼는 정도입니다 사이즈 다운은 비추합니닷!! 신발 예쁘고 맘에드러요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-04"
+    },
+    {
+     "no": 18780877,
+     "text": "너무 이뻐요!! 발볼이 보통 여자들보다 큰편인데요 매우 잘 맞습니다!! 일단 착화감이 너무 좋아서 하루 종일 신었는데 발이 엄청 편했어요ㅎㅎ 나중에 봄 되면 다른 컬러도 사야겠습니다ㅜㅜ",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-12"
+    },
+    {
+     "no": 17068501,
+     "text": "구두는 반업해서 신는 편인데 후기에서 다들 크다고 하셔서 정사이즈로 구매했어요~! 길이가 남긴 하는데 편하게 잘 신을 수 있을 것 같아욤 ㅎㅎ 디자인 유니크하구 너무 예쁩니당",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-05-10"
+    },
+    {
+     "no": 16928838,
+     "text": "보통 운동화 230 여유있게 맞는 편인데 ^^ 스타킹이랑 양말 신고 225 딱 맞아요 ! 고무 말랑말랑 해서 많이 아프지도 않지만 너무 딱맞아서 그런지 물집은 잡혔어요 ㅠㅍㅠ",
+     "grade": 4,
+     "likes": 1,
+     "date": "2026-04-26"
+    },
+    {
+     "no": 17704638,
+     "text": "소재 자체가 말랑말랑하고 부드러워서 발에 잘 감기고 편안해요! 밑창도 부드러운 느낌이에요! 심플하면서 중간 리본이 포인트 되니까 아무때나 신어도 어울려서 좋습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-26"
+    }
+   ],
+   "roster": true,
+   "handle": "nuus__official",
+   "query": "털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3381543,
+   "url": "https://product.29cm.co.kr/catalog/3381543",
+   "brand": "어그",
+   "brand_en": "UGG",
+   "brand_id": "18684",
+   "name": "[WOMEN] 타스만 II - 체스트넛 / 1174470-CHE",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 198000,
+   "normal_price": 198000,
+   "discount": 0,
+   "review_count": 854,
+   "rating": 5.0,
+   "review_total_listed": 854,
+   "sold_out": false,
+   "release_date": "2025-08-07",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "▶ 전 라인 베스트셀러이자 스테디셀러\n▶고급스러운 스웨이드 소재에 시그니처 자수 디테일이 돋보이는 클래식 슬리퍼\n▶ 어그 플러쉬 소재를 사용하던 이전 시즌과 달리 고품질의 천연 양모 안감으로 교체되어 더욱 프리미엄해진 상품\n▶ 사탕수수 EVA 아웃솔로 편안한 착화감\n102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 ▶ Upper (갑피) : 스웨이드 ▶ Lining (안감) : 17mm 양모 ▶ Footbed (깔창) : Sugarcane EVA ▶ Outsole (겉창) : Sugarcane EVA 102102 색상 상세 페이지 참조 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세 페이지 참조 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 UGG 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 인도네시아 102106 취급시 주의사항 물에 젖었을때 직사광선이나 열로 직접 건조하면 변형,변질 될 수 있으니 통풍이 잘되는 그늘에서 건조권장함/ 가죽류의 경우, 가죽전용크림을 사용하여 주 1회 손질할 경우 장기간 사용 가능함/ 가죽류의 오염의 경우, 가죽전용 크림으로 세척하되 일반세척제나 벤졸성분 사용을 금지함 ※ 상품에 부착된 케어라벨을 참조하세요 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁 해결 규정에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 A/S 문의접수는 MY>1:1문의 이용",
+   "images": [
+    "https://img.29cm.co.kr/item/202507/11f066868ec2626b8909abe4fe0885c6.jpg",
+    "https://img.29cm.co.kr/item/202507/11f066869367f5ad8909a5cae5cc813a.jpg",
+    "https://img.29cm.co.kr/item/202507/11f066869a2964a3afc0f5901a680177.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 18853261,
+     "text": "원래 240-245신어서 사이즈 고민을 많이했어요! 고민하다가 240으로 했는데 얇은 양말 신고 딱 맞아요! 털이 눌린다고 하니 이걸로 하길 잘한거같아요. 신발이 너무 귀여워요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-20"
+    },
+    {
+     "no": 18643835,
+     "text": "어그 미니를 너무 잘 신어서 새로운 디자인으로 구매했어요 보통 240-245 신는데 미니 240 너무 딱 맞아서 250으로 구매했는데 살짝 넉넉하게 잘 맞아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-27"
+    },
+    {
+     "no": 18788987,
+     "text": "샌들로 사려다 타스만 샀는데 맘에 들어요 발 사이즈 245 신발 245250 신는데 이 사이즈 잘 맞아요! 정품도 맞는 것 같구요 뒷꿈치 살짝 들리지만 괜찮아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-13"
+    },
+    {
+     "no": 18813752,
+     "text": "원래 230인대 더편하게 신을려고 240으로 하나더삿어요 ㅎㅎ 어그는 겨울에 믿고삽니당 ㅎㅎ 뭘입든 잘어울려서 좋아요 이번겨울도 따뜻ㅅ하게 날개용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-15"
+    },
+    {
+     "no": 18785910,
+     "text": "추워지기 시작해서 얼른 쟁였어요. 숏이랑 같은 사이즈샀는데 슬리퍼라 그런지 헐렁하긴하네요. 두꺼운양말하고 신으면 괜찮을것같기도해요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-13"
+    },
+    {
+     "no": 18660110,
+     "text": "245 신는데 240 샀더니 사이즈 잘 맞아요 좀 끼는 느낌이긴한데  양털아 좀 숨죽으면 더 잘 맞을거 같아요 디자인이 너무 귀여워서 맘에 들어요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-09-29"
+    },
+    {
+     "no": 18826053,
+     "text": "겨울에 막 신을 슬리퍼가 없어서 삿어여 부들부들 따듯할거같아영 ㅎㅎ 굿굿 털이 아직 풍성해서 딱 맞는 느낌이 있깅해여 신다보면 좀 커질듯",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-16"
+    },
+    {
+     "no": 15105174,
+     "text": "일단 평소 235 사이즈를 신는데, 아무래노 안에 털이 있어서 240으로 주문! 아주 딱 맞아서 반업 크게 사시는걸 추천드리고, 디자인도 너무 예쁘고 정말 데일리로 잘 신고 다닐 것 같아요 👍🏻",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-06"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "ugg",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5334806,
+   "url": "https://www.musinsa.com/products/5334806",
+   "brand": "어그",
+   "brand_en": "UGG",
+   "brand_id": "ugg",
+   "name": "[WOMEN] 타스만 II - 체스넛 / 1174470-CHE",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 198000,
+   "normal_price": 198000,
+   "discount": 0,
+   "review_count": 852,
+   "rating": 4.9,
+   "review_total_listed": 852,
+   "sold_out": false,
+   "release_date": "2025-08-19",
+   "season": "2025 F/W",
+   "style_no": "1174470-CHE",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250819/5334806/detail_5334806_17574081648538_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5334806/detail_5334806_17574081656985_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5334806/detail_5334806_17574081665057_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5334806/detail_5334806_17574081672957_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5334806/detail_5334806_17574081683685_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20250819/5334806/detail_5334806_17574081691960_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80081218,
+     "text": "평소 235 신는데 어그는 항상 240 구매하면 딱이더라고요 착용감 좋고 예쁩니다",
+     "grade": 5,
+     "likes": 5,
+     "date": "2025-11-21"
+    },
+    {
+     "no": 79385898,
+     "text": "운동화를 보통 260 신는데 운동화 사이즈랑 동사이즈로 가면 됩니다. 따뜻하고 편하고 가볍네요. 체스넛 색상을 많이들 찾는 이유가 분명히 있네요. 매력적이고 여기저기 잘 신을 것 같네요",
+     "grade": 5,
+     "likes": 4,
+     "date": "2025-10-28"
+    },
+    {
+     "no": 79590179,
+     "text": "크다기엔 발이 꽉 끼고 아프고 작다기엔 걸으면서 계속 벗겨지고 그래도 한번 잘 신어볼게요 편한거 원하시면 코케트나 디스케트 추천 드립니다",
+     "grade": 4,
+     "likes": 3,
+     "date": "2025-11-04"
+    },
+    {
+     "no": 88008552,
+     "text": "생각했던 것보다 털이 많아서 더 푹신해요 근데 털 좀 빠지긴해요..! 그리고 전 235신는데 240 사니까 약간 널널하긴해요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-10-06"
+    },
+    {
+     "no": 79809606,
+     "text": "225 230 신는데 220 딱 좋아요 사이즈 발볼 안넓으면 다운시켜도 좋을거같아용",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-14"
+    },
+    {
+     "no": 87519893,
+     "text": "쭉신던건데 너무 낡아서 보내주고 겨울되기전 새로 구매했어요!이번에 굽있는것도 시켰었는데 역시 타스만이 훨씬 더 편하고 이쁘네요 만족합니다^^",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-16"
+    },
+    {
+     "no": 80964770,
+     "text": "235 신는데요! 정사이즈여서 40시킨 저는 조금 크지만 그래도 두꺼운 양말 신거나 그러면 괜찮아요!! 다들 정사이즈 사세요!! 🙏🏻🤭 어그는 넘 겨울에 꼭 필수죠! 저는 완전 만족하면서 신어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-02-24"
+    },
+    {
+     "no": 82408804,
+     "text": "저는 235를 신는데 딱 정사이즈 같아요 40시켰더니 크지만 너무 예뻐서!! 그냥 신어요,, 색도 빨간색이랑 잘 어울리고 방수처리 해두면 오래오래 신을 수 있을 거 같아요🤍",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-02-21"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "ugg",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 1814465,
+   "url": "https://product.29cm.co.kr/catalog/1814465",
+   "brand": "락피쉬웨더웨어",
+   "brand_en": "ROCKFISH WEATHERWEAR",
+   "brand_id": "6326",
+   "name": "ORIGINAL WINTER BOOTS MIDDLE(8inch) - 2 colors",
+   "genders": [
+    "2"
+   ],
+   "category": "",
+   "sale_price": 122500,
+   "normal_price": 129000,
+   "discount": 5,
+   "review_count": 512,
+   "rating": 5.0,
+   "review_total_listed": 512,
+   "sold_out": false,
+   "release_date": "2026-09-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세페이지 참조 102102 색상 CHESTNUT, COCOA 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세페이지참조 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 ㈜에이유브랜즈/㈜에이유브랜즈 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 취급시 주의사항 - 물 세탁시 소재 변형이 발생 할 수 있습니다. - 염소, 산소계 표백제로 표백할 수 없습니다. - 드라이크리닝은 할 수 있으나 셀프 세탁은 할 수 없고, 전문점에서만 할 수 있습니다. - 세탁 후 건조시, 기계건조를 할 수 없습니다. - 기름기가 있는 장소에서의 사용은 가능한 피해야 합니다. - 불 옆에 놓으면 변화하거나 변형 될 수 있습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 품질보증기간내(6개월) 이후 유상처리됨(수선비+왕복운송비)발생됨 ※ 단,고객과실시엔 품질보증 기간내도 유상처리됨. 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 고객센터/1688-7039",
+   "images": [
+    "https://img.29cm.co.kr/item/202509/11f09acbbf38947c920c393a2401441d.jpg",
+    "https://img.29cm.co.kr/item/202509/11f09acbbf37f7aab5634bf51d12dc6f.jpg",
+    "https://img.29cm.co.kr/item/202509/11f09acbbf37f836920c330ca225c349.jpg",
+    "https://img.29cm.co.kr/item/202509/11f09acbbf381f48920ce131ba14a30d.jpg",
+    "https://img.29cm.co.kr/item/202509/11f09acbbf38bb8e920ce108d58fd992.jpg",
+    "https://img.29cm.co.kr/item/202509/11f09acbbf38947a920c5d081cf5137a.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 7351413,
+     "text": "어머니 겨울 선물로 샀어요 235-240 신으시는데 처음엔 살짝 작게 느껴지셨대요 그래도 추운날 따뜻하고 편하게 신으신다고 양말 두꺼운거 안심으면 편하게 신으실 수 있으실듯 품질은 양모 100%라 믿고 샀습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2023-12-03"
+    },
+    {
+     "no": 7245696,
+     "text": "엄마도 올겨울에는 털부츠 신고싶으다고 하셔서 크리스마스 선물로 사드렸는데 엄청 좋아하셨어요! 평소에 입고다니는 옷들과 잘어울릴거같은 차콜색으로 구매했고 털은 아주 복실복실해서 좋습니다!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2023-11-23"
+    },
+    {
+     "no": 10351337,
+     "text": "투웨이가 가능한 어그 🩷 굳이 어그라는 브랜드를 사기보단 튼튼하고 가성비좋은 락피쉬가 좋은 것 같아요 충분히 그만큼의 가격할것 같구 전 이번에 처음 사보는거지만 왠지 매년살것 같는 느깜이네요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2024-09-10"
+    },
+    {
+     "no": 16051897,
+     "text": "숏 잘 신었어서 미들 샀는데 숏이 손이 더 잘가긴 해요..ㅎㅎ 털이 폭닥폭닥해서 발에 땀날정도로 따듯해용!! 폭설에도 끄떡없습니닷",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-29"
+    },
+    {
+     "no": 10758170,
+     "text": "운동화든 뭐든 230신는데 230주문하니까 딱 맞아요 사이즈 크게 했으면 클날뻔 했어요 예쁘고 귀엽고 아장(?)하게 걷게됩니다 얼른 겨울이 와서 개시하고 싶네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2024-10-21"
+    },
+    {
+     "no": 7557482,
+     "text": "한파에 신으려고 부랴부랴 주문했는데 털빵빵하고 정말 따뜻해요:) 체스넛 컬러가 무난해서 코디하기도 좋구요 칼발 235인데 사이즈업해서 편안하게 신기 딱 좋네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2023-12-23"
+    },
+    {
+     "no": 11080814,
+     "text": "박스를 열자마자 선물받은거 같은 기분이 드는 패키지에요 색상도 너무 이쁘고 착화감도 좋아서 신고 벗기도 너무 편해요! 여기저기 다 잘어울리는 예쁜 색상이에욤",
+     "grade": 5,
+     "likes": 0,
+     "date": "2024-11-13"
+    },
+    {
+     "no": 11177625,
+     "text": "일부로 접어서도 신으려고 조음 긴걸로 샀는데 너무 귀엽궁…어그 저렴이 버전으로 아주 좋아요 사이즈는 발볼이 넓지않은편이라 정사이즈했눈데 잘 맞아요!",
+     "grade": 4,
+     "likes": 0,
+     "date": "2024-11-17"
+    }
+   ],
+   "roster": false,
+   "handle": "rockfish_official",
+   "query": "털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3562915,
+   "url": "https://product.29cm.co.kr/catalog/3562915",
+   "brand": "락피쉬웨더웨어",
+   "brand_en": "ROCKFISH WEATHERWEAR",
+   "brand_id": "6326",
+   "name": "CURLY FUR BOOTS MIDDLE - 5 colors",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 132000,
+   "normal_price": 132000,
+   "discount": 0,
+   "review_count": 145,
+   "rating": 5.0,
+   "review_total_listed": 145,
+   "sold_out": false,
+   "release_date": "2025-10-24",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 상세페이지 참조 102102 색상 BEIGE, COCOA, KHAKI GREY, IVORY, DUSTY PINK 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세페이지 참조 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 ㈜에이유브랜즈/㈜에이유브랜즈 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 취급시 주의사항 - 물 세탁시 소재 변형이 발생 할 수 있습니다. - 염소, 산소계 표백제로 표백할 수 없습니다. - 드라이크리닝은 할 수 있으나 셀프 세탁은 할 수 없고, 전문점에서만 할 수 있습니다. - 세탁 후 건조시, 기계건조를 할 수 없습니다. - 기름기가 있는 장소에서의 사용은 가능한 피해야 합니다. - 불 옆에 놓으면 변화하거나 변형 될 수 있습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 품질보증기간내(6개월) 이후 유상처리됨(수선비+왕복운송비)발생됨 ※ 단,고객과실시엔 품질보증 기간내도 유상처리됨. 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 고객센터/1688-7039 2928622 2026-10-20 00:00:00 2026-11-03 23:59:59 false 0 internal [NEW] 2",
+   "images": [
+    "https://img.29cm.co.kr/item/202610/11f1cbb840543f0cb3939baa4148e037.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1cbb84051f51ab39383a63591df3f.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1cbb84051f5b899ae09161b8ee77b.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1cbb84053a36c99ae07ee6f1c136a.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1cbb8405243da99ae4989b3874543.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1cbb84051f518b3934720c069f9ef.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15595730,
+     "text": "보자마자 반해버려서 흰색이든 뭐든 바로 구매해버렸습니다 신고 나가자마자 바로 오염될거같지만 너무이뻐서 어쩔수가없어요..ㅠㅠ이쁘긴 너무이뻐요!! 베이지도 사고싶습니다!ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-14"
+    },
+    {
+     "no": 15357489,
+     "text": "저는 230신는데 일부러 240 주문했어요 ㅋㅁㅋ 역시 크네요 ㅠㅠ 겨울양말 신어도 살짝 커요.. 그냥 정사이즈 주문하세용! 색감이나 디자인은 맘에 들어요~🫶🏻",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-21"
+    },
+    {
+     "no": 15337608,
+     "text": "평소 235를 신는데 두꺼운 양말과 함께신으려고 240했어요. 좀 커요. 그치만 작은 것보단 낫고 헐떡거리진 않아요. 엄청 따듯합니다.. 발에 땀나요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-19"
+    },
+    {
+     "no": 14990755,
+     "text": "너무 귀여워요ㅠ!! 신고 걸을때도 편하고 따뜻해서 한겨울에 신기 좋을 것 같아요 홋카이도 같은데 여행가서 신으면 너무 이쁠듯!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-10-28"
+    },
+    {
+     "no": 15793019,
+     "text": "여행가게 되어서 구매했는데 따뜻하고 좋아요 사이즈는 240~245 신는데 240 하니까 널널하니 딱 좋네요 잘 신겠습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-04"
+    },
+    {
+     "no": 15784654,
+     "text": "컬러 너무 고민했는데 화이트라도 굽이 높아서 떼 잘 안탈거같아요^^ 일본갈때 신으려고 샀는데 풍경이랑 찰떡일거같아요!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-03"
+    },
+    {
+     "no": 15592344,
+     "text": "안에 털이 꽉 차 있어서 신자마자 발이 따뜻해요. 맨발로 신어도 촉감이 부드럽고 보송해서 장시간 착용해도 불편함이 없어요. 발목까지 안정감 있게 잡아줘서 걷기도 편하고, 겨울에 찬 바람 막아주는 느낌이 확실해요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-13"
+    },
+    {
+     "no": 15346557,
+     "text": "오오요으 너무귀엽자나요 최고에요 !ㅜㅜ빨리 눈이오면좋겠어요 진짜예쁠거같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-20"
+    }
+   ],
+   "roster": false,
+   "handle": "rockfish_official",
+   "query": "털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3455558,
+   "url": "https://product.29cm.co.kr/catalog/3455558",
+   "brand": "누스",
+   "brand_en": "NUUS",
+   "brand_id": "15120",
+   "name": "[바로배송] 프리다 2-way 벨트 미들/롱 부츠 [n107]_4color",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 103680,
+   "normal_price": 128000,
+   "discount": 19,
+   "review_count": 130,
+   "rating": 4.5,
+   "review_total_listed": 130,
+   "sold_out": false,
+   "release_date": "2025-09-26",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 Black (PU) : Artificial Leather / Black (leather) : Cow hide 90%, PU 10% (Coated Leather) / Taupe (suede), Deep brown (suede) : Cow Suede 102102 색상 Black(PU), Black(leather), Taupe (suede), Deep brown (suede) 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 230-255mm 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 누스 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세페이지 참조 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 전자상거래법 준수 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 A/S 문의접수 : MY>1:1문의 이용 / A/S 책임자 : 010-7219-3335",
+   "images": [
+    "https://img.29cm.co.kr/item/202511/11f0bacdaa8881588388411a061a20b8.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61c9b39943aa5409f3c7b91c6e5.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61c73c1356aa540ff77dd59d083.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61c73c1356ca5406d84c2996670.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61c73c1aa8ca3c0ada71c20b01b.jpg",
+    "https://img.29cm.co.kr/item/202512/11f0e61c73c13568a5402910786a7b7b.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15140375,
+     "text": "검정색 살까 하다가 스웨이드 부츠가 예뻐보여서 토프색상으로 샀는데 너무 예뻐요!! 사이즈가 애매해서 240이랑 245 고민했는데 저는 헐떡거리는것보다 정사이즈가 좋을거같아서 240 했는데 잘 맞아요(칼발이에요)",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-08"
+    },
+    {
+     "no": 18690322,
+     "text": "사진에는 종아리 입구부분이 커보였는데 생각보다 딱맞는 느낌이였어요 마른편입니다. 가죽도 이쁘고 디자인도 마음에 들어요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-02"
+    },
+    {
+     "no": 15383467,
+     "text": "다리가 오다리라서 부츠가 잘 안어울리능데 오히랴 미들에 통이 넉넉해서 덜 단점이 부각되궁 예쁜것 같아요 긍데 생각보다 굽? 이있어서 키좀 크신분들은 더 커보이실거에요. 그치만 착화감이 좋아서 굳굳ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-23"
+    },
+    {
+     "no": 15258398,
+     "text": "선물하려고 제꺼랑 동생꺼 두가지 구매했는데 너무 만족해요! 다만 처음 오픈할때는 냄새가 좀 나서 열어두고 실착하시면 더 좋을 것 같아요! 스웨이드가 이쁘게 잘 나왔고 색이 가을겨울에 잘 어울릴것 같아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-13"
+    },
+    {
+     "no": 15108554,
+     "text": "이쁜데 아직 신고 나가보진 못했어요. 두꺼운 양말이랑 신을 거 생각해서 크게 샀는데 좀 너무 큰가 싶기도 하네요,, 헐떡 거려서 오래 걷긴 힘들 거 같은 느낌. 그렇지만 깔창 끼고서라도 잘 신어보겠습니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-06"
+    },
+    {
+     "no": 15305813,
+     "text": "오래된 검정 부츠를 보내고.. 기본 부츠 필요해서 보다가 벨트 탈착도 되고 소가죽 선택도 되서 구매했어요! 처음에 열었을 때 냄새가 너무 심해서 놀랐지만 금방 빠지더라구요. 기본템으로 추천해요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-17"
+    },
+    {
+     "no": 15775446,
+     "text": "롱치마에 입을 검정 부츠 찾아보다가 가죽이고 스트랩 포인트가 아랫쪽에 있는 게 마음에 들었어요! 양말 신고 신을거라 반업했네요 정사이즈 했어도 될 듯?! 그래도 막 엄청 큰 느낌은 아니에요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-02"
+    },
+    {
+     "no": 15050610,
+     "text": "유튜브 보고 구매했어요. 이런 깔끔한 미들부츠를 찾고 있었는데 발견한 부츠입니다! 아직 신고 나가보지는 않았지만 발이 편할 것 같네요. 냄새 많이 난다는 후기를 봤는데 저는 괜찮았습니다~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-03"
+    }
+   ],
+   "roster": true,
+   "handle": "nuus__official",
+   "query": "털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5612085,
+   "url": "https://www.musinsa.com/products/5612085",
+   "brand": "누아트 스튜디오",
+   "brand_en": "NUART STUDIO",
+   "brand_id": "nuartstudio",
+   "name": "에토 클래식 스웨이드 퍼 숏 미니 부츠_5colors",
+   "genders": [
+    "M",
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 29330,
+   "normal_price": 39100,
+   "discount": 25,
+   "review_count": 322,
+   "rating": 4.7,
+   "review_total_listed": 322,
+   "sold_out": false,
+   "release_date": "2025-10-20",
+   "season": "",
+   "style_no": "5016397660",
+   "material": [],
+   "spec_text": "[지수 pick]",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17924656306059_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17924656307757_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344765526_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344778169_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344796168_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344805828_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344817237_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344826392_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344834504_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344843059_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251020/5612085/detail_5612085_17621344851667_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80999864,
+     "text": "평소 240 사이즈를 신어서 이것도 240을 선택했어요. 털이 있는데도 생각보다 넉넉한 편이라 편하게 신고 다니는 중이에요.",
+     "grade": 5,
+     "likes": 6,
+     "date": "2025-12-14"
+    },
+    {
+     "no": 79578376,
+     "text": "갑자기 추워져서 어그 부츠 서둘러 샀는데 완전 잘 산 것 같아요! 예쁜 체스트넛 컬러에 착화감도 좋고 가벼워서 편해요 사이즈도 평소 235 신는데 240하니까 적당해요 올 겨울 매일 신을 것 같아요!",
+     "grade": 5,
+     "likes": 5,
+     "date": "2025-11-04"
+    },
+    {
+     "no": 80914971,
+     "text": "225-230 신는데 발볼 없는 편이라 좀 크게 느껴집니다 정사이즈로 구매하심 될거 같아요 225도 신으시면 230도 좀 큽니다",
+     "grade": 5,
+     "likes": 3,
+     "date": "2025-12-11"
+    },
+    {
+     "no": 81091860,
+     "text": "색감도 예쁘고 따뜻해요!!! 근데 제가 발볼 좀 넓은 편이고 235신는데 후기 잘 보고 230으로 사길 잘했어요..!! 크게 나왔더라구요! 딱 맞는 정도가 아니라 되게 넉넉합니다..!! 참고하세요!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-12-18"
+    },
+    {
+     "no": 80840410,
+     "text": "이번 여행에서 신었는데 발바닥이 별로 아프지 않고 예쁘게 신었어요! 조금 헐렁하긴한데 걷는데 불편하진 않아요. 싼가격에 이정도면 대만족입니다~",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-12-11"
+    },
+    {
+     "no": 80055988,
+     "text": "일단 퀄리티는 너무 좋아요 고급스럽고 털도 부드러워요 다만 사이즈가 생각보다 많이 커요 평소 240 신는데 230 살걸 그랬어요",
+     "grade": 4,
+     "likes": 2,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 81784449,
+     "text": "저렴한 가격에 잘 구매했어요! 발이 많이 편한 편은 아닌데 따뜻하고 높이도 괜찮아서 올겨울 잘 신고 있습니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-21"
+    },
+    {
+     "no": 81571091,
+     "text": "겨울에만 신을거라 저렴한걸로 어그부츠 샀는데 진짜 가격대비 너무 괜찮아요 기대 이상이상이상입니다",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-10"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "양털 숏부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3575628,
+   "url": "https://product.29cm.co.kr/catalog/3575628",
+   "brand": "누아트스튜디오",
+   "brand_en": "NUARTSTUDIO",
+   "brand_id": "21874",
+   "name": "겨울부츠 에토 클래식 스웨이드 방한 퍼 숏 미니 어그 부츠_5color",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 32900,
+   "normal_price": 55000,
+   "discount": 40,
+   "review_count": 74,
+   "rating": 4.5,
+   "review_total_listed": 74,
+   "sold_out": false,
+   "release_date": "2025-10-17",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "﻿\n﻿\n&#xFEFF\n&#xFEFF\n﻿\n&#xFEFF\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n﻿\n102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 micro fiber 102102 색상 상세페이지 참고 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 상세페이지 참고 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 누아트 스튜디오 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세페이지 참고 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 상세페이지 참고 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 상세페이지 참고",
+   "images": [
+    "https://img.29cm.co.kr/item/202610/11f1c61e832340b890ed052046c1e437.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1c61e876222ec90ed677edba43a13.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1c61e89ddd15290edf3fe58f217fc.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1c5d40353acdc90eddbb98380713d.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0bbaaf71ef1ea83886bdc20134f87.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0bbaaf08eccac83886111c5ccbff8.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15472585,
+     "text": "계속 신으면서 털 눌리는걸 감안해도 조금 크긴 하네요. 5사이즈분들은 반사이즈 작게 사셔도 될거같아요! 저렴한데 따뜻해서 좋아요. 택부분은 처음에 신었을때 거슬릴 수 있으나 신다보면 익숙해지는거같습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-02"
+    },
+    {
+     "no": 16221998,
+     "text": "크다는 말이 많아서 걱정했는데, 양말신고 수면양말 신으면 딱 맞게 신을 수 있어요! 컬러가 그레이시한 브라운이라 어느 옷에나 튀지 않지만 포인트 컬러로 신을 수 있어서 너무 좋아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-19"
+    },
+    {
+     "no": 15431505,
+     "text": "저렴한거 구매헤서 가볍게신으려고 했는데, 받아보고 놀랐습니다~ 마감처리며 바닥이며 너무좋네요~ 사이즈넉넉하게 나왔으니 감안해서 주문하시면될것같아요~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-28"
+    },
+    {
+     "no": 15461673,
+     "text": "원래 245신는데 250은 살짝 크더라구용 ㅠㅠ 담엔 240으로 시켜야겠어요! 원래도 245는 부츠는 잘 없는 편이라서 두꺼운 양말 신으면 괜찮을거같아요 ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-01"
+    },
+    {
+     "no": 15293537,
+     "text": "평소 운동화 250을 좀 넉넉하게 신는편인데 두꺼운 양말 신고도 신발이 좀 크게 느껴져요 그래도 색깔 마음에 들고 신고 다니기에 편해서 마음에 듭니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-16"
+    },
+    {
+     "no": 15950426,
+     "text": "이가격에 이 퀄리티라뇨..요듬 데실리로 편하게 신는 신발이에요.사이즈는 살착 큰데 겨울이라 두껀양말 신으면 딱입니다~~ 번창하세요~~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-19"
+    },
+    {
+     "no": 16000935,
+     "text": "사이즈가 조금 크긴한데 나쁘지않은 정도였어요 두꺼운 양말 신으면 괜찮아요 따뜻하고 가격도 착하고 마음에 들어요 추운 겨울에 잘 신을거 같아요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-01-24"
+    },
+    {
+     "no": 15439941,
+     "text": "반사이즈 크게사라고 되어있는데 오히려 반사이즈~한사이즈 작게 사야할 것 같습니다. 한사이즈 작게 샀는데도 크네요 그거 빼곤 마음에 듭니다",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-11-29"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3555923,
+   "url": "https://product.29cm.co.kr/catalog/3555923",
+   "brand": "마크모크",
+   "brand_en": "MACMOC",
+   "brand_id": "9576",
+   "name": "[당일발송] Bboni 뽀니 양털 리얼 소가죽  리본 방한 어그 플랫폼 슬리퍼_4colors (4cm)",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 99000,
+   "normal_price": 99000,
+   "discount": 0,
+   "review_count": 42,
+   "rating": 5.0,
+   "review_total_listed": 42,
+   "sold_out": false,
+   "release_date": "2025-10-15",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 겉감 Cow Leather , Real Wool 안감 Wool+ Polyester 102102 색상 상세 페이지 참조 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 무게 470g 앞굽 3cm 뒷굽 4cm 발볼 8cm - 40(245~250) size, 한짝 기준 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 마크모크 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 MADE IN CHINA 102106 취급시 주의사항 리얼 가죽 소재로 우천 및 세탁시 주의 / 오염 및 이물로 인한 세탁 원하실 경우 신발이 직접적인 물 접촉보단 부드러운 천에 미온수로 닦아주시고 빠르게 건조하는것이 좋습니다. 천연가죽의 경우 소재 특성상 색상 및 텍스쳐가 일정하지 않을 수 있으며, 결에 따라 양발의 색상이 상이 할 수 있습니다. 또한 사용 부위에 따라 자연스러운 주름, 흠집 등이 있을 수 있습니다. 포장 및 배송으로 마찰 되는 부분은 가죽이 하얗게 보여지나 이는 손이나 부드러운 솔 등으로 쓸어주면 본래의 결 상태로 돌아올 수 있습니다. 또한 스프리트/스웨이드 소재 특성상 습기에 의해 염료가 빠지거나 오염이 생길 수 있어 옅은색 의류 또는 밝은색 양말 착용시 주의 바랍니다. 털내피와 털깔창으로 이루어진 제품들은 소재의 특성상 처음 착화시에 털 재질이 묻어나올 수 있습니다. 이는 교환/반품 사유에 해당되지 않습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 소비자 보호법의 보증기준에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 마크모크 고객센터 02)6339-8240",
+   "images": [
+    "https://img.29cm.co.kr/item/202510/11f0b52b221c0c988388d32c31e41939.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0a5779389d3fea9184712666c6008.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 18839619,
+     "text": "마크모크 털 슬리퍼 이번에 색 진짜 잘 빠졌어요!!! 브라운이랑 카멜색이랑 엄청 고민했는데, 카멜 승♥️ 색 뿐만이 아니라 내피털+리본 조합이 정말 고급스러워져 맘에 들어요!!🎀 마크모크 롱 부츠도 도전해주세용><!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-18"
+    },
+    {
+     "no": 18853519,
+     "text": "겨울 신발 미리 장만해 놨는데 너무 예쁘고 귀여워요! 평소 발볼 없는 225~230 신는데 정사이즈 딱 좋았고요. 발 빠짐 없이 뭔가 안정감 있는 느낌으로 편해요! 품절만 안 된다면 매년 이거 사고 싶어요^^",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-20"
+    },
+    {
+     "no": 18851979,
+     "text": "가을, 겨울과 너어어무 잘 어울리는 신발이에요!🐻🧸 색감도 예쁜데 디자인이 러블리 그 자체!🤎 편하기고 편해서 어주아주 자주 신을 것 같습니다!🧦",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-20"
+    },
+    {
+     "no": 15246790,
+     "text": "평소 마크모크 레인부츠, 귀마개도 잘 쓰고 있구 디자인도 귀여워서 주문했는데 실물 미쳤는뒈요… 너무 귀여워요 ㅠㅠㅠㅠ 밑창도 꽃무늬라 예쁘고 어* 브랜드보다 잘 신을 거 같아요 ^_^",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-13"
+    },
+    {
+     "no": 15400358,
+     "text": "귀여운 리본 포인트와 통굽이 있어서 더 사랑스러워 보이고 뒤에 밴딩은 탈부착도 가능해요 🤎🤎 !! 따뜻함은 물론 오래 신어도 폭신하더라구용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-25"
+    },
+    {
+     "no": 15474837,
+     "text": "사이즈 딱맞아요! 바닥도 안에도 털이 소복해서 겨울나기용으로 딱! 리본도 예쁘고 매년 귀여운 털슬리퍼, 어그나와서 얼해도 저장합니다💕",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-03"
+    },
+    {
+     "no": 15241912,
+     "text": "너무너무 귀엽고 예쁘네요 털이있고 겨울에 신을거라 5센치정도 크게샀는데 딱이구요 맨발에신어도 좋을 정도로 고급퀄리티여서 기분도 좋아요^^ 품질이 좋아 다른사람에게 선물하고싶네요 올 겨울 따시게 보낼 것 같습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-13"
+    },
+    {
+     "no": 15769635,
+     "text": "생각한 이미지 그대로에요!! 청순하고 예뻐요 굽이 높아서 눈길이나 빗길에 쉽게 젖지 않아 좋고, 무엇보다 잘 미끄러지지 않아서 안심되고 좋습니다!! 저는 정사이즈 추천드릴게요 살짝 크게 샀더니 발목에 무리가..",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-01"
+    }
+   ],
+   "roster": false,
+   "handle": "mac_moc",
+   "query": "방한부츠",
+   "cheaper_elsewhere": {
+    "mall": "무신사",
+    "goodsNo": 5537002,
+    "sale_price": 77220,
+    "url": "https://www.musinsa.com/products/5537002"
+   }
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 2875311,
+   "url": "https://product.29cm.co.kr/catalog/2875311",
+   "brand": "푸마",
+   "brand_en": "PUMA",
+   "brand_id": "2738",
+   "name": "스노우배 부츠 W - 블랙 / 393920-01",
+   "genders": [
+    "3"
+   ],
+   "category": "",
+   "sale_price": 89000,
+   "normal_price": 89000,
+   "discount": 0,
+   "review_count": 34,
+   "rating": 4.5,
+   "review_total_listed": 34,
+   "sold_out": false,
+   "release_date": "2026-10-01",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "- 추운 날씨에도 따뜻한 착용감을 선사하는 패딩 소재의 부츠\n- 내구성이 우수한 립 스톱 소재의 어퍼와 인조 퍼 안감\n- 흙, 먼지 등을 막아주는 머드가드 기술 적용\n- 스토퍼로 발목 부분을 조여 핏 조절이 가능한 클로저\n- 간편한 착화를 돕는 뒤축 힐탭 고리\n- 미끄럼을 방지하는 고무 소재 아웃솔\n102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 합성가죽+천연가죽(소가죽) 102102 색상 PUMA BLACK-SHADOW GRAY 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 220-250 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 PUMA 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 케어라벨 참고 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁 해결 규정에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 A/S 문의접수는 MY>11문의 이용",
+   "images": [
+    "https://img.29cm.co.kr/item/202410/11ef852e2da3211c8fb2bfb074acf8db.jpg",
+    "https://img.29cm.co.kr/item/202410/11ef852e31e389f28fb20d36f3c2f205.jpg",
+    "https://img.29cm.co.kr/item/202410/11ef852e34b6ce2785199779533d735d.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15675898,
+     "text": "삿포로 여행에서 따뜻하게 잘신엇어요~~^^ 사이즈는 너무 딱 맞아서 처음엔 괜찮은데 신고 다니다보면 조금 답답해서 차안에서는 신발벗고있었어요~ 그래도 여행에서 아주 잘신엇어요~~^^",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-22"
+    },
+    {
+     "no": 16160588,
+     "text": "패딩부츠 사고싶었는데 다른 것들은 부담스러워 보였는데 이건 깔끔해보여서 샀어요. 신고 벗기는 불편하지만 이제 적응해서 괜찮아요 올 겨울 따뜻하게 보냈습니다ㅎㅎ",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-02-10"
+    },
+    {
+     "no": 15593350,
+     "text": "후기처럼 사이즈 반업하기 잘한 것 같아요 차곡차곡 잘 밀어넣으면 들어가긴하는데 연습이 좀 필요할 것같지만 눈올 때 따듯하게 잘신을 수있을 것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-13"
+    },
+    {
+     "no": 15508781,
+     "text": "평소 250사이즈 신으시는 엄마 선물로 주문했는데 들어가는 부분은 조금 타이트하지만 신은 상태에서는 상당히 넉넉하고 편하다고 하셨습니다!",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-05"
+    },
+    {
+     "no": 15662034,
+     "text": "세일에 득템 했어요. 가격 진짜 베리굿!! 올겨울 눈밭에 갈때 잘 신을 것 같아요! 다만 볼 이 좀 좁아요 신을때 살짝 용을 쓰게 됩니다.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-20"
+    },
+    {
+     "no": 15608825,
+     "text": "괜찮은 가격에 주문했어요 디자인도 무난하고 편하고 따듯해요 휘뚜루마뚜루 신기 딱좋아요. 또 주문해놓고싶어요. 잘심을게요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-15"
+    },
+    {
+     "no": 15591751,
+     "text": "사이즈도 잘 맞고 제품 사진과 동일합니다. 안에 털도 푹신푹신하고 따뜻합니다. 가격에 비해서 퀄리티도 좋습니다!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-13"
+    },
+    {
+     "no": 12071462,
+     "text": "따뜻하고 편해요 눈 오는 날 신었는데 덜 미끄러워 좋았어요. 발목 부분이 빡빡해서 약간 불편한가 싶었는데 신다보니 괜찮았고 발목 쪽으로 바람이 들지 않아 좋았어요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-02-08"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "방한부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3576016,
+   "url": "https://product.29cm.co.kr/catalog/3576016",
+   "brand": "엘리자베스 스튜어트",
+   "brand_en": "ELIZABETH STUART",
+   "brand_id": "82224",
+   "name": "[프리오픈] 천연 소가죽 루나 퍼 부츠 EBAL157780",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 116100,
+   "normal_price": 199000,
+   "discount": 42,
+   "review_count": 24,
+   "rating": 5.0,
+   "review_total_listed": 24,
+   "sold_out": false,
+   "release_date": "2025-10-27",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 외피소재 : 천연가죽(소가죽), 내피소재 : 폴리에스터, 창소재 : 합성고무 102102 색상 블랙,모카,브라운 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 230,240,250 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)슈크리에이션 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 천연가죽 상품의 경우 가죽 특성상 물빠짐등의 이염이 있을 수 있습니다. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자분쟁해결기준에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 엘리자베스 스튜어트 , 010-7251-5304",
+   "images": [
+    "https://img.29cm.co.kr/item/202510/11f0b2ffa7511a01b27dadd6beb9854a.jpg",
+    "https://img.29cm.co.kr/item/202610/11f1c235b9f8c7718aae83946790ae83.jpg",
+    "https://img.29cm.co.kr/item/202601/11f0ec411debb02ea54003a7217546d7.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2ffa947b9e3b27ded2226f9b425.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2ffa8648618a9182fe800f834a4.jpg",
+    "https://img.29cm.co.kr/item/202601/11f0ec411debd740a54083c566a3e283.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15063677,
+     "text": "바로 이거지 심플하지만 이쁘교 따둣하지만 포인트가 있는 저 뒷모습 어그 미리 준비 안하면 나중에 진짜 후회합니다 다들 행사할때 싸게 쟁여가세염",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-04"
+    },
+    {
+     "no": 15732827,
+     "text": "요즘 거의 맨날 신고 다니는 신발이에요! 따뜻하고 뒤에 버튼 디테일이 귀여워요. 230-35신는 사람에게 240사이즈는 조금 크긴한데 막 불편하진 않아서 그냥 신고다니고 있씁니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-28"
+    },
+    {
+     "no": 15912412,
+     "text": "앞코가 둥그래서 너무 귀여워요. 240하면 너무 클거같아서 보통 235신는대 230 주문햤어요. 딱맞아요. 따뜻하고 가볍고!! 만족이에여",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-14"
+    },
+    {
+     "no": 15701447,
+     "text": "귀엽고 따수워요! 정사이즈이지만 맨발에 신어서 그런지 조금 여유로운 느낌이라 저는 깔창 하나 넣고 신으려구요 다른색도 사거싶어여",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-24"
+    },
+    {
+     "no": 15064335,
+     "text": "무난한데 포인트 있어서 흔하지 않은 ? 너무 맘에들어요ㅠ 마감 깔끔하고 무엇보다 안 촌스러운 고급 브라운인거같아요 오래 신고 걸어도 발 안 아프고 귀엽고 이쁘고 다함 ㅠ 고민중이신분들 강추 !",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-04"
+    },
+    {
+     "no": 15063870,
+     "text": "넘 귀여운 깜댕이...갈색부츠 많아서 블랙했는데 대만족쓰 바지 롤업해서 신어도 이쁠거같구 살짝 긴 양말 매치해서 신어도 이쁠거같아용 수족냉증이라 겨울에 발 따수운거 찾는데 이겁니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-04"
+    },
+    {
+     "no": 15447397,
+     "text": "귀여워요 편해요 가벼워요 사이즈가 5단위가 있으면 더 좋겠어요 안에 털도 왕 부드럽고 발바닥도 푹신해요 검정색 사려다가 영의정 같을까봐 갈색 샀어요 맘에 들어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-30"
+    },
+    {
+     "no": 15067827,
+     "text": "군더더기 없이 깔끔한 디자인이라 어디에나 잘 어울려요! 뒤에 은근 포인트가 있어서 더 좋네용 ㅎㅎ 베이직한 어그 부츠 🩷 무겁지도 않아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-04"
+    }
+   ],
+   "roster": false,
+   "handle": "elizabethstuart_official",
+   "query": "털부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3586860,
+   "url": "https://product.29cm.co.kr/catalog/3586860",
+   "brand": "리토",
+   "brand_en": "LITO",
+   "brand_id": "83460",
+   "name": "럼브 퍼 아일렛 웨지 앵클 부츠 LOWTSDR4h018_3colors",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 99000,
+   "normal_price": 99000,
+   "discount": 0,
+   "review_count": 15,
+   "rating": 4.5,
+   "review_total_listed": 15,
+   "sold_out": false,
+   "release_date": "2025-10-16",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 합성스웨이드 102102 색상 블랙, 카멜, 타우페 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 225~250mm / 4.5cm 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 리토 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 세탁이 가능한 제품에 한하여 단독 세탁을 하며 세제는 중성세제를 사용합니다. 신발이 젖은 경우에는 건조된 천 등으로 물기를 닦고 형태 변형 방지를 위하여 흰 종이나 천을 넣어서 통풍이 잘되는 그늘에 말려주세요. 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자분쟁해결기준에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 (주)45스페이스 / 1600-8541",
+   "images": [
+    "https://img.29cm.co.kr/item/202607/11f17b3b3fb7250c8148ab9283c71525.jpg",
+    "https://img.29cm.co.kr/next-product/2026/04/17/0b95b2e2a8d54b39bfb8e3022eb9147a_20260417094330.jpg",
+    "https://img.29cm.co.kr/next-product/2026/04/17/b202b0df64ca439abfda321be47ee4b9_20260417094331.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15495411,
+     "text": "발목이 살짝 보이는 앵클 디자인 덕분에 다리가 훨씬 얇아 보이고, 전체 퍼 안감이 발을 따뜻하게 감싸줘요ㅎㅎ 자연스러운 웨지라 키 높이 효과는 물론 장시간 걸어도 발이 편했어요ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-04"
+    },
+    {
+     "no": 15239318,
+     "text": "색감 좋고 털도 깔창까지 다 깔려있어서 따수워요. 굽 높이도 높아서 좋고 전체적으로 다 마음에 듭니다. 이번 겨울 휘뚜루마뚜루 신으려구요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-13"
+    },
+    {
+     "no": 15567462,
+     "text": "디자인이 뭉툭하지 않아서 좋아요. 발목까지 올라오는 길이도 마음에 들구요. 발볼없는 편이고 두꺼운양말 신으려고 한사이즈 업했는데 사이즈도 딱 좋아요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-11"
+    },
+    {
+     "no": 15207870,
+     "text": "디자인 딱 맘에드는 신발이에요. 편한데 멋스럽고 여기저기신기좋은신발 찾다가 구매했는데 완전 딱 착화감도 편하고, 지금부터 겨울내내 신기도좋을듯해요. 마음에 쏙드는신발이라 주구장창 잘신을듯해요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-11"
+    },
+    {
+     "no": 15207715,
+     "text": "올핸 꼭 멋스러운부츠는 하나사야지싶어서 구매했더니 생각보다 더더좋네요. 디자인두진짜잘나왔고 편하고 따뜻해요. 제가생각했던 모든장점이있어서 완전맘에 쏙입니다. 실물이 더 좋네요ㅎ!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-11"
+    },
+    {
+     "no": 16203740,
+     "text": "선물용으로 구매했는데 미끄럽지 않고 정사이즈에 키높이 충분히 되어 마음에 든다고 합니다. 재구매 하려구요 추천합니다!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-15"
+    },
+    {
+     "no": 15220020,
+     "text": "사이즈 잘맞고 발도 따듯하네요~ 신발이 너무 무겁지않고 좋아요 앵클부츠라 멋스럽고 ㅋㅋ블랙이라 고급스럽기도 하고 다른 색도 하나더 구매하려구요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-12"
+    },
+    {
+     "no": 15220258,
+     "text": "사이즈도 잘맞고 신발 이뻐요 모델처럼 코디해서 이어도 좋고 요즘 이신발 자주 신는데 오래신어도 발 불편하지 않고 이쁘고 좋습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-12"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "스웨이드 퍼 부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5659188,
+   "url": "https://www.musinsa.com/products/5659188",
+   "brand": "착한구두",
+   "brand_en": "CHAAKAN",
+   "brand_id": "chaakan",
+   "name": "두들 레이스업 뽀글이 방한화",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 42900,
+   "normal_price": 42900,
+   "discount": 0,
+   "review_count": 94,
+   "rating": 4.7,
+   "review_total_listed": 94,
+   "sold_out": false,
+   "release_date": "2025-10-29",
+   "season": "",
+   "style_no": "WTACR4h855,WTACR4h856",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17636229972426_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17617234752969_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17617234769855_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17617234777783_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17617234761506_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17617234786457_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17617234795518_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251029/5659188/detail_5659188_17618939257897_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81475639,
+     "text": "굽이 완전 높지는 않은데 발목부분이 도톰해서 긴 바지 입어도안끌리게 잡아주는거 같아요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-01-06"
+    },
+    {
+     "no": 80040263,
+     "text": "별기대안하고 취소하려했는데 가격은 착하고 디자인도 색감도 착화감도 아주편하고 아주 뜻밖에 득템이네요.. 잘신을게요 ~^^",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 80983968,
+     "text": "가격도 괜찮고 따뜻해요 아쉬운건 뮬이라 걷기 편한건 아니구 발가락에 힘 좀 들어가요 그리고 흰양말 신으면 바닥에 검은털들이 좀 묻어나네요 한철 생각하면 디자인도 귀엽고 나쁘지않음 퀄리티 좋은편은 아님다",
+     "grade": 4,
+     "likes": 1,
+     "date": "2025-12-14"
+    },
+    {
+     "no": 80835672,
+     "text": "생각보다 무게가 가벼워서 오래 걸어도 부담이 덜해요 끈 조절해서 발등 부분을 편하게 맞출 수 있고 바닥 쿠션감도 있어서 착화감 좋습니다 캐주얼룩에 잘 어울려서 자주 신을 신발이에요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-08"
+    },
+    {
+     "no": 80069465,
+     "text": "양말 조금 도톰하게 신는 분들은 반 사이즈 업도 괜찮을 것 같아요 발목 부분이 너무 꽉 조이거나 헐렁하지 않고 적당히 잡아줘서 걸을 때 안정감도 좋아요✨",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 80069395,
+     "text": "진짜 보드라운 털이 발등부터 발목까지 폭 감싸줘서 신자마자 따뜻함이 스르륵 올라오는 느낌이었어요 두꺼운 양말 안 신어도 될 정도로 포근해서 외출 준비할 때 시간이 줄었어요🙆🏻‍♀️🫣",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 79826403,
+     "text": "신자마자 발을 폭 감싸주는 뽀글이 촉감이 너무 포근해서 하루가 편해요 끈으로 조절되니까 안정감 있게 맞춰지고 움직일 때마다 발이 편안하네요 신고 나가면 발이 계속 따뜻해서 외출이 한결 여유로워져요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-15"
+    },
+    {
+     "no": 81893167,
+     "text": "디자인 귀엽고 예뻐요 ! 생각보다 굽이 있어서 놀랐어요 재보니깐 4센치정도돼요 근데 발바닥이 조금 딱딱해서 저는 깔창 바꿨어요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-03-12"
+    }
+   ],
+   "roster": false,
+   "handle": "chaakan_official",
+   "query": "방한부츠",
+   "cheaper_elsewhere": {
+    "mall": "29CM",
+    "goodsNo": 3618625,
+    "sale_price": 35900,
+    "url": "https://product.29cm.co.kr/catalog/3618625"
+   }
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3592829,
+   "url": "https://product.29cm.co.kr/catalog/3592829",
+   "brand": "디스커버리 익스페디션",
+   "brand_en": "DISCOVERY EXPEDITION",
+   "brand_id": "14994",
+   "name": "스무디 (BLACK)",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 97300,
+   "normal_price": 139000,
+   "discount": 30,
+   "review_count": 13,
+   "rating": 5.0,
+   "review_total_listed": 13,
+   "sold_out": false,
+   "release_date": "2025-10-27",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 겉감1 폴리에스터100% 안감 폴리에스터100% 충전재 폴리에스터100% 102102 색상 블랙 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 230, 240, 250 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 ㈜에프앤에프 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 베트남 102106 취급시 주의사항 마른천으로 닦아 주십시오/화기에 가까이 가지 마십시오/보풀 또는 올뜯김 현상에 주의하십시오 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 관련법 및 소비자 분쟁해결기준에 따름 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 F&F 080-820-8802",
+   "images": [
+    "https://img.29cm.co.kr/item/202511/11f0c8f95a4182fba563a99ee1fb8fc2.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b56df9597ea993808965ae5292c0.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 16343113,
+     "text": "삿뽀로 여행 때문에 구매했는데 정말 잘 신었어요. 오래동안 신고 걸어 다녔는데 불편함 없이 정말 신었어요. 디자인도 어디에 신어도 다 이뽀요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-04"
+    },
+    {
+     "no": 15533252,
+     "text": "칼발에 발등낮은 245입니다 10단위로 나와서 고민했는데 작으면 난처하고… 크면 차라리 두꺼운 양말 신으면 되겠지하고 250주문 했는데 잘 맞아요! 같은 사이즈이신분 참고해주세요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-08"
+    },
+    {
+     "no": 15866367,
+     "text": "패딩 부츠가 오래돼서 새로 구입했습니다. 사이즈는 잘 맞고 따뜻해서 요즘 매일 신고 있어요. 바닥도 미끄럽지 않아서 좋아요.",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-10"
+    },
+    {
+     "no": 15465094,
+     "text": "250사이즈 인데 신으면 발이 안커보이고 안에는 여유있어요 굽이 있어서 키가 커보이는 효과도 있고 일단 따뜻한데 튼튼하고 예뻐요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-02"
+    },
+    {
+     "no": 15399964,
+     "text": "신발은 튼튼해보이고 따뜻할것같아요  신발안쪽에도 털이있는줄 알았는데 없네요  사이즈는 10단위로 나와서 딱맞는 느낌이에요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-11-25"
+    },
+    {
+     "no": 15545175,
+     "text": "사이즈도 잘 맞고 너무 따뜻해요🤗 눈길 걱정도 없을것같고 등산 가게되면 이거 신고 가려구요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-09"
+    },
+    {
+     "no": 15721833,
+     "text": "한겨울 진짜 따뜻하게 날거 같아요 .싸이즈도 잘 맞고 눕 높이도 알맞춤한게  넘 😀 좋아요 스타일도 넘 이쁘고요 디스커버리 브랜드를 넘 좋아해서 여름 겨울 다 디스커버리 운동화로 삽니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-27"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "방한부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3604928,
+   "url": "https://product.29cm.co.kr/catalog/3604928",
+   "brand": "야세",
+   "brand_en": "YASE",
+   "brand_id": "15066",
+   "name": "플리즈프로젝트x야세 노바 슬라우치 천연양모 부츠",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 181300,
+   "normal_price": 259000,
+   "discount": 30,
+   "review_count": 13,
+   "rating": 4.5,
+   "review_total_listed": 13,
+   "sold_out": false,
+   "release_date": "2025-10-28",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 Cow leather 102102 색상 Black 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 길이 28CM / 굽 높이 5.5CM (S 사이즈 기준) 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)씨씨씨컴퍼니 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 습기 주의 직사광선 주의 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 구매일자로 부터 1년 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 (주)씨씨씨컴퍼니",
+   "images": [
+    "https://img.29cm.co.kr/item/202510/11f0b2fda25f9c06a91861af5520fb3c.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fda5e91099b27dbd00435101af.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fda5e89bbaa918894fd50432d6.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fda5eb0cbea9181be2c0ac0072.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b2fda5ea496ca918115c4a0d3a82.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 18835977,
+     "text": "쿠폰혜택까지 야무지게 받아서 합리적으로 구매했어요 진짜 퀄리티 좋고 이쁘고 다했음 겨울 기다려 집니다 너무 귀여워요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-18"
+    },
+    {
+     "no": 15434412,
+     "text": "너무너무 귀여워요 240인데 m시켰더니 딱이네요 적당히 커서 두꺼운양말도 잘신을거같어요 별 박스부터 설레는 신발이라 만족합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-29"
+    },
+    {
+     "no": 15442390,
+     "text": "착화감 편하고 따뜻합니다 비슷한 디자인의 부츠 많은데 야세만의 디테일에서 차이점이 큰 거 같아요 별 무늬가 넘 귀여워요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-29"
+    },
+    {
+     "no": 15565614,
+     "text": "블랙 스웨이드 부츠 찾고 있었는데 딱이에요 사이즈도 정사이즈고 안에 털이 있어서 추운날에 신고 다니기 좋네요 ㅎㅎ 밑창은 살짝 딱딱하긴한테 폭신한 깔창 얇은거 깔았더니 괜찮아요! 키작녀라 굽높이도 너무 좋습니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-11"
+    },
+    {
+     "no": 15515937,
+     "text": "귀엽고 키커져서 좋아요. 발등이 높은편이라 딱딱?한게 부딪혀서 좀 불편하긴한데 괜찮은데 뒤꿈치 도 살짝 까이긴하네요. 두꺼운 양말 신어야할것같고 그래도 만족합니다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-06"
+    },
+    {
+     "no": 16094235,
+     "text": "존예 입니다 매일매일 이것만 신고싶어요 키도 욘나 카지고 디자인도 기엽뽀작스해서 손이자주가요 맨첨 신엇을깬 발이 조금 아팟는데 이젠 안아픔 ㅎㅎ 굳그",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-03"
+    },
+    {
+     "no": 16833274,
+     "text": "신발이 너무귀여워요,,, 세일할때 득템했습니다 ㅎㅎㅎ 벌써 겨울을 기다리고있어요 편하고 좋습니다 강추합니다~~~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-04-17"
+    },
+    {
+     "no": 15569104,
+     "text": "예쁜데 착화감이 진짜 안좋아요,, 신발 자체는 큰데 발등이 조이고 딱딱하게 뭐가 걸립니다. 바닥도 딱딱해서 오래 신으면 발 진짜 아픔,,종아리부분에 이염도 생기니 초반에 밝은 바지는 피하시길",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-11"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "방한부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3614650,
+   "url": "https://product.29cm.co.kr/catalog/3614650",
+   "brand": "씨엘씨엘",
+   "brand_en": "CLCL",
+   "brand_id": "52560",
+   "name": "토스티 윈터 부츠",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 79200,
+   "normal_price": 99000,
+   "discount": 20,
+   "review_count": 13,
+   "rating": 4.5,
+   "review_total_listed": 13,
+   "sold_out": false,
+   "release_date": "2025-10-30",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 소가죽 외 102102 색상 체스트넛 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 230,240,250,260 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 에이블팩토리 협력업체 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 상세 페이지 참조 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 공정거래위원회 고시(소비자분쟁해결기준)에 의거하여 보상해 드립니다 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용",
+   "images": [
+    "https://img.29cm.co.kr/item/202510/11f0b4a43f2598a6a9181563183dcc4b.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b4a44213b7cdb27d8d13711c2b94.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b4a442145430a918d51efc69c798.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b4a442145411b27d5b14cd8c102d.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b4a44213b7cfb27d9982338f76bb.jpg",
+    "https://img.29cm.co.kr/item/202510/11f0b4a442156583b27dd95d517bf6b9.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 16159421,
+     "text": "겨울에 손발이 워낙 차서 어그부츠 하나 장만했어요. 발은 일단 굉장히 따뜻합니다 ㅎㅎ 그리고 다른 어그랑은 다르게 테슬 포인트가 있어서 차별화도 되고 좋아요. 디자인도 맘에 들고 따뜻 포근한 착용느낌도 좋아용!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-10"
+    },
+    {
+     "no": 15725471,
+     "text": "정말 귀여워요! 근데 한쪽발이 잘 안들어가서 ㅠㅠ 딱맞긴 한데 지퍼가 없어서 구두주걱 없으면 신기가 조금 힘들어요 아직 날씨가 춥지 않아서 신어보지 못했는데 얼른 신고 나가보고 싶어요 ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-27"
+    },
+    {
+     "no": 15346278,
+     "text": "진짜 너무너무 예뻐요 ! 고민하다가 샀는데 너무 예쁘고 무게도 가볍고 발도 아주 따뜻합니다. 저는 발볼 좁은 칼발이고 구두 235 운동화 240인데 240 적당해요. 추천합니다 !",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-20"
+    },
+    {
+     "no": 16001256,
+     "text": "가성비 너무 조아여! 사실 어그 재질 특성상 물에 약하고 오래 못 신는게 다반수라 비싼거 살 이유가 없다 생각해서 구매해봤는데 너무 귀엽고 만족합니다ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-24"
+    },
+    {
+     "no": 16274793,
+     "text": "발이 엄청 따뜻하고 휘뚜루마뚜루 다 잘 어울려서 매일 신고 다녔어요~~생각보다 조급 컷지만 안에 양말 신으니까 괜차나여",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-25"
+    },
+    {
+     "no": 15511367,
+     "text": "컨버스230신는데 사이즈 잘맞아요 다만 좀 무겁고 마감이 그렇게 좋진 않네요.. 그냥 딱 가격값하는듯! 글두 디자인이 귀여워서 품고 갈개용",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-06"
+    },
+    {
+     "no": 15704716,
+     "text": "귀염띠니입니다. 발이 적응하면 편한거 같아용 근데 벗을 때 털이 날려서 살살 벗어야 해요ㅜ 그래도 귀여워서 그냥 안벗으면 돼요🥺",
+     "grade": 4,
+     "likes": 0,
+     "date": "2025-12-25"
+    },
+    {
+     "no": 15513976,
+     "text": "테슬고 귀엽고 따뜻합니다 사이즈도 잘맞고 겨울내내 잘신을것같아요 어디에나 잘 매치할수있고 적당한 굽과 디자인도 귀여워요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-06"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "스웨이드 퍼 부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5633298,
+   "url": "https://www.musinsa.com/products/5633298",
+   "brand": "하버드 슈즈",
+   "brand_en": "HARVARD SHOES",
+   "brand_id": "harvardshoes",
+   "name": "프리챌 겨울 방한부츠 여성 스노우 윈터부츠",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 25800,
+   "normal_price": 79800,
+   "discount": 68,
+   "review_count": 75,
+   "rating": 4.6,
+   "review_total_listed": 75,
+   "sold_out": false,
+   "release_date": "2025-10-23",
+   "season": "",
+   "style_no": "25_freechal",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17683554980552_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17611895165706_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17611895160589_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17611895304145_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17611895335207_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17611895392998_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251023/5633298/detail_5633298_17611895430566_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81485305,
+     "text": "겨울에 발도 시렵고 눈이나 비오면 신을 부츠가 없어서 구매했어요. 신발 안에 퍼때문에 사이즈가 작게 느껴지니 반사이즈~한사이즈 업 하시길 추천해요. 따뜻해서 좋네요.",
+     "grade": 4,
+     "likes": 3,
+     "date": "2026-01-06"
+    },
+    {
+     "no": 82026918,
+     "text": "발 볼이 넓은 편이라 사이즈 크게 삿는데 헐렁하네요! 정사이즈 그대로 나오는거같아요!!~ 발볼러도 정사이즈사면 딱일듯해용",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-19"
+    },
+    {
+     "no": 82026937,
+     "text": "남자칭구랑 커플로했는데 남자친구도 발볼넓어서 정사이즈사도 괜찮을지 걱정 엄청했는데 넉넉히 나와서 정사 딱이네요! 디자인 옙뻐요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-03-19"
+    },
+    {
+     "no": 81287867,
+     "text": "사진 그대로의 느낌으로 왔어요. 편안할 것 같지만 생각 보다는 묵직해서 좀 더 신어봐야 할 것 같아요.",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-27"
+    },
+    {
+     "no": 82008860,
+     "text": "여자 칼발 250 기준 널널하고 남자 보통 250 기준 딱 맞아요. 슬리퍼라 신고 벗기는 편한 편. 뒤꿈치 부분은 있으나 마나한^^;;  적당한 착화감이고 털신이라 따뜻해요~~",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-02-02"
+    },
+    {
+     "no": 81407460,
+     "text": "지인이 산거보고 예쁘고 편해보여서 샀는데 그냥 무조건 사세요 남친선물해줬는데 아주편하고 좋대용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-02"
+    },
+    {
+     "no": 81385721,
+     "text": "삿포로에서 신으려구 급하게 주문한건데 너무 만족했어요! 방수도 잘되고 착화감도 좋아용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-01"
+    },
+    {
+     "no": 81150614,
+     "text": "발볼이 넓은편인데 정사이즈 시켜도 편안합니더 근데 발끝이 사이즈가 좀 남아요 신발이 살짝 크게 나온편같네여 신발 예쁘다고 정보 두번따엿슴다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-12-28"
+    }
+   ],
+   "roster": false,
+   "handle": "harvard_shoes",
+   "query": "방한부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5561895,
+   "url": "https://www.musinsa.com/products/5561895",
+   "brand": "모그어스",
+   "brand_en": "MOGAUS",
+   "brand_id": "mogaus",
+   "name": "래더 퍼 천연소가죽 플랫폼 미니부츠 2color",
+   "genders": [
+    "W"
+   ],
+   "category": "신발 > 패딩/퍼 신발",
+   "sale_price": 75000,
+   "normal_price": 109000,
+   "discount": 31,
+   "review_count": 71,
+   "rating": 4.6,
+   "review_total_listed": 71,
+   "sold_out": false,
+   "release_date": "2025-10-01",
+   "season": "",
+   "style_no": "MG25FWYJ703",
+   "material": [],
+   "spec_text": "[무신사 단독]",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17604256399185_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17593068500811_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17593068508231_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17593068515611_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17604256329139_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17593068524396_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251001/5561895/detail_5561895_17593068530268_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 80622920,
+     "text": "디차인도 예쁘고 가벼우며 신고벗기. 편해요 지인이 보고 맘에 들어해서 선물로. 재구매 했어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-12-02"
+    },
+    {
+     "no": 82073202,
+     "text": "엄청 따뜻하고 편한데 걷다 보면 뒤꿈치가 낮아서 그런가 길에 있는 조그마한 돌 같은게 잘 들어가요 그거 빼곤 다 좋아요",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-03-16"
+    },
+    {
+     "no": 82816068,
+     "text": "신고 벗기 편하고 신발이 되게 가벼워서 좋았어요 단점은 양말에 털이 엄청 묻어 나와서 같이 신는 양말 청소 하기가 힘든거 빼고 다 만족 ㅠ",
+     "grade": 4,
+     "likes": 0,
+     "date": "2026-03-08"
+    },
+    {
+     "no": 81991794,
+     "text": "운동화 235-240신는데 사이즈 딱입니다. 주로 두꺼운 양말을 신는데도 불편함 없어요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-01"
+    },
+    {
+     "no": 81928741,
+     "text": "일본여행을 어그신고 간게 잘못된 선택이였지먼.. 코디를 위해 오기로 신고 갔습니더!! 푹신하고 따뜻하지만 장시간 걷기는 힘듷어요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-28"
+    },
+    {
+     "no": 81654304,
+     "text": "220-225 신는데 조금 커요! 털 죽으면 조금 헐렁할 것 같은데 발은 안 빠질 정도? 오래 신고 걸으면 발이 피로하지만 크게 신경쓰이는 정도는 아니에요 다른 어그부츠에 비해 발이 얄쌍해보여서 좋아요!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-14"
+    },
+    {
+     "no": 81624504,
+     "text": "어그 처음 사봤는데 너무 편하고 귀여워요 색깔은 사진이랑 똑같고 은근 키높이라 마음에 들어요👍👍👍👍🥰🥰🥰",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-13"
+    },
+    {
+     "no": 81403085,
+     "text": "어그부츠가 필요했는데 너무 비싸 해당제품을 구매하게 되었습니다 저렴한 가격에 비해 착용감이 너무 좋고 따뜻합니다!!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-02"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "방한부츠",
+   "cheaper_elsewhere": null
+  },
+  {
+   "mall": "29CM",
+   "goodsNo": 3605141,
+   "url": "https://product.29cm.co.kr/catalog/3605141",
+   "brand": "야세",
+   "brand_en": "YASE",
+   "brand_id": "15066",
+   "name": "레더스윙 천연양모 클로그 체스넛",
+   "genders": [
+    ""
+   ],
+   "category": "",
+   "sale_price": 132300,
+   "normal_price": 189000,
+   "discount": 30,
+   "review_count": 10,
+   "rating": 4.5,
+   "review_total_listed": 10,
+   "sold_out": false,
+   "release_date": "2025-10-28",
+   "season": "",
+   "style_no": "",
+   "material": [],
+   "spec_text": "102101 운동화인 경우에는 겉감, 안감을 구분하여 표시 제품 주소재 Double Face Sheepskin 102102 색상 Black, Chestnut 102103 발길이 : 해외 사이즈 표기시 국내사이즈 병행 표기 (mm) / 굽 높이 (굽 재료를 사용하는 여성화에 한함, cm) 치수 37,38,39,40,41,42,43 102104 수입품의 경우 수입자를 함께 표기 (병행수입의 경우 병행수입 여부로 대체 가능) 제조자 (주)씨씨씨컴퍼니 102105 제조국은 법률상 중요정보이니 정확히 입력해주세요. 제조국 중국 102106 취급시 주의사항 습기 주의 직사광선 주의 102107 품질보증기간 및 수리/교환/반품 등의 보상방법 정보 품질보증기준 구매일로부터 1년 102108 29CM 고객센터 1660-2929 (발신전용), A/S 문의접수는 MY>1:1문의 이용 A/S 책임자와 전화번호 (주)씨씨씨컴퍼니",
+   "images": [
+    "https://img.29cm.co.kr/item/202511/11f0b9f5af86fa019380419bec637681.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0b89d0431e3a99380d1db0fd3872e.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0b89d043195879380dd1813458fb3.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0b89d043391f2838811b4bb48b029.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0b89d0434554483885dea1a7f53de.jpg",
+    "https://img.29cm.co.kr/item/202511/11f0b89d0430ab259380e368e45f7ed3.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 15357470,
+     "text": "천연가죽 가격이상으로 따뜻하고 편하고 멋지기까지 합니다 칼라별로 주문 했어요 독특한 디자인이 맘에 들어요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2025-11-21"
+    },
+    {
+     "no": 15420613,
+     "text": "일단은 너무 마음에 들어요!! 쉐입이 둥글어서 웬만한 바지에는 다 잘붙어요 색감도 딱 원하던 브라운입니다 평소 운동화 280 기준 정사이즈로 신으니 딱 맞네요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2025-11-27"
+    },
+    {
+     "no": 16191392,
+     "text": "너무 귀여워요 어그 질려서 다른 신발 찾던 중이었는데 생각보다 코디 하기도 쉽고 착화감이 편해요 가죽이 부드러워서 오래 편하게 신을 것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-13"
+    }
+   ],
+   "roster": false,
+   "handle": null,
+   "query": "방한부츠",
+   "cheaper_elsewhere": null
+  }
+ ],
+ "appended_at": "2026-10-20T17:33+09:00"
+}
