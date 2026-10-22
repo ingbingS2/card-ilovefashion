@@ -725,6 +725,40 @@
         "https://someplace.co.kr/ footer 인스타 링크 → instagram.com/someplace.kr (함께 걸린 @some._.pl은 10-14 '이용할 수 없는 프로필')",
         "출처 2곳 — 10-14 사용자 지시('태그하고')로 추가"
       ]
+    },
+    {
+      "name": "모그어스",
+      "aliases": [
+        "MOG.AUS",
+        "mogaus"
+      ],
+      "handle": "mog.aus.kr",
+      "verified": true,
+      "roster": false,
+      "sources": [
+        "https://mogaus.co.kr/",
+        "https://www.instagram.com/mog.aus.kr/",
+        "https://www.threads.com/@mog.aus.kr",
+        "https://linktr.ee/mog.aus_kr"
+      ],
+      "verified_at": "2026-10-22"
+    },
+    {
+      "name": "누아트 스튜디오",
+      "aliases": [
+        "Nuart Studio",
+        "nuartstudio",
+        "누아트스튜디오"
+      ],
+      "handle": "nuartstudio_",
+      "verified": true,
+      "roster": false,
+      "sources": [
+        "https://nuartstudio.kr/",
+        "https://www.instagram.com/nuartstudio_/",
+        "https://www.threads.com/@c.c.indy/post/DLpB1oDzTq5"
+      ],
+      "verified_at": "2026-10-22"
     }
   ]
 }
