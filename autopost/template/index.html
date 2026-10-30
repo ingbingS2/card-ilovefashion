@@ -64,6 +64,12 @@ body{margin:0;background:#fff;font-family:var(--sans)}
 .card.cover .over .kicker{font-size:13px;font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.82);margin-bottom:12px}
 .card.cover .over .title{font-size:42px;line-height:1.24;letter-spacing:-1.6px}
 .card.cover .over .sub{font-size:16px;font-weight:500;color:rgba(255,255,255,.9);margin-top:14px;line-height:1.6}
+/* 2026-10-30 표지 글자 위 배치(text_pos: top) — 사진 하단의 신발·밑단을 글자가 가리지 않게. 그라데이션은 위쪽, 계정 줄만 아래에 */
+.card.cover.top .shade{background:linear-gradient(to bottom,rgba(8,8,10,.8) 0%,rgba(8,8,10,.62) 18%,rgba(8,8,10,.34) 30%,rgba(8,8,10,.1) 40%,rgba(8,8,10,0) 48%)}
+.card.cover.top .shade::before{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 10%,rgba(0,0,0,0) 26%);mask-image:linear-gradient(to bottom,#000 0%,#000 10%,rgba(0,0,0,0) 26%)}
+.card.cover.top .shade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to top,rgba(8,8,10,.55),rgba(8,8,10,0))}
+.card.cover.top .over{top:34px;bottom:auto}
+.card.cover.top .over .bottom{position:absolute;left:0;right:0;top:601px;margin-top:0}
 /* 2026-10-14 상품 카드 = 사진 위(가림 없음) + 아래 흰 정보 칸 — 사용자 피드백 "상품이 메인인데 상품이 안 보인다" */
 .card.item{display:flex;flex-direction:column;background:#fff}
 .card.item .photo{position:relative;inset:auto;flex:1 1 auto;min-height:0;width:540px;height:auto;overflow:hidden}
@@ -107,7 +113,7 @@ function card(c,i){
     body = `<div class="prodline">${c.prod}</div><h2 class="title">${c.title}</h2><div class="pricebox"><div class="now"><b>${c.sale}</b>${c.off?`<span class="off">${c.off}<i>↓</i></span><s>${c.normal}</s>`:''}<span class="proof">${c.proof}</span></div></div><div class="selling"><span class="q">${c.sp}</span></div>`;
   }
   const left = c.kind==='cover' ? '' : `가격·이미지 ${c.mall}`;
-  return `<div class="card ${c.kind}" id="card${i}">${photo}<div class="over">${body}${bottom(left)}</div></div>`;
+  return `<div class="card ${c.kind}${c.kind==='cover'&&c.text_pos==='top'?' top':''}" id="card${i}">${photo}<div class="over">${body}${bottom(left)}</div></div>`;
 }
 function sizePhoto(img){const wrap=img.parentElement,ratio=img.naturalWidth/img.naturalHeight;let w=440,h=Math.round(w/ratio);if(h>420){h=420;w=Math.round(h*ratio)}wrap.style.width=w+'px';wrap.style.height=h+'px'}
 document.getElementById('board').innerHTML=(window.CARDS||[]).map(card).join('');

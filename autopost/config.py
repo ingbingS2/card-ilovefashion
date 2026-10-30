@@ -56,7 +56,7 @@ CAPTION_WARN_PATTERNS = {r"[가-힣A-Za-z]+(?:에서|부터)\s.{0,40}까지": "'
 # episode.json에서 세션이 쓸 수 있는 키 — 사실(가격·후기·인용 원문 등)은 candidates.json에서만 온다
 PRODUCT_KEYS = {"goodsNo", "image", "pos", "zoom", "display_name", "color", "headline", "quote_no", "spec_line"}
 ZOOM_MAX = 1.15   # 상품 카드 사진 확대 상한 — 원본 가장자리 테두리·잡동사니만 걷어낼 정도(10-14)
-COVER_KEYS = {"goodsNo", "image", "pos", "kicker", "title", "sub", "collage"}
+COVER_KEYS = {"goodsNo", "image", "pos", "kicker", "title", "sub", "collage", "text_pos"}
 COLLAGE_MIN, COLLAGE_MAX = 2, 5   # 표지 콜라주(10-07 사용자 지시: 여러 색을 한 표지에) — 세로 띠 2~5개
 CTA_KEYS = {"zzal", "title", "sub"}
 ZZAL_INDEX = ZZAL_DIR / "index.json"   # 저장소에 든 짤 목록(자막·장면·무드·어울리는 주제·last_used)

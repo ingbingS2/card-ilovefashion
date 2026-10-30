@@ -83,7 +83,8 @@ def card_dicts(ep: dict, prods: list[dict], cover_cand: dict, zzal_rel: str) -> 
     cover = ep["cover"]
     cards = [{"kind": "cover", "img": "assets/" + asset_name("cover", cover_cand["goodsNo"], cover["image"]),
               "pos": cover.get("pos", "50% 20%"), "kicker": html.escape(cover.get("kicker", "")),
-              "title": rich(cover["title"]), "sub": rich(cover.get("sub", ""))}]
+              "title": rich(cover["title"]), "sub": rich(cover.get("sub", "")),
+              "text_pos": cover.get("text_pos", "bottom")}]   # top = 글자를 위에(사진 아래쪽 실루엣·신발을 가리지 않게, 10-30)
     if cover.get("collage"):   # 여러 상품·색을 세로 띠로 나란히(10-07 사용자 지시)
         cards[0]["imgs"] = [{"img": "assets/" + asset_name(f"cover{k}", part["goodsNo"], part["image"]),
                              "pos": part.get("pos", "50% 25%")} for k, part in enumerate(cover["collage"], 1)]
