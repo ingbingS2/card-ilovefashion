@@ -19,10 +19,11 @@
   "cover": {
     "goodsNo": 5741896,
     "image": 0,
-    "pos": "50% 40%",
+    "pos": "50% 50%",
     "kicker": "SHEARLING BOOTS",
     "title": "아침 기온 한 자릿수,<br><em>늦가을 어그부츠</em> 다섯",
-    "sub": "발목 높이 낮은 것부터 골랐어요"
+    "sub": "",
+    "text_pos": "top"
   },
   "products": [
     {
