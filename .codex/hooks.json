@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash 'D:\\fashion-cardnews\\.codex\\hooks\\session-start-brief.sh'",
+            "timeout": 15,
+            "statusMessage": "PROJECT-BRIEF.md 로드 중..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash 'D:\\fashion-cardnews\\.codex\\hooks\\auto-commit-push.sh'",
+            "timeout": 60,
+            "statusMessage": "Auto-committing & pushing changes..."
+          }
+        ]
+      }
+    ]
+  }
+}
