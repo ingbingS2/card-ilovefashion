@@ -759,6 +759,23 @@
         "https://www.threads.com/@c.c.indy/post/DLpB1oDzTq5"
       ],
       "verified_at": "2026-10-22"
+    },
+    {
+      "name": "어그",
+      "aliases": [
+        "UGG",
+        "ugg"
+      ],
+      "handle": "ugg_korea",
+      "verified": true,
+      "roster": false,
+      "sources": [
+        "https://www.instagram.com/ugg_korea/ (표시명 UGG® Korea, 프로필 링크 shinsegaev.com/store/ugg)",
+        "https://pf.kakao.com/_RRyml (어그 코리아 공식 카카오채널 게시물 'UGG 공식 인스타그램' → instagram.com/ugg_korea)",
+        "웹검색 결과 'UGG® Korea (@ugg_korea)' 프로필 목록 + X 언급(출처 3 약함)"
+      ],
+      "verified_at": "2026-10-30",
+      "note": "글로벌 계정 @ugg는 별도 — 한국 공식은 ugg_korea"
     }
   ]
 }
