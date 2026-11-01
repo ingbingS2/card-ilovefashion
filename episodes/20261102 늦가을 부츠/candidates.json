@@ -1,0 +1,509 @@
+{
+ "folder": "20261102 늦가을 부츠",
+ "collected_at": "2026-11-02T02:12+09:00",
+ "queries": [
+  "이크닉 부츠(브라우저)"
+ ],
+ "gf": "A",
+ "new_since": "2025-01-01",
+ "notes": [
+  "2026-11-02T02:12+09:00 브라우저 수동 수집(11-02 사용자 지시 '브라우저로 만들어'): PC 브라우저에서 무신사 상세·후기 API 원본 JSON을 받아 collect.build_musinsa로 변환. 원본과 SHA-256 대조 완료. 후기는 도움순 3쪽 중 별점4+·40~120자·금지어 없음 상위 8개만 받음."
+ ],
+ "dropped": {},
+ "candidates": [
+  {
+   "mall": "무신사",
+   "goodsNo": 5386031,
+   "url": "https://www.musinsa.com/products/5386031",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "008 slouchy 3way boots",
+   "genders": [],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 188100,
+   "normal_price": 209000,
+   "discount": 10,
+   "review_count": 156,
+   "rating": 4.9,
+   "review_total_listed": 156,
+   "sold_out": false,
+   "release_date": "2025-09-01",
+   "season": "",
+   "style_no": "BEFWIHCBT08",
+   "material": [],
+   "spec_text": "008 slouchy 3way boots는 사이즈별 출고 일정이 상이합니다.\n주문 전 선택하신 사이즈의 출고 예정일을 꼭 확인해 주세요.",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919276617_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919287641_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919298082_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919376714_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919384217_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919391838_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919400114_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5386031/detail_5386031_17581919407753_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 88092342,
+     "text": "일부러 5사이즈 크게 시켰는데, 굳이 그럴 필요 없을 것 같아요! 착용감도 너무 편하고 안에 스트링이 있어서 길이조절 가능한 게 최고예요!!!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-10-09"
+    },
+    {
+     "no": 86642930,
+     "text": "운동화 225 -230 신는데 230 딱 좋아요! 225도 괜찮았을 거 같기도하고 .. 걍 편한게 좋아서 그리고 예뻐서 맘에 듭니당",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-07-30"
+    },
+    {
+     "no": 84097565,
+     "text": "키가 작아서 깔창사용하려고 235신는데 240주문했어요 부츠치고는 볼이 작게나와서 사이즈업해도 괜찮네요 누구나신어도 좋을 디자인이고 종아리걱정없이 신을수있어요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-05-01"
+    },
+    {
+     "no": 82028411,
+     "text": "유니크한 스타일 롱 부츠라 무난한 스커트나 숏팬츠에 신으면 부츠가 포인트가 되서 더욱 이쁜 거 같아요 ! 저는 발 사이즈 230이라 반업해서 235로 구매 했고 사이즈는 반업하시는 걸 추천드려요 !",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-02-03"
+    },
+    {
+     "no": 80379731,
+     "text": "누가 신은거 보고 이뻐서 바로 주문했는데 실물 너무 예뻐용 저는 정사이즈로 주문했는데 너무 딱맞아서 한사이즈 업하니까 오래걸어도 안아프고 딱 좋았서요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-26"
+    },
+    {
+     "no": 79602942,
+     "text": "거의 2주만에 받았는데 완전 만족해요! 종아리가 얇은편이 아닌데 둘레 편안하게 잘 맞아요! 운동화 250신는데 이것도 사이즈 똑같이하니 딱 좋네요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-11-05"
+    },
+    {
+     "no": 88432473,
+     "text": "주름 지는 게 너무 이뻐요!! 반사이즈 업했더니 조금 커서 정사이즈 추천해요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-24"
+    },
+    {
+     "no": 88073489,
+     "text": "일단 핏이 너무 예뻐요... 안에 밴딩이 있어서 원하는 만큼 까부라지게 연출가능한게 굿굿입니다! 여름 빼고 다 신을 수 있을 듯요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-09"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 6081757,
+   "url": "https://www.musinsa.com/products/6081757",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "103 matte buckle strap boots",
+   "genders": [],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 197100,
+   "normal_price": 219000,
+   "discount": 10,
+   "review_count": 35,
+   "rating": 4.6,
+   "review_total_listed": 35,
+   "sold_out": false,
+   "release_date": "2026-03-04",
+   "season": "",
+   "style_no": "BFIHCBT103",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17793432209682_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386355325_big.png",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386364517_big.png",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386372614_big.png",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386380944_big.png",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386389672_big.png",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386402301_big.png",
+    "https://image.msscdn.net/images/prd_img/20260304/6081757/detail_6081757_17737386415103_big.png"
+   ],
+   "quotes": [
+    {
+     "no": 85623472,
+     "text": "너어무편해요 이쁘고 ㅠ 접어서듀 신고 그냥도 신고 활용도 너무 좋아요!! 이거신고 랩비트버텻습니다!! 다만 안쪽재질 이염심하니까 설명잘읽고 구매하세용",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-06-23"
+    },
+    {
+     "no": 86610243,
+     "text": "평소 운동화 230 널널하게 신는 편인데 발볼 쪽이 살짝 낀다고 느껴져서 반업이나 한사이즈 업 추천드려요! 근데 안쪽이 스웨이드 제질인데 여름엔 당연히 덥고 색빠짐이있어요 검은색 양말 신으시은 걸 강력 추천합니당…",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-07-29"
+    },
+    {
+     "no": 87825581,
+     "text": "부츠 통이 버클로 조절하는 방식이어서 좋았어요! 발 길이는 괜찮은데 발볼이 넓어서 그런지 좀 좁더라구요.. 디자인은 너무 예뻐요!! 버클에 문제가 있었는데 친절하게 대처해주셔서 좋았습니다!",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-30"
+    },
+    {
+     "no": 87804978,
+     "text": "반사이즈 크게 신는거 ㅊㅊ해요. 발볼이 살짝 작게 나온듯한 느낌이에요. 반사이즈업하니까 너무 편하구 너무 이뻐용! 버클이 좀 풀리긴한데 다시 쪼이면되니깡 딱히 거슬리진 않네용",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-29"
+    },
+    {
+     "no": 87804724,
+     "text": "디자인 너무 이뻐요!! 그리구 발도 엄청편해요. 완전 포인트로 주기 좋습니당",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-29"
+    },
+    {
+     "no": 87304200,
+     "text": "사이즈도 딱 좋고 넘 편해서 좋아요 ㅠ 여행다닐때마다 신고 3만보 넘게 걸어도 발 안아파요!!! 버클이 좀 풀리는거 말곤 다 넘 만족합니당..",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-09-04"
+    },
+    {
+     "no": 86410638,
+     "text": "살짝 발이 작은데 예뻐서 신고 있어요 뒷꿈치 좀 아픈 것만 빼면 착화감도 좋아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-08-21"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7063693,
+   "url": "https://www.musinsa.com/products/7063693",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "305 buckle slouchy boots  / brown",
+   "genders": [],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 208050,
+   "normal_price": 219000,
+   "discount": 5,
+   "review_count": 6,
+   "rating": 5.0,
+   "review_total_listed": 6,
+   "sold_out": false,
+   "release_date": "2026-08-12",
+   "season": "",
+   "style_no": "BFIHCBT305BR",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890336516671_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890336518354_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890336521468_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890336520037_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429453470_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429455223_big.png",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429456759_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429458122_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429459448_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429460789_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063693/detail_7063693_17890429462138_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 88261269,
+     "text": "운동화 240 구두 245를 신는 편이라 245로 주문했는데 좀 타이트한 편입니다! 발볼 넓으시면 두사이즈 키우셔도 좋을 것 같아요! 신발 자체는 편해서 만보까지는 편하게 걸었어요 ㅎㅎ",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-16"
+    },
+    {
+     "no": 88094965,
+     "text": "이런신발 서치하고 있었는데 쿠폰먹여서 정가보다 저렴하게 구매할 수 있어서 좋았어요! 버클이 포인트로 아주 예쁩니다! 그리고 쉐입이 이뻐서 어느옷에 매치해도 찰떡이에요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-09"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5788739,
+   "url": "https://www.musinsa.com/products/5788739",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "[X ODOR] WESTERN FUR BOOTS / GREY",
+   "genders": [],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 149000,
+   "normal_price": 149000,
+   "discount": 0,
+   "review_count": 19,
+   "rating": 4.9,
+   "review_total_listed": 19,
+   "sold_out": false,
+   "release_date": "2025-11-28",
+   "season": "",
+   "style_no": "BEFWCOIHCBT03GR",
+   "material": [
+    "굽 높이: 보통",
+    "무게: 가벼움"
+   ],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17651823524646_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17651823554067_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17651823545958_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17651823539007_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17652779597362_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17652779605483_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20251128/5788739/detail_5788739_17652779614096_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 81697370,
+     "text": "그레이색이라 얼룩 묻은게 너무 티가 잘나요 그거 빼고는 회색 어그 부츠라는 희소성도 그렇고 디자인도 그렇고 너무 예뻐요 얼룩묻으면 다이소 스웨이드지우개? 그걸로 지우면 잘 지워져요 ~~",
+     "grade": 4,
+     "likes": 3,
+     "date": "2026-01-17"
+    },
+    {
+     "no": 83206233,
+     "text": "이크닉에서 신발은 처음 구매해보는데 발도 아주 편하고 색감도 예뻐서 이번 겨울 최애 신발로 잘 신고댕겻습니다요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-25"
+    },
+    {
+     "no": 83166600,
+     "text": "처음엔 불편해서 엥? 너무불편한데 했는데 신다보니 이것보다 편한어그없었습니다 진심 이번겨울 이것만 주구장창신었어요 다시 쟁여놓고 내년에 신고싶은데 240 만들어주십쇼 ..",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-23"
+    },
+    {
+     "no": 82204025,
+     "text": "평소 240신고 그냥 적당했습니다!! 처음에는 좀 꽉낀다 생각했는데 신다보니 괜찮았어요. 많이 따뜻하고 포인트 주기 너무 좋은 신발이라 생각해요. 단 많이 걸을 때 신으면 조금 발이 아픕미다",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-02-12"
+    },
+    {
+     "no": 81828688,
+     "text": "디자인 당연히 예쁘고요 생각보다 무게감이 있어서 신고 다녀봐야 알겠지만 일단 착화감은 괜찮아서 크게 문제는 없을 것 같아요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-23"
+    },
+    {
+     "no": 81740139,
+     "text": "키높이효과를 줘서 다리라인이 예뻐 보이고 신발도 부해보이지않고 따듯해요! 그레이색상 흔하지않아서 더욱 더 손이갑니다~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-19"
+    },
+    {
+     "no": 81582691,
+     "text": "발볼이 넓어 사이즈업했더니 아주 편하네요.디자인은 물론 색상도 너무 맘에 듭니다~추운 겨울 따뜻하고도 스타일도 살릴수있겠습니다~",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-11"
+    },
+    {
+     "no": 81556718,
+     "text": "충동구매로 산거라 긴가민가했는데 물건받는순간 사길 넘 잘했다 ㅋ ㅋ했어요 세컬러중에 고민도없이 그레이선택했고ㅜ ㅜ 독보적.. 너무예쁘고 착화감도좋고 너무너무 따뜻해요 컬러가 흔하지않고 너무너무 예쁨..",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-01-09"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 5385842,
+   "url": "https://www.musinsa.com/products/5385842",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "002 2type wedge boots",
+   "genders": [],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 160650,
+   "normal_price": 189000,
+   "discount": 15,
+   "review_count": 8,
+   "rating": 5.0,
+   "review_total_listed": 8,
+   "sold_out": false,
+   "release_date": "2025-09-01",
+   "season": "",
+   "style_no": "BEFWIHCBT02",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20250901/5385842/detail_5385842_17581917209798_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5385842/detail_5385842_17581917221266_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5385842/detail_5385842_17581917269350_big.png",
+    "https://image.msscdn.net/images/prd_img/20250901/5385842/detail_5385842_17581917277823_big.png"
+   ],
+   "quotes": [
+    {
+     "no": 81880340,
+     "text": "예뻐요 종아리 넉넉해요 미끄럽긴 합니다 오래 신으면 발 아픈건 어쩔 수 없음 그치만 앞 쉐입이 예쁨 신을수록 자연스레 구겨져서 더 예뻐용",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-01-26"
+    },
+    {
+     "no": 80922202,
+     "text": "가죽 부드럽고 유연하지만 미들부츠 만들기엔 잘 안꾸겨져서..걍 롱기장으로 신어야해요 ㅠ 바닥 미끄러울거같구 발볼 9센치라 한사이즈 업했는데 역시 편하게 잘 맞아요 업하길 잘함!",
+     "grade": 5,
+     "likes": 2,
+     "date": "2025-12-11"
+    },
+    {
+     "no": 82690343,
+     "text": "칼발이규 한사이즈 크게했더니 딱 좋았어요! 나이 먹으니 깔끔하게 좋네여.. 굿",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-05-03"
+    },
+    {
+     "no": 82689468,
+     "text": "롱부츠 구입하고 싶었는데 정말 마음에 들어요. 소재도 너무 부드럽고 기장과 폭이 마음에 듭니다. 안감이 버텨주길 바래요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-03-03"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7063683,
+   "url": "https://www.musinsa.com/products/7063683",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "305 buckle slouchy boots  / black",
+   "genders": [],
+   "category": "신발 > 부츠/워커",
+   "sale_price": 208050,
+   "normal_price": 219000,
+   "discount": 5,
+   "review_count": 14,
+   "rating": 4.4,
+   "review_total_listed": 14,
+   "sold_out": false,
+   "release_date": "2026-08-12",
+   "season": "",
+   "style_no": "BFIHCBT305BK",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890336123065_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890336124393_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890336125786_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427002642_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427004331_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427005750_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427007160_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427008525_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427009968_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063683/detail_7063683_17890427011435_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 88031779,
+     "text": "운동화 250으로 신고 발볼 넓고 등 높은 편인데 255하니까 딱 좋음!! 너무예뿌요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-10-07"
+    },
+    {
+     "no": 87698877,
+     "text": "진짜 예뻐요 바지랑 입어도 예쁘고 정사이즈로 샀는데 딱 맞았어요 완전 만족..",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-09-25"
+    },
+    {
+     "no": 88362439,
+     "text": "굽이 얇고 높아서 걱정했는데 생각보다 엄청 편해요! 발등, 발바닥 부분 쿠션 아주 충분합니다 이뻐요",
+     "grade": 5,
+     "likes": 1,
+     "date": "2026-10-21"
+    },
+    {
+     "no": 88527468,
+     "text": "굽이 길 갈 때 빠질까봐 걱정되긴 한데 ㅠ 너무 이쁘고 생각보다 엄청 폭신해요! 착용감 좋아요 진짜 이쁨",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-27"
+    },
+    {
+     "no": 88238181,
+     "text": "진짜 딱 정사이즈에요 구두는 정사이즈 신는데 스웨이드 부츠라 딱 맞게 신으면 스타킹이나 양말 못신을거같아서 반사이즈 업 했어요 진짜 너무 예뻐서 이 가격임에도 불구하고 구매했어요 진짜 어른 여자 부츠에요",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-15"
+    },
+    {
+     "no": 88339055,
+     "text": "원래 225 230 신는데 225만 빨리 와서 바로 시켰거든요 근데 완전 잘한듯 딱 편하게 맞아요 한 번 신었는데 완전 여자라고 많이 들음",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-20"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  }
+ ]
+}

@@ -776,6 +776,22 @@
       ],
       "verified_at": "2026-10-30",
       "note": "글로벌 계정 @ugg는 별도 — 한국 공식은 ugg_korea"
+    },
+    {
+      "name": "이크닉",
+      "aliases": [
+        "IHCNIK",
+        "ihcnik"
+      ],
+      "handle": "link.ihcnik",
+      "verified": true,
+      "roster": false,
+      "sources": [
+        "https://link-ihcnik.link/ 공식몰 footer 인스타 링크 → instagram.com/link.ihcnik",
+        "https://www.instagram.com/link.ihcnik/ (프로필 외부 링크 link-ihcnik.link, 26 FW 룩북 일치)",
+        "출처 2곳 — 11-02 사용자가 이 계정 링크를 직접 주며 이크닉 회차 지시(10-14 썸플레이스와 같은 방식)"
+      ],
+      "verified_at": "2026-11-02"
     }
   ]
 }
