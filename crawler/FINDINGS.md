@@ -1,6 +1,7 @@
 # crawler/FINDINGS — 무신사·29CM API 실측 (크롤러·재검증에 쓰는 엔드포인트)
 
 > 🚨 **2026-10-01: 무신사가 데이터센터 IP를 Cloudflare로 막는다.** GitHub Actions(매시간 크롤러 — 후기 API 403으로 30회+ 연속 실패)와 Claude 클라우드 세션 모두 `api.musinsa.com`(검색)·`goods-detail.musinsa.com`(상세)·`goods.musinsa.com`(후기)이 403 "Attention Required". **랭킹 `client.musinsa.com`만 열린다.** 가정용 IP(사용자 PC)에서는 `requests`로 전부 200. → 10-02부터 autopost는 클라우드 루틴이 기본이고, 무신사가 막히면 **우회하지 않고**(헤드리스 브라우저 위장·자동화 탐지 회피 금지) 그 실행 동안 무신사를 건너뛰어 29CM 위주로 만든다. PC에서 돌면 두 몰 다. (10-02 실측: 봇 표기 UA(`…-autopost/1.0 (card-news bot)`)는 **가정용 IP에서도** 무신사·29CM 모두 403 — autopost는 7월부터 쓰던 일반 Chrome UA 문자열을 유지한다. 데이터센터 IP 차단은 그 UA로도 막히고, 뚫지 않는다.)
+> 🚨 **2026-11-02: 가정용 PC(kangk)에서도 파이썬 `requests` 요청만 Cloudflare 차단.** `api`·`goods-detail`·`goods.musinsa.com`이 403 "Sorry, you have been blocked"(WAF 차단 페이지, 챌린지 아님). 같은 PC·같은 IP의 일반 브라우저는 같은 API가 200, `client.musinsa.com` 랭킹은 `requests`도 200. → IP가 아니라 클라이언트(파이썬 HTTP 클라이언트)를 막는 규칙으로 보인다. 10-20 회차는 다른 PC(Admin)에서 `requests`로 수집이 됐다. **autopost는 브라우저 흉내로 뚫지 않는다**(UA·TLS 위장 금지). 이 PC에서는 `collect`·`verify`·`publish --pending`이 무신사 상품을 재검증하지 못한다. 11-02 이크닉 회차는 사람이 쓰는 브라우저에서 원본 JSON을 받아 수집 코드로 변환했다(해시 대조).
 > **29CM 상세 `bff-api.29cm.co.kr/api/v5/product-detail/{no}`는 `Origin/Referer: https://product.29cm.co.kr` 헤더가 있어야 200**(없으면 403 — 아래 09-05 "403" 기록의 원인). 그래도 0.4초 간격 연속 호출은 6건 중 5건 403 → 세션 쿠키 + 1.5~2초 간격이면 10건 중 8건 200. 검색·후기 API는 헤더 없이도 200.
 
 > 2026-07-19 실측, 이후 정정 반영(가격 필드 08-06, 검색 API 08-25, 상세 API 08-11, Playwright 경로 09-05). 크롤러 고칠 때·게시 전 가격 재확인할 때 여기부터.
