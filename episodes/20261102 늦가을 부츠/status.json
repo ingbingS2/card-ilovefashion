@@ -1,5 +1,5 @@
 {
-  "stage": "approved",
+  "stage": "publishing",
   "built_at": "2026-11-02T03:15:33+09:00",
   "issues": [
     [
@@ -85,5 +85,48 @@
   "approved_quote": "승인",
   "verified_at": "2026-11-02T03:34:19+09:00",
   "verified_fingerprint": "4fb6c7cdf55a73977cbf417355e7d7472dd83596b48f9379d45fbfddd7b301fb",
-  "verified_via": "browser 2026-11-01T18:33:34.989Z sha256 444fb43c1c631a4f"
+  "verified_via": "browser 2026-11-01T18:33:34.989Z sha256 444fb43c1c631a4f",
+  "carousel_id": "18067051763615793",
+  "image_urls": [
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/1.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/2.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/3.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/4.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/5.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/6.jpg",
+    "https://raw.githubusercontent.com/ingbingS2/card-ilovefashion/refs/heads/claude/autopost-data/episodes/20261102%20%EB%8A%A6%EA%B0%80%EC%9D%84%20%EB%B6%80%EC%B8%A0/7.jpg"
+  ],
+  "user_tags": {
+    "2": {
+      "tags": [
+        "link.ihcnik"
+      ],
+      "result": "ok"
+    },
+    "3": {
+      "tags": [
+        "link.ihcnik"
+      ],
+      "result": "ok"
+    },
+    "4": {
+      "tags": [
+        "link.ihcnik"
+      ],
+      "result": "ok"
+    },
+    "5": {
+      "tags": [
+        "link.ihcnik"
+      ],
+      "result": "ok"
+    },
+    "6": {
+      "tags": [
+        "link.ihcnik"
+      ],
+      "result": "ok"
+    }
+  },
+  "publishing_at": "2026-11-02T03:35:02+09:00"
 }
