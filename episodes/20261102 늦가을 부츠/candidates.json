@@ -1,13 +1,13 @@
 {
  "folder": "20261102 늦가을 부츠",
- "collected_at": "2026-11-02T02:12+09:00",
+ "collected_at": "2026-11-02T02:18+09:00",
  "queries": [
   "이크닉 부츠(브라우저)"
  ],
  "gf": "A",
  "new_since": "2025-01-01",
  "notes": [
-  "2026-11-02T02:12+09:00 브라우저 수동 수집(11-02 사용자 지시 '브라우저로 만들어'): PC 브라우저에서 무신사 상세·후기 API 원본 JSON을 받아 collect.build_musinsa로 변환. 원본과 SHA-256 대조 완료. 후기는 도움순 3쪽 중 별점4+·40~120자·금지어 없음 상위 8개만 받음."
+  "2026-11-02T02:18+09:00 브라우저 수동 수집(11-02 사용자 지시 '브라우저로 만들어'): PC 브라우저에서 무신사 상세·후기 API 원본 JSON을 받아 collect.build_musinsa로 변환. 원본과 SHA-256 대조 완료. 후기는 도움순 3쪽 중 별점4+·40~120자·금지어 없음 상위 8개만 받음."
  ],
  "dropped": {},
  "candidates": [
@@ -493,6 +493,68 @@
     {
      "no": 88339055,
      "text": "원래 225 230 신는데 225만 빨리 와서 바로 시켰거든요 근데 완전 잘한듯 딱 편하게 맞아요 한 번 신었는데 완전 여자라고 많이 들음",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-20"
+    }
+   ],
+   "roster": false,
+   "handle": "link.ihcnik",
+   "query": "이크닉 부츠(브라우저)",
+   "cheaper_elsewhere": {
+    "unavailable": "이 PC에서 수집 코드가 두 몰 모두 403 — 29CM 가격 비교 못 함(브라우저 수동 수집)"
+   }
+  },
+  {
+   "mall": "무신사",
+   "goodsNo": 7063650,
+   "url": "https://www.musinsa.com/products/7063650",
+   "brand": "이크닉",
+   "brand_en": "IHCNIK",
+   "brand_id": "ihcnik",
+   "name": "304 textured high snekeares / ivory",
+   "genders": [],
+   "category": "신발 > 스니커즈",
+   "sale_price": 179550,
+   "normal_price": 189000,
+   "discount": 5,
+   "review_count": 5,
+   "rating": 4.6,
+   "review_total_listed": 5,
+   "sold_out": false,
+   "release_date": "2026-08-12",
+   "season": "",
+   "style_no": "BFIHCSN304",
+   "material": [],
+   "spec_text": "",
+   "images": [
+    "https://image.msscdn.net/images/goods_img/20260812/7063650/7063650_17890335015656_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890335021601_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890335024495_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890426104179_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890426106273_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890426107658_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890426109283_big.jpg",
+    "https://image.msscdn.net/images/prd_img/20260812/7063650/detail_7063650_17890426110708_big.jpg"
+   ],
+   "quotes": [
+    {
+     "no": 88037276,
+     "text": "이런스타일 찾고있는데 너무 흔하지 않은 디자인에 굽 있는게 맘에 들고 검정색도 갖고싶으요",
+     "grade": 5,
+     "likes": 2,
+     "date": "2026-10-07"
+    },
+    {
+     "no": 88578108,
+     "text": "예뻐용 근데 생각한 것만큼 완전 쌩화이트는 아니고 아이보리빛 약간 나는~ 착화감도 나쁘진 않습니다 정사이즈 기준",
+     "grade": 5,
+     "likes": 0,
+     "date": "2026-10-29"
+    },
+    {
+     "no": 88347756,
+     "text": "굽 높이에 비해 편하고 색상 마음에 듭니다. 아이보리 빛을 띄고 있습니다.",
      "grade": 5,
      "likes": 0,
      "date": "2026-10-20"
