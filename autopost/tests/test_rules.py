@@ -256,3 +256,18 @@ def test_cover_product_is_first_card(episode, cands, handles):
     assert not any("첫 상품 카드" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
     episode["products"].append(episode["products"].pop(0))   # 표지 상품(100)을 맨 뒤로
     assert any("첫 상품 카드" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+
+
+def test_single_brand_needs_user_reason(episode, cands, handles):
+    """한 브랜드 5종은 single_brand(사용자 지시 근거)가 있을 때만 허용(11-02)."""
+    for c in cands["candidates"]:
+        c["brand"] = "이크닉"
+    assert any("같은 브랜드가 두 번" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+    episode["single_brand"] = "11-02 사용자 '이크닉 브랜드 신발 5종으로 가자'"
+    assert not any("같은 브랜드" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+
+
+def test_brand_lines_dedupe(handles):
+    prods = [{"brand": "유라고"}, {"brand": "유라고"}, {"brand": "없는브랜드"}, {"brand": "없는브랜드"}]
+    lines, skipped = rules.brand_lines(prods, handles)
+    assert len(lines) == len(set(lines)) and skipped == ["없는브랜드"]

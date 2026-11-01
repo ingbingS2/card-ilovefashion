@@ -10,7 +10,7 @@ import unicodedata
 from datetime import date
 
 from . import config
-from .state import excluded_brand, find_handle, posted, same_brand, same_keyword
+from .state import excluded_brand, find_handle, norm_brand, posted, same_brand, same_keyword
 
 _BODY_MEASURE = re.compile(r"(\d{2,3}\s*(cm|kg|키로|센치))|(키\s*\d{3})|(몸무게)|(\d{2,3}\s*/\s*\d{2,3})",
                            re.I)
@@ -301,7 +301,11 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
     if prods and roster_count != 1:
         warn(f"로스터 브랜드가 {roster_count}곳 — 기준은 로스터 1 + 신규 4 (§2)")
     if any(same_brand(a, b) for i, a in enumerate(brands) for b in brands[i + 1:]):
-        err("한 회차에 같은 브랜드가 두 번")
+        sb = str(ep.get("single_brand") or "").strip()
+        if sb and len({norm_brand(b) for b in brands}) == 1:   # 사용자가 한 브랜드 회차를 지시한 경우만(11-02)
+            warn(f"단일 브랜드 회차 — 사용자 지시: {sb}")
+        else:
+            err("한 회차에 같은 브랜드가 두 번 (사용자가 한 브랜드 회차를 지시했으면 single_brand에 그 근거를 적을 것)")
     if len(em_lines) == 5 and len(set(em_lines)) == 1:
         warn("다섯 헤드라인의 강조가 모두 같은 줄 — 기계적으로 보임(§3)")
 
@@ -428,7 +432,9 @@ def brand_lines(prods: list[dict], handles: dict) -> tuple[list[str], list[str]]
     for p in prods:
         entry = find_handle(handles, p["brand"], p.get("brand_en", ""), p.get("brand_id", ""))
         if entry and entry.get("verified") and entry.get("handle"):
-            lines.append(f"{entry['name']} @{entry['handle'].lstrip('@')}")
-        else:
+            line = f"{entry['name']} @{entry['handle'].lstrip('@')}"
+            if line not in lines:   # 단일 브랜드 회차(11-02)에서 같은 줄 반복 금지
+                lines.append(line)
+        elif p["brand"] not in skipped:
             skipped.append(p["brand"])
     return lines, skipped
