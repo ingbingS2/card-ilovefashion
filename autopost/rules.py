@@ -325,6 +325,8 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
     cc = by_no.get(str(cover.get("goodsNo")))
     if str(cover.get("goodsNo")) not in nos:
         err("표지 상품은 5종 중 하나여야 함 — 한 상품의 다른 컷을 표지로(§4)")
+    elif prods and str(prods[0].get("goodsNo")) != str(cover.get("goodsNo")):
+        err("표지 상품이 첫 상품 카드(2번 장)가 아님 — 표지에 나온 상품을 바로 다음 장에 둘 것(§4, 11-02 사용자 지시)")
     if cc:
         ci = cover.get("image")
         if not isinstance(ci, int) or isinstance(ci, bool) or not 0 <= ci < len(cc.get("images", [])):

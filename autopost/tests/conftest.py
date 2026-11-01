@@ -59,7 +59,7 @@ def episode():
     return {
         "folder": "20261002 가을 재킷", "keyword": "가을 재킷", "season_word": "가을", "item_word": "재킷",
         "axis": "보온 정도", "mood": "상황 스케치형",
-        "cover": {"goodsNo": 103, "image": 3, "kicker": "AUTUMN JACKET",
+        "cover": {"goodsNo": 100, "image": 3, "kicker": "AUTUMN JACKET",
                   "title": "아침저녁만 추운 날<br><em>가을 재킷</em> 다섯", "sub": "후기로 두께를 확인했습니다"},
         "products": [
             {"goodsNo": 100 + i, "image": 0, "display_name": f"재킷 {i}",

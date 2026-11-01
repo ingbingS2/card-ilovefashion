@@ -40,7 +40,7 @@ def test_cover_and_caption_need_season_and_item_words(episode, cands, handles):
 
 
 def test_cover_photo_must_differ_from_card_photos(episode, cands, handles):
-    episode["cover"]["image"] = 0  # 103번 상품 카드도 image 0
+    episode["cover"]["image"] = 0  # 100번 상품 카드도 image 0
     assert any("같은 원본" in e for e in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
 
 
@@ -249,3 +249,10 @@ def test_cover_collage_rules(episode, cands, handles):
     assert any("5종 중 하나" in m for m in errs) and any("대표 컷" in m for m in errs)
     episode["cover"]["collage"] = [ok[0]]                                                    # 1개는 콜라주 아님
     assert any("collage는" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+
+
+def test_cover_product_is_first_card(episode, cands, handles):
+    """표지에 나온 상품이 바로 다음 장(첫 상품 카드)에 와야 한다(11-02 사용자 지시)."""
+    assert not any("첫 상품 카드" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+    episode["products"].append(episode["products"].pop(0))   # 표지 상품(100)을 맨 뒤로
+    assert any("첫 상품 카드" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
