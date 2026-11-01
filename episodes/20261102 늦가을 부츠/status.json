@@ -1,6 +1,6 @@
 {
-  "stage": "approved",
-  "built_at": "2026-11-02T03:11:27+09:00",
+  "stage": "built",
+  "built_at": "2026-11-02T03:15:33+09:00",
   "issues": [
     [
       "warn",
@@ -29,6 +29,10 @@
     [
       "warn",
       "단일 브랜드 회차 — 사용자 지시: 11-02 사용자 '어그부츠 버리고 이크닉 브랜드 신발 5종으로 가자'"
+    ],
+    [
+      "warn",
+      "캡션 첫 문장에 '늦가을'·'부츠'가 없음: 안녕하쌉사리와요?"
     ]
   ],
   "shots": [
@@ -75,8 +79,5 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "949457ac7fd4479ded532bd2a0c0db3b8d8df7198fb6a8f2e7ae2662b76a8b37",
-  "approved_at": "2026-11-02T03:12:45+09:00",
-  "approved_fingerprint": "949457ac7fd4479ded532bd2a0c0db3b8d8df7198fb6a8f2e7ae2662b76a8b37",
-  "approved_quote": "승인"
+  "fingerprint": "4fb6c7cdf55a73977cbf417355e7d7472dd83596b48f9379d45fbfddd7b301fb"
 }
