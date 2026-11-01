@@ -36,7 +36,13 @@
 | 5 | 이크닉 | [무신사] WESTERN FUR BOOTS (5788739) | 149,000 | 149,000 | 0% | 19 | 4.9 | 2025-11-28  | 인용 | @link.ihcnik |
 
 ## 3. 게시 정보
-- (게시 후 publish가 채운다)
+<!-- publish -->
+- 게시 2026-11-02T03:35+09:00 (KST) · (permalink 미확인) · media_id 18174154195454995
+- 게시 방식: autopost.publish (Graph API) · 호스팅: raw.githubusercontent.com
+- 캡션 재조회 일치: None
+- 사진 태그(user_tags): 2번 @link.ihcnik, 3번 @link.ihcnik, 4번 @link.ihcnik, 5번 @link.ihcnik, 6번 @link.ihcnik
+- 측정 예정: +72h
+<!-- /publish -->
 
 ## 4. 측정값 — 게시 +72시간
 - (measure가 채운다)

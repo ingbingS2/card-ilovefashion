@@ -1,5 +1,5 @@
 {
-  "stage": "publishing",
+  "stage": "posted",
   "built_at": "2026-11-02T03:15:33+09:00",
   "issues": [
     [
@@ -128,5 +128,7 @@
       "result": "ok"
     }
   },
-  "publishing_at": "2026-11-02T03:35:02+09:00"
+  "publishing_at": "2026-11-02T03:35:02+09:00",
+  "posted_at": "2026-11-02T03:35+09:00",
+  "media_id": "18174154195454995"
 }
