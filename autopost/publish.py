@@ -601,7 +601,17 @@ def main(argv=None) -> None:
     mode.add_argument("--pending", action="store_true", help="승인 기록된 회차를 재검증 후 게시(하루 한 건)")
     mode.add_argument("--next", action="store_true", help="다음 게시 가능 시각(KST)만 출력")
     ap.add_argument("--quote", default="", help="--approve와 함께: 사용자가 보낸 승인 메시지 원문")
+    ap.add_argument("--browser-facts", help="--pending과 함께: 무신사가 파이썬 요청을 막을 때 브라우저에서 받은 원본 파일")
     args = ap.parse_args(argv)
+    if args.browser_facts:
+        if not args.pending:
+            ap.error("--browser-facts는 --pending과 함께만")
+        from . import verify as verify_mod
+        try:
+            verify_mod.use_browser_facts(verify_mod.load_browser_facts(args.browser_facts))
+        except (verify_mod.BrowserFactsError, OSError, ValueError) as e:
+            print(f"⛔ 브라우저 원본 거부: {e}")
+            sys.exit(1)
     if args.next:
         t = earliest_post_time()
         print("지금 게시 가능" if t is None or t <= config.now_kst() else f"다음 게시 가능 시각: {t:%m-%d %H:%M} KST")

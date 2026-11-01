@@ -17,6 +17,47 @@ from . import config, malls, malls29
 from .state import fingerprint, load_status, save_status
 
 FIELDS = ("sale_price", "normal_price", "discount", "review_count", "rating")
+
+# 무신사가 이 실행 환경의 파이썬 요청을 막을 때(11-02 FINDINGS), 사람이 쓰는 브라우저에서 받은 무신사 원본으로 재검증한다.
+# KEYWORD-POLICY §6 "수동 확인이 필요하면 사람이 쓰는 브라우저로 … API를 fetch". 차단을 피하는 게 아니라 확인 경로를 바꾸는 것.
+# 파일 형식: {"payload": "<JSON 문자열>", "sha256": "<payload의 SHA-256>"}
+#   payload = {"captured_at": ISO 시각, "items": {goodsNo: {"goodsPrice": {...}, "goodsReview": {...},
+#              "isOutOfStock": bool, "goodsSaleType": "SALE"…, "quote": {"no", "content"} | null}}}
+# 해시가 안 맞으면(옮겨 적다 틀림) 거부, 받은 지 VERIFY_FRESH_MINUTES가 지났으면 거부. 29CM 상품에는 쓰지 않는다.
+_BROWSER: dict | None = None
+
+
+class BrowserFactsError(ValueError):
+    pass
+
+
+def load_browser_facts(path: str, now=None) -> dict:
+    import hashlib
+    from datetime import datetime
+    raw = json.loads(open(path, encoding="utf-8").read())
+    payload, digest = raw.get("payload"), raw.get("sha256")
+    if not isinstance(payload, str) or not digest:
+        raise BrowserFactsError("브라우저 원본 파일 형식이 아님(payload·sha256 필요)")
+    if hashlib.sha256(payload.encode("utf-8")).hexdigest() != digest:
+        raise BrowserFactsError("브라우저 원본 해시 불일치 — 옮기는 중 바뀜, 다시 받을 것")
+    data = json.loads(payload)
+    try:
+        cap = datetime.fromisoformat(str(data["captured_at"]).replace("Z", "+00:00"))
+    except (KeyError, ValueError):
+        raise BrowserFactsError("captured_at 없음·형식 오류")
+    now = now or config.now_kst()
+    age = (now - cap).total_seconds() / 60
+    if not -5 <= age <= config.VERIFY_FRESH_MINUTES:
+        raise BrowserFactsError(f"브라우저 원본이 {age:.0f}분 전 것 — {config.VERIFY_FRESH_MINUTES}분 안에 받은 것만")
+    items = {str(k): v for k, v in (data.get("items") or {}).items()}
+    if not items:
+        raise BrowserFactsError("브라우저 원본에 상품이 없음")
+    return {"captured_at": data["captured_at"], "sha256": digest, "items": items}
+
+
+def use_browser_facts(facts: dict | None) -> None:
+    global _BROWSER
+    _BROWSER = facts
 EXIT_OK, EXIT_BLOCKED, EXIT_CHANGED, EXIT_LOOKUP = 0, 1, 3, 4
 
 
@@ -61,6 +102,12 @@ def check(folder: str) -> tuple[list[str], list[str], list[str], dict]:
                        "sold_out": malls29.sold_out(d)}
                 if avg is None:   # 후기 API 실패 — 0.5 단위 상세 값으로 '변경'을 만들지 않고 카드 값을 유지
                     new["rating"] = c.get("rating")
+            elif _BROWSER is not None:
+                d = _BROWSER["items"].get(str(c["goodsNo"]))
+                if d is None:
+                    raise malls.MallError("브라우저 원본에 이 상품이 없음")
+                new = {**malls.price_facts(d), **malls.review_summary(d),
+                       "sold_out": bool(d.get("isOutOfStock")) or (d.get("goodsSaleType") or "SALE") != "SALE"}
             else:
                 d = malls.detail(c["goodsNo"])
                 new = {**malls.price_facts(d), **malls.review_summary(d), "sold_out": bool(d.get("isOutOfStock"))}
@@ -76,8 +123,12 @@ def check(folder: str) -> tuple[list[str], list[str], list[str], dict]:
         if p.get("quote_no") is not None:
             q = next((q for q in c["quotes"] if str(q["no"]) == str(p["quote_no"])), None)
             try:
-                finder = malls29.find_review if is29 else find_review
-                r = finder(c["goodsNo"], p["quote_no"])
+                if not is29 and _BROWSER is not None:
+                    bq = _BROWSER["items"][str(c["goodsNo"])].get("quote")
+                    r = bq if bq and str(bq.get("no")) == str(p["quote_no"]) else None
+                else:
+                    finder = malls29.find_review if is29 else find_review
+                    r = finder(c["goodsNo"], p["quote_no"])
             except malls.MallError as e:
                 failed.append(f"{tag}: 후기 조회 실패 {e}")
                 continue
@@ -145,6 +196,10 @@ def run(folder: str, do_apply: bool = False) -> int:
     st = load_status(folder)
     st["verified_at"] = config.now_kst().isoformat(timespec="seconds")
     st["verified_fingerprint"] = st["fingerprint"]
+    if _BROWSER is not None:
+        st["verified_via"] = f"browser {_BROWSER['captured_at']} sha256 {_BROWSER['sha256'][:16]}"
+    else:
+        st.pop("verified_via", None)
     save_status(folder, st)
     print("재검증 통과 — 5종 구매 가능, 숫자·인용문 그대로.")
     return EXIT_OK
@@ -154,7 +209,14 @@ def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description="게시 직전 재검증")
     ap.add_argument("folder")
     ap.add_argument("--apply", action="store_true", help="바뀐 숫자를 candidates.json에 반영")
+    ap.add_argument("--browser-facts", help="무신사가 파이썬 요청을 막을 때: 브라우저에서 받은 원본 파일(해시·60분 검사)")
     args = ap.parse_args(argv)
+    if args.browser_facts:
+        try:
+            use_browser_facts(load_browser_facts(args.browser_facts))
+        except (BrowserFactsError, OSError, ValueError) as e:
+            print(f"[막힘] {e}")
+            sys.exit(EXIT_BLOCKED)
     sys.exit(run(args.folder, args.apply))
 
 
