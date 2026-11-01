@@ -47,8 +47,10 @@ def render(cards: list[dict], base_dir: Path, out_dir: Path) -> list[dict]:
                 out = out_dir / f"{i + 1}.jpg"
                 el.screenshot(path=str(out), type="jpeg", quality=95)
                 ratio = page.evaluate(
-                    "(i) => { const o = document.querySelector(`#card${i} .over`);"
-                    " return o ? o.getBoundingClientRect().height / 675 : null; }", i)
+                    "(i) => { const c = document.querySelector(`#card${i}`), o = c.querySelector('.over');"
+                    " if (!o) return null; const r = o.getBoundingClientRect();"
+                    # 세로 표지(text_pos left)는 글자가 가로 폭을 차지한다 — 폭 비율로 잰다(11-02)
+                    " return c.classList.contains('left') ? r.width / 540 : r.height / 675; }", i)
                 results.append({"index": i + 1, "file": out.name, "text_ratio": ratio,
                                 "font_ok": font_ok})
             browser.close()

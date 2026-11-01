@@ -322,8 +322,8 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
             err(f"표지 {k}에 허용되지 않은 태그")
     if re.search(r"[<>]", cover.get("kicker", "")):
         err("표지 kicker에 태그 문자")
-    if cover.get("text_pos") not in (None, "top", "bottom"):
-        err(f"표지 text_pos는 top 또는 bottom — {cover['text_pos']!r}")
+    if cover.get("text_pos") not in (None, "top", "bottom", "left"):
+        err(f"표지 text_pos는 top·bottom·left 중 하나 — {cover['text_pos']!r}")
     if cover.get("pos") is not None and not _POS.match(str(cover["pos"])):
         err("표지 pos는 '50% 20%' 형식")
     cc = by_no.get(str(cover.get("goodsNo")))

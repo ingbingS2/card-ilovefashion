@@ -69,6 +69,15 @@ body{margin:0;background:#fff;font-family:var(--sans)}
 .card.cover.top .shade::before{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 10%,rgba(0,0,0,0) 26%);mask-image:linear-gradient(to bottom,#000 0%,#000 10%,rgba(0,0,0,0) 26%)}
 .card.cover.top .shade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to top,rgba(8,8,10,.55),rgba(8,8,10,0))}
 .card.cover.top .over{top:34px;bottom:auto}
+/* 2026-11-02 표지 제목 왼쪽 세로 배치(text_pos: left) — 사용자 지시 "멘트를 왼쪽 세로로". 글자는 바로 세우고(upright) 첫 줄이 왼쪽 기둥 */
+.card.cover.left .shade{background:linear-gradient(to right,rgba(8,8,10,.72) 0%,rgba(8,8,10,.5) 16%,rgba(8,8,10,.18) 30%,rgba(8,8,10,0) 40%)}
+.card.cover.left .shade::before{-webkit-mask-image:linear-gradient(to right,#000 0%,#000 8%,rgba(0,0,0,0) 22%);mask-image:linear-gradient(to right,#000 0%,#000 8%,rgba(0,0,0,0) 22%)}
+.card.cover.left .shade::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to top,rgba(8,8,10,.55),rgba(8,8,10,0))}
+.card.cover.left .over{top:34px;left:30px;right:auto;bottom:auto;writing-mode:vertical-lr;display:flex;flex-direction:row;align-items:flex-start;gap:0}
+.card.cover.left .over .kicker{writing-mode:vertical-lr;text-orientation:mixed;font-size:11px;letter-spacing:.24em;margin:0 10px 0 0}
+.card.cover.left .over .title{text-orientation:upright;font-size:38px;line-height:1.22;letter-spacing:0;white-space:nowrap}
+.card.cover.left .over .title .vsp{display:inline-block;inline-size:.45em}
+.card.cover.left .over .sub{display:none}
 /* 2026-10-14 상품 카드 = 사진 위(가림 없음) + 아래 흰 정보 칸 — 사용자 피드백 "상품이 메인인데 상품이 안 보인다" */
 .card.item{display:flex;flex-direction:column;background:#fff}
 .card.item .photo{position:relative;inset:auto;flex:1 1 auto;min-height:0;width:540px;height:auto;overflow:hidden}
@@ -119,12 +128,13 @@ function card(c,i){
     : `<div class="photo"><img src="${c.img}" alt="" style="--pos:${c.pos||'50% 15%'};transform:scale(${c.zoom||1});transform-origin:${c.pos||'50% 15%'}"></div><div class="shade"></div>`;
   let body;
   if(c.kind==='cover'){
-    body = `${c.kicker?`<div class="kicker">${c.kicker}</div>`:''}<h2 class="title">${c.title}</h2><p class="sub">${c.sub||''}</p>`;
+    const t = c.text_pos==='left' ? c.title.replace(/ /g,'<i class="vsp"></i>') : c.title;  // 세로쓰기 띄어쓰기는 한 글자만큼 벌어진다 — 짧은 여백으로
+    body = `${c.kicker?`<div class="kicker">${c.kicker}</div>`:''}<h2 class="title">${t}</h2><p class="sub">${c.sub||''}</p>`;
   } else {
     body = `<div class="prodline">${c.prod}</div><h2 class="title">${c.title}</h2><div class="pricebox"><div class="now"><b>${c.sale}</b>${c.off?`<span class="off">${c.off}<i>↓</i></span><s>${c.normal}</s>`:''}<span class="proof">${c.proof}</span></div></div><div class="selling"><span class="q">${c.sp}</span></div>`;
   }
   const left = c.kind==='cover' ? '' : `가격·이미지 ${c.mall}`;
-  return `<div class="card ${c.kind}${c.kind==='cover'&&c.text_pos==='top'?' top':''}" id="card${i}">${photo}<div class="over">${body}</div>${bottom(left)}</div>`;
+  return `<div class="card ${c.kind}${c.kind==='cover'&&(c.text_pos==='top'||c.text_pos==='left')?' '+c.text_pos:''}" id="card${i}">${photo}<div class="over">${body}</div>${bottom(left)}</div>`;
 }
 function sizePhoto(img){const wrap=img.parentElement,ratio=img.naturalWidth/img.naturalHeight;let w=440,h=Math.round(w/ratio);if(h>420){h=420;w=Math.round(h*ratio)}wrap.style.width=w+'px';wrap.style.height=h+'px'}
 document.getElementById('board').innerHTML=(window.CARDS||[]).map(card).join('');
