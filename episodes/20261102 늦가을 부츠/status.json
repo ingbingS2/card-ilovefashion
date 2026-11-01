@@ -82,5 +82,8 @@
   "fingerprint": "4fb6c7cdf55a73977cbf417355e7d7472dd83596b48f9379d45fbfddd7b301fb",
   "approved_at": "2026-11-02T03:16:27+09:00",
   "approved_fingerprint": "4fb6c7cdf55a73977cbf417355e7d7472dd83596b48f9379d45fbfddd7b301fb",
-  "approved_quote": "승인"
+  "approved_quote": "승인",
+  "verified_at": "2026-11-02T03:34:19+09:00",
+  "verified_fingerprint": "4fb6c7cdf55a73977cbf417355e7d7472dd83596b48f9379d45fbfddd7b301fb",
+  "verified_via": "browser 2026-11-01T18:33:34.989Z sha256 444fb43c1c631a4f"
 }
