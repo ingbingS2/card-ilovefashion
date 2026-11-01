@@ -1,5 +1,5 @@
 {
-  "stage": "built",
+  "stage": "approved",
   "built_at": "2026-11-02T03:11:27+09:00",
   "issues": [
     [
@@ -75,5 +75,8 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "949457ac7fd4479ded532bd2a0c0db3b8d8df7198fb6a8f2e7ae2662b76a8b37"
+  "fingerprint": "949457ac7fd4479ded532bd2a0c0db3b8d8df7198fb6a8f2e7ae2662b76a8b37",
+  "approved_at": "2026-11-02T03:12:45+09:00",
+  "approved_fingerprint": "949457ac7fd4479ded532bd2a0c0db3b8d8df7198fb6a8f2e7ae2662b76a8b37",
+  "approved_quote": "승인"
 }
