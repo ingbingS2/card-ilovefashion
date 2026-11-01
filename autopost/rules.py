@@ -372,23 +372,27 @@ def check_episode(ep: dict, cands: dict, history: list[dict], handles: dict,
     # 캡션 (§5) — 브랜드 목록은 build가 붙인다
     cap = nfc(ep.get("caption", ""))
     fs = first_sentence(cap)
+    # 사용자가 직접 쓴 캡션(11-02 "당분간 피드 멘트 내가 쓸게") — 문체 규칙은 경고만, 원문을 고치지 않는다.
+    # 해시태그·@멘션·📌은 여전히 오류(브랜드 목록은 build가 하단에 붙인다).
+    by_user = ep.get("caption_author") == "user"
+    style = warn if by_user else err
     if season not in fs or item not in fs:
-        err(f"캡션 첫 문장에 '{season}'·'{item}'가 없음: {fs[:40]}")
+        style(f"캡션 첫 문장에 '{season}'·'{item}'가 없음: {fs[:40]}")
     if "#" in cap:
         err("해시태그 금지(§5)")
     if "@" in cap or "📌" in cap:
         err("캡션 본문에 @멘션/📌 — 브랜드 목록은 build가 자동으로 붙인다")
     for w in config.CAPTION_BANNED:
         if w in cap.lower():
-            err(f"캡션 금지 표현 '{w}'")
+            style(f"캡션 금지 표현 '{w}'")
     if re.search(config.RANKING_PATTERN, cap, re.I):
-        err("캡션에 랭킹 표현(§1·§5)")
+        style("캡션에 랭킹 표현(§1·§5)")
     for pat, why in config.CAPTION_WARN_PATTERNS.items():
         m = re.search(pat, cap)
         if m:
             warn(f"캡션: {why} — '{m.group(0)[:40]}'")
     n = emoji_count(cap)
-    if not 3 <= n <= 5:
+    if not by_user and not 3 <= n <= 5:
         warn(f"캡션 이모지 {n}개 (기준 3~5)")
     if any(h.get("caption_first", "")[:6] == fs[:6] for h in hist[-3:] if h.get("caption_first")):
         warn("캡션 첫 문장이 최근 회차와 같은 패턴으로 시작")

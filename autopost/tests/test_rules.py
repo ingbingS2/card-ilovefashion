@@ -271,3 +271,13 @@ def test_brand_lines_dedupe(handles):
     prods = [{"brand": "유라고"}, {"brand": "유라고"}, {"brand": "없는브랜드"}, {"brand": "없는브랜드"}]
     lines, skipped = rules.brand_lines(prods, handles)
     assert len(lines) == len(set(lines)) and skipped == ["없는브랜드"]
+
+
+def test_user_caption_style_rules_warn_only(episode, cands, handles):
+    """사용자가 쓴 캡션(caption_author=user)은 문체 규칙을 경고로만 — 해시태그·@는 여전히 오류(11-02)."""
+    episode["caption"] = "안녕하쌉사리와요? 이 신발이 아주 맛도리 요물입니다."
+    assert any("첫 문장" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+    episode["caption_author"] = "user"
+    assert not any("캡션" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
+    episode["caption"] += " #부츠"
+    assert any("해시태그" in m for m in errors(rules.check_episode(episode, cands, [], handles, TODAY)))
