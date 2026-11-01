@@ -1,6 +1,6 @@
 {
   "stage": "built",
-  "built_at": "2026-11-02T02:19:27+09:00",
+  "built_at": "2026-11-02T03:02:58+09:00",
   "issues": [
     [
       "warn",
@@ -41,31 +41,31 @@
     {
       "index": 2,
       "file": "2.jpg",
-      "text_ratio": 0.31407407407407406,
+      "text_ratio": 0.3496296296296296,
       "font_ok": true
     },
     {
       "index": 3,
       "file": "3.jpg",
-      "text_ratio": 0.31407407407407406,
+      "text_ratio": 0.3496296296296296,
       "font_ok": true
     },
     {
       "index": 4,
       "file": "4.jpg",
-      "text_ratio": 0.31407407407407406,
+      "text_ratio": 0.3496296296296296,
       "font_ok": true
     },
     {
       "index": 5,
       "file": "5.jpg",
-      "text_ratio": 0.31407407407407406,
+      "text_ratio": 0.3496296296296296,
       "font_ok": true
     },
     {
       "index": 6,
       "file": "6.jpg",
-      "text_ratio": 0.31407407407407406,
+      "text_ratio": 0.3496296296296296,
       "font_ok": true
     },
     {
@@ -75,5 +75,5 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "43e9795e0cea0ca76b5f233f8c0da0184478a62c4731e3bbe5a9078f7528ada3"
+  "fingerprint": "59afcecad760b38d30495080a1a8fc6103f8a81e5484ae893ec5554b34680692"
 }
