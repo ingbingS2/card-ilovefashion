@@ -1,10 +1,10 @@
 {
   "stage": "built",
-  "built_at": "2026-10-30T16:49:19+09:00",
+  "built_at": "2026-11-02T01:55:04+09:00",
   "issues": [
     [
       "warn",
-      "folder 날짜(20261020)가 오늘 KST(20261030)가 아님 — 클라우드는 UTC 시계라 날짜를 KST로 잡을 것"
+      "folder 날짜(20261020)가 오늘 KST(20261102)가 아님 — 클라우드는 UTC 시계라 날짜를 KST로 잡을 것"
     ],
     [
       "warn",
@@ -27,7 +27,7 @@
     {
       "index": 1,
       "file": "1.jpg",
-      "text_ratio": 0.2150462962962963,
+      "text_ratio": 0.29,
       "font_ok": true
     },
     {
@@ -67,5 +67,5 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "6b9644587c32b094cd39f8e9ef0e8b64f91e436e9f027666291b6fd42d9cf8a1"
+  "fingerprint": "dc7ff6309dcd6938300a4d794aa7106c834575c1ef67cd33b88ea69040889002"
 }
