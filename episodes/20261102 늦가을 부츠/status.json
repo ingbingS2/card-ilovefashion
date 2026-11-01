@@ -1,6 +1,6 @@
 {
   "stage": "built",
-  "built_at": "2026-11-02T02:18:46+09:00",
+  "built_at": "2026-11-02T02:19:27+09:00",
   "issues": [
     [
       "warn",
@@ -35,7 +35,7 @@
     {
       "index": 1,
       "file": "1.jpg",
-      "text_ratio": 0.29,
+      "text_ratio": 0.2150462962962963,
       "font_ok": true
     },
     {
@@ -75,5 +75,5 @@
       "font_ok": true
     }
   ],
-  "fingerprint": "7adb0cdbafd88ba064bc99c63c9a81d5c462b571397a809d4cbaf363df5498eb"
+  "fingerprint": "43e9795e0cea0ca76b5f233f8c0da0184478a62c4731e3bbe5a9078f7528ada3"
 }
