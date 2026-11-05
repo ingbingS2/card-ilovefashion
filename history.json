@@ -457,6 +457,22 @@
     "zzal": "20260718.jpg",
     "caption_first": "안녕하쌉사리와요?",
     "auto": true,
-    "permalink": "https://www.instagram.com/p/DfNY03iD6w8/"
+    "permalink": "https://www.instagram.com/p/DfNY03iD6w8/",
+    "metrics": {
+      "reach": 7,
+      "saved": 0,
+      "shares": 0,
+      "likes": 4,
+      "comments": 0,
+      "total_interactions": 4,
+      "profile_visits": 2,
+      "follows": 0,
+      "views": 27
+    },
+    "measured_at": "2026-11-05T11:40+09:00",
+    "measured_hours": 80.1,
+    "verdict": "미달",
+    "brand_comments": [],
+    "comment_count": 0
   }
 ]
